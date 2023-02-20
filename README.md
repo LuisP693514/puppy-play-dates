@@ -23,7 +23,7 @@ Informational modal displaying selected profiles or businesses and chat between 
 
 ## WireFrames
 
-![](./images/interface_wireframe.png)
+![](./frontend/src/images/interface_wireframe.png)
 
 ## Technologies & Technical Challenges
 Puppy Play dates relies on Geolocation and Google Maps Platform to display locational information for profiles, businesses, parks etc. AWS will allow users to upload profile pictures. Future functionality will employ Websockets for live chat. 
