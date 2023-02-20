@@ -5,7 +5,7 @@ const passport = require('passport');
 const express = require('express');
 const router = express.Router();
 const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
-const DEFAULT_PROFILE_IMAGE_URL = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/blank-profile-picture-gb0a817da7_1280.png"
+const DEFAULT_PROFILE_IMAGE_URL = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"
 
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
