@@ -4,6 +4,8 @@ const User = mongoose.model('User');
 const passport = require('passport');
 const express = require('express');
 const router = express.Router();
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
+const DEFAULT_PROFILE_IMAGE_URL = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/blank-profile-picture-gb0a817da7_1280.png"
 
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
@@ -11,7 +13,7 @@ const validateLoginInput = require('../../validations/login');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 
-router.post('/register', validateRegisterInput,async (req, res, next) => {
+router.post('/register', singleMulterUpload("image"), validateRegisterInput,async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
   // username.
   const user = await User.findOne({
@@ -33,8 +35,13 @@ router.post('/register', validateRegisterInput,async (req, res, next) => {
     return next(err);
   }
 
+  const profileImageUrl = req.file ?
+      await singleFileUpload({ file: req.file, public: true }) :
+      DEFAULT_PROFILE_IMAGE_URL;
+
   const newUser = new User({
     username: req.body.username,
+    profileImageUrl,
     email: req.body.email
   });
 
@@ -79,6 +86,7 @@ router.get('/current', restoreUser, (req, res) => {
   res.json({
     _id: req.user._id,
     username: req.user.username,
+    profileImageUrl: req.user.profileImageUrl,
     email: req.user.email
   });
 });
