@@ -7,8 +7,7 @@ const userSchema = new Schema({
         required: true
     },
     profileImageUrl: {
-        type: String,
-        required: true
+        type: String
     },
 
     email: {
