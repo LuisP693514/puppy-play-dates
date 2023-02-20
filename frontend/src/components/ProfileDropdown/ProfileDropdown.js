@@ -27,7 +27,8 @@ const ProfileDropdown = () => {
                 break;
             case 'Logout':
                 dispatch(sessionActions.logout());
-                history.push('/login')
+                history.push('/login');
+                break;
                 // is it still sessionActions for logout
             default:
                 break;
@@ -36,19 +37,19 @@ const ProfileDropdown = () => {
 
   return (
     <select onChange={handleChange}>
-        <option key={profile} value={'Profile'}>
+        <option key={'profile'} value={'Profile'}>
             Profile
         </option>
-        <option key={settings} value={'Account Settings'}>
+        <option key={'settings'} value={'Account Settings'}>
             Account Settings
         </option>
-        <option key={messages} value={'Messages'}>
+        <option key={'messages'} value={'Messages'}>
             Messages
         </option>
-        <option key={favorites} value={'Favorites'}>
+        <option key={'favorites'} value={'Favorites'}>
             Favorites
         </option>
-        <option key={logout} value={'Logout'}>
+        <option key={'logout'} value={'Logout'}>
             Logout
         </option>
     </select>
