@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 
-const DEFAULT_PROFILE_IMAGE_URL = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/blank-profile-picture-gb0a817da7_1280.png'; // <- Insert the S3 URL that you copied above here
+const DEFAULT_PROFILE_IMAGE_URL = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png'; // <- Insert the S3 URL that you copied above here
 
 // Connect to database
 mongoose
