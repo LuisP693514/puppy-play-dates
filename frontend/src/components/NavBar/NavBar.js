@@ -29,7 +29,7 @@ function Navbar() {
                 {showDropdown && <ProfileDropdown />}
             </div>
             <div id='headerLogo'>
-                <Link classname='navLogo' to='/'>
+                <Link className='navLogo' to='/'>
                     {/* this is where i put logo image */}
                 </Link>
             </div>
