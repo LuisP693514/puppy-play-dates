@@ -16,7 +16,6 @@ const Filters = () => {
     // how to filter in the backend and how would that reflect in the map. would it just lead to different route or replotting of maps?
 
     return (
-        <></>
         // <select onChange={handleFilter}>
         //     <option key={all} value={'All'}>
         //         All
@@ -27,6 +26,7 @@ const Filters = () => {
         //         </option>
         //     ))}
         // </select>
+        (<></>)
     );
 };
 
