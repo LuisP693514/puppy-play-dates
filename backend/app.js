@@ -1,5 +1,6 @@
 require('./models/User');
 require('./config/passport');
+const debug = require('debug')
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -51,7 +52,7 @@ app.use((req, res, next) => {
     next(err);
 });
 
-// const serverErrorLogger = debug('backend:error');
+const serverErrorLogger = debug('backend:error');
 
 // Express custom error handler that will be called whenever a route handler or
 // middleware throws an error or invokes the `next` function with a truthy value
