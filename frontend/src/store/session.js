@@ -37,10 +37,18 @@ export const getCurrentUser = () => async dispatch => {
   };
 
 const startSession = (userInfo, route) => async dispatch => {
+    const { image, username, password, email } = userInfo;
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("email", email);
+
+    if (image) formData.append("image", image);
+
     try {
         const res = await jwtFetch(route, {
             method: "POST",
-            body: JSON.stringify(userInfo)
+            body: formData
         });
         const { user, token } = await res.json();
         localStorage.setItem('jwtToken', token);
