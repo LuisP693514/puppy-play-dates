@@ -2,18 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: { type: String, required: true },
+    username: { type: String },
     profileImageUrl: { type: String },
-    email: { type: String, required: true, unique: true },
-    hashedPassword: { type: String, required: true },
+    email: { type: String, unique: true },
+    hashedPassword: { type: String },
     otherPhotos: { type: [String] },
-    puppyName: { type: String, required: true },
-    puppyBreed: { type: String, required: true },
+    puppyName: { type: String },
+    puppyBreed: { type: String },
     puppyAge: { type: Number, min: 0, max: 100 },
-    puppyVaccinated: { type: Boolean, required: true },
-    name: { type: String, required: true },
-    ownerAge: { type: Number, min: 5, max: 200 }
+    puppyVaccinated: { type: Boolean },
+    name: { type: String },
+    ownerAge: { type: Number, min: 5, max: 200 },
+    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'Friend'}]
     
+
 }, {
     timestamps: true
 });
