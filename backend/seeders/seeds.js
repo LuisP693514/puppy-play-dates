@@ -6,9 +6,6 @@ const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 
-
-
-
 // Create users
 const users = [];
 
@@ -21,15 +18,16 @@ const maxLat = 40.7331;
 let randomLat = Math.random() * (maxLat - minLat) + minLat;
 
 const preseeded_locations = []
-for (let i = 0; i < 10; i++) {
-    presseeded_locations.push([randomLat, randomLong])
+for (let i = 0; i < 9; i++) {
+    preseeded_locations.push([randomLat, randomLong])
 }
 
 users.push(
     new User({
         username: 'demo-user',
         email: 'demo-user@appacademy.io',
-        hashedPassword: bcrypt.hashSync('starwars', 10)
+        hashedPassword: bcrypt.hashSync('starwars', 10),
+        coordinates: [40.7363, -73.9938]
     })
 )
 
@@ -40,7 +38,8 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
         new User({
             username: faker.internet.userName(firstName, lastName),
             email: faker.internet.email(firstName, lastName),
-            hashedPassword: bcrypt.hashSync(faker.internet.password(), 10)
+            hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+            coordinates: preseeded_locations[i]
         })
     )
 }
@@ -56,7 +55,7 @@ mongoose
     });
 
 const insertSeeds = () => {
-    console.log("Resetting db and seeding users and tweets...");
+    console.log("Resetting db and seeding users");
 
     User.collection.drop()
         .then(() => User.insertMany(users))

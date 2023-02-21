@@ -37,7 +37,7 @@ export const fetchUser = (userId) => async (dispatch) => {
 };
 
 export const fetchUsers = () => async (dispatch) => {
-    const response = await jwtFetch(`/api/users`);
+    const response = await jwtFetch(`/api/users/all`);
 
     if (response.ok) {
         const users = await response.json();
