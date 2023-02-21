@@ -28,8 +28,8 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute exact path="/profile" component={ProfilePage} />
-        <AuthRoute exact path="/map" component={MyGoogleMap} />
-        <AuthRoute exact path="/main" component={MainPage} />
+        <ProtectedRoute exact path="/map" component={MyGoogleMap} />
+        <ProtectedRoute exact path="/main" component={MainPage} />
       </Switch>
     </>
   );

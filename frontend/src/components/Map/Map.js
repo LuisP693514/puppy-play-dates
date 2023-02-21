@@ -7,7 +7,7 @@ import { fetchUsers, getUsers } from '../../store/users';
 import { useDispatch, useSelector } from 'react-redux';
 
 const containerStyle = {
-    width: '95%',
+    width: '100%',
     height: '90vh',
     margin: '0 auto'
 };
