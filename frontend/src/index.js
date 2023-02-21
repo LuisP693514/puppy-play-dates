@@ -7,8 +7,16 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/store';
 import { ModalProvider } from './context/Modal';
+import * as userActions from './store/users'
+import jwtFetch from './store/jwt';
 
-let store = configureStore({});
+const store = configureStore({});
+
+if (process.env.NODE_ENV !== 'production') {
+  window.store = store;
+  window.jwtFetch = jwtFetch;
+  window.userActions = userActions;
+}
 
 function Root() {
   return (

@@ -6,6 +6,13 @@ h2 {
     font-size: 2.3em;
 }
 
+h3 {
+    font-size: 1.7em;
+}
+h4 {
+    font-size: 1.3em;
+}
+
 /* div {
     border: 1px solid red
 } */
@@ -21,6 +28,10 @@ input {
     outline: none;
 }
 
+.container{
+    display: flex;
+    justify-content: center;
+}
 .errors {
     margin-top: 3px;
     font-size: .7em;
