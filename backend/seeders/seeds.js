@@ -11,14 +11,17 @@ const users = [];
 
 const minLong = -74.0000;
 const maxLong = -73.9876;
-let randomLong = Math.random() * (maxLong - minLong) + minLong;
+let randomLong;
 
 const minLat = 40.7395;
 const maxLat = 40.7331;
-let randomLat = Math.random() * (maxLat - minLat) + minLat;
+let randomLat;
 
 const preseeded_locations = []
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < 10; i++) {
+    
+    randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+    randomLat = (Math.random() * (maxLat - minLat)) + minLat;
     preseeded_locations.push([randomLat, randomLong])
 }
 
@@ -27,7 +30,8 @@ users.push(
         username: 'demo-user',
         email: 'demo-user@appacademy.io',
         hashedPassword: bcrypt.hashSync('starwars', 10),
-        coordinates: [40.7363, -73.9938]
+        latitude: 40.7363, 
+        longitude: -73.9938
     })
 )
 
@@ -39,7 +43,9 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
             username: faker.internet.userName(firstName, lastName),
             email: faker.internet.email(firstName, lastName),
             hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
-            coordinates: preseeded_locations[i]
+            latitude: preseeded_locations[i][0],
+            longitude: preseeded_locations[i][1]
+
         })
     )
 }
