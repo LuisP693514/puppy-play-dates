@@ -58,8 +58,13 @@ router.patch('/:reqId', async (req, res) => {
         }
 
         //work here
+        request.status = status;
+        const savedRequest = await request.save();
+        res.status(200).json(savedRequest)
+
     } catch (err) {
         res.status(500).json({ message: err.messsage })
     }
 })
 
+module.exports = router;
