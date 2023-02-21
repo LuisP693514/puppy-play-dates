@@ -29,7 +29,7 @@ users.push(
     new User({
         username: 'demo-user',
         email: 'demo-user@appacademy.io',
-        hashedPassword: bcrypt.hashSync('starwars', 10),
+        hashedPassword: bcrypt.hashSync('password', 10),
         latitude: 40.7363, 
         longitude: -73.9938
     })
