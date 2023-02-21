@@ -7,7 +7,7 @@ function ProfileModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}></button>
+      <button onClick={() => setShowModal(true)}>Profile Modal</button>
       {/* the button referenced here should be the pin location of dog */}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

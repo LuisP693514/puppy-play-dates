@@ -1,18 +1,40 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {useHistory } from 'react-router-dom';
 import { fetchUser, getUser } from "../../store/users";
 import "./ProfilePopUp.css";
 
 const ProfilePopUp = ({userId}) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const otherUser = useSelector(getUser(userId));
+    const sessionUser = useSelector((state) => state.session.user);
+    const isFriend = sessionUser.friends.includes(userId);
+    // const [selectedUserId, setSelectedUserId] = useState(null);
 
     useEffect(() => {
         dispatch(fetchUser(userId))
     }, [dispatch, userId]);
 
     if (!otherUser) return null;
+
+    const handleCreateDate = e => {
+        e.preventDefault();
+        // setSelectedUserId(userId)
+        history.push('/createDate', {sessionUser, otherUser});
+    };
+
+    const handleAddFriend = e => {
+        e.preventDefault();
+        // dispatch(createFriend);
+    };
+
+    const handleMessage = e => {
+        e.preventDefault();
+        history.push(`/messages/${userId}`)
+        // hide the userid 
+    };
 
     return (
         <div className="profile-modal">
@@ -49,8 +71,16 @@ const ProfilePopUp = ({userId}) => {
                 <div className="owner-age-section">
                     <h2 id="owner-age-text">Age: </h2>
                     <h3 id='owner-age'>{otherUser.age}</h3>
-                </div>
-                {/* friends options: add, message, create event */}
+                </div> 
+                <div className="profile-modal-buttons">   
+                    {isFriend ? (
+                        <button id="create-event-button" onClick={handleCreateDate}>Create Play Date</button>
+                        ) : (
+                        <button id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>
+                    )}
+                    <button id="message-button" onClick={handleMessage}>Message</button>
+                </div> 
+                
             </div>
         </div>
     );
