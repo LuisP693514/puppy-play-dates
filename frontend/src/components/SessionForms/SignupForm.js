@@ -59,7 +59,7 @@ function SignupForm () {
     <div className="login-form-div signup-div">
       <form className="session-form" onSubmit={handleSubmit}>
         <div className="login-spacer signup-head">
-          <h2 className="orange-text">Sign Up</h2>
+          <h2 className="orange-text signup-head">Sign Up</h2>
           <div className="login-spacer center"><img className="signin-logo" src={tightlogo}/> </div>
         </div>
         <div className="login-spacer">

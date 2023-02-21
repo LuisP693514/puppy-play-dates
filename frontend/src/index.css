@@ -18,6 +18,7 @@ input {
     border: none;
     border-bottom: 1px solid grey;
     width: 175px;
+    outline: none;
 }
 
 .errors {
