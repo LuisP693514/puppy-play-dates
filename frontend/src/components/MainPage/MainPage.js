@@ -1,11 +1,12 @@
 import ProfileModal from '../ProfileModal';
 import Navbar from '../NavBar/NavBar';
 import './MainPage.css'
+// import Navbar from './components/NavBar/NavBar';
 
 function MainPage() {
     return (
       <>
-        <Navbar/>
+        {/* <Navbar/> */}
         <p>Yay doggies</p>
         <ProfileModal />
         <footer>

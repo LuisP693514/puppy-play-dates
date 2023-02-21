@@ -12,6 +12,7 @@ import MyGoogleMap from './components/Map/Map'
 import { getCurrentUser } from './store/session';
 // import Navbar from './components/NavBar/NavBar';
 import ProfilePage from './components/ProfilePage/ProfilePage';
+import LandingPage from './components/LandingPage/LandingPage';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
   return loaded && (
     <>
       <Switch>
-        <AuthRoute exact path="/" component={MainPage} />
+        <AuthRoute exact path="/" component={LandingPage} />
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute exact path="/profile" component={ProfilePage} />
