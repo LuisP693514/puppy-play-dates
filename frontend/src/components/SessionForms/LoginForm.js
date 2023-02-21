@@ -64,7 +64,6 @@ function LoginForm () {
           disabled={!email || !password}
         >Log In</button>
         <button
-
           className="login-button"
           disabled={!email || !password}
         >Demo User</button>
