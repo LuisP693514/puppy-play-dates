@@ -13,9 +13,9 @@ const userSchema = new Schema({
     puppyVaccinated: { type: Boolean },
     name: { type: String },
     ownerAge: { type: Number, min: 5, max: 200 },
-    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'Friend'}]
+    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'Friend'}],
+    coordinates: [{type: Number}]
     
-
 }, {
     timestamps: true
 });
