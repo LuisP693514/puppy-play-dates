@@ -101,11 +101,9 @@ router.get('/all', async (req, res, next) => {
 
 // /api/users/:userId grabs 1 user specified by the userId in the params
 router.get('/:userId', async (req, res) => {
-  console.log('Received GET request to /users/:userId');
-  console.log('req.params:', req.params);
   try {
     const userId = req.params.userId;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select('-hashedPassword');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
