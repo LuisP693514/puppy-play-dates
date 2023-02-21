@@ -1,0 +1,11 @@
+.main-page-logo{
+    height: 75px;
+}
+
+.nav-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}

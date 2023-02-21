@@ -55,7 +55,10 @@ function MyGoogleMap() {
         onLoad={onLoad}
         onUnmount={onUnmount}
         options={{
-            styles: data
+            styles: data,
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false
         }}
       >
       </GoogleMap>

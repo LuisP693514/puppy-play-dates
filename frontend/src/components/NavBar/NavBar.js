@@ -4,6 +4,7 @@ import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 // import { useDispatch} from 'react-redux';
 import Filters from '../Filters/Filters';
 import { useState } from 'react';
+import tightlogo from "../../images/tight-logo.jpg"
 
 
 function Navbar() {
@@ -22,7 +23,7 @@ function Navbar() {
     }
 
     return (
-        <div className='header'>
+        <div className='nav-bar-header'>
             <div className='profile-dropdown'>
                <i id='profile' className="fa-solid fa-user" onClick={handleProfileClick}></i>
                <i id='pfp-arrow' className="fa-solid fa-caret-down" onClick={handleProfileClick}></i>
@@ -30,7 +31,7 @@ function Navbar() {
             </div>
             <div id='headerLogo'>
                 <Link className='navLogo' to='/'>
-                    {/* this is where i put logo image */}
+                    <img className="main-page-logo" src={tightlogo}/>
                 </Link>
             </div>
             <div className='filters'>

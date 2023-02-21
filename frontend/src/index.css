@@ -2,15 +2,19 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+h1 {
+    font-size: 3.5em;
+}
+
 h2 {
-    font-size: 2.3em;
+    font-size: 2.7em;
 }
 
 h3 {
     font-size: 1.7em;
 }
 h4 {
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 /* div {
@@ -21,11 +25,28 @@ button {
     border-radius: 20px
 }
 
+button:hover{
+    cursor: pointer;
+    
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover { 
+    color: #ee7308;
+}
+
 input {
     border: none;
     border-bottom: 1px solid grey;
     width: 175px;
     outline: none;
+}
+
+.spacer {
+    margin-bottom: 7px;
 }
 
 .container{
@@ -44,5 +65,13 @@ input {
 
 .orange-text{
     color: orange
+}
+
+.dark-orange-text{
+    color: #ee7308;
+}
+
+.white-text{
+    color: white;
 }
 
