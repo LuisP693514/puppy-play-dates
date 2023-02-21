@@ -4,6 +4,7 @@ import './MainPage.css'
 function MainPage() {
     return (
       <>
+        <Navbar/>
         <p>Yay doggies</p>
         <ProfileModal />
         <footer>

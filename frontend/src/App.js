@@ -22,7 +22,6 @@ function App() {
 
   return loaded && (
     <>
-      <Navbar/>
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
         <AuthRoute exact path="/login" component={LoginForm} />
