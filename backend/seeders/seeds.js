@@ -30,6 +30,7 @@ users.push(
         username: 'demo-user',
         email: 'demo-user@appacademy.io',
         hashedPassword: bcrypt.hashSync('password', 10),
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png",
         latitude: 40.7363, 
         longitude: -73.9938
     })
