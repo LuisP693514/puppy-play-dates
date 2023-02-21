@@ -1,0 +1,24 @@
+.avatar {
+    width: 200px;
+    margin: 10px;
+    border:7px solid orange;
+    border-radius: 500px;
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+}
+
+.landing-page-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-page-personnel {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.landing-page-links {
+    display: flex;
+}
