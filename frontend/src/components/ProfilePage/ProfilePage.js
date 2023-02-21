@@ -1,7 +1,7 @@
 import './ProfilePage.css';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from './store/session';
+import { getCurrentUser } from '../../store/session';
 import {useHistory } from 'react-router-dom';
 import { selectCurrentUser } from '../../store/session';
 import { deleteUser, updateUser } from '../../store/users';
@@ -14,16 +14,12 @@ function ProfilePage() {
     const [showModal, setShowModal] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [updatedUser, setUpdatedUser] = useState(currentUser);
+    // const [image, setImage] = useState(null);
 
 
     useEffect(() => {
         dispatch(getCurrentUser())
     }, [dispatch]);
-
-    // const handleEdit = e => {
-    //     e.preventDefault();
-    //     history.push('/editProfile')
-    // }
 
     const handleEdit = () => {
         setEditMode(true);
@@ -55,6 +51,7 @@ function ProfilePage() {
         setShowModal(false);
     }
 
+    // const updateFile = e => setImage(e.target.files[0]);
 
     if (editMode) {
         return (
@@ -89,6 +86,11 @@ function ProfilePage() {
                     Vaccinated:
                     <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />
                 </label>
+                 <div className="profile-image">
+                    <label> Profile Image: 
+                        <input type="file" accept=".jpg, .jpeg, .png" onChange={e => setUpdatedUser({...updatedUser, image: e.target.files[0]})} />
+                    </label>
+                </div>
                 <button type='button' onClick={handleUpdate}>Update</button>
                 <button type='button' onClick={handleCancel}>Cancel</button>
             </ form>

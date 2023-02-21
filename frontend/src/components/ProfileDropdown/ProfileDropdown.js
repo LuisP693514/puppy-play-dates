@@ -16,11 +16,23 @@ const ProfileDropdown = () => {
             case 'Profile':
                 history.push('/profile');
                 break;
-            case 'Account Settings':
-                history.push('/settings');
-                break;
+            // case 'Account Settings':
+            //     history.push('/settings');
+            //     break;
             case 'Messages':
                 history.push('/messages');
+                break;
+            case 'Friends':
+                history.push('/friends');
+                break;
+            case 'Friends Requests':
+                history.push('/friendRequests');
+                break;
+            case 'Play Dates':
+                history.push('/playdates');
+                break;
+            case 'Date Requests':
+                history.push('/dateRequests');
                 break;
             // case 'Favorites':
             //     history.push('/favorites');
@@ -43,11 +55,23 @@ const ProfileDropdown = () => {
         <option key={'profile'} value={'Profile'}>
             Profile
         </option>
-        <option key={'settings'} value={'Account Settings'}>
+        {/* <option key={'settings'} value={'Account Settings'}>
             Account Settings
-        </option>
+        </option> */}
         <option key={'messages'} value={'Messages'}>
             Messages
+        </option>
+        <option key={'friends'} value={'Friends'}>
+            Friends
+        </option>
+        <option key={'friendRequests'} value={'Friend Requests'}>
+            Friend Requests
+        </option>
+        <option key={'playDates'} value={'Play Dates'}>
+            Play Dates
+        </option>
+        <option key={'dateRequests'} value={'Date Requests'}>
+            Date Requests
         </option>
         {/* <option key={'favorites'} value={'Favorites'}>
             Favorites
