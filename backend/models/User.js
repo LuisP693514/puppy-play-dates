@@ -14,6 +14,7 @@ const userSchema = new Schema({
     name: { type: String },
     ownerAge: { type: Number, min: 5, max: 200 },
     friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'Friend'}],
+    dates: [{type: mongoose.Schema.Types.ObjectId, ref: 'Date'}],
     coordinates: [{type: Number}]
     
 }, {
