@@ -1,17 +1,22 @@
 import ProfileModal from '../ProfileModal';
 import Navbar from '../NavBar/NavBar';
 import './MainPage.css'
-// import Navbar from './components/NavBar/NavBar';
+import MyGoogleMap from '../Map/Map';
 
 function MainPage() {
     return (
       <>
-        {/* <Navbar/> */}
-        <p>Yay doggies</p>
-        <ProfileModal />
-        <footer>
+      <div className="main-layout">
+        <div>
+          <Navbar/>
+
+        </div>
+        <MyGoogleMap />
+        <footer className='white-text'>
           Copyright &copy; 2023 Puppy Play Dates
+          <ProfileModal />
         </footer>
+      </div>
       </>
     );
   }

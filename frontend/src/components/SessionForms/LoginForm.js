@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './SessionForm.css';
 
 import { login, clearSessionErrors } from '../../store/session';
@@ -67,6 +68,7 @@ function LoginForm () {
           className="login-button"
           disabled={!email || !password}
         >Demo User</button>
+        <Link to='/signup'><div className="orange-text sign-up">Sign up for an Account</div></Link>
       </form>
     </div>
   );
