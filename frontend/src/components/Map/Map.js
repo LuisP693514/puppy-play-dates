@@ -17,10 +17,12 @@ const center = {
   lng: -73.9939538
 };
 
-const locations = [
-    center,
-    {lat: 40.7365, lng: -73.9904}
-]
+// const locations = [
+//     center,
+//     {lat: 40.7365, lng: -73.9904}
+// ]
+
+// const photos = []
 
 function MyGoogleMap() {
     const dispatch = useDispatch()
@@ -38,14 +40,17 @@ function MyGoogleMap() {
     
     console.log(users)
     
-    const coordinate = users.map((user) => {
+    // const coordinate = users.map((user) => {
         
-        console.log(user.longitude)
-        console.log(user.latitude)
+    //     console.log(user.longitude)
+    //     console.log(user.latitude)
 
-        const currentCoordinates = { lat: user.latitude, lng: user.longitude }
-        locations.push(currentCoordinates)
-    })
+    //     const currentCoordinates = { lat: user.latitude, lng: user.longitude }
+    //     const currentPhoto = user.profileImageUrl
+        
+    //     locations.push(currentCoordinates)
+    //     photos.push(currentPhoto)
+    // })
         
     const [map, setMap] = useState(null)
 
@@ -86,11 +91,11 @@ function MyGoogleMap() {
             fullscreenControl: false
         }}
       >
-        {locations.map(location => (
+        {users.map(user => (
             <Marker 
-                position={location} 
+                position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
-                    url: defaultTest,
+                    url: user.profileImageUrl,
                     scaledSize: { width: 40, height: 40 }
                 }}
             />
