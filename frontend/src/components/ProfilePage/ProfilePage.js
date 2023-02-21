@@ -1,7 +1,7 @@
 import './ProfilePage.css';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from './store/session';
+import { getCurrentUser } from '../../store/session';
 import {useHistory } from 'react-router-dom';
 import { selectCurrentUser } from '../../store/session';
 import { deleteUser, updateUser } from '../../store/users';
