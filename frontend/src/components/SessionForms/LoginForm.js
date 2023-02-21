@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './SessionForm.css';
-
+import * as sessionActions from '../../store/session';
 import { login, clearSessionErrors } from '../../store/session';
 import tightlogo from "../../images/tight-logo.jpg"
 
@@ -27,6 +27,12 @@ function LoginForm () {
     e.preventDefault();
     dispatch(login({ email, password })); 
   }
+
+  const handleDemoSubmit = () => {
+    return dispatch(sessionActions.login({ 
+      email: 'demo-user@appacademy.io', 
+      password: 'password' }
+  ))};
 
   return (
     <div className="login-form-div">
@@ -66,6 +72,7 @@ function LoginForm () {
         >Log In</button>
         <button
           className="login-button"
+          onClick={(e) => handleDemoSubmit()}
           disabled={!email || !password}
         >Demo User</button>
         <Link to='/signup'><div className="orange-text sign-up">Sign up for an Account</div></Link>
