@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
 
 import { login, clearSessionErrors } from '../../store/session';
+import tightlogo from "../../images/tight-logo.jpg"
 
 function LoginForm () {
   const [email, setEmail] = useState('');
@@ -27,32 +28,47 @@ function LoginForm () {
   }
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Log In Form</h2>
-      <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
-        />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <input
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />
-    </form>
+    <div className="login-form-div">
+      <div className="login-spacer center"><img className="login-logo" src={tightlogo}/> </div>
+
+      <form className="session-form" onSubmit={handleSubmit}>
+        <div className="gradient"></div>
+        <div className="login-spacer center orange-text"><h2>Login</h2></div>
+        <div className="login-spacer">
+          <label>
+            <span className="grey-text"><i className="fa-solid fa-user"></i> </span>
+            <input type="text"
+              className="input-field"
+              value={email}
+              onChange={update('email')}
+              placeholder="Email"
+            />
+          </label>
+          <div className="errors">{errors?.email}</div>
+        </div>
+        <div className="login-spacer">
+          <label>
+            <span className="grey-text"><i className="fa-solid fa-lock"></i> </span>
+            <input type="password"
+              className="input-field"
+              value={password}
+              onChange={update('password')}
+              placeholder="Password"
+            />
+          <div className="errors">{errors?.password}</div>
+          </label>
+        </div>
+        <button
+          type="submit"
+          className="login-button"
+          disabled={!email || !password}
+        >Log In</button>
+        <button
+          className="login-button"
+          disabled={!email || !password}
+        >Demo User</button>
+      </form>
+    </div>
   );
 }
 
