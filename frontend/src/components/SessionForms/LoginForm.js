@@ -29,7 +29,7 @@ function LoginForm () {
   }
 
   const handleDemoSubmit = () => {
-    return dispatch(sessionActions.login({ 
+    dispatch(sessionActions.login({ 
       email: 'demo-user@appacademy.io', 
       password: 'password' }
   ))};
@@ -73,7 +73,6 @@ function LoginForm () {
         <button
           className="login-button"
           onClick={(e) => handleDemoSubmit()}
-          disabled={!email || !password}
         >Demo User</button>
         <Link to='/signup'><div className="orange-text sign-up">Sign up for an Account</div></Link>
       </form>

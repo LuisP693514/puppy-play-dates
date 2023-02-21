@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { isCreatingDate, getCreateDateError, getCreatedDate, createNewDate } from '../../store/dates'; 
+import { useDispatch } from "react-redux";
+import { createNewDate } from '../../store/dates'; 
 import './CreateDateForm.css';
 
 const CreateDate = ({sessionUser, otherUser}) => {
@@ -11,9 +11,10 @@ const CreateDate = ({sessionUser, otherUser}) => {
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
     // time?
+    // need to edit create date functionality
 
-  const isLoading = useSelector(isCreatingDate);
-  const error = useSelector(getCreateDateError);
+//   const isLoading = useSelector(isCreatingDate);
+//   const error = useSelector(getCreateDateError);
     //const date = useSelector(getCreatedDate);
 
   const handleSubmit = (e) => {
@@ -69,8 +70,8 @@ const CreateDate = ({sessionUser, otherUser}) => {
                     // location might not be a string
                 />
             </div>
-            {isLoading && <p id='loading-date'>Creating date...</p>}
-            {error && <p id='date-error'>Error creating date: {error}</p>}
+            {/* {isLoading && <p id='loading-date'>Creating date...</p>}
+            {error && <p id='date-error'>Error creating date: {error}</p>} */}
             <button id='date-submit' type="submit">Create Date</button>
         </form>
     </div>
