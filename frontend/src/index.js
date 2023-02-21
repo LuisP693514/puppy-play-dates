@@ -9,6 +9,7 @@ import configureStore from './store/store';
 import { ModalProvider } from './context/Modal';
 import * as userActions from './store/users'
 import jwtFetch from './store/jwt';
+import * as sessionActions from './store/session'
 
 const store = configureStore({});
 
@@ -16,7 +17,9 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.jwtFetch = jwtFetch;
   window.userActions = userActions;
+  window.sessionActions = sessionActions;
 }
+
 
 function Root() {
   return (
