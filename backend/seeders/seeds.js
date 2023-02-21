@@ -8,6 +8,9 @@ const NUM_SEED_USERS = 10;
 
 // Create users
 const users = [];
+const preseeded_locations = [
+    
+]
 
 users.push(
     new User({
