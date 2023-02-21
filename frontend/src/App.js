@@ -10,7 +10,8 @@ import SignupForm from './components/SessionForms/SignupForm';
 import MyGoogleMap from './components/Map/Map'
 
 import { getCurrentUser } from './store/session';
-import Navbar from './components/NavBar/NavBar';
+// import Navbar from './components/NavBar/NavBar';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <AuthRoute exact path="/" component={MainPage} />
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
+        <ProtectedRoute exact path="/profile" component={ProfilePage} />
         <AuthRoute exact path="/map" component={MyGoogleMap} />
       </Switch>
     </>

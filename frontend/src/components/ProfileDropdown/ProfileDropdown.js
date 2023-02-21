@@ -22,9 +22,9 @@ const ProfileDropdown = () => {
             case 'Messages':
                 history.push('/messages');
                 break;
-            case 'Favorites':
-                history.push('/favorites');
-                break;
+            // case 'Favorites':
+            //     history.push('/favorites');
+            //     break;
             case 'Logout':
                 dispatch(sessionActions.logout());
                 history.push('/login');
@@ -49,9 +49,9 @@ const ProfileDropdown = () => {
         <option key={'messages'} value={'Messages'}>
             Messages
         </option>
-        <option key={'favorites'} value={'Favorites'}>
+        {/* <option key={'favorites'} value={'Favorites'}>
             Favorites
-        </option>
+        </option> */}
        {sessionUser ? (
             <option key={"logout"} value={"Logout"}>
                 Logout
