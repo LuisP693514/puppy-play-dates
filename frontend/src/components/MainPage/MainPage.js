@@ -1,4 +1,5 @@
 import ProfileModal from '../ProfileModal';
+import Navbar from '../NavBar/NavBar';
 import './MainPage.css'
 
 function MainPage() {
