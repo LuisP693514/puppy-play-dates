@@ -25,6 +25,7 @@ const locations = [
 function MyGoogleMap() {
     const dispatch = useDispatch()
     const users = useSelector(getUsers)
+    const defaultTest = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"
 
     useEffect(() => {
         dispatch(fetchUsers())
@@ -37,12 +38,15 @@ function MyGoogleMap() {
     
     console.log(users)
     
-    const coordinate = users.map((user) => (
-        // {lat: user.coordinates[0], lng: user.coordinats[1]}
-        console.log(user.coordinates)
-        // console.log(user.coordinates[0])
-    ))
-        // console.log(locations)
+    const coordinate = users.map((user) => {
+        
+        console.log(user.longitude)
+        console.log(user.latitude)
+
+        const currentCoordinates = { lat: user.latitude, lng: user.longitude }
+        locations.push(currentCoordinates)
+    })
+        
     const [map, setMap] = useState(null)
 
     const onLoad = useCallback(function callback(map) {
@@ -58,7 +62,6 @@ function MyGoogleMap() {
     // const styles = mapConfig()
     // debugger
 
-    console.log(data)
     const zoom = 17
     map.setZoom(zoom)
 
@@ -83,8 +86,17 @@ function MyGoogleMap() {
             fullscreenControl: false
         }}
       >
+        {locations.map(location => (
+            <Marker 
+                position={location} 
+                icon={{
+                    url: defaultTest,
+                    scaledSize: { width: 40, height: 40 }
+                }}
+            />
+        ))}
       </GoogleMap>
-  ) : <>Test</>
+  ) : <>...Loading</>
 
 }
 export default MyGoogleMap
