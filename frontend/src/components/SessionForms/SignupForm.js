@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
+import tightlogo from "../../images/tight-logo.jpg"
 
 function SignupForm () {
   const [email, setEmail] = useState('');
@@ -55,56 +56,68 @@ function SignupForm () {
   
   const updateFile = e => setImage(e.target.files[0]);
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Sign Up Form</h2>
-      <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
-        />
-      </label>
-      <div className="errors">{errors?.username}</div>
-      <label>
-        <span>Username</span>
-        <input type="text"
-          value={username}
-          onChange={update('username')}
-          placeholder="Username"
-        />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <div className="errors">
-        {password !== password2 && 'Confirm Password field must match'}
-      </div>
-      <label>
-        <span>Confirm Password</span>
-        <input type="password"
-          value={password2}
-          onChange={update('password2')}
-          placeholder="Confirm Password"
-        />
-      </label>
-      <label>
-        Profile Image
-        <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
-      </label>
-      <input
-        type="submit"
-        value="Sign Up"
-        disabled={!email || !username || !password || password !== password2}
-      />
-    </form>
+    <div className="login-form-div signup-div">
+      <form className="session-form" onSubmit={handleSubmit}>
+        <div className="login-spacer signup-head">
+          <h2 className="orange-text">Sign Up</h2>
+          <div className="login-spacer center"><img className="signin-logo" src={tightlogo}/> </div>
+        </div>
+        <div className="login-spacer">
+          <label>
+            <span>Email: </span>
+            <input type="text"
+              className="input-field"
+              value={email}
+              onChange={update('email')}
+              placeholder="Email"
+            />
+          </label>
+        <div className="errors">{errors?.email}</div>
+        </div>
+        <div className="login-spacer">
+          <label>
+            <span>Username: </span>
+            <input type="text"
+              value={username}
+              onChange={update('username')}
+              placeholder="Username"
+            />
+          </label>
+          <div className="errors">{errors?.username}</div>
+        </div>
+        <div className="login-spacer">
+          <label>
+            <span>Password: </span>
+            <input type="password"
+              value={password}
+              onChange={update('password')}
+              placeholder="Password"
+            />
+          </label>
+          <div className="errors">{errors?.password}</div>
+        </div>
+        <div className="login-spacer">
+          <label>
+            <span>Confirm Password: </span>
+            <input type="password"
+              value={password2}
+              onChange={update('password2')}
+              placeholder="Confirm Password"
+            />
+          </label>
+          <div className="errors">{password !== password2 && 'Confirm Password field must match'}</div>
+        </div>
+        <div className="login-spacer">
+          <label> Profile Image: </label>
+          <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
+        </div>
+        <button
+          className="login-button"
+          type="submit"
+          disabled={!email || !username || !password || password !== password2}
+        >Sign Up</button>
+      </form>
+    </div>
   );
 }
 
