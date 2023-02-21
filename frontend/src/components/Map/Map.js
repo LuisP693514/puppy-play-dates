@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { useState, useCallback, useEffect } from 'react';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { googleMapApiKey } from '../../config/keys';
 import './GoogleMap.css'
 import data from './MapConfig.json'
-
+import { fetchUsers, getUsers } from '../../store/users';
+import { useDispatch, useSelector } from 'react-redux';
 
 const containerStyle = {
     width: '95%',
@@ -16,15 +17,28 @@ const center = {
   lng: -73.9939538
 };
 
+const locations = [
+    center,
+    {lat: 40.7365, lng: -73.9904}
+]
+
 function MyGoogleMap() {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: googleMapApiKey
-  })
+    const dispatch = useDispatch()
+    const users = useSelector(getUsers)
 
-  const [map, setMap] = useState(null)
+    useEffect(() => {
+        dispatch(fetchUsers())
+    }, [])
 
-  const onLoad = useCallback(function callback(map) {
+    console.log(users)
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: googleMapApiKey
+    })
+
+    const [map, setMap] = useState(null)
+
+    const onLoad = useCallback(function callback(map) {
     // const bounds = new window.google.maps.LatLngBounds(center);
     // map.fitBounds(bounds);
 
@@ -36,6 +50,7 @@ function MyGoogleMap() {
 
     // const styles = mapConfig()
     // debugger
+
     console.log(data)
     const zoom = 17
     map.setZoom(zoom)
@@ -63,6 +78,6 @@ function MyGoogleMap() {
       >
       </GoogleMap>
   ) : <>Test</>
-}
 
+}
 export default MyGoogleMap
