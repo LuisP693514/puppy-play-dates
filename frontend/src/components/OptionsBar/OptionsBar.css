@@ -1,0 +1,24 @@
+.options-bar-div{
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 5vw;
+    z-index: 5;
+    background: #F78914;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.options-icons{
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+
+}
+
+.double-spacer {
+    margin-bottom: 20px;
+}
