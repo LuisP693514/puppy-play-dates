@@ -13,7 +13,9 @@ const validateLoginInput = require('../../validations/login');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 
-router.post('/register', singleMulterUpload("image"), validateRegisterInput,async (req, res, next) => {
+
+
+router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
   // username.
   const user = await User.findOne({
@@ -36,8 +38,8 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput,asyn
   }
 
   const profileImageUrl = req.file ?
-      await singleFileUpload({ file: req.file, public: true }) :
-      DEFAULT_PROFILE_IMAGE_URL;
+    await singleFileUpload({ file: req.file, public: true }) :
+    DEFAULT_PROFILE_IMAGE_URL;
 
   const newUser = new User({
     username: req.body.username,
