@@ -30,6 +30,10 @@ export const clearSessionErrors = () => ({
 export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
 
+export const selectCurrentUser = state => {
+    return state?.session.user ? state.session.user : null; 
+}
+
 export const getCurrentUser = () => async dispatch => {
     const res = await jwtFetch('/api/users/current');
     const user = await res.json();
