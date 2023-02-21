@@ -38,6 +38,7 @@
 
 .session-form {
     margin-top: 20px;
+    width: max-content;
 }
 
 .signin-logo{
@@ -54,5 +55,11 @@
     padding-right: 40px;
     padding-left: 40px;
     padding-bottom: 40px;
-    padding-top: 15px;git
+    padding-top: 15px;
+}
+
+
+.signup-head{
+    padding-top: 4px;
+    margin-bottom: 5px;
 }
