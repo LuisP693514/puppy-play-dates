@@ -12,6 +12,7 @@ import MyGoogleMap from './components/Map/Map'
 import { getCurrentUser } from './store/session';
 import Navbar from './components/NavBar/NavBar';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
