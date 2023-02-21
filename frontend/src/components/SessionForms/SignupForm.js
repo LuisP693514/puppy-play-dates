@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
@@ -9,9 +10,10 @@ function SignupForm () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     return () => {
@@ -47,14 +49,15 @@ function SignupForm () {
     const user = {
       email,
       username,
-      image,
+      // image,
       password
     };
     
     dispatch(signup(user)); 
+    history.push('/signup2', {user});
   }
   
-  const updateFile = e => setImage(e.target.files[0]);
+  // const updateFile = e => setImage(e.target.files[0]);
   return (
     <div className="login-form-div signup-div">
       <form className="session-form" onSubmit={handleSubmit}>
@@ -107,10 +110,10 @@ function SignupForm () {
           </label>
           <div className="errors">{password !== password2 && 'Confirm Password field must match'}</div>
         </div>
-        <div className="login-spacer">
+        {/* <div className="login-spacer">
           <label> Profile Image: </label>
           <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
-        </div>
+        </div> */}
         <button
           className="login-button"
           type="submit"
