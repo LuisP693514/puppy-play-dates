@@ -6,11 +6,24 @@ const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 
+
+
+
 // Create users
 const users = [];
-const preseeded_locations = [
-    
-]
+
+const minLong = -74.0000;
+const maxLong = -73.9876;
+let randomLong = Math.random() * (maxLong - minLong) + minLong;
+
+const minLat = 40.7395;
+const maxLat = 40.7331;
+let randomLat = Math.random() * (maxLat - minLat) + minLat;
+
+const preseeded_locations = []
+for (let i = 0; i < 10; i++) {
+    presseeded_locations.push([randomLat, randomLong])
+}
 
 users.push(
     new User({
