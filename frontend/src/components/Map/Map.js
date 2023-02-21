@@ -30,12 +30,19 @@ function MyGoogleMap() {
         dispatch(fetchUsers())
     }, [])
 
-    console.log(users)
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: googleMapApiKey
     })
-
+    
+    console.log(users)
+    
+    const coordinate = users.map((user) => (
+        // {lat: user.coordinates[0], lng: user.coordinats[1]}
+        console.log(user.coordinates)
+        // console.log(user.coordinates[0])
+    ))
+        // console.log(locations)
     const [map, setMap] = useState(null)
 
     const onLoad = useCallback(function callback(map) {
