@@ -51,7 +51,7 @@ app.use((req, res, next) => {
     err.statusCode = 404;
     next(err);
 });
-
+   
 const serverErrorLogger = debug('backend:error');
 
 // Express custom error handler that will be called whenever a route handler or
