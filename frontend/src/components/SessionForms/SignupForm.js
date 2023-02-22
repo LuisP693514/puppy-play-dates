@@ -54,7 +54,7 @@ function SignupForm () {
       password
     };
     
-    dispatch(signup(user)); 
+    dispatch(signup(user));
     history.push('/signup2', {user});
   }
   

@@ -19,7 +19,9 @@ const removeUser = userId => ({
 });
 
 export const getUser = userId => state => {
-    return state?.users ? state.user[userId] : null;
+    debugger
+    
+    return state?.users ? state?.users[userId] : null;
 };
 
 export const getUsers = state => {

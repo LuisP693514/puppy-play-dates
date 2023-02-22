@@ -23,7 +23,7 @@ const CreateDate = ({sessionUser, otherUser}) => {
       latitude
     };
     dispatch(createDateRequest(userOneId, userTwoId, dateInfo));
-    history.push('/dates')
+    // history.push('/dates')
   };
 
   return (
