@@ -1,33 +1,34 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getDates } from '../../store/dates';
+import { fetchDates, getDates } from '../../store/dates';
 import { getCurrentUser, selectCurrentUser } from '../../store/session';
-import { fetchUser, getUser } from '../../store/users';
 import './DateShowPage.css';
+import DateEventContainer from './DateEventContainer';
 
 const DateShowPage = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
-    const user = useSelector(getUser(currentUser.id))
+    const dates = useSelector(getDates);
+
 
     useEffect(() => {
         dispatch(getCurrentUser())
-        dispatch(fetchUser(currentUser.id))
+        dispatch(fetchDates(currentUser._id))
     }, [dispatch]);
 
 
-    if(!user) return null;
+    if(!dates) return null;
 
     return (
         <div className='user-date-show-page'>
             <div className='date-index-container'>
                 <h1 id='upcoming-dates'>Upcoming Dates</h1>
                 <div id='date-index'>
-                    {/* {user.dates.map(dateId => 
+                    {dates.map(dateId => 
                         <div id='date-item'>
                             <DateEventContainer dateId={dateId}/>
                         </div>
-                    )} */}
+                    )}
                 </div>
             </div>
             <div className='date-request-index-container'>
@@ -35,7 +36,7 @@ const DateShowPage = () => {
                 <div id='date-request-index'>
                     {/* {user.dateRequests.map(requestId => 
                         <div id='date-item'>
-                            <DateRequestContainer requestId={requestId}/>
+                            <DateRequestContainer user={user} requestId={requestId}/>
                         </div>
                     )} */}
                 </div>

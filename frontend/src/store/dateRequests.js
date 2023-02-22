@@ -30,8 +30,8 @@ export const getDateRequests = state => {
 };
 
 
-export const fetchDate = (dateRequestId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/dates/${dateRequestId}`);
+export const fetchDateRequest = (dateRequestId) => async (dispatch) => {
+    const response = await jwtFetch(`/api/dateRequests/${dateRequestId}`);
 
     if (response.ok) {
         const dateRequest = await response.json();
