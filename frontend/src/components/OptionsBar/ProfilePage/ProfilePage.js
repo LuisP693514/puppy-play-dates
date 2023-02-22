@@ -37,21 +37,6 @@ function ProfilePage({open, profileClose}) {
         setEditMode(false);
     }
 
-    const handleDeleteClick = e => {
-        e.preventDefault();
-        setShowModal(true);
-    }
-
-    const handleConfirmDelete = e => {
-        e.preventDefault();
-        dispatch(deleteUser(currentUser._id));
-        history.push('/login');
-    }
-
-    const handleCancelDelete = e => {
-        e.preventDefault();
-        setShowModal(false);
-    }
 
     useEffect(() => {
         if (!editMode) {
@@ -66,7 +51,7 @@ function ProfilePage({open, profileClose}) {
     if (editMode) {
         return ReactDom.createPortal(
             <div className="options-modal">
-                <button onClick={profileClose} className="profile-close">&times;</button>
+                <button onClick={profileClose} className="modal-close">&times;</button>
                 <form className='current-user-profile'>
                     <h3 id='profile-text'>Edit Profile</h3>
                     <div className="update-div">
@@ -118,7 +103,7 @@ function ProfilePage({open, profileClose}) {
                 <div className='current-user-profile'>
                     <div className="profile-header">
                         <h3 id='profile-text'>My Profile</h3>
-                        <button onClick={profileClose} className="profile-close">&times;</button>
+                        <button onClick={profileClose} className="modal-close">&times;</button>
                     </div>
                     <img className="profile-image" src={currentUser.profileImageUrl} alt="profile"/>
                     <div className="profile-puppy-details-section"> 
@@ -147,23 +132,7 @@ function ProfilePage({open, profileClose}) {
                         <button className='button edit-profile-button' onClick={handleEdit}>
                             Edit Profile
                         </button>
-                        <button className='button delete-profile-button' onClick={handleDeleteClick}>
-                            Delete Profile
-                        </button>
                     </div>
-                    {showModal && (
-                        <div className='delete-modal'>
-                            <h2>Are you sure you want to delete your profile?</h2>
-                            <div className='modal-buttons'>
-                                <button className='yes-button' onClick={handleConfirmDelete}>
-                                    Yes
-                                </button>
-                                <button className='no-button' onClick={handleCancelDelete}>
-                                    No
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>,
             document.getElementById("portal")
