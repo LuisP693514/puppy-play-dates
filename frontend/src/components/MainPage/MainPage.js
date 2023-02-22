@@ -17,9 +17,6 @@ function MainPage() {
               <ProfileModal />
             </div>
             <MyGoogleMap />
-            <footer className='white-text'>
-              Copyright &copy; 2023 Puppy Play Dates
-            </footer>
           </div>
         </div>
       </>

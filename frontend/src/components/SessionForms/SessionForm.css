@@ -66,3 +66,15 @@
 .sign-up {
     text-align: center
 }
+
+.sign-up:hover{
+    color: #ee7308;
+}
+
+.switch-login{
+    text-align: center;
+}
+
+.switch-login:hover{
+    color: #ee7308;
+}

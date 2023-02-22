@@ -7,8 +7,11 @@ import data from './MapConfig.json'
 
 const containerStyle = {
     width: '100%',
-    height: '90vh',
-    margin: '0 auto'
+    height: '91.6vh',
+    margin: '0px auto',
+    overflow: 'hidden',
+    bottom: '0',
+    position: 'absolute'
 };
 
 const center = {
@@ -58,7 +61,7 @@ function MyGoogleMap() {
             styles: data,
             mapTypeControl: false,
             streetViewControl: false,
-            fullscreenControl: false
+            fullscreenControl: false,
         }}
       >
       </GoogleMap>

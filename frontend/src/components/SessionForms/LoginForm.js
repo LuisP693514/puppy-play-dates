@@ -74,7 +74,7 @@ function LoginForm () {
           className="login-button"
           onClick={(e) => handleDemoSubmit()}
         >Demo User</button>
-        <Link to='/signup'><div className="orange-text sign-up">Sign up for an Account</div></Link>
+        <Link to='/signup'><div className="grey-text sign-up">Sign up for an Account</div></Link>
       </form>
     </div>
   );
