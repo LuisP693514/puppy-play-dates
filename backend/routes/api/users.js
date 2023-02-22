@@ -99,6 +99,47 @@ router.get('/all', async (req, res, next) => {
   res.json(users);
 })
 
+// /api/users/:userId/dates grabs all the dates a single user has (array)
+router.get('/:userId/dates', async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const user = User.findById(userId)
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+
+    const dates = user.dates
+
+    if (!dates) {
+      return res.status(404).json({message: "User's dates not found"})
+    }
+
+    res.status(200).json(dates)
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+})
+// /api/users/:userId/friends grabs all the dates a single user has (array)
+
+router.get('/:userId/friends', async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const user = User.findById(userId)
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+
+    const friends = user.friends
+
+    if (!friends) {
+      return res.status(404).json({message: "User's friends not found"})
+    }
+
+    res.status(200).json(friends)
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+})
 // /api/users/:userId grabs 1 user specified by the userId in the params
 router.get('/:userId', async (req, res) => {
   try {
@@ -125,6 +166,19 @@ router.patch('/:userId', validateDoggyInputs, async (req, res, next) => {
       res.json(updatedUser);
     }
   });
+})
+
+router.delete('/:userId', async (req, res) => {
+  const userId = req.params.userId
+  try {
+    const user = await User.findByIdAndDelete(userId)
+    if (!user) {
+      return res.status(404).json({message: 'Could not delete user.'})
+    }
+    res.json({message: "Successfully deleted the user."})
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
 })
 
 
