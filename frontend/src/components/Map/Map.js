@@ -69,6 +69,7 @@ function MyGoogleMap() {
   }, [])
 
   getLocation().then(coords => {
+    console.log(coords)
     setLatitude(coords[0])
     setLongitude(coords[1])
   }).catch(error => {
