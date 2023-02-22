@@ -5,13 +5,15 @@ import errors from './errors';
 import usersReducer from './users';
 import dateReducer from './dates';
 import dateRequestReducer from './dateRequests';
+import markersReducer from './markers';
 
 const rootReducer = combineReducers({
   session,
   errors,
   users: usersReducer,
   dates: dateReducer,
-  dateRequests: dateRequestReducer
+  dateRequests: dateRequestReducer,
+  markers: markersReducer
 });
 
 let enhancer;

@@ -30,6 +30,7 @@ function App() {
         <ProtectedRoute exact path="/profile" component={ProfilePage} />
         <ProtectedRoute exact path="/map" component={MyGoogleMap} />
         <ProtectedRoute exact path="/main" component={MainPage} />
+        {/* <ProtectedRoute exact path="/users/:id" component={ProfilePage} /> */}
       </Switch>
     </>
   );
