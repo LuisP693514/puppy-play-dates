@@ -67,14 +67,14 @@ function LoginForm () {
         </div>
         <button
           type="submit"
-          className="login-button"
+          className="button"
           disabled={!email || !password}
         >Log In</button>
         <button
-          className="login-button"
+          className="button"
           onClick={(e) => handleDemoSubmit()}
         >Demo User</button>
-        <Link to='/signup'><div className="green-text sign-up">Sign up for an Account</div></Link>
+        <Link to='/signup'><div className="grey-text sign-up">Sign up for an Account</div></Link>
       </form>
     </div>
   );
