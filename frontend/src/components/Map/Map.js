@@ -87,7 +87,7 @@ function MyGoogleMap() {
             styles: data,
             mapTypeControl: false,
             streetViewControl: false,
-            fullscreenControl: false,
+            fullscreenControl: false, 
         }}
       >
         {users.map(user => (
