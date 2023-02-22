@@ -161,15 +161,18 @@ router.get('/:userId', async (req, res) => {
 // /api/users/:userId updates the user
 router.patch('/:userId', validateDoggyInputs, async (req, res, next) => {
   const userId = req.params.userId;
-  const updatedUserData = req.params.body;
-
-  User.findByIdAndUpdate(userId, updatedUserData, { new: true }, (err, updatedUser) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(updatedUser);
+  const updatedUserData = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
     }
-  });
+    res.status(200).json(user)
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+  
 })
 
 router.delete('/:userId', async (req, res) => {
