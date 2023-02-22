@@ -5,7 +5,7 @@ const Marker = require('../models/Marker');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
-const NUM_SEED_USERS = 10;
+const NUM_SEED_USERS = 20;
 
 // Create users
 const users = [];
@@ -19,7 +19,7 @@ const maxLat = 40.7331;
 let randomLat;
 
 const preseeded_locations = []
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < NUM_SEED_USERS; i++) {
     
     randomLong = (Math.random() * (maxLong - minLong)) + minLong;
     randomLat = (Math.random() * (maxLat - minLat)) + minLat;
