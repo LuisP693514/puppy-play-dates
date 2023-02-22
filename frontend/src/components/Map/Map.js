@@ -106,45 +106,55 @@ function MyGoogleMap() {
         {markers.map(marker => {
             switch(marker.markerType) {
                 case 'dogPark':
-                    <Marker 
-                        position={{ lat: marker.latitude, lng: marker.longitude }}
-                        icon={{
-                            url: dogParkIcon,
-                            scaledSize: { width: 40, height: 40 }
-                        }}
-                    />
+                    return (
+                        <Marker 
+                            position={{ lat: marker.latitude, lng: marker.longitude }}
+                            icon={{
+                                url: dogParkIcon,
+                                scaledSize: { width: 40, height: 40 }
+                            }}
+                        />
+                    )
                 case 'vet':
-                    <Marker 
-                        position={{ lat: marker.latitude, lng: marker.longitude }}
-                        icon={{
-                            url: veternarianIcon,
-                            scaledSize: { width: 40, height: 40 }
-                        }}
-                    />
+                    return (
+                        <Marker 
+                            position={{ lat: marker.latitude, lng: marker.longitude }}
+                            icon={{
+                                url: veternarianIcon,
+                                scaledSize: { width: 40, height: 40 }
+                            }}
+                        />
+                    )
                 case 'petStore':
-                    <Marker 
-                        position={{ lat: marker.latitude, lng: marker.longitude }}
-                        icon={{
-                            url: petStoreIcon,
-                            scaledSize: { width: 40, height: 40 }
-                        }}
-                    />
+                    return (
+                        <Marker 
+                            position={{ lat: marker.latitude, lng: marker.longitude }}
+                            icon={{
+                                url: petStoreIcon,
+                                scaledSize: { width: 40, height: 40 }
+                            }}
+                        />
+                    )
                 case 'groomer':
-                    <Marker 
-                        position={{ lat: marker.latitude, lng: marker.longitude }}
-                        icon={{
-                            url: groomersIcon,
-                            scaledSize: { width: 40, height: 40 }
-                        }}
-                    />
+                    return (
+                        <Marker 
+                            position={{ lat: marker.latitude, lng: marker.longitude }}
+                            icon={{
+                                url: groomersIcon,
+                                scaledSize: { width: 40, height: 40 }
+                            }}
+                        />
+                    )
                 default:
-                    <Marker 
-                        position={{ lat: 40.7356, lng: -73.9910 }}
-                        icon={{
-                        url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
-                        scaledSize: { width: 40, height: 40 }
-                        }}
-                    />
+                    return (
+                        <Marker 
+                            position={{ lat: 40.7356, lng: -73.9910 }}
+                            icon={{
+                            url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
+                            scaledSize: { width: 40, height: 40 }
+                            }}
+                        />
+                    )
             }
     })}
         {/* {parks.map(park => (
