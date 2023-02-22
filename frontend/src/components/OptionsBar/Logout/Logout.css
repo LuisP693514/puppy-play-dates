@@ -13,17 +13,19 @@
     border-radius: 10px;
 }
 
-
-
 .logout-button-div{
     display: flex;
 }
 
 .logout-buttons {
+    padding-top: 10px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 0px;
+    font-size: 18px
 }
 
 .logout-text{
     text-align: center;
+    font-size: 18px;
 }

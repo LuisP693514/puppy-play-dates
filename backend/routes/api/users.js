@@ -44,7 +44,9 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
   const newUser = new User({
     username: req.body.username,
     profileImageUrl,
-    email: req.body.email
+    email: req.body.email,
+    longitude: req.body.longitude,
+    latitude: req.body.latitude
   });
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -96,11 +98,7 @@ router.get('/current', restoreUser, (req, res) => {
 // /api/users/all grabs all the users and exludes the password from the request
 router.get('/all', async (req, res, next) => {
   const users = await User.find().select('-hashedPassword');
-  const usersById = {}
-  users.forEach(user => {
-    usersById[user._id] = user.toObject();
-  });
-  res.json(usersById);
+  res.json(users);
 })
 
 // /api/users/:userId/dates grabs all the dates a single user has (array)
@@ -124,6 +122,24 @@ router.get('/:userId/dates', async (req, res) => {
   }
 })
 // /api/users/:userId/friends grabs all the dates a single user has (array)
+
+router.get('/:userId/friendRequests', async (req, res) => {
+  const userId = req.params.userId
+  try {
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+
+    const friendRequests = user.friendRequests;
+    res.status(200).json({})
+    
+  } catch (err) {
+    
+  }
+})
+router.get('/:userId/dateRequests')
 
 router.get('/:userId/friends', async (req, res) => {
   const userId = req.params.userId;
@@ -152,7 +168,7 @@ router.get('/:userId', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({userId: user});
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -161,18 +177,15 @@ router.get('/:userId', async (req, res) => {
 // /api/users/:userId updates the user
 router.patch('/:userId', async (req, res, next) => {
   const userId = req.params.userId;
-  const updatedUserData = req.body;
-  try {
-    const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
-    console.log(user)
-    if (!user) {
-      return res.status(404).json({message: "User not found"})
+  const updatedUserData = req.params.body;
+
+  User.findByIdAndUpdate(userId, updatedUserData, { new: true }, (err, updatedUser) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.json(updatedUser);
     }
-    res.status(200).json(user)
-  } catch (err) {
-    res.status(500).json({message: err.message})
-  }
-  
+  });
 })
 
 router.delete('/:userId', async (req, res) => {
@@ -187,6 +200,8 @@ router.delete('/:userId', async (req, res) => {
     res.status(500).json({message: err.message})
   }
 })
+
+
 
 
 
