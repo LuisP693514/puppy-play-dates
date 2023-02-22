@@ -4,20 +4,25 @@ import { fetchDates, getDates } from '../../store/dates';
 import { getCurrentUser, selectCurrentUser } from '../../store/session';
 import './DateShowPage.css';
 import DateEventContainer from './DateEventContainer';
+import DateRequestContainer from './DateRequestContainer';
+import { fetchDateRequests, getDateRequests } from '../../store/dateRequests';
 
 const DateShowPage = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const dates = useSelector(getDates);
+    const dateRequests = useSelector(getDateRequests);
 
 
     useEffect(() => {
         dispatch(getCurrentUser())
         dispatch(fetchDates(currentUser._id))
+        dispatch(fetchDateRequests(currentUser._id))
     }, [dispatch]);
 
 
-    if(!dates) return null;
+    if (!dates) return null;
+    if (!dateRequests) return null;
 
     return (
         <div className='user-date-show-page'>
@@ -34,11 +39,11 @@ const DateShowPage = () => {
             <div className='date-request-index-container'>
                 <h2 id='date-requests'>Date Requests</h2>
                 <div id='date-request-index'>
-                    {/* {dateRequests.map(requestId => 
+                    {dateRequests.map(requestId => 
                         <div id='date-item'>
-                            <DateRequestContainer user={user} requestId={requestId}/>
+                            <DateRequestContainer requestId={requestId}/>
                         </div>
-                    )} */}
+                    )}
                 </div>
             </div>
         </div>

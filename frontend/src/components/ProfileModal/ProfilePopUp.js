@@ -10,17 +10,20 @@ const ProfilePopUp = ({userId}) => {
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
     const sessionUser = useSelector((state) => state.session.user);
-    const isFriend = sessionUser.friends.includes(userId);
+    const currentUser = useSelector(getUser(sessionUser._id))
+    const isFriend = currentUser.friends.includes(userId);
 
     useEffect(() => {
         dispatch(fetchUser(userId))
+        dispatch(fetchUser(sessionUser._id))
     }, [dispatch, userId]);
 
+    if (!currentUser) return null;
     if (!otherUser) return null;
 
     const handleCreateDate = e => {
         e.preventDefault();
-        history.push('/createDate', {sessionUser, otherUser});
+        history.push('/createDate', {currentUser, otherUser});
     };
 
     const handleAddFriend = e => {

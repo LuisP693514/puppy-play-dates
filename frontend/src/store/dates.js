@@ -40,7 +40,7 @@ export const fetchDate = (dateId) => async (dispatch) => {
 };
 
 export const fetchDates = (userId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/${userId}/dates`);
+    const response = await jwtFetch(`/api/users/${userId}/dates`);
 
     if (response.ok) {
         const dates = await response.json();
@@ -49,7 +49,7 @@ export const fetchDates = (userId) => async (dispatch) => {
 };
 
 export const updateDate = date => async (dispatch) => {
-    const response = await jwtFetch(`/api/dates/${date.id}`,{
+    const response = await jwtFetch(`/api/dates/${date._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(date)
@@ -62,7 +62,7 @@ export const updateDate = date => async (dispatch) => {
 };
 
 export const createDate = date => async (dispatch) => {
-    const response = await jwtFetch(`/api/dates`, {
+    const response = await jwtFetch(`/api/dates/create`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(date)
@@ -90,7 +90,7 @@ const dateReducer = (state = {}, action) => {
     case RECEIVE_DATES:
         return {...action.dates};
     case RECEIVE_DATE:
-        return {...state, [action.date.id]: action.date};
+        return {...state, [action.date._id]: action.date};
     case REMOVE_DATE:
         const newState = {...state};
         delete newState[action.dateId];

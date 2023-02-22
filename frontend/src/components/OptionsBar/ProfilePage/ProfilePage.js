@@ -35,7 +35,6 @@ function ProfilePage({open, profileClose}) {
         setEditMode(false);
     }
 
-
     // const updateFile = e => setImage(e.target.files[0]);
 
     if(!open) return null
