@@ -5,21 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from '../../../store/session';
 import {useHistory } from 'react-router-dom';
 import { selectCurrentUser } from '../../../store/session';
-import { deleteUser, updateUser } from '../../../store/users';
+import { deleteUser, fetchUser, getUser, updateUser } from '../../../store/users';
 
 
 function ProfilePage({open, profileClose}) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const currentUser = useSelector(selectCurrentUser)
+    const user = useSelector(selectCurrentUser)
+    const currentUser = useSelector(getUser(user._id))
     const [showModal, setShowModal] = useState(false);
     const [editMode, setEditMode] = useState(false);
-    const [updatedUser, setUpdatedUser] = useState(currentUser);
-    // const [image, setImage] = useState(null);
+    const [updatedUser, setUpdatedUser] = useState({...currentUser});
 
 
     useEffect(() => {
         dispatch(getCurrentUser())
+        dispatch(fetchUser(user._id))
     }, [dispatch]);
 
     const handleEdit = () => {
@@ -43,7 +44,7 @@ function ProfilePage({open, profileClose}) {
 
     const handleConfirmDelete = e => {
         e.preventDefault();
-        dispatch(deleteUser(currentUser._id));
+        dispatch(deleteUser(currentUser.id));
         history.push('/login');
     }
 
@@ -52,7 +53,15 @@ function ProfilePage({open, profileClose}) {
         setShowModal(false);
     }
 
-    // const updateFile = e => setImage(e.target.files[0]);
+    useEffect(() => {
+        if (!editMode) {
+        dispatch(getCurrentUser());
+        }
+    }, [dispatch, editMode]);
+
+    if (!user) return null;
+    if (!currentUser) return null;
+
     if(!open) return null
     if (editMode) {
         return ReactDom.createPortal(
@@ -85,10 +94,9 @@ function ProfilePage({open, profileClose}) {
                             Puppy Temperament:
                             <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({...updatedUser, puppyTemperament: e.target.value})} />
                         </label>
-                        {/* possibly do a dropdown for preselected list of temperaments */}
                         <label>
                             Vaccinated:
-                            <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />
+                            <input type='checkbox' checked={updatedUser.puppyVaccinated} onChange={e => setUpdatedUser({...updatedUser, puppyVaccinated: e.target.checked})} />
                         </label>
                     </div>
                     <div className="profile-image">
@@ -132,7 +140,7 @@ function ProfilePage({open, profileClose}) {
                         </div>
                         <div className="my-dog-vacc-section">
                             <p id="my-dog-vacc-text">Vaccinated: </p>
-                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated}</p>
+                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated ? 'Yes' : 'No'}</p>
                         </div>
                     </div>
                     <div className='profile-page-buttons'>
