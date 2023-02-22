@@ -19,7 +19,7 @@ const removeUser = userId => ({
 });
 
 export const getUser = userId => state => {
-    return state?.users ? state.user[userId] : null;
+    return state?.users ? state?.users[userId] : null;
 };
 
 export const getUsers = state => {
@@ -46,7 +46,7 @@ export const fetchUsers = () => async (dispatch) => {
 
 
 export const updateUser = user => async (dispatch) => {
-    const response = await jwtFetch(`/api/users/${user.id}`,{
+    const response = await jwtFetch(`/api/users/${user._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
@@ -73,7 +73,7 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_USERS:
             return {...action.users};
         case RECEIVE_USER:
-            return {...state, [action.user.id]: action.user};
+            return {...state, [action.user._id]: action.user};
         case REMOVE_USER:
             const newState = {...state};
             delete newState[action.userId];

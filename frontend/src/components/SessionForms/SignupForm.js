@@ -54,8 +54,10 @@ function SignupForm () {
       password
     };
     
+
     dispatch(signup(user)); 
     history.push('/main', {user});
+
   }
   
   // const updateFile = e => setImage(e.target.files[0]);

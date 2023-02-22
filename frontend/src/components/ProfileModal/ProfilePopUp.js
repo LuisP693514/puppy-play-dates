@@ -11,7 +11,6 @@ const ProfilePopUp = ({userId}) => {
     const otherUser = useSelector(getUser(userId));
     const sessionUser = useSelector((state) => state.session.user);
     const isFriend = sessionUser.friends.includes(userId);
-    // const [selectedUserId, setSelectedUserId] = useState(null);
 
     useEffect(() => {
         dispatch(fetchUser(userId))
@@ -21,7 +20,6 @@ const ProfilePopUp = ({userId}) => {
 
     const handleCreateDate = e => {
         e.preventDefault();
-        // setSelectedUserId(userId)
         history.push('/createDate', {sessionUser, otherUser});
     };
 

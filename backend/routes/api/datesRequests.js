@@ -14,13 +14,27 @@ router.post('/create', async (req, res, next) => {
             return res.status(404).json({ message: "Sender or receiver not found!" })
         }
 
-        const existingRequest = await DateRequest.findOne({ sender: senderId, receiver: receiverId });
+        const existingRequest = await DateRequest.findOne({
+
+            $or: [{ sender: senderId, receiver: receiverId, date: date },
+            { sender: receiverId, receiver: senderId, date: date }]
+        })
 
         if (existingRequest) {
             return res.status(400).json({ message: "Date request already exists" });
         }
 
-        const newRequest = new DateRequest({ sender: senderId, receiver: receiverId })
+        const newRequest = new DateRequest({
+            sender: senderId,
+            receiver: receiverId,
+            date: date,
+            creator: senderId,
+            invitee: receiverId,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            name: req.body.name
+        })
+
         const savedRequest = await newRequest.save();
         res.status(201).json(savedRequest)
 

@@ -19,7 +19,7 @@ const maxLat = 40.7331;
 let randomLat;
 
 const preseeded_locations = []
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < NUM_SEED_USERS; i++) {
     
     randomLong = (Math.random() * (maxLong - minLong)) + minLong;
     randomLat = (Math.random() * (maxLat - minLat)) + minLat;

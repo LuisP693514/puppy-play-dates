@@ -1,21 +1,24 @@
 import ReactDom from 'react-dom';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getCurrentUser, selectCurrentUser } from '../../../store/session';
 import { updateUser } from '../../../store/users';
 import './ProfilePage.css';
 
 
+
 function ProfilePage({open, profileClose}) {
     const dispatch = useDispatch();
+
     const currentUser = useSelector(selectCurrentUser)
     const [editMode, setEditMode] = useState(false);
-    const [updatedUser, setUpdatedUser] = useState(currentUser);
-    // const [image, setImage] = useState(null);
+    const [updatedUser, setUpdatedUser] = useState({...currentUser});
 
 
     useEffect(() => {
         dispatch(getCurrentUser())
+        dispatch(fetchUser(user._id))
     }, [dispatch]);
 
     const handleEdit = () => {
@@ -32,7 +35,9 @@ function ProfilePage({open, profileClose}) {
         setEditMode(false);
     }
 
+
     // const updateFile = e => setImage(e.target.files[0]);
+
     if(!open) return null
     if (editMode) {
         return ReactDom.createPortal(
@@ -65,10 +70,9 @@ function ProfilePage({open, profileClose}) {
                             Puppy Temperament:
                             <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({...updatedUser, puppyTemperament: e.target.value})} />
                         </label>
-                        {/* possibly do a dropdown for preselected list of temperaments */}
                         <label>
                             Vaccinated:
-                            <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />
+                            <input type='checkbox' checked={updatedUser.puppyVaccinated} onChange={e => setUpdatedUser({...updatedUser, puppyVaccinated: e.target.checked})} />
                         </label>
                     </div>
                     <div className="profile-image">
@@ -112,7 +116,7 @@ function ProfilePage({open, profileClose}) {
                         </div>
                         <div className="my-dog-vacc-section">
                             <p id="my-dog-vacc-text">Vaccinated: </p>
-                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated}</p>
+                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated ? 'Yes' : 'No'}</p>
                         </div>
                     </div>
                     <div className='profile-page-buttons'>
