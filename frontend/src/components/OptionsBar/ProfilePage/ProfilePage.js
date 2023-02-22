@@ -1,19 +1,17 @@
-import './ProfilePage.css';
 import ReactDom from 'react-dom';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from '../../../store/session';
-import {useHistory } from 'react-router-dom';
-import { selectCurrentUser } from '../../../store/session';
-import { deleteUser, fetchUser, getUser, updateUser } from '../../../store/users';
+
+import { getCurrentUser, selectCurrentUser } from '../../../store/session';
+import { updateUser } from '../../../store/users';
+import './ProfilePage.css';
+
 
 
 function ProfilePage({open, profileClose}) {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const user = useSelector(selectCurrentUser)
-    const currentUser = useSelector(getUser(user._id))
-    const [showModal, setShowModal] = useState(false);
+
+    const currentUser = useSelector(selectCurrentUser)
     const [editMode, setEditMode] = useState(false);
     const [updatedUser, setUpdatedUser] = useState({...currentUser});
 
@@ -37,36 +35,14 @@ function ProfilePage({open, profileClose}) {
         setEditMode(false);
     }
 
-    const handleDeleteClick = e => {
-        e.preventDefault();
-        setShowModal(true);
-    }
 
-    const handleConfirmDelete = e => {
-        e.preventDefault();
-        dispatch(deleteUser(currentUser.id));
-        history.push('/login');
-    }
-
-    const handleCancelDelete = e => {
-        e.preventDefault();
-        setShowModal(false);
-    }
-
-    useEffect(() => {
-        if (!editMode) {
-        dispatch(getCurrentUser());
-        }
-    }, [dispatch, editMode]);
-
-    if (!user) return null;
-    if (!currentUser) return null;
+    // const updateFile = e => setImage(e.target.files[0]);
 
     if(!open) return null
     if (editMode) {
         return ReactDom.createPortal(
             <div className="options-modal">
-                <button onClick={profileClose} className="profile-close">&times;</button>
+                <button onClick={profileClose} className="modal-close">&times;</button>
                 <form className='current-user-profile'>
                     <h3 id='profile-text'>Edit Profile</h3>
                     <div className="update-div">
@@ -118,7 +94,7 @@ function ProfilePage({open, profileClose}) {
                 <div className='current-user-profile'>
                     <div className="profile-header">
                         <h3 id='profile-text'>My Profile</h3>
-                        <button onClick={profileClose} className="profile-close">&times;</button>
+                        <button onClick={profileClose} className="modal-close">&times;</button>
                     </div>
                     <img className="profile-image" src={currentUser.profileImageUrl} alt="profile"/>
                     <div className="profile-puppy-details-section"> 
@@ -147,23 +123,7 @@ function ProfilePage({open, profileClose}) {
                         <button className='button edit-profile-button' onClick={handleEdit}>
                             Edit Profile
                         </button>
-                        <button className='button delete-profile-button' onClick={handleDeleteClick}>
-                            Delete Profile
-                        </button>
                     </div>
-                    {showModal && (
-                        <div className='delete-modal'>
-                            <h2>Are you sure you want to delete your profile?</h2>
-                            <div className='modal-buttons'>
-                                <button className='yes-button' onClick={handleConfirmDelete}>
-                                    Yes
-                                </button>
-                                <button className='no-button' onClick={handleCancelDelete}>
-                                    No
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>,
             document.getElementById("portal")
