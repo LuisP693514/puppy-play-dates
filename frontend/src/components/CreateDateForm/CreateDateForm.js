@@ -1,8 +1,8 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { createNewDate } from '../../store/dates'; 
 import './CreateDateForm.css';
+import { createDateRequest } from '../../store/dateRequests';
 
 const CreateDate = ({sessionUser, otherUser}) => {
     const dispatch = useDispatch();
@@ -13,8 +13,8 @@ const CreateDate = ({sessionUser, otherUser}) => {
     // time?
     // need to edit create date functionality
 
-//   const isLoading = useSelector(isCreatingDate);
-//   const error = useSelector(getCreateDateError);
+    //   const isLoading = useSelector(isCreatingDate);
+    //   const error = useSelector(getCreateDateError);
     //const date = useSelector(getCreatedDate);
 
   const handleSubmit = (e) => {
@@ -26,7 +26,7 @@ const CreateDate = ({sessionUser, otherUser}) => {
       description,
       location,
     };
-    dispatch(createNewDate(userOneId, userTwoId, dateInfo));
+    dispatch(createDateRequest(userOneId, userTwoId, dateInfo));
     history.push('/dates')
   };
 
