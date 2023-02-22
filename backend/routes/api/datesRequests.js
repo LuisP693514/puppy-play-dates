@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const DateRequest = require('../../models/Date-Request')
-const User = require('../../models/User');
+const DateRequest = mongoose.model('DateRequest');
+const User = mongoose.model("User")
 
 router.post('/create', async (req, res, next) => {
-    const { senderId, receiverId } = req.body;
+    const { senderId, receiverId, date } = req.body;
     try {
         const sender = await User.findById(senderId);
         const receiver = await User.findById(receiverId);
@@ -14,13 +14,13 @@ router.post('/create', async (req, res, next) => {
             return res.status(404).json({ message: "Sender or receiver not found!" })
         }
 
-        const existingRequest = await FriendRequest.findOne({ sender: senderId, receiver: receiverId });
+        const existingRequest = await DateRequest.findOne({ sender: senderId, receiver: receiverId });
 
         if (existingRequest) {
-            return res.status(400).json({ message: "Friend request already exists" });
+            return res.status(400).json({ message: "Date request already exists" });
         }
 
-        const newRequest = new FriendRequest({ sender: senderId, receiver: receiverId })
+        const newRequest = new DateRequest({ sender: senderId, receiver: receiverId })
         const savedRequest = await newRequest.save();
         res.status(201).json(savedRequest)
 

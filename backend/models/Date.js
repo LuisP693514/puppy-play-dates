@@ -14,7 +14,7 @@ const dateSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    name: {type: string}
+    name: {type: String}
 
 }, {
     timestamps: true
