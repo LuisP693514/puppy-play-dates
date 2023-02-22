@@ -46,6 +46,7 @@ export const fetchUsers = () => async (dispatch) => {
 
 
 export const updateUser = user => async (dispatch) => {
+   
     const response = await jwtFetch(`/api/users/${user._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
@@ -76,7 +77,7 @@ const usersReducer = (state = {}, action) => {
             return {...state, [action.user._id]: action.user};
         case REMOVE_USER:
             const newState = {...state};
-            delete newState[action.userId];
+            delete newState[action.userId]; 
             return newState;
         default:
             return state;
