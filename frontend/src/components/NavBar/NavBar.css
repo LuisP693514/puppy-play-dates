@@ -1,5 +1,10 @@
 .main-page-logo{
-    height: 75px;
+    height: 85px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5px;
+    z-index: 4;
 }
 
 .nav-bar-header {
@@ -8,4 +13,16 @@
     align-items: center;
     padding-left: 5vw;
     padding-right: 5vw;
+}
+
+.filter {
+    font-size: 50px;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+}
+
+.filter:hover{
+    color: darkorange;
+    background-color: none;
 }

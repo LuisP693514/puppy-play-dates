@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const dateSchema = new Schema({
 
-    day: {type: Date},
+    date: { type: Date },
+    latitude: { type: Number },
+    longitude: { type: Number },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -11,8 +13,9 @@ const dateSchema = new Schema({
     invitee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
-    
+    },
+    name: {type: String}
+
 }, {
     timestamps: true
 });

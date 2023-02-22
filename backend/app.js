@@ -1,10 +1,12 @@
 require('./models/User');
+require('./models/Marker')
 require('./config/passport');
 const debug = require('debug')
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const usersRouter = require('./routes/api/users');
+const markersRouter = require('./routes/api/markers');
 
 const cors = require('cors');
 const csurf = require('csurf');
@@ -45,6 +47,7 @@ app.use(
 // Attach Express routers
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/markers', markersRouter)
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');

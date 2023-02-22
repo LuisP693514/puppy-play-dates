@@ -1,0 +1,78 @@
+/* some basic css so we can see what it looks like  */
+
+/* Modal container */
+.modal {
+    z-index: 100;
+    position: relative;
+    top: 10%;
+    left: 7%;
+    background-color: white;
+    width: max-content;
+    padding: 40px;
+    padding-right: 60px;
+    padding-left: 60px;
+    box-shadow: 8px 9px 8px #6b6767;
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    text-align: center;
+}
+
+/* Modal warning message */
+.modal-message {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Modal buttons container */
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Yes button */
+.modal-button-yes {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* No button */
+.modal-button-no {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-image {
+    height: 100px;
+}
+
+.profile-header {
+    display: flex;
+}
+
+.profile-close {
+    position: relative;
+}
+
+.update-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.update-buttons {
+    display: Flex;
+    flex-direction: column;
+}

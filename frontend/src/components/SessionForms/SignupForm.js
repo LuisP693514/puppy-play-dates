@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
 import tightlogo from "../../images/tight-logo.jpg"
+import { Link } from 'react-router-dom';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
@@ -115,10 +116,11 @@ function SignupForm () {
           <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
         </div> */}
         <button
-          className="login-button"
+          className="button"
           type="submit"
           disabled={!email || !username || !password || password !== password2}
         >Sign Up</button>
+        <Link to="/login"><div className="grey-text switch-login ">Already have an Account?</div></Link>
       </form>
     </div>
   );

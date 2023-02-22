@@ -1,4 +1,11 @@
+html {
+    height: 100%;
+    width: 100%
+}
+
 body {
+    height: 100%;
+    width: inherit;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -21,13 +28,48 @@ h4 {
     border: 1px solid red
 } */
 
-button {
-    border-radius: 20px
+.button {
+    border-radius: 10px;
+    background-color: orange;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: white;
+    width: 100%;
+    margin-bottom: 12px;
 }
 
 button:hover{
     cursor: pointer;
-    
+}
+
+
+.button:hover{
+    background-color: #ee7308;
+}
+
+.grey-button{
+    border-radius: 10px;
+    background-color: lightgrey;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: black;
+    width: 100%;
+    margin-bottom: 12px;
+    border: 2px solid #ee7308;
+}
+
+.grey-button:hover{
+    cursor: pointer;
+    color: white;
+    background-color: #ee7308;
+}
+
+.small-button {
+    width: 50%
 }
 
 a:link {
@@ -45,6 +87,11 @@ input {
     outline: none;
 }
 
+#portal{
+    height: inherit;
+    width: 100%;
+}
+
 .spacer {
     margin-bottom: 7px;
 }
@@ -57,6 +104,11 @@ input {
     margin-top: 3px;
     font-size: .7em;
     color: red
+}
+
+.green-text{
+    color: #0e592a
+
 }
 
 .grey-text{
@@ -73,5 +125,15 @@ input {
 
 .white-text{
     color: white;
+}
+
+.modal-overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 4;
 }
 
