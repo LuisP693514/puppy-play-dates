@@ -44,7 +44,9 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
   const newUser = new User({
     username: req.body.username,
     profileImageUrl,
-    email: req.body.email
+    email: req.body.email,
+    longitude: req.body.longitude,
+    latitude: req.body.latitude
   });
 
   bcrypt.genSalt(10, (err, salt) => {
