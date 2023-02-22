@@ -17,19 +17,19 @@ const dateRequestSchema = new mongoose.Schema({
     default: 'pending'
   },
   date: { type: Date },
-    latitude: { type: Number },
-    longitude: { type: Number },
-    creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    invitee: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    name: {type: String}
+  latitude: { type: Number },
+  longitude: { type: Number },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  invitee: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  name: { type: String }
 }, {
-    timestamps: true
+  timestamps: true
 });
 
 module.exports = mongoose.model('DateRequest', dateRequestSchema)
