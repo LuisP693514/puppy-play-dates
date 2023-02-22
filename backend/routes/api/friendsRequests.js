@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const FriendRequest = require('../../models/Friend-Request');
-const User = require('../../models/User');
-const Friend = mongoose.model('Friend');
+const FriendRequest = mongoose.model('FriendRequest');
+const User = mongoose.model('User');
 
-router.post('/create', async (req, res, next) => {
+router.post('/create', async (req, res) => {
     const { senderId, receiverId } = req.body;
     try {
         const sender = await User.findById(senderId);
@@ -48,7 +47,7 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-router.patch('/:reqId', async (req, res) => {
+router.patch('/:requestId', async (req, res) => {
     const requestId = req.params.reqId;
     const { status } = req.body;
     try {
@@ -64,6 +63,19 @@ router.patch('/:reqId', async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ message: err.messsage })
+    }
+})
+
+router.delete('/:requestId', async (req, res) => {
+    const requestId = req.params.requestId
+    try {
+        const request = await FriendRequest.findByIdAndDelete(requestId)
+        if (!request) {
+            return res.status(404).json({message: "Friend request not found."})
+        }
+        res.json({message: "Successfully deleted friend request"})
+    } catch (err) {
+        res.status(500).json({message: err.message})
     }
 })
 
