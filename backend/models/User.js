@@ -20,7 +20,7 @@ const userSchema = new Schema({
     latitude: { type: Number },
     longitude: { type: Number },
     signedIn: { type: Boolean, default: false },
-    puppyTemperament: { type: String },
+    puppyTemperament: { type: String }
 
 }, {
     timestamps: true

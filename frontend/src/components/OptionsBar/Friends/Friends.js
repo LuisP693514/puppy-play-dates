@@ -9,7 +9,7 @@ export default function Friends({open, friendsClose}) {
     return ReactDom.createPortal(
         <div className="options-modal">
             TESTING FRIENDS
-            <button onClick={friendsClose} className="modal-close">&times;</button>
+            <button onClick={friendsClose} className="friends-close">&times;</button>
         </div>,
         document.getElementById("portal")
     )

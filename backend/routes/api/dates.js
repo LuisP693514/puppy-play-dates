@@ -13,7 +13,7 @@ router.get('/:dateId', async (req, res) => {
             return res.status(404).json({ message: "Date not found" })
         }
 
-        res.status(200).json({dateId: Date})
+        res.status(200).json(Date)
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
@@ -73,15 +73,5 @@ router.delete('/:dateId', async (req, res) => {
 
 router.patch('/:dateId', async (req, res) => {
     const dateId = req.params.dateId
-    const dateUpdate = req.body
-    try {
-        const date = Date.findByIdAndUpdate(dateId, dateUpdate, {new: true})
-        if (!date) {
-            return res.status(404).json({message: "Date not found"})
-        }
-
-        res.status(200).json({dateId: date})
-    } catch (err) {
-        
-    }
+    
 })

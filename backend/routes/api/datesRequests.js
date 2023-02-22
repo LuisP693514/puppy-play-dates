@@ -43,10 +43,10 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
-router.get('/:requestId', async (req, res) => {
-    const requestId = req.params.requestId;
+router.get('/:userId', async (req, res) => {
+    const userId = req.params.userId;
     try {
-        const request = await User.findById(userId)
+        const user = await User.findById(userId)
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }

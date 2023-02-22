@@ -5,14 +5,10 @@ import './SessionForm.css';
 import * as sessionActions from '../../store/session';
 import { login, clearSessionErrors } from '../../store/session';
 import tightlogo from "../../images/tight-logo.jpg"
-import { getLocation } from '../Utils/getLocation';
-import { updateUser } from '../../store/users';
 
 function LoginForm () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
@@ -27,18 +23,9 @@ function LoginForm () {
     return e => setState(e.currentTarget.value);
   }
 
-  getLocation().then(coords => {
-    console.log(coords);
-    setLatitude(coords[0])
-    setLongitude(coords[1])
-  }).catch(error => {
-    console.error(error);
-  });
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password })); 
-    dispatch(updateUser( { latitude, longitude } ))
   }
 
   const handleDemoSubmit = () => {
@@ -80,11 +67,11 @@ function LoginForm () {
         </div>
         <button
           type="submit"
-          className="login-button"
+          className="button"
           disabled={!email || !password}
         >Log In</button>
         <button
-          className="login-button"
+          className="button"
           onClick={(e) => handleDemoSubmit()}
         >Demo User</button>
         <Link to='/signup'><div className="grey-text sign-up">Sign up for an Account</div></Link>

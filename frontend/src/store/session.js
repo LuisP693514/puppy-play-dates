@@ -41,13 +41,11 @@ export const getCurrentUser = () => async dispatch => {
   };
 
 const startSession = (userInfo, route) => async dispatch => {
-    const { image, username, password, email, latitude, longitude } = userInfo;
+    const { image, username, password, email } = userInfo;
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
     formData.append("email", email);
-    formData.append("latitude", latitude);
-    formData.append("longitude", longitude);
 
     if (image) formData.append("image", image);
 

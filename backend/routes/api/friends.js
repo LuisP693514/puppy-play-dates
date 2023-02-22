@@ -4,6 +4,7 @@ const router = express.Router();
 const Friend = mongoose.model('Friend');
 const User = mongoose.model("User");
 
+
 router.get('/:friendId', async (req, res) => {
     const friendId = req.params.friendId
     try {
@@ -12,7 +13,7 @@ router.get('/:friendId', async (req, res) => {
             return res.status(404).json({ message: "Friend not found" })
         }
 
-        res.status(200).json({friendId: friend})
+        res.status(200).json(friend)
     } catch (err) {
         res.status(500).json({ message: err.message })
     }

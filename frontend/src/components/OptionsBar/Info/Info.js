@@ -9,7 +9,7 @@ export default function Info({open, infoClose}) {
     return ReactDom.createPortal(
         <div className="options-modal">
             TESTING INFO MODAL
-            <button onClick={infoClose} className="modal-close">&times;</button>
+            <button onClick={infoClose} className="info-close">&times;</button>
         </div>,
         document.getElementById("portal")
     )

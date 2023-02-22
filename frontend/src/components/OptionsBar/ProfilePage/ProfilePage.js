@@ -15,7 +15,7 @@ function ProfilePage({open, profileClose}) {
     const currentUser = useSelector(getUser(user._id))
     const [showModal, setShowModal] = useState(false);
     const [editMode, setEditMode] = useState(false);
-    const [updatedUser, setUpdatedUser] = useState({...currentUser}); 
+    const [updatedUser, setUpdatedUser] = useState({...currentUser});
 
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function ProfilePage({open, profileClose}) {
     const handleConfirmDelete = e => {
         e.preventDefault();
         dispatch(deleteUser(currentUser._id));
-        history.push('/login'); 
+        history.push('/login');
     }
 
     const handleCancelDelete = e => {

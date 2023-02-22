@@ -12,16 +12,15 @@
 }
 
 .login-button{
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: orange;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     color: white;
     width: 100%;
     margin-bottom: 12px;
-    font-size: 18px
 }
 
 .login-button:hover{
@@ -43,7 +42,7 @@
 }
 
 .signin-logo{
-    height: 70px
+    height: 50px
 }
 
 .signup-head {
@@ -65,8 +64,7 @@
 }
 
 .sign-up {
-    text-align: center;
-    font-size: 14px
+    text-align: center
 }
 
 .sign-up:hover{
@@ -75,7 +73,6 @@
 
 .switch-login{
     text-align: center;
-    font-size: 14px;
 }
 
 .switch-login:hover{
