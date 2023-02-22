@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import ProfilePage from './ProfilePage/ProfilePage'
+import { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import ProfilePage from './ProfilePage/ProfilePage'
 import * as sessionActions from '../../store/session';
 import Friends from './Friends/Friends'
 import Messages from './Messages/Messages'
@@ -21,17 +20,27 @@ export default function OptionsBar() {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [logoutOpen, setLogoutOpen] = useState(false)
 
+  // useEffect(() => {
+
+  //   if (history.location.state && history.location.state.from === 'signup') {
+  //     setProfilePageOpen(true);
+  //   }
+  // }, [history]);
+
   const handleLogout = () => {
     dispatch(sessionActions.logout());
     history.push('/login');
   }
 
   const closeAllModals = () => {
-    setSettingsOpen(false)
     setProfilePageOpen(false);
     setFriendsOpen(false)
     setMessagesOpen(false)
     setInfoOpen(false)
+  }
+
+  const hideModals = () => {
+    setSettingsOpen(false)
   }
 
   return (
@@ -40,7 +49,7 @@ export default function OptionsBar() {
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setSettingsOpen(true)}}><i className="fa-solid fa-gear white-text"></i></button>
-            <Settings open={settingsOpen} settingsClose={() => setSettingsOpen(false)} closeAllModals={closeAllModals}></Settings>
+            <Settings open={settingsOpen} settingsClose={() => setSettingsOpen(false)} closeAllModals={closeAllModals} hideModals={hideModals}></Settings>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setProfilePageOpen(true)}}><i className="fa-solid fa-paw white-text"></i></button>

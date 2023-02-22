@@ -55,7 +55,7 @@ function SignupForm () {
     };
     
     dispatch(signup(user)); 
-    history.push('/signup2', {user});
+    history.push('/main', {user});
   }
   
   // const updateFile = e => setImage(e.target.files[0]);
@@ -116,11 +116,11 @@ function SignupForm () {
           <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
         </div> */}
         <button
-          className="button"
+          className="login-button"
           type="submit"
           disabled={!email || !username || !password || password !== password2}
         >Sign Up</button>
-        <Link to="/login"><div className="grey-text switch-login ">Already have an Account?</div></Link>
+        <Link to="/login"><div className="grey-text switch-login">Already have an Account?</div></Link>
       </form>
     </div>
   );

@@ -1,18 +1,14 @@
-import './ProfilePage.css';
 import ReactDom from 'react-dom';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from '../../../store/session';
-import {useHistory } from 'react-router-dom';
-import { selectCurrentUser } from '../../../store/session';
-import { deleteUser, updateUser } from '../../../store/users';
+import { getCurrentUser, selectCurrentUser } from '../../../store/session';
+import { updateUser } from '../../../store/users';
+import './ProfilePage.css';
 
 
 function ProfilePage({open, profileClose}) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const currentUser = useSelector(selectCurrentUser)
-    const [showModal, setShowModal] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [updatedUser, setUpdatedUser] = useState(currentUser);
     // const [image, setImage] = useState(null);
@@ -34,22 +30,6 @@ function ProfilePage({open, profileClose}) {
     const handleCancel = () => {
         setUpdatedUser(currentUser);
         setEditMode(false);
-    }
-
-    const handleDeleteClick = e => {
-        e.preventDefault();
-        setShowModal(true);
-    }
-
-    const handleConfirmDelete = e => {
-        e.preventDefault();
-        dispatch(deleteUser(currentUser._id));
-        history.push('/login');
-    }
-
-    const handleCancelDelete = e => {
-        e.preventDefault();
-        setShowModal(false);
     }
 
     // const updateFile = e => setImage(e.target.files[0]);
@@ -139,23 +119,7 @@ function ProfilePage({open, profileClose}) {
                         <button className='button edit-profile-button' onClick={handleEdit}>
                             Edit Profile
                         </button>
-                        <button className='button delete-profile-button' onClick={handleDeleteClick}>
-                            Delete Profile
-                        </button>
                     </div>
-                    {showModal && (
-                        <div className='delete-modal'>
-                            <h2>Are you sure you want to delete your profile?</h2>
-                            <div className='modal-buttons'>
-                                <button className='yes-button' onClick={handleConfirmDelete}>
-                                    Yes
-                                </button>
-                                <button className='no-button' onClick={handleCancelDelete}>
-                                    No
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>,
             document.getElementById("portal")
