@@ -8,6 +8,7 @@ import Friends from './Friends/Friends'
 import Messages from './Messages/Messages'
 import Info from './Info/Info'
 import Settings from './Settings/Settings'
+import Logout from './Logout/Logout'
 import './OptionsBar.css'
 
 export default function OptionsBar() {
@@ -18,6 +19,7 @@ export default function OptionsBar() {
   const [messagesOpen, setMessagesOpen] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [logoutOpen, setLogoutOpen] = useState(false)
 
   const handleLogout = () => {
     dispatch(sessionActions.logout());
@@ -30,7 +32,6 @@ export default function OptionsBar() {
     setFriendsOpen(false)
     setMessagesOpen(false)
     setInfoOpen(false)
-
   }
 
   return (
@@ -58,7 +59,10 @@ export default function OptionsBar() {
             <Info open={infoOpen} infoClose={() => setInfoOpen(false)}></Info>
         </div>
         <div className="options-icons">
-            <Link to="/login" onClick={handleLogout}><div className="double-spacer"><i className="fa-solid fa-right-from-bracket white-text"></i></div></Link>          
+        <button className="double-spacer" onClick={() => {
+                        closeAllModals()
+                        setLogoutOpen(true)}}><i className="fa-solid fa-right-from-bracket white-text"></i></button>
+            <Logout open={logoutOpen} logoutClose={() => setLogoutOpen(false)} handleLogout={handleLogout}></Logout>         
         </div>
     </div>
   )

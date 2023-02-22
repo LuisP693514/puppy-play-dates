@@ -4,7 +4,7 @@
     height: 100%;
     width: 5vw;
     max-width: 70px;
-    z-index: 5;
+    z-index: 4;
     background: #F78914;
     display: flex;
     flex-direction: column;

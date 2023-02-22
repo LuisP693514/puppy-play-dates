@@ -1,0 +1,29 @@
+.logout-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    box-shadow: 2px 5px 8px #6b6767;
+    border-radius: 10px;
+}
+
+
+
+.logout-button-div{
+    display: flex;
+}
+
+.logout-buttons {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logout-text{
+    text-align: center;
+}

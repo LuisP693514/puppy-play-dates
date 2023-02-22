@@ -23,7 +23,7 @@ function Navbar() {
                 <Link className='navLogo' to='/'></Link>
             </div>
             <div>
-                    <button className="orange-text filter"onClick={handleFilterClick}><i class="fa-solid fa-sliders"></i></button>
+                <button className="orange-text filter"onClick={handleFilterClick}><i class="fa-solid fa-sliders"></i></button>
             </div>
         </div>
     )

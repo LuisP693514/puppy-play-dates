@@ -23,5 +23,6 @@
 }
 
 .filter:hover{
-    color: darkorange
+    color: darkorange;
+    background-color: none;
 }

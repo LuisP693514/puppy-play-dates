@@ -29,7 +29,7 @@ h4 {
 } */
 
 .button {
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: orange;
     padding-left: 20px;
     padding-right: 20px;
@@ -42,6 +42,34 @@ h4 {
 
 button:hover{
     cursor: pointer;
+}
+
+
+.button:hover{
+    background-color: #ee7308;
+}
+
+.grey-button{
+    border-radius: 10px;
+    background-color: lightgrey;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: black;
+    width: 100%;
+    margin-bottom: 12px;
+    border: 2px solid #ee7308;
+}
+
+.grey-button:hover{
+    cursor: pointer;
+    color: white;
+    background-color: #ee7308;
+}
+
+.small-button {
+    width: 50%
 }
 
 a:link {
@@ -97,5 +125,15 @@ input {
 
 .white-text{
     color: white;
+}
+
+.modal-overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 4;
 }
 
