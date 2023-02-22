@@ -123,6 +123,24 @@ router.get('/:userId/dates', async (req, res) => {
 })
 // /api/users/:userId/friends grabs all the dates a single user has (array)
 
+router.get('/:userId/friendRequests', async (req, res) => {
+  const userId = req.params.userId
+  try {
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+
+    const friendRequests = user.friendRequests;
+    res.status(200).json({})
+    
+  } catch (err) {
+    
+  }
+})
+router.get('/:userId/dateRequests')
+
 router.get('/:userId/friends', async (req, res) => {
   const userId = req.params.userId;
   try {
@@ -182,6 +200,8 @@ router.delete('/:userId', async (req, res) => {
     res.status(500).json({message: err.message})
   }
 })
+
+
 
 
 
