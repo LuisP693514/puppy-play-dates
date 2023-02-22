@@ -23,6 +23,13 @@
 }
 
 .filter:hover{
-    color: darkorange;
-    background-color: none;
+    color: #ee7308;
+
+}
+
+.nav-bar-height{
+    min-height: 75px;
+    z-index: 3;
+    position: relative;
+    background-color: white;
 }

@@ -3,17 +3,14 @@ import { Modal } from '../../context/Modal';
 import ProfilePopUp from './ProfilePopUp.js';
 
 function ProfileModal() {
-  const [showModal, setShowModal] = useState(false);
+  
+  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Profile Modal</button>
-      {/* the button referenced here should be the pin location of dog */}
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <ProfilePopUp />
-        </Modal>
-      )}
+      <button className="double-spacer test" onClick={() => {
+        setProfileOpen(true)}}>Profile Modal</button>
+      <ProfilePopUp open={profileOpen} profileClose={() => setProfileOpen(false)}></ProfilePopUp>
     </>
   );
 }

@@ -1,19 +1,12 @@
-.profile-modal {
+.filter-modal {
     z-index: 100;
     position: absolute;
-    bottom: 9%;
-    right: 5%;
+    top: 9%;
+    right: 1%;
     background-color: white;
     width: max-content;
     padding: 40px;
     padding-right: 60px;
     padding-left: 60px;
     box-shadow: 4px 5px 8px #6b6767;
-    height: 500px;
-}
-
-.test {
-    font-size: 40px;
-    z-index: 100;
-    position: absolute;
 }
