@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DateRequestSchema = new mongoose.Schema({
+const dateRequestSchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -20,4 +20,4 @@ const DateRequestSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('dateRequest', DateRequestSchema)
+module.exports = mongoose.model('DateRequest', dateRequestSchema)
