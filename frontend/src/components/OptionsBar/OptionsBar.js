@@ -52,19 +52,19 @@ export default function OptionsBar() {
             <Settings open={settingsOpen} settingsClose={() => setSettingsOpen(false)} closeAllModals={closeAllModals} hideModals={hideModals}></Settings>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
-                        setProfilePageOpen(true)}}><i className="fa-solid fa-paw white-text"></i></button>
+                        setProfilePageOpen(!profilePageOpen)}}><i className="fa-solid fa-paw white-text"></i></button>
             <ProfilePage open={profilePageOpen} profileClose={()=> setProfilePageOpen(false)} closeAllModals={closeAllModals}></ProfilePage>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
-                        setFriendsOpen(true)}}><i className="fa-solid fa-bone white-text"></i></button>
+                        setFriendsOpen(!friendsOpen)}}><i className="fa-solid fa-bone white-text"></i></button>
             <Friends open={friendsOpen} friendsClose={() => setFriendsOpen(false)} closeAllModals={closeAllModals}></Friends>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
-                        setMessagesOpen(true)}}><i className="fa-solid fa-comments white-text"></i></button>
+                        setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
             <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
-                        setInfoOpen(true)}}><i className="fa-regular fa-circle-question white-text"></i></button>
+                        setInfoOpen(!infoOpen)}}><i className="fa-regular fa-circle-question white-text"></i></button>
             <Info open={infoOpen} infoClose={() => setInfoOpen(false)}></Info>
         </div>
         <div className="options-icons">

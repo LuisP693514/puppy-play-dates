@@ -37,7 +37,7 @@ function ProfilePage({open, profileClose}) {
     if (editMode) {
         return ReactDom.createPortal(
             <div className="options-modal">
-                <button onClick={profileClose} className="profile-close">&times;</button>
+                <button onClick={profileClose} className="modal-close">&times;</button>
                 <form className='current-user-profile'>
                     <h3 id='profile-text'>Edit Profile</h3>
                     <div className="update-div">
@@ -90,7 +90,7 @@ function ProfilePage({open, profileClose}) {
                 <div className='current-user-profile'>
                     <div className="profile-header">
                         <h3 id='profile-text'>My Profile</h3>
-                        <button onClick={profileClose} className="profile-close">&times;</button>
+                        <button onClick={profileClose} className="modal-close">&times;</button>
                     </div>
                     <img className="profile-image" src={currentUser.profileImageUrl} alt="profile"/>
                     <div className="profile-puppy-details-section"> 

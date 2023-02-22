@@ -20,7 +20,7 @@ export default function AcctDetails({open, onClose}) {
         <>
             <div>
                 <div className='central-modal'>
-                    <button onClick={onClose} className="settings-close">&times;</button>
+                    <button onClick={onClose} className="modal-close">&times;</button>
                     <div className="delete-text orange-text"><h3>Update Account Information</h3></div>
                     <div>
                         <div className="settings-update">

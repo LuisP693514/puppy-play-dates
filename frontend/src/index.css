@@ -154,3 +154,10 @@ input {
     border-radius: 10px;
 }
 
+.modal-close {
+    font-size: 30px;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    color: #ee7308;
+}
