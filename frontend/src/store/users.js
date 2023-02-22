@@ -46,6 +46,7 @@ export const fetchUsers = () => async (dispatch) => {
 
 
 export const updateUser = user => async (dispatch) => {
+   
     const response = await jwtFetch(`/api/users/${user._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},

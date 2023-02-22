@@ -28,7 +28,7 @@ function ProfilePage({open, profileClose}) {
     }
 
     const handleUpdate = () => {
-        dispatch(updateUser(updatedUser));
+        dispatch(updateUser({...currentUser, ...updatedUser}));
         setEditMode(false);
     }
 

@@ -159,7 +159,7 @@ router.get('/:userId', async (req, res) => {
 });
 
 // /api/users/:userId updates the user
-router.patch('/:userId', validateDoggyInputs, async (req, res, next) => {
+router.patch('/:userId', async (req, res, next) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
   try {
