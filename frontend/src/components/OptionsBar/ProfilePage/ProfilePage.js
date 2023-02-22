@@ -14,8 +14,7 @@ function ProfilePage({open, profileClose}) {
     const currentUser = useSelector(selectCurrentUser)
     const [showModal, setShowModal] = useState(false);
     const [editMode, setEditMode] = useState(false);
-    const [updatedUser, setUpdatedUser] = useState(currentUser);
-    // const [image, setImage] = useState(null);
+    const [updatedUser, setUpdatedUser] = useState({...currentUser});
 
 
     useEffect(() => {
@@ -52,7 +51,13 @@ function ProfilePage({open, profileClose}) {
         setShowModal(false);
     }
 
-    // const updateFile = e => setImage(e.target.files[0]);
+    useEffect(() => {
+    if (!editMode) {
+      dispatch(getCurrentUser());
+    }
+    }, [dispatch, editMode]);
+
+
     if(!open) return null
     if (editMode) {
         return ReactDom.createPortal(
@@ -85,7 +90,6 @@ function ProfilePage({open, profileClose}) {
                             Puppy Temperament:
                             <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({...updatedUser, puppyTemperament: e.target.value})} />
                         </label>
-                        {/* possibly do a dropdown for preselected list of temperaments */}
                         <label>
                             Vaccinated:
                             <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />

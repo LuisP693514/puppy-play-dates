@@ -34,7 +34,7 @@ const DateShowPage = () => {
             <div className='date-request-index-container'>
                 <h2 id='date-requests'>Date Requests</h2>
                 <div id='date-request-index'>
-                    {/* {user.dateRequests.map(requestId => 
+                    {/* {dateRequests.map(requestId => 
                         <div id='date-item'>
                             <DateRequestContainer user={user} requestId={requestId}/>
                         </div>

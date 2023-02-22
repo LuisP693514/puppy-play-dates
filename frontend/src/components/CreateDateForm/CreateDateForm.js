@@ -7,31 +7,24 @@ import { createDateRequest } from '../../store/dateRequests';
 const CreateDate = ({sessionUser, otherUser}) => {
     const dispatch = useDispatch();
     const history = useHistory
-    const [dateName, setDateName] = useState('');
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
-    // time?
-    // need to edit create date functionality
-
-    //   const isLoading = useSelector(isCreatingDate);
-    //   const error = useSelector(getCreateDateError);
-    //const date = useSelector(getCreatedDate);
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userOneId = sessionUser.id;
     const userTwoId = otherUser.id;
     const dateInfo = {
-      dateName,
+      name,
       description,
-      location,
+      longitude,
+      latitude
     };
     dispatch(createDateRequest(userOneId, userTwoId, dateInfo));
     history.push('/dates')
   };
-
-    // if (date) {history.push(`/dates/${date.id}`)};
-    // maybe redirect to date index since have to wait for acceptance
 
   return (
     <div className='create-date-form-container'>
@@ -43,8 +36,8 @@ const CreateDate = ({sessionUser, otherUser}) => {
                     id="date-name-input"
                     type="text"
                     name="name"
-                    value={dateName}
-                    onChange={(e) => setDateName(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                 />
             </div>
@@ -58,20 +51,29 @@ const CreateDate = ({sessionUser, otherUser}) => {
                     required
                 ></textarea>
             </div>
+            <p>Location:</p>
             <div className="date-location-section">
-                <label id="date-location-input">Location</label>
+                <label id="date-location-input">Latitude</label>
                 <input
                     id="date-location-input"
                     type="text"
-                    name="location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    name="latitude"
+                    value={latitude}
+                    onChange={(e) => setLatitude(e.target.value)}
                     required
-                    // location might not be a string
                 />
             </div>
-            {/* {isLoading && <p id='loading-date'>Creating date...</p>}
-            {error && <p id='date-error'>Error creating date: {error}</p>} */}
+            <div className="date-location-section">
+                <label id="date-location-input">Longitude</label>
+                <input
+                    id="date-location-input"
+                    type="text"
+                    name="longitude"
+                    value={longitude}
+                    onChange={(e) => setLongitude(e.target.value)}
+                    required
+                />
+            </div>
             <button id='date-submit' type="submit">Create Date</button>
         </form>
     </div>
