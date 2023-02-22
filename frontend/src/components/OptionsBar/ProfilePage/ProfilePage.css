@@ -66,3 +66,13 @@
 .profile-close {
     position: relative;
 }
+
+.update-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.update-buttons {
+    display: Flex;
+    flex-direction: column;
+}
