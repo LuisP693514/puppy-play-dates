@@ -5,7 +5,7 @@ const Marker = require('../models/Marker');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
-const NUM_SEED_USERS = 20;
+const NUM_SEED_USERS = 10;
 
 // Create users
 const users = [];
