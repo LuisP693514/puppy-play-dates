@@ -18,7 +18,8 @@ const userSchema = new Schema({
     friendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'FriendRequest'}],
     dateRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'DateRequest'}],
     latitude: {type: Number},
-    longitude: {type: Number}
+    longitude: {type: Number},
+    signedIn: {type: Boolean, default: false}
     
 }, {
     timestamps: true

@@ -15,7 +15,19 @@ const dateRequestSchema = new mongoose.Schema({
     type: String,
     enum: ['pending', 'accepted', 'declined'],
     default: 'pending'
-  }
+  },
+  date: { type: Date },
+    latitude: { type: Number },
+    longitude: { type: Number },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    invitee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    name: {type: String}
 }, {
     timestamps: true
 });
