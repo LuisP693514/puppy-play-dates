@@ -23,9 +23,8 @@ export default function LandingPage() {
                     <div className="spacer"><h3>Logan Hartman</h3></div>
                     <div className="spacer"><h4>Team Lead</h4></div>
                     <div className="landing-page-links">
-                        <div><i className="fa-brands fa-square-github orange-text link-icon"></i></div>
-                        <div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div>
-                        <div></div>
+                        <a href="https://github.com/logan-hart" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-square-github orange-text link-icon"></i></div></a>
+                        <a href="https://www.linkedin.com/in/logan-hartman4104/" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div></a>
                     </div>
                 </div>
                 <div className="landing-page-card">
@@ -33,9 +32,8 @@ export default function LandingPage() {
                     <div className="spacer"><h3>Luis Perez</h3></div>
                     <div className="spacer"><h4>Backend Lead</h4></div>
                     <div className="landing-page-links">
-                        <div><i className="fa-brands fa-square-github orange-text link-icon"></i></div>
-                        <div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div>
-                        <div></div>
+                        <a href="https://github.com/LuisP693514" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-square-github orange-text link-icon"></i></div></a>
+                        <a href="https://www.linkedin.com/in/luis-perez-5baa4695/" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div></a>
                     </div>
                 </div>
                 <div className="landing-page-card">
@@ -43,9 +41,8 @@ export default function LandingPage() {
                     <div className="spacer"><h3>Mei Huang</h3></div>
                     <div className="spacer"><h4>Frontend Lead</h4></div>
                     <div className="landing-page-links">
-                        <div><i className="fa-brands fa-square-github orange-text link-icon"></i></div>
-                        <div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div>
-                        <div></div>
+                        <a href="https://github.com/meih15" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-square-github orange-text link-icon"></i></div></a>
+                        <a href="https://www.linkedin.com/in/mei-huang-ba967a159" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div></a>
                     </div>
                 </div>
                 <div className="landing-page-card">
@@ -53,9 +50,8 @@ export default function LandingPage() {
                     <div className="spacer"><h3>Janira Crispin</h3></div>
                     <div className="spacer"><h4>Project Flex</h4></div>
                     <div className="landing-page-links">
-                        <div><i className="fa-brands fa-square-github orange-text link-icon"></i></div>
-                        <div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div>
-                        <div></div>
+                        <a href="https://github.com/janirac" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-square-github orange-text link-icon"></i></div></a>
+                        <a href="https://www.linkedin.com/in/janira-crispin-396656a9/" target="_blank" rel="noopener noreferrer"><div><i className="fa-brands fa-linkedin orange-text link-icon"></i></div></a>
                     </div>
                 </div>
             </div>
