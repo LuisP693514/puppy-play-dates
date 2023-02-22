@@ -5,11 +5,14 @@ import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
 import tightlogo from "../../images/tight-logo.jpg"
 import { Link } from 'react-router-dom';
+import { getLocation } from '../Utils/getLocation';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
   const [password2, setPassword2] = useState('');
   // const [image, setImage] = useState(null);
   const errors = useSelector(state => state.errors.session);
@@ -45,13 +48,38 @@ function SignupForm () {
     return e => setState(e.currentTarget.value);
   }
   
+  // async function getLocationData() {
+  //   debugger
+  //   try {
+  //     const location = await getLocation();
+  //     setLatitude = (location[0])
+  //     setLongitude = (location[1])
+  //     console.log(location); // this will log the user's latitude and longitude to the console
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+  
+  getLocation().then(coords => {
+    console.log(coords);
+    setLatitude(coords[0])
+    setLongitude(coords[1])
+  }).catch(error => {
+    console.error(error);
+  });
+  // const currentLocation = getLocation()
+  // console.log(currentLocation)
+
+  
   const handleSubmit = e => {
     e.preventDefault();
     const user = {
       email,
       username,
       // image,
-      password
+      password,
+      latitude,
+      longitude
     };
     
 
