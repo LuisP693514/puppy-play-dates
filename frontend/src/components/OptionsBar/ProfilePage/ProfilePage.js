@@ -53,6 +53,12 @@ function ProfilePage({open, profileClose}) {
         setShowModal(false);
     }
 
+    useEffect(() => {
+        if (!editMode) {
+        dispatch(getCurrentUser());
+        }
+    }, [dispatch, editMode]);
+
     if (!user) return null;
     if (!currentUser) return null;
 
