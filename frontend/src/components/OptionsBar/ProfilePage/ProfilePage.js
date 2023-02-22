@@ -140,7 +140,7 @@ function ProfilePage({open, profileClose}) {
                         </div>
                         <div className="my-dog-vacc-section">
                             <p id="my-dog-vacc-text">Vaccinated: </p>
-                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated}</p>
+                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated ? 'Yes' : 'No'}</p>
                         </div>
                     </div>
                     <div className='profile-page-buttons'>
