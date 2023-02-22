@@ -1,4 +1,11 @@
+html {
+    height: 100%;
+    width: 100%
+}
+
 body {
+    height: 100%;
+    width: inherit;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -21,13 +28,20 @@ h4 {
     border: 1px solid red
 } */
 
-button {
-    border-radius: 20px
+.button {
+    border-radius: 20px;
+    background-color: orange;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: white;
+    width: 100%;
+    margin-bottom: 12px;
 }
 
 button:hover{
     cursor: pointer;
-    
 }
 
 a:link {
@@ -43,6 +57,11 @@ input {
     border-bottom: 1px solid grey;
     width: 175px;
     outline: none;
+}
+
+#portal{
+    height: inherit;
+    width: 100%;
 }
 
 .spacer {
