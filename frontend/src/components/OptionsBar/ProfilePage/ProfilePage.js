@@ -96,7 +96,7 @@ function ProfilePage({open, profileClose}) {
                         </label>
                         <label>
                             Vaccinated:
-                            <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />
+                            <input type='checkbox' checked={updatedUser.puppyVaccinated} onChange={e => setUpdatedUser({...updatedUser, puppyVaccinated: e.target.checked})} />
                         </label>
                     </div>
                     <div className="profile-image">
