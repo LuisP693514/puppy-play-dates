@@ -13,7 +13,7 @@ function ProfilePage({open, profileClose}) {
 
     const currentUser = useSelector(selectCurrentUser)
     const [editMode, setEditMode] = useState(false);
-    const [updatedUser, setUpdatedUser] = useState({...currentUser});
+    const [updatedUser, setUpdatedUser] = useState({...currentUser}); 
 
 
     useEffect(() => {
