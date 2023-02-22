@@ -13,6 +13,15 @@
     align-items: center;
     padding-left: 5vw;
     padding-right: 5vw;
-
 }
 
+.filter {
+    font-size: 50px;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+}
+
+.filter:hover{
+    color: darkorange
+}

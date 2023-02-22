@@ -3,6 +3,7 @@
     left: 0;
     height: 100%;
     width: 5vw;
+    max-width: 70px;
     z-index: 5;
     background: #F78914;
     display: flex;
@@ -10,6 +11,8 @@
     justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
+    box-shadow: 2px 5px 8px #6b6767;
+
 }
 
 .options-icons{
@@ -20,5 +23,18 @@
 }
 
 .double-spacer {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.options-modal {
+    z-index: 100;
+    position: relative;
+    top: 10%;
+    left: 7%;
+    background-color: white;
+    width: max-content;
+    padding: 40px;
+    padding-right: 60px;
+    padding-left: 60px;
+    box-shadow: 4px 5px 8px #6b6767
 }

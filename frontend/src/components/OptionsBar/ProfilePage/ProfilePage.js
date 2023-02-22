@@ -56,53 +56,57 @@ function ProfilePage({open, profileClose}) {
     if(!open) return null
     if (editMode) {
         return ReactDom.createPortal(
-            <div className="modal">
+            <div className="options-modal">
                 <button onClick={profileClose} className="profile-close">&times;</button>
                 <form className='current-user-profile'>
                     <h3 id='profile-text'>Edit Profile</h3>
-                    <label>
-                        Name:
-                        <input type='text' value={updatedUser.name} onChange={e => setUpdatedUser({...updatedUser, name: e.target.value})} />
-                    </label>
-                    <label>
-                        Age:
-                        <input type='text' value={updatedUser.age} onChange={e => setUpdatedUser({...updatedUser, age: e.target.value})} />
-                    </label>
-                    <label>
-                        Puppy Name:
-                        <input type='text' value={updatedUser.puppyName} onChange={e => setUpdatedUser({...updatedUser, puppyName: e.target.value})} />
-                    </label>
-                    <label>
-                        Puppy Age:
-                        <input type='text' value={updatedUser.puppyAge} onChange={e => setUpdatedUser({...updatedUser, puppyAge: e.target.value})} />
-                    </label>
-                    <label>
-                        Puppy Breed:
-                        <input type='text' value={updatedUser.puppyBreed} onChange={e => setUpdatedUser({...updatedUser, puppyBreed: e.target.value})} />
-                    </label>
-                    <label>
-                        Puppy Temperament:
-                        <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({...updatedUser, puppyTemperament: e.target.value})} />
-                    </label>
-                    {/* possibly do a dropdown for preselected list of temperaments */}
-                    <label>
-                        Vaccinated:
-                        <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />
-                    </label>
+                    <div className="update-div">
+                        <label>
+                            Name:
+                            <input type='text' value={updatedUser.name} onChange={e => setUpdatedUser({...updatedUser, name: e.target.value})} />
+                        </label>
+                        <label>
+                            Age:
+                            <input type='text' value={updatedUser.age} onChange={e => setUpdatedUser({...updatedUser, age: e.target.value})} />
+                        </label>
+                        <label>
+                            Puppy Name:
+                            <input type='text' value={updatedUser.puppyName} onChange={e => setUpdatedUser({...updatedUser, puppyName: e.target.value})} />
+                        </label>
+                        <label>
+                            Puppy Age:
+                            <input type='text' value={updatedUser.puppyAge} onChange={e => setUpdatedUser({...updatedUser, puppyAge: e.target.value})} />
+                        </label>
+                        <label>
+                            Puppy Breed:
+                            <input type='text' value={updatedUser.puppyBreed} onChange={e => setUpdatedUser({...updatedUser, puppyBreed: e.target.value})} />
+                        </label>
+                        <label>
+                            Puppy Temperament:
+                            <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({...updatedUser, puppyTemperament: e.target.value})} />
+                        </label>
+                        {/* possibly do a dropdown for preselected list of temperaments */}
+                        <label>
+                            Vaccinated:
+                            <input type='checkbox' checked={updatedUser.vaccinated} onChange={e => setUpdatedUser({...updatedUser, vaccinated: e.target.checked})} />
+                        </label>
+                    </div>
                     <div className="profile-image">
                         <label> Profile Image: 
                             <input type="file" accept=".jpg, .jpeg, .png" onChange={e => setUpdatedUser({...updatedUser, image: e.target.files[0]})} />
                         </label>
                     </div>
-                    <button type='button' onClick={handleUpdate}>Update</button>
-                    <button type='button' onClick={handleCancel}>Cancel</button>
+                    <div className="update-buttons">
+                        <button className="button" type='button' onClick={handleUpdate}>Update</button>
+                        <button className="button" type='button' onClick={handleCancel}>Cancel</button>
+                    </div>
                 </ form>
             </div>,
             document.getElementById("portal")
         )
     } else {
         return ReactDom.createPortal(
-            <div className="modal">
+            <div className="options-modal">
                 <div className='current-user-profile'>
                     <div className="profile-header">
                         <h3 id='profile-text'>My Profile</h3>

@@ -7,6 +7,7 @@ import * as sessionActions from '../../store/session';
 import Friends from './Friends/Friends'
 import Messages from './Messages/Messages'
 import Info from './Info/Info'
+import Settings from './Settings/Settings'
 import './OptionsBar.css'
 
 export default function OptionsBar() {
@@ -16,6 +17,7 @@ export default function OptionsBar() {
   const [friendsOpen, setFriendsOpen] = useState(false)
   const [messagesOpen, setMessagesOpen] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   const handleLogout = () => {
     dispatch(sessionActions.logout());
@@ -23,16 +25,21 @@ export default function OptionsBar() {
   }
 
   const closeAllModals = () => {
+    setSettingsOpen(false)
     setProfilePageOpen(false);
     setFriendsOpen(false)
     setMessagesOpen(false)
     setInfoOpen(false)
+
   }
 
   return (
     <div className="options-bar-div">
         <div className="options-icons">
-            <Link to="/"><div className="double-spacer"><i className="fa-solid fa-gear white-text"></i></div></Link>
+            <button className="double-spacer" onClick={() => {
+                        closeAllModals()
+                        setSettingsOpen(true)}}><i className="fa-solid fa-gear white-text"></i></button>
+            <Settings open={settingsOpen} settingsClose={() => setSettingsOpen(false)} closeAllModals={closeAllModals}></Settings>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setProfilePageOpen(true)}}><i className="fa-solid fa-paw white-text"></i></button>
@@ -49,7 +56,6 @@ export default function OptionsBar() {
                         closeAllModals()
                         setInfoOpen(true)}}><i className="fa-regular fa-circle-question white-text"></i></button>
             <Info open={infoOpen} infoClose={() => setInfoOpen(false)}></Info>
-            <Link to="/"><div className="double-spacer"></div></Link>
         </div>
         <div className="options-icons">
             <Link to="/login" onClick={handleLogout}><div className="double-spacer"><i className="fa-solid fa-right-from-bracket white-text"></i></div></Link>          
