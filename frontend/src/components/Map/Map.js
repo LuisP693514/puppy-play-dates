@@ -1,9 +1,12 @@
-import { useState, useCallback } from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { useState, useCallback, useEffect } from 'react';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { googleMapApiKey } from '../../config/keys';
 import './GoogleMap.css'
 import data from './MapConfig.json'
-
+import { fetchUsers, getUsers } from '../../store/users';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { fetchMarkers, getMarkers } from '../../store/markers';
 
 const containerStyle = {
     width: '100%',
@@ -19,27 +22,33 @@ const center = {
   lng: -73.9939538
 };
 
+
 function MyGoogleMap() {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: googleMapApiKey
-  })
+    const dispatch = useDispatch()
+    const users = useSelector(getUsers)
+    const markers = useSelector(getMarkers)
+    const history = useHistory()
+    const defaultTest = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"
+    const dogParkIcon = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png'
+    const veternarianIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/vet.png"
+    const groomersIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pets-hair-salon.avif"
+    const petStoreIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pet+store.png"
 
-  const [map, setMap] = useState(null)
+    useEffect(() => {
+        dispatch(fetchUsers())
+        dispatch(fetchMarkers())
+    }, [])
 
-  const onLoad = useCallback(function callback(map) {
-    // const bounds = new window.google.maps.LatLngBounds(center);
-    // map.fitBounds(bounds);
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: googleMapApiKey
+    })
+    
+    console.log(users)
+        
+    const [map, setMap] = useState(null)
 
-    // const mapConfig = async () => {
-    //     // debugger
-    //     return await JSON.parse(MapStyle)
-    // }
-
-
-    // const styles = mapConfig()
-    // debugger
-    console.log(data)
+    const onLoad = useCallback(function callback(map) {
     const zoom = 17
     map.setZoom(zoom)
 
@@ -49,6 +58,23 @@ function MyGoogleMap() {
   const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, [])
+  
+    markers.map(marker => {
+        switch(marker.markerType) {
+            case 'dogPark':
+                const parkIcon = {url: dogParkIcon,
+                    scaledSize: { width: 40, height: 40 }}
+            case 'vet':
+                const vetIcon = {url: veternarianIcon,
+                    scaledSize: { width: 40, height: 40 }}
+            case 'petStore':
+                const storeIcon = {url: petStoreIcon,
+                    scaledSize: { width: 40, height: 40 }}
+            case 'groomer':
+                const groomerIcon = {url: groomersIcon,
+                    scaledSize: { width: 40, height: 40 }}
+        }
+    })
 
   return isLoaded ? (
       <GoogleMap
@@ -64,8 +90,81 @@ function MyGoogleMap() {
             fullscreenControl: false,
         }}
       >
+        {users.map(user => (
+            <Marker 
+                clickable
+                onClick={() => {
+                    history.push('/');
+                }}
+                position={{ lat: user.latitude, lng: user.longitude }} 
+                icon={{
+                    url: user.profileImageUrl,
+                    scaledSize: { width: 40, height: 40 }
+                }}
+            />
+        ))}
+        {markers.map(marker => {
+            switch(marker.markerType) {
+                case 'dogPark':
+                    <Marker 
+                        position={{ lat: marker.latitude, lng: marker.longitude }}
+                        icon={{
+                            url: dogParkIcon,
+                            scaledSize: { width: 40, height: 40 }
+                        }}
+                    />
+                case 'vet':
+                    <Marker 
+                        position={{ lat: marker.latitude, lng: marker.longitude }}
+                        icon={{
+                            url: veternarianIcon,
+                            scaledSize: { width: 40, height: 40 }
+                        }}
+                    />
+                case 'petStore':
+                    <Marker 
+                        position={{ lat: marker.latitude, lng: marker.longitude }}
+                        icon={{
+                            url: petStoreIcon,
+                            scaledSize: { width: 40, height: 40 }
+                        }}
+                    />
+                case 'groomer':
+                    <Marker 
+                        position={{ lat: marker.latitude, lng: marker.longitude }}
+                        icon={{
+                            url: groomersIcon,
+                            scaledSize: { width: 40, height: 40 }
+                        }}
+                    />
+                default:
+                    <Marker 
+                        position={{ lat: 40.7356, lng: -73.9910 }}
+                        icon={{
+                        url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
+                        scaledSize: { width: 40, height: 40 }
+                        }}
+                    />
+            }
+    })}
+        {/* {parks.map(park => (
+            <Marker 
+            position={{ lat: park.latitude, lng: park.longitude }} 
+            icon={{
+                url: park.profileImageUrl,
+                scaledSize: { width: 40, height: 40 }
+            }}
+        />
+        ))} */}
+        {/* <Marker 
+            position={{ lat: 40.7356, lng: -73.9910 }}
+            icon={{
+                url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
+                scaledSize: { width: 40, height: 40 }
+            }}
+        /> */}
       </GoogleMap>
-  ) : <>Test</>
-}
+  ) : <>...Loading</>
 
+}
 export default MyGoogleMap

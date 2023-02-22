@@ -3,3 +3,8 @@
     margin: 0;
     padding: 0;
 } */
+
+img[src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"]{
+    border-radius: 100px;
+    border:1px solid #000 !important;
+}
