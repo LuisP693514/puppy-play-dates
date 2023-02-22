@@ -87,7 +87,7 @@ function MyGoogleMap() {
             styles: data,
             mapTypeControl: false,
             streetViewControl: false,
-            fullscreenControl: false,
+            fullscreenControl: false, 
         }}
       >
         {users.map(user => (
@@ -113,7 +113,7 @@ function MyGoogleMap() {
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
-                    scaledSize: { width: 40, height: 40 }
+                    scaledSize: { width: 60, height: 60 }
                 }}
             />)
         ))}
