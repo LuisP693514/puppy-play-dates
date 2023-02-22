@@ -96,7 +96,11 @@ router.get('/current', restoreUser, (req, res) => {
 // /api/users/all grabs all the users and exludes the password from the request
 router.get('/all', async (req, res, next) => {
   const users = await User.find().select('-hashedPassword');
-  res.json(users);
+  const usersById = {}
+  users.forEach(user => {
+    usersById[user._id] = user.toObject();
+  });
+  res.json(usersById);
 })
 
 // /api/users/:userId/dates grabs all the dates a single user has (array)
@@ -148,7 +152,7 @@ router.get('/:userId', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json(user);
+    res.json({userId: user});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
