@@ -39,8 +39,8 @@ export const fetchDateRequest = (dateRequestId) => async (dispatch) => {
     }
 };
 
-export const fetchDateRequests = () => async (dispatch) => {
-    const response = await jwtFetch(`/api/dateRequests`);
+export const fetchDateRequests = (userId) => async (dispatch) => {
+    const response = await jwtFetch(`/api/users/${userId}/dataRequests`);
 
     if (response.ok) {
         const dateRequests = await response.json();
@@ -49,7 +49,7 @@ export const fetchDateRequests = () => async (dispatch) => {
 };
 
 export const updateDateRequest = dateRequest => async (dispatch) => {
-    const response = await jwtFetch(`/api/dateRequests/${dateRequest.id}`,{
+    const response = await jwtFetch(`/api/dateRequests/${dateRequest._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(dateRequest)
@@ -62,7 +62,7 @@ export const updateDateRequest = dateRequest => async (dispatch) => {
 };
 
 export const createDateRequest = dateRequest => async (dispatch) => {
-    const response = await jwtFetch(`/api/dateRequests`, {
+    const response = await jwtFetch(`/api/dateRequests/create`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(dateRequest)
@@ -90,7 +90,7 @@ const dateRequestReducer = (state = {}, action) => {
     case RECEIVE_DATE_REQUESTS:
         return {...action.dateRequests};
     case RECEIVE_DATE_REQUEST:
-        return {...state, [action.dateRequest.id]: action.dateRequest};
+        return {...state, [action.dateRequest._id]: action.dateRequest};
     case REMOVE_DATE_REQUEST:
         const newState = {...state};
         delete newState[action.dateRequestId];

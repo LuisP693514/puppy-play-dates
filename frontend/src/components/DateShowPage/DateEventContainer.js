@@ -7,7 +7,7 @@ import { fetchUser, getUser } from "../../store/users";
 const DateEventContainer = ({dateId}) => {
     const dispatch = useDispatch();
     const date = useSelector(getDate(dateId));
-    const otherUser =useSelector(getUser(date.invitee))
+    const otherUser = useSelector(getUser(date.invitee))
 
     useEffect(() => {
         dispatch(fetchDate(dateId))
@@ -21,10 +21,12 @@ const DateEventContainer = ({dateId}) => {
         <p>Date with {otherUser.puppyName}</p>
             <div>{date.name}</div>
             <div>{date.date}</div>
-            {/* <div>{date.location}</div> dates location*/}
             <div>{date.description}</div>
+            {/* <div>Location:</div>
+            <div>Latitude: {date.latitude}</div>
+            <div>Longitude: {date.longitude}</div> */}
         </div>
     )
 };
 
-export default DateEventContainer
+export default DateEventContainer;

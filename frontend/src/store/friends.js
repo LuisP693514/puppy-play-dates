@@ -92,7 +92,7 @@ export const fetchFriends = () => async (dispatch) => {
 };
 
 export const upFriend = friend => async (dispatch) => {
-    const response = await jwtFetch(`/api/friends/${friend.id}`,{
+    const response = await jwtFetch(`/api/friends/${friend._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(friend)
@@ -143,7 +143,7 @@ const createFriendReducer = (state = initialState, action) => {
     case RECEIVE_FRIENDS:
         return {...action.friends};
     case RECEIVE_FRIEND:
-        return {...state, [action.friend.id]: action.friend};
+        return {...state, [action.friend._id]: action.friend};
     case REMOVE_FRIEND:
         const newState = {...state};
         delete newState[action.friendId];

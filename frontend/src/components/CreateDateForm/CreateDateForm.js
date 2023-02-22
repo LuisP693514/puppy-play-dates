@@ -4,18 +4,18 @@ import { useDispatch } from "react-redux";
 import './CreateDateForm.css';
 import { createDateRequest } from '../../store/dateRequests';
 
-const CreateDate = ({sessionUser, otherUser}) => {
+const CreateDate = ({currentUser, otherUser}) => {
     const dispatch = useDispatch();
     const history = useHistory
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('')
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userOneId = sessionUser.id;
-    const userTwoId = otherUser.id;
+    const userOneId = currentUser._id;
+    const userTwoId = otherUser._id;
     const dateInfo = {
       name,
       description,
@@ -56,7 +56,7 @@ const CreateDate = ({sessionUser, otherUser}) => {
                 <label id="date-location-input">Latitude</label>
                 <input
                     id="date-location-input"
-                    type="text"
+                    type="number"
                     name="latitude"
                     value={latitude}
                     onChange={(e) => setLatitude(e.target.value)}
@@ -67,7 +67,7 @@ const CreateDate = ({sessionUser, otherUser}) => {
                 <label id="date-location-input">Longitude</label>
                 <input
                     id="date-location-input"
-                    type="text"
+                    type="number"
                     name="longitude"
                     value={longitude}
                     onChange={(e) => setLongitude(e.target.value)}
