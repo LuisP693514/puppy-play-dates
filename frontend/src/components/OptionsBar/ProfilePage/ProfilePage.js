@@ -43,7 +43,7 @@ function ProfilePage({open, profileClose}) {
 
     const handleConfirmDelete = e => {
         e.preventDefault();
-        dispatch(deleteUser(currentUser.id));
+        dispatch(deleteUser(currentUser._id));
         history.push('/login');
     }
 
