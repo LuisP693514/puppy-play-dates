@@ -7,8 +7,9 @@ import { fetchUsers, getUsers } from '../../store/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchMarkers, getMarkers } from '../../store/markers';
-import { selectCurrentUser } from '../../store/session';
+import { getCurrentUser, selectCurrentUser } from '../../store/session';
 import { getLocation } from '../Utils/getLocation';
+import { updateUser } from '../../store/users';
 
 const containerStyle = {
     width: '100%',
@@ -36,10 +37,14 @@ function MyGoogleMap() {
     const groomersIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pets-hair-salon.avif"
     const petStoreIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pet+store.png"
     const sessionUser = useSelector(selectCurrentUser)
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
 
     useEffect(() => {
         dispatch(fetchUsers())
+        dispatch(getCurrentUser())
         dispatch(fetchMarkers())
+        dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
     }, [dispatch])
 
 
@@ -62,6 +67,14 @@ function MyGoogleMap() {
   const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, [])
+
+  getLocation().then(coords => {
+    setLatitude(coords[0])
+    setLongitude(coords[1])
+  }).catch(error => {
+  });
+
+
 
   return isLoaded ? (
       <GoogleMap

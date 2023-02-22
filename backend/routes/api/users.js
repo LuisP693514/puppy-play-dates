@@ -98,11 +98,7 @@ router.get('/current', restoreUser, (req, res) => {
 // /api/users/all grabs all the users and exludes the password from the request
 router.get('/all', async (req, res, next) => {
   const users = await User.find().select('-hashedPassword');
-  const usersById = {}
-  users.forEach(user => {
-    usersById[user._id] = user.toObject();
-  });
-  res.json(usersById);
+  res.json(users);
 })
 
 // /api/users/:userId/dates grabs all the dates a single user has (array)
@@ -154,7 +150,7 @@ router.get('/:userId', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({userId: user});
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -163,18 +159,15 @@ router.get('/:userId', async (req, res) => {
 // /api/users/:userId updates the user
 router.patch('/:userId', validateDoggyInputs, async (req, res, next) => {
   const userId = req.params.userId;
-  const updatedUserData = req.body;
-  try {
-    const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
-    console.log(user)
-    if (!user) {
-      return res.status(404).json({message: "User not found"})
+  const updatedUserData = req.params.body;
+
+  User.findByIdAndUpdate(userId, updatedUserData, { new: true }, (err, updatedUser) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.json(updatedUser);
     }
-    res.status(200).json(user)
-  } catch (err) {
-    res.status(500).json({message: err.message})
-  }
-  
+  });
 })
 
 router.delete('/:userId', async (req, res) => {
