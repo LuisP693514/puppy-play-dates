@@ -43,11 +43,28 @@ function MyGoogleMap() {
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     
+    // useEffect(() => {
+    // //     getLocation().then(coords => {
+    // //         console.log(coords)
+    // //         setLatitude(coords[0])
+    // //         setLongitude(coords[1])
+    // //         dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
+    // //     })
+    // //   .catch(error => {
+    // //   });
+    // }, [])
+
     useEffect(() => {
+        getLocation().then(coords => {
+            setLatitude(coords[0])
+            setLongitude(coords[1])
+        })
+      .catch(error => {
+      });
         dispatch(fetchUsers())
         dispatch(fetchMarkers())
         dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
-    }, [dispatch])
+    }, [dispatch, latitude, longitude])
     
     
     const { isLoaded } = useJsApiLoader({
@@ -77,13 +94,7 @@ function MyGoogleMap() {
     setMap(null)
   }, [])
 
-  getLocation().then(coords => {
-    console.log(coords)
-    setLatitude(coords[0])
-    setLongitude(coords[1])
-  }).catch(error => {
-  });
-
+  const hasLocation = longitude > 0 && latitude > 0;
   return isLoaded ? (
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -99,7 +110,7 @@ function MyGoogleMap() {
         }}
       > 
         {users.map(user => (
-            user._id === sessionUser._id ?
+            user._id === sessionUser._id && hasLocation ?
             (<Marker 
                 clickable
                 onClick={() => {
