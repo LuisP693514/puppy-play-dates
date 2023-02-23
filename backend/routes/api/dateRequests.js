@@ -44,7 +44,7 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
-router.get('/:userId/filter', async (req, res) => {
+router.get('/:userId', async (req, res) => {
     const userId = req.params.userId
     try {
         const user = await User.findById(userId)
@@ -52,13 +52,7 @@ router.get('/:userId/filter', async (req, res) => {
             return res.status(404).json({ message: "User not found" })
         }
 
-        // const dRById = {}
-        // user.dateRequests.forEach(request => {
-        //     const date = await DateRequest.findById(request._id).select("_id creator invitee")
-        //     dRById[request._id] = date;
-        // });
-
-        const dRById = await getDateRequests(user)
+        const dRById = await getDateRequestsPending(user)
         console.log(dRById)
         res.status(200).json(dRById)
 
@@ -66,49 +60,63 @@ router.get('/:userId/filter', async (req, res) => {
         res.status(500).json({ message: err.message })
     }
 })
-router.get('/:userId', async (req, res) => {
-    console.log("hello")
-    const userId = req.params.userId;
-    try {
-        const user = await User.findById(userId)
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' })
-        }
 
-        const requests = await FriendRequest.find({ $or: [{ sender: userId }, { receiver: userId }] })
-            .populate('sender', '_id username')
-            .populate('receiver', '_id username');
+// router.get('/:userId', async (req, res) => {
+//     console.log("hello")
+//     const userId = req.params.userId;
+//     try {
+//         const user = await User.findById(userId)
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' })
+//         }
 
-        res.status(200).json(requests)
-    } catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-})
+//         const requests = await FriendRequest.find({ $or: [{ sender: userId }, { receiver: userId }] })
+//             .populate('sender', '_id username')
+//             .populate('receiver', '_id username');
+
+//         res.status(200).json(requests)
+//     } catch (err) {
+//         res.status(500).json({ message: err.message })
+//     }
+// })
 
 router.patch('/:reqId', async (req, res) => {
     const requestId = req.params.reqId;
-    const { status } = req.body;
+    const updateData = req.body;
     try {
-        const request = await FriendRequest.findById(requestId)
+        const request = await DateRequest.findByIdAndUpdate(requestId, updateData, {new: true})
         if (!request) {
-            return res.status(404).json({ message: 'Friend request not found' })
+            return res.status(404).json({ message: 'Date request not found' })
         }
 
         //work here
-        request.status = status;
-        const savedRequest = await request.save();
-        res.status(200).json(savedRequest)
+        res.status(200).json(request)
 
     } catch (err) {
         res.status(500).json({ message: err.messsage })
     }
 })
 
-async function getDateRequests(user) {
+router.delete('/reqId', async (req, res) => {
+    const requestId = req.params.reqId
+    try {
+        const request = await DateRequest.findByIdAndDelete(requestId)
+
+        if (!request) {
+            return res.status(404).json({message: "Failed to delete date request"})
+        }
+
+        res.status(200).json({message: "Deleted date request successfully."})
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+})
+
+async function getDateRequestsPending(user) {
     const object = {}
     for (let i = 0; i < user.dateRequests.length; i++) {
         const request = user.dateRequests[i];
-        const date = await DateRequest.findById(request).select("_id creator invitee status");
+        const date = await DateRequest.findById(request)
         object[user.dateRequests[i]] = date;
     }
     return object;

@@ -96,10 +96,12 @@ router.get('/current', restoreUser, (req, res) => {
 
 // /api/users/all grabs all the users and exludes the password from the request
 router.get('/all', async (req, res, next) => {
-  const users = await User.find().select('-hashedPassword');
+  const users = await User.find()
   const usersById = {}
   users.forEach(user => {
-    usersById[user._id] = user.toObject();
+    const userObj = user.toObject();
+    delete userObj.hashedPassword;
+    usersById[user._id] = userObj;
   });
   res.json(usersById);
 })
@@ -200,7 +202,7 @@ router.get('/:userId', async (req, res) => {
 });
 
 // /api/users/:userId updates the user
-router.patch('/:userId', async (req, res) => {
+router.patch('/:userId', async (req, res, next) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
   try {
@@ -209,7 +211,29 @@ router.patch('/:userId', async (req, res) => {
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
-    res.status(200).json(user)
+
+    if (user.password) user.password = null;
+
+    if (req.body.password){
+
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) throw err;
+        bcrypt.hash(req.body.password, salt, async (err, hashedPasswor) => {
+          if (err) throw err;
+          try {
+            user.hashedPassword = hashedPasswor;
+            const userUpdated = await user.save();
+            const { hashedPassword, ...rest } = userUpdated.toObject();
+            return res.status(200).json(rest);
+          }
+          catch (err) {
+            next(err);
+          }
+        })
+      });
+    } else {
+      res.status(200).json(user)
+    }
   } catch (err) {
     res.status(500).json({message: err.message})
   }
