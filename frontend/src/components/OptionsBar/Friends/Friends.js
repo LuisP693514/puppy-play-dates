@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useEffect } from 'react';
-import ReactDom from 'react-dom'
+import reactDom from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchFriendRequests, getFriendRequests } from '../../../store/friendRequests';
 import { fetchFriends, getFriends } from '../../../store/friends';
