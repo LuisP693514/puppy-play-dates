@@ -40,7 +40,7 @@ export const fetchDateRequest = (dateRequestId) => async (dispatch) => {
 };
 
 export const fetchDateRequests = (userId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/dateRequests${userId}`);
+    const response = await jwtFetch(`/api/dateRequests/${userId}`);
 
     if (response.ok) {
         const dateRequests = await response.json();
@@ -48,8 +48,8 @@ export const fetchDateRequests = (userId) => async (dispatch) => {
     }
 };
 
-export const fetchDateRequestsFiltered = userId => async (dispatch) => {
-    const response = await jwtFetch(`/api/dateRequests/${userId}`);
+// export const fetchDateRequestsFiltered = userId => async (dispatch) => {
+//     const response = await jwtFetch(`/api/dateRequests/${userId}`);
 
 //     if (response.ok) {
 //         const dateRequests = await response.json();
