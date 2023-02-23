@@ -6,7 +6,7 @@ import { signup, clearSessionErrors } from '../../store/session';
 import tightlogo from "../../images/tight-logo.jpg"
 import { Link } from 'react-router-dom';
 
-function SignupForm () {
+function SignupForm() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +44,7 @@ function SignupForm () {
 
     return e => setState(e.currentTarget.value);
   }
-  
+
   const handleSubmit = e => {
     e.preventDefault();
     const user = {
@@ -53,18 +53,18 @@ function SignupForm () {
       // image,
       password
     };
-    
+
     dispatch(signup(user));
-    history.push('/signup2', {user});
+    history.push('/signup', { user });
   }
-  
+
   // const updateFile = e => setImage(e.target.files[0]);
   return (
     <div className="login-form-div signup-div">
       <form className="session-form" onSubmit={handleSubmit}>
         <div className="login-spacer signup-head">
           <h2 className="orange-text signup-head">Sign Up</h2>
-          <div className="login-spacer center"><img className="signin-logo" src={tightlogo}/> </div>
+          <div className="login-spacer center"><img className="signin-logo" src={tightlogo} /> </div>
         </div>
         <div className="login-spacer">
           <label>
@@ -76,7 +76,7 @@ function SignupForm () {
               placeholder="Email"
             />
           </label>
-        <div className="errors">{errors?.email}</div>
+          <div className="errors">{errors?.email}</div>
         </div>
         <div className="login-spacer">
           <label>
@@ -118,7 +118,7 @@ function SignupForm () {
         <button
           className="button"
           type="submit"
-          disabled={!email || !username || !password || password !== password2}
+        // disabled={!email || !username || !password || password !== password2}
         >Sign Up</button>
         <Link to="/login"><div className="grey-text switch-login ">Already have an Account?</div></Link>
       </form>

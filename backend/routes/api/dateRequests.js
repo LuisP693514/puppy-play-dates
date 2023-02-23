@@ -33,7 +33,8 @@ router.post('/create', async (req, res, next) => {
             invitee: receiverId,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
-            name: req.body.name
+            name: req.body.name,
+            description: req.body.description
         })
 
         const savedRequest = await newRequest.save();

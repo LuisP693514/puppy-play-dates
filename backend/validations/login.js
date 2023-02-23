@@ -5,11 +5,11 @@ const handleValidationErrors = require('./handleValidationErrors');
 // middleware to validate the keys in the body of a request to login a user
 const validateLoginInput = [
   check('email')
-    .exists({ checkFalsy: true })
+    // .exists({ checkFalsy: true })
     .isEmail()
     .withMessage('Email is invalid'),
   check('password')
-    .exists({ checkFalsy: true })
+    // .exists({ checkFalsy: true })
     .isLength({ min: 6, max: 30 })
     .withMessage('Password is incorrect'),
   handleValidationErrors
