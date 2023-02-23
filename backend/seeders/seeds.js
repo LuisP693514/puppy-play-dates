@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const DateRequest = require('../models/DateRequest');
 
-const NUM_SEED_USERS = 10;
+const NUM_SEED_USERS = 25;
 
 // Create users
 const users = [];
@@ -46,10 +46,10 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
     const lastName = faker.name.lastName();
     let profileImage;
     while (profileImage === undefined) {
-        const randomNumber = Math.floor(Math.random() * 10);
+        const randomNumber = Math.floor(Math.random() * NUM_SEED_USERS);
         if (!generatedNumbers.includes(randomNumber)) {
             generatedNumbers.push(randomNumber);
-            profileImage = `https://puppyplaydates.s3.us-east-2.amazonaws.com/public/${randomNumber}profilepic.jpg`
+            profileImage = `https://puppyplaydates.s3.us-east-2.amazonaws.com/public/${randomNumber}profilepic.png`
             users.push(
                 new User({
                     username: faker.internet.userName(firstName, lastName),
