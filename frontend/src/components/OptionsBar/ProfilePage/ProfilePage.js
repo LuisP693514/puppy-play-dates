@@ -20,7 +20,7 @@ function ProfilePage({ open, profileClose }) {
     const [image, setImage] = useState(null);
 
     const handleImageChange = (e) => {
-        debugger
+      
         const reader = new FileReader();
         const file = e.target.files[0];
         // setImage(file)
