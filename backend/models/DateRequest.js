@@ -10,7 +10,8 @@ const DateRequestSchema = new Schema({
   longitude: { type: Number },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   invitee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  name: { type: String }
+  name: { type: String },
+  description: { type: String }
 }, {
   timestamps: true
 });
