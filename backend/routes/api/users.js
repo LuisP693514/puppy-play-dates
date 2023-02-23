@@ -202,18 +202,18 @@ router.get('/:userId', async (req, res) => {
 });
 
 // /api/users/:userId updates the user
-router.patch('/:userId', async (req, res, next) => {
+router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
-  // debugger
+  debugger
   try {
-    // singleMulterUpload("image"),
-    // const profileImageUrl = req.body.image ?
-    //   await singleFileUpload({ file: req.body.image, public: true }) 
-    //   :
-    //   DEFAULT_PROFILE_IMAGE_URL;
+    // 
+    const profileImageUrl = req.body.image ?
+      await singleFileUpload({ file: req.body.image, public: true }) 
+      :
+      DEFAULT_PROFILE_IMAGE_URL;
 
-    // updatedUserData.profileImageUrl = profileImageUrl
+    updatedUserData.profileImageUrl = profileImageUrl
 
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
 
