@@ -26,7 +26,6 @@ const FriendContainer = ({friend}) => {
     }
 
 
-
     return (
         <div className="friend-container">
             <button className="friend-info" onClick={() => {

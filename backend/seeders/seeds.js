@@ -47,6 +47,15 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
     let profileImage;
     while (profileImage === undefined) {
         const randomNumber = Math.floor(Math.random() * NUM_SEED_USERS);
+        const dogTemperaments = ['affectionate','agile','alert','brave','calm','cheerful','confident',
+                                'courageous','curious','docile','energetic','friendly','gentle','happy',
+                                'independent','intelligent','loyal','obedient','playful','protective','quiet',
+                                'reliable','sensitive','smart','social','stubborn','trainable','vigilant','watchful'];
+        const dogBreeds = ["Beagle","Dalmatian","Greyhound","Chow Chow","Golden Retriever","Siberian Husky","Great Dane","Dachshund",
+                            "Bulldog","Poodle","Boxer","Labrador Retriever","Chihuahua","Pomeranian","Bichon Frise","Border Collie",
+                            "Corgi","Akita","Shih Tzu","Bernese Mountain Dog","Cane Corso","Rhodesian Ridgeback","Shar Pei",
+                            "Weimaraner","Basenji","Mastiff","Newfoundland","Pug","Saint Bernard","Shiba Inu"];
+
         if (!generatedNumbers.includes(randomNumber)) {
             generatedNumbers.push(randomNumber);
             profileImage = `https://puppyplaydates.s3.us-east-2.amazonaws.com/public/${randomNumber}profilepic.png`
@@ -57,7 +66,14 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
                     hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
                     latitude: preseeded_locations[i][0],
                     longitude: preseeded_locations[i][1],
-                    profileImageUrl: profileImage
+                    profileImageUrl: profileImage,
+                    puppyName: faker.animal.dog(),
+                    puppyBreed: dogBreeds[Math.floor(Math.random() * dogBreeds.length)],
+                    puppyAge: faker.datatype.number({ min: 1, max: 30 }),
+                    name: faker.name.findName(),
+                    ownerAge: faker.datatype.number({ min: 10, max: 100 }),
+                    puppyTemperament: dogTemperaments[Math.floor(Math.random() * dogTemperaments.length)],
+                    puppyVaccinated: faker.datatype.boolean()
                 })
             )
         }
