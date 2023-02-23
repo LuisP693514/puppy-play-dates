@@ -7,6 +7,10 @@ import { fetchUsers, getUsers } from '../../store/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchMarkers, getMarkers } from '../../store/markers';
+import { getCurrentUser, selectCurrentUser } from '../../store/session';
+import { getLocation } from '../Utils/getLocation';
+import { updateUser } from '../../store/users';
+import ProfileModal from '../ProfileModal';
 
 const containerStyle = {
     width: '100%',
@@ -17,10 +21,12 @@ const containerStyle = {
     position: 'absolute'
 };
 
-const center = {
-  lat: 40.7361589,
-  lng: -73.9939538
-};
+// const center = {
+//   lat: 40.7361589,
+//   lng: -73.9939538
+// };
+
+
 
 
 function MyGoogleMap() {
@@ -33,18 +39,30 @@ function MyGoogleMap() {
     const veternarianIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/vet.png"
     const groomersIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pets-hair-salon.avif"
     const petStoreIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pet+store.png"
-
+    const sessionUser = useSelector(selectCurrentUser)
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+    
     useEffect(() => {
         dispatch(fetchUsers())
         dispatch(fetchMarkers())
-    }, [])
-
+        dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
+    }, [dispatch])
+    
+    
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: googleMapApiKey
     })
     
-    console.log(users)
+    const center = {
+      lat: 40.7361589,
+      lng: -73.9939538
+    };
+
+    // console.log(users)
+    // console.log('this is session user below')
+    // console.log(sessionUser)
         
     const [map, setMap] = useState(null)
 
@@ -58,23 +76,13 @@ function MyGoogleMap() {
   const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, [])
-  
-    markers.map(marker => {
-        switch(marker.markerType) {
-            case 'dogPark':
-                const parkIcon = {url: dogParkIcon,
-                    scaledSize: { width: 40, height: 40 }}
-            case 'vet':
-                const vetIcon = {url: veternarianIcon,
-                    scaledSize: { width: 40, height: 40 }}
-            case 'petStore':
-                const storeIcon = {url: petStoreIcon,
-                    scaledSize: { width: 40, height: 40 }}
-            case 'groomer':
-                const groomerIcon = {url: groomersIcon,
-                    scaledSize: { width: 40, height: 40 }}
-        }
-    })
+
+  getLocation().then(coords => {
+    console.log(coords)
+    setLatitude(coords[0])
+    setLongitude(coords[1])
+  }).catch(error => {
+  });
 
   return isLoaded ? (
       <GoogleMap
@@ -91,17 +99,34 @@ function MyGoogleMap() {
         }}
       > 
         {users.map(user => (
-            <Marker 
+            user._id === sessionUser._id ?
+            (<Marker 
                 clickable
                 onClick={() => {
-                    history.push('/');
+                    // history.push('/');
+                    console.log(user._id)
+                    // {<ProfileModal userId={user._id} />}
                 }}
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
                     scaledSize: { width: 60, height: 60 }
                 }}
-            />
+            />)
+                :
+           ( <Marker 
+                clickable
+                onClick={() => {
+                    // history.push('/');
+                    console.log(user._id)
+                    // {<ProfileModal userId={user._id} />}
+                }}
+                position={{ lat: user.latitude, lng: user.longitude }} 
+                icon={{
+                    url: user.profileImageUrl,
+                    scaledSize: { width: 40, height: 40 }
+                }}
+            />)
         ))}
         {markers.map(marker => {
             switch(marker.markerType) {
@@ -157,22 +182,6 @@ function MyGoogleMap() {
                     )
             }
     })}
-        {/* {parks.map(park => (
-            <Marker 
-            position={{ lat: park.latitude, lng: park.longitude }} 
-            icon={{
-                url: park.profileImageUrl,
-                scaledSize: { width: 40, height: 40 }
-            }}
-        />
-        ))} */}
-        {/* <Marker 
-            position={{ lat: 40.7356, lng: -73.9910 }}
-            icon={{
-                url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
-                scaledSize: { width: 40, height: 40 }
-            }}
-        /> */}
       </GoogleMap>
   ) : <>...Loading</>
 
