@@ -12,7 +12,6 @@ const validateLoginInput = require('../../validations/login');
 
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
-const validateDoggyInputs = require('../../validations/doggieValidations');
 
 
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
@@ -159,7 +158,7 @@ router.get('/:userId', async (req, res) => {
 });
 
 // /api/users/:userId updates the user
-router.patch('/:userId', async (req, res, next) => {
+router.patch('/:userId', async (req, res) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
   try {
@@ -174,7 +173,7 @@ router.patch('/:userId', async (req, res, next) => {
   }
   
 })
-
+// /api/users/:userId deletes the user
 router.delete('/:userId', async (req, res) => {
   const userId = req.params.userId
   try {

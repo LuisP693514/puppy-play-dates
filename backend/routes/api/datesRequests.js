@@ -43,6 +43,27 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
+router.get('/all/:userId', async (req, res) => {
+    const userId = req.params.userId
+    try {
+        const user = await User.findById(userId).select('dateRequests')
+
+        if (!user) {
+            return res.status(404).json({message: "User not found"})
+        }
+
+        const dRById = {}
+        user.dateRequests.forEach(request => {
+            const date = DateRequest.findById(request._id).select("_id creator invitee")
+            user.dateRequests[request._id] = date;
+        });
+
+        res.status(200).json(dRById)
+
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+})
 router.get('/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
@@ -60,6 +81,7 @@ router.get('/:userId', async (req, res) => {
         res.status(500).json({ message: err.message })
     }
 })
+
 
 router.patch('/:reqId', async (req, res) => {
     const requestId = req.params.reqId;
