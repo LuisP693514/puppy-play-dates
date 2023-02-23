@@ -153,7 +153,7 @@ function MyGoogleMap() {
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
-                    scaledSize: { width: 40, height: 40 }
+                    scaledSize: { width: 80, height: 80 }
                 }}
             />)
         ))}
@@ -222,7 +222,7 @@ function MyGoogleMap() {
             }
     })}
       </GoogleMap>
-      <div className='reset-to-user-center'> 
+      <div className='map-center-button'> 
         <button onClick={() => {
             // debugger
             const currentUser = users[sessionUser._id]

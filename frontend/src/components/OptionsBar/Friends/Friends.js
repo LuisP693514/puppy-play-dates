@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useEffect } from 'react';
 import ReactDom from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,7 +42,7 @@ const Friends = ({open, friendsClose})  => {
 
 
     if (!open) return null
-    return ReactDom.createPortal(
+    return reactDom.createPortal(
         <div className="options-modal">
             TESTING FRIENDS
                 <div className='friends-index-container'>

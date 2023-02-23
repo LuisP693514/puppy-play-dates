@@ -25,7 +25,7 @@ h4 {
     font-size: 1.1em;
 }
 
-/* div {
+/* `{
     border: 1px solid red
 } */
 
@@ -34,8 +34,8 @@ h4 {
     background-color: orange;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     color: white;
     width: 100%;
     margin-bottom: 12px;
@@ -86,7 +86,7 @@ input {
     border-bottom: 1px solid grey;
     width: 200px;
     outline: none;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 #portal{
@@ -99,6 +99,12 @@ input {
     width: 100%;
     z-index: 1;
 }
+
+/* #portal2{
+    height: inherit;
+    width: 100%;
+    z-index: 2;
+} */
 
 .spacer {
     margin-bottom: 7px;
@@ -142,7 +148,7 @@ input {
     right: 0;
     left: 0;
     background-color: rgba(0,0,0,.5);
-    z-index: 4;
+    z-index: 6;
 }
 
 .central-modal{
@@ -151,7 +157,7 @@ input {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    z-index: 5;
+    z-index: 7;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

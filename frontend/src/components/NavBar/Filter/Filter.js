@@ -7,8 +7,12 @@ export default function Filter({open, filterClose}) {
 
     return reactDom.createPortal(
         <div className="filter-modal">
-            Filters Testing 
-            <button onClick={filterClose} className="modal-close">&times;</button>
+            {/* <button onClick={filterClose} className="modal-close filter-close">&times;</button> */}
+            <button><img src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pet-store-icon.png"/></button>
+            <button><img src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dog-park-icon.png"/></button>
+            <button><img src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/vet-icon.png"/></button>
+            <button><img src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dog-groomer-icon.png"/></button>
+            
         </div>,
         document.getElementById("portal")
     )

@@ -8,3 +8,7 @@
     border-top: 10px solid orange;
     border-bottom: 10px solid orange;
 }
+
+.settings-text{
+    font-size: 1.2em;
+}
