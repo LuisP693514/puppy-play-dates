@@ -34,7 +34,14 @@ users.push(
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png",
         latitude: 40.7363, 
-        longitude: -73.9938
+        longitude: -73.9938,
+        puppyName: 'Demodog',
+        puppyBreed: 'Shiba Inu',
+        puppyAge: 3,
+        name: "Demolition",
+        ownerAge: 95,
+        puppyTemperament: "energetic",
+        puppyVaccinated: true
     })
 )
 
@@ -70,7 +77,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
                     puppyName: faker.animal.dog(),
                     puppyBreed: dogBreeds[Math.floor(Math.random() * dogBreeds.length)],
                     puppyAge: faker.datatype.number({ min: 1, max: 30 }),
-                    name: faker.name.findName(),
+                    name: faker.name.fullName(),
                     ownerAge: faker.datatype.number({ min: 10, max: 100 }),
                     puppyTemperament: dogTemperaments[Math.floor(Math.random() * dogTemperaments.length)],
                     puppyVaccinated: faker.datatype.boolean()
