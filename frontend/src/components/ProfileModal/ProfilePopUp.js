@@ -8,44 +8,44 @@ import "./ProfilePopUp.css";
 
 const ProfilePopUp = ({userId, open, profileClose }) => {
     const dispatch = useDispatch();
-    // const history = useHistory();
-    // const otherUser = useSelector(getUser(userId));
-    // const sessionUser = useSelector((state) => state.session.user);
-    // const currentUser = useSelector(getUser(sessionUser._id))
+    const history = useHistory();
+    const otherUser = useSelector(getUser(userId));
+    const sessionUser = useSelector((state) => state.session.user);
+    const currentUser = useSelector(getUser(sessionUser._id))
     // const isFriend = currentUser.friends.includes(userId);
 
-    // useEffect(() => {
-    //     dispatch(fetchUser(userId))
-    //     dispatch(fetchUser(sessionUser._id))
-    // }, [dispatch, userId]);
+    useEffect(() => {
+        dispatch(fetchUser(userId))
+        dispatch(fetchUser(sessionUser._id))
+    }, [dispatch, userId]);
 
-    // if (!currentUser) return null;
-    // if (!otherUser) return null;
+    if (!currentUser) return null;
+    if (!otherUser) return null;
 
-    // const handleCreateDate = e => {
-    //     e.preventDefault();
-    //     history.push('/createDate', {currentUser, otherUser});
-    // };
+    const handleCreateDate = e => {
+        e.preventDefault();
+        history.push('/createDate', {currentUser, otherUser});
+    };
 
-    // const handleAddFriend = e => {
-    //     e.preventDefault();
-    //     // dispatch(createFriend);
-    // };
+    const handleAddFriend = e => {
+        e.preventDefault();
+        // dispatch(createFriend);
+    };
 
-    // const handleMessage = e => {
-    //     e.preventDefault();
-    //     history.push(`/messages/${userId}`)
-    //     // hide the userid 
-    // };
+    const handleMessage = e => {
+        e.preventDefault();
+        history.push(`/messages/${userId}`)
+        // hide the userid 
+    };
 
     if (!open) return null
     return reactDom.createPortal(
         <>
-            <div className="profile-modal">
+            {/* <div className="profile-modal">
                 TESTING PROFILE MODAL
                 <button onClick={profileClose} className="modal-close">&times;</button>
-            </div>
-            {/* <div className="profile-modal">
+            </div> */}
+            <div className="profile-modal">
                 <img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile"/>
                 <div className="puppy-details-section"> 
                     <h1 id="puppy-profile-details-text">Puppy Profile</h1>
@@ -80,17 +80,17 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                         <h2 id="owner-age-text">Age: </h2>
                         <h3 id='owner-age'>{otherUser.age}</h3>
                     </div> 
-                    <div className="profile-modal-buttons">   
+                    {/* <div className="profile-modal-buttons">   
                         {isFriend ? (
                             <button id="create-event-button" onClick={handleCreateDate}>Create Play Date</button>
                             ) : (
                             <button id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>
                         )}
                         <button id="message-button" onClick={handleMessage}>Message</button>
-                    </div> 
+                    </div>  */}
                     
                 </div>
-            </div> */}
+            </div>
         </>,
         document.getElementById("portal")
     );

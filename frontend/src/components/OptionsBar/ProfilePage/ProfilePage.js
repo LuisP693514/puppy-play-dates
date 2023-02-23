@@ -17,13 +17,20 @@ function ProfilePage({open, profileClose}) {
     const [editMode, setEditMode] = useState(false);
     const [updatedUser, setUpdatedUser] = useState({...currentUser});
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+    const [image, setImage] = useState(null);
 
     const handleImageChange = (e) => {
         const reader = new FileReader();
         const file = e.target.files[0];
-
+        //upload file to aws 
+        //getback success file upload with reosurce url
+        // do stuff on  bottom
         reader.onloadend = () => {
-            setUpdatedUser({ ...updatedUser, image: file });
+            // debugger
+            // go into updatedUser and make the file inside
+            // const updatedUser1 = Object.assign({}, updatedUser);
+            updatedUser.image = file;
+            setUpdatedUser({ ...updatedUser });
             setImagePreviewUrl(reader.result);
         };
 
