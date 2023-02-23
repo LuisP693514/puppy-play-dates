@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { updateDate } from "../../store/dates";
+import { updateDate } from "../../../store/dates";
     
        
 const UpdateDateForm = ({date}) => {

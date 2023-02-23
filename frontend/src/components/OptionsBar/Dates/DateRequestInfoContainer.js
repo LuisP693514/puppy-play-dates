@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser, getUser } from "../../../store/users";
-import { deleteDateRequest } from "../../store/dateRequests";
+import { deleteDateRequest } from "../../../store/dateRequests";
 
 const DateRequestInfoContainer = ({request}) => {
     const dispatch = useDispatch();

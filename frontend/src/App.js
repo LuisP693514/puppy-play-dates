@@ -14,7 +14,7 @@ import ProfilePage from './components/OptionsBar/ProfilePage/ProfilePage';
 import LandingPage from './components/LandingPage/LandingPage';
 import SignupFormTwo from './components/SessionForms/SignupFormTwo';
 import CreateDate from './components/CreateDateForm/CreateDateForm';
-import UpdateDateForm from './components/DateShowPage/DateUpdateForm';
+import UpdateDateForm from './components/OptionsBar/Dates/DateUpdateForm';
 
 
 function App() {
