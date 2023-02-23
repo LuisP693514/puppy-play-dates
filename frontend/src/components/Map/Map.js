@@ -230,6 +230,7 @@ function MyGoogleMap() {
                 lat: currentUser.latitude,
                 lng: currentUser.longitude
             })
+            map.setZoom(17)
         }}>Re-Center
         </button>
       </div>
