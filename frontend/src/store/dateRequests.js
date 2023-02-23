@@ -40,7 +40,7 @@ export const fetchDateRequest = (dateRequestId) => async (dispatch) => {
 };
 
 export const fetchDateRequests = (userId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/users/${userId}/dateRequests`);
+    const response = await jwtFetch(`/api/dateRequests${userId}`);
 
     if (response.ok) {
         const dateRequests = await response.json();
@@ -51,11 +51,29 @@ export const fetchDateRequests = (userId) => async (dispatch) => {
 export const fetchDateRequestsFiltered = userId => async (dispatch) => {
     const response = await jwtFetch(`/api/dateRequests/${userId}`);
 
-    if (response.ok) {
-        const dateRequests = await response.json();
-        dispatch(receiveDateRequests(dateRequests));
-    }
-}
+//     if (response.ok) {
+//         const dateRequests = await response.json();
+//         dispatch(receiveDateRequests(dateRequests));
+//     }
+// }
+
+// export const fetchDateRequestsPendingInvitee = userId => async (dispatch) => {
+//     const response = await jwtFetch(`/api/dateRequests/${userId}/pending/invitee`);
+
+//     if (response.ok) {
+//         const dateRequests = await response.json();
+//         dispatch(receiveDateRequests(dateRequests));
+//     }
+// }
+
+// export const fetchDateRequestsRejected = userId => async (dispatch) => {
+//     const response = await jwtFetch(`/api/dateRequests/${userId}/rejected/creator`);
+
+//     if (response.ok) {
+//         const dateRequests = await response.json();
+//         dispatch(receiveDateRequests(dateRequests));
+//     }
+// }
 
 export const updateDateRequest = dateRequest => async (dispatch) => {
     const response = await jwtFetch(`/api/dateRequests/${dateRequest._id}`,{
