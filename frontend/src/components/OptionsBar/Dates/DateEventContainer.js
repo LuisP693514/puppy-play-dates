@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { deleteDate, fetchDate, getDate} from "../../store/dates";
-import { fetchUser, getUser } from "../../store/users";
+import { deleteDate, fetchDate, getDate} from "../../../store/dates";
+import { fetchUser, getUser } from "../../../store/users";
 
 
 const DateEventContainer = ({dateId}) => {
