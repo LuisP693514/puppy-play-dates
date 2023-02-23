@@ -201,12 +201,23 @@ router.get('/:userId', async (req, res) => {
 router.patch('/:userId', async (req, res) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
+  // debugger
   try {
+    // singleMulterUpload("image"),
+    // const profileImageUrl = req.body.image ?
+    //   await singleFileUpload({ file: req.body.image, public: true }) 
+    //   :
+    //   DEFAULT_PROFILE_IMAGE_URL;
+
+    // updatedUserData.profileImageUrl = profileImageUrl
+
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
+
     console.log(user)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
+
     res.status(200).json(user)
   } catch (err) {
     res.status(500).json({message: err.message})
