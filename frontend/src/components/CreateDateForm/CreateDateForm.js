@@ -10,19 +10,21 @@ const CreateDate = ({currentUser, otherUser}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0)
+    const [longitude, setLongitude] = useState(0);
+    const [date, setDate] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userOneId = currentUser._id;
     const userTwoId = otherUser._id;
-    const dateInfo = {
-      name,
-      description,
-      longitude,
-      latitude
+    const dateInfo = {   
+        name,
+        date,
+        description,
+        longitude,
+        latitude
     };
-    dispatch(createDateRequest(userOneId, userTwoId, dateInfo));
+    dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
     // history.push('/dates')
   };
 
@@ -40,6 +42,16 @@ const CreateDate = ({currentUser, otherUser}) => {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
+            </div>
+            <div className="date-time-section">
+                <label id="date-time-text">Date and Time</label>
+                <textarea
+                    id="date-date-input"
+                    name="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                ></textarea>
             </div>
             <div className="date-description-section">
                 <label id="date-description-text">Description</label>

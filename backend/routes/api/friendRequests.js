@@ -6,22 +6,21 @@ const FriendRequest = require('../../models/FriendRequest');
 const User = mongoose.model('User');
 
 router.post('/create', async (req, res) => {
-    const { senderId, receiverId } = req.body;
+    const { sender, receiver } = req.body;
     try {
-        const sender = await User.findById(senderId);
-        const receiver = await User.findById(receiverId);
-
-        if (!sender || !receiver) {
+        const senderm = await User.findById(sender);
+        const receiverm = await User.findById(receiver);
+        if (!senderm || !receiverm) {
             return res.status(404).json({ message: "Sender or receiver not found!" })
         }
 
-        const existingRequest = await FriendRequest.findOne({ sender: senderId, receiver: receiverId });
+        const existingRequest = await FriendRequest.findOne({ sender: sender, receiver: receiver });
 
         if (existingRequest) {
             return res.status(400).json({ message: "Friend request already exists" });
         }
 
-        const newRequest = new FriendRequest({ sender: senderId, receiver: receiverId })
+        const newRequest = new FriendRequest({ sender: sender, receiver: receiver })
         const savedRequest = await newRequest.save();
         res.status(201).json(savedRequest)
 
