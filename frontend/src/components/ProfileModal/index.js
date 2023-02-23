@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import ProfilePopUp from './ProfilePopUp.js';
 
+
 function ProfileModal( {userId} ) {
   const [profileOpen, setProfileOpen] = useState(false);
 

@@ -4,6 +4,7 @@
     height: 100%;
     width: 5vw;
     max-width: 70px;
+    min-width: 70px;
     z-index: 4;
     background: #F78914;
     display: flex;
@@ -36,5 +37,7 @@
     padding: 40px;
     padding-right: 60px;
     padding-left: 60px;
-    box-shadow: 4px 5px 8px #6b6767
+    box-shadow: 4px 5px 8px #6b6767;
+    outline: 2px solid orange;
+    outline-offset: -10px;
 }

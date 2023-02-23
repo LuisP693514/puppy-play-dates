@@ -25,7 +25,7 @@ function Navbar() {
                     <Link className='navLogo' to='/'></Link>
                 </div>
                 <div>
-                    <button className="double-spacer orange-text filter" onClick={() => setFilterOpen(!filterOpen)}><i class="fa-solid fa-sliders"></i></button>
+                    <button className="double-spacer orange-text filter" onClick={() => setFilterOpen(!filterOpen)}><i className="fa-solid fa-sliders"></i></button>
                     <Filter open={filterOpen} filterClose={() => setFilterOpen(false)}></Filter>
                 </div>
             </div>
