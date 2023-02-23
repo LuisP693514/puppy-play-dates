@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const DateRequest = require('../../models/DateRequest');
-const DateRequest = require('../../models/DateRequest');
 // const DateRequest = mongoose.model('DateRequest');
 const User = mongoose.model("User");
 
@@ -47,7 +46,6 @@ router.post('/create', async (req, res, next) => {
 
 router.get('/:userId/filter', async (req, res) => {
     const userId = req.params.userId
-    console.log("IM IN")
     try {
         const user = await User.findById(userId)
         if (!user) {

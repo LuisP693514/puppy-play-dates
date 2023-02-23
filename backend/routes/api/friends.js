@@ -21,6 +21,7 @@ router.get('/:friendId', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
+    console.log('im in')
     const { userId, friendId } = req.body;
     try {
         // check to see if user exists

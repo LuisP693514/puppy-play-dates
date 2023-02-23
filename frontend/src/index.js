@@ -11,6 +11,7 @@ import * as userActions from './store/users'
 import jwtFetch from './store/jwt';
 import * as sessionActions from './store/session'
 import * as dateRequestActions from './store/dateRequests'
+import * as friendActions from './store/friends'
 
 const store = configureStore({});
 
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.userActions = userActions;
   window.sessionActions = sessionActions;
   window.dateRequestActions = dateRequestActions;
+  window.friendActions = friendActions;
 }
 
 
