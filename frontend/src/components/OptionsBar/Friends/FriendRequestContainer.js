@@ -4,7 +4,7 @@ import { deleteFriendRequest, updateFriendRequest } from "../../../store/friendR
 import { createFriend } from "../../../store/friends";
 import { fetchUser, getUser } from "../../../store/users";
 
-const FriendRequestContainer = ({request, currentUser}) => {
+const FriendRequestContainer = ({request}) => {
     const dispatch = useDispatch();
     const sender = useSelector(getUser(request.sender))
 
@@ -16,10 +16,10 @@ const FriendRequestContainer = ({request, currentUser}) => {
         e.preventDefault();
         dispatch(createFriend({
             friend: request.sender,
-            user: currentUser._id
+            user: request.receiver
         }))
         dispatch(createFriend({
-            friend: currentUser._id,
+            friend: request.receiver,
             user: request.sender
         }))
         dispatch(deleteFriendRequest(request._id))

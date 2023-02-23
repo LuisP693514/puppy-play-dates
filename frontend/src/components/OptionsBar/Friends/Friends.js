@@ -60,7 +60,7 @@ const Friends = ({open, friendsClose})  => {
                     <div id='friend-request-index'>
                         {pendingInvitee.map(request => {
                             return (<div id='friend-item'>
-                                        <FriendRequestContainer request={request} currentUser={currentUser}/>
+                                        <FriendRequestContainer request={request}/>
                                     </div>)
                         })}
                     </div>

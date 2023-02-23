@@ -8,14 +8,14 @@ import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 const FriendContainer = ({friend}) => {
     // this shows friend id on table, and gets userId
     const dispatch = useDispatch();
-    const friendUser = useSelector(getUser(friend.user))
+    const friendUser = useSelector(getUser(friend.friend))
     const [showModal, setShowModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
 
 
 
     useEffect(() => {
-        dispatch(fetchUser(friend.user))
+        dispatch(fetchUser(friend.friend))
     })
 
     if (!friendUser) return null
