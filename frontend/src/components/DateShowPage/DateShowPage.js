@@ -23,6 +23,7 @@ const DateShowPage = () => {
 
     if (!dates) return null;
     if (!dateRequests) return null;
+    
 
     return (
         <div className='user-date-show-page'>
@@ -37,6 +38,7 @@ const DateShowPage = () => {
                 </div>
             </div>
             <div className='date-request-index-container'>
+                {/* should only be date requests sent to user */}
                 <h2 id='date-requests'>Date Requests</h2>
                 <div id='date-request-index'>
                     {dateRequests.map(requestId => 
@@ -46,6 +48,8 @@ const DateShowPage = () => {
                     )}
                 </div>
             </div>
+            {/* section for all pending requests this user sent */}
+            {/* section for all rejected requests of this user */}
         </div>
     )
 };

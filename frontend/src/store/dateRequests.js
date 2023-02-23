@@ -48,6 +48,15 @@ export const fetchDateRequests = (userId) => async (dispatch) => {
     }
 };
 
+export const fetchDateRequestsFiltered = userId => async (dispatch) => {
+    const response = await jwtFetch(`/api/dateRequests/all/${userId}`); //this needs to change
+
+    if (response.ok) {
+        const dateRequests = await response.json();
+        dispatch(receiveDateRequests(dateRequests));
+    }
+}
+
 export const updateDateRequest = dateRequest => async (dispatch) => {
     const response = await jwtFetch(`/api/dateRequests/${dateRequest._id}`,{
         method: 'PATCH',
