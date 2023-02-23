@@ -14,13 +14,13 @@ export default function Settings({open, settingsClose, hideModals}) {
             <div className="modal-overlay"></div>
             <div className="central-modal settings-modal">
                 <button onClick={settingsClose} className="modal-close">&times;</button>
-                <button className="double-spacer orange-text settings-text" onClick={() => {
+                <button className="double-spacer settings-text" onClick={() => {
                     // hideModals()
-                    setAcctDetailsOpen(true)}}><h3>Change Account Settings</h3></button>
+                    setAcctDetailsOpen(true)}}><p className="settings-text">Change Account Settings</p></button>
                 <AcctDetails open={acctDetailsOpen} onClose={() => setAcctDetailsOpen(false)}></AcctDetails>         
-                <button className="orange-text settings-text" onClick={() => {
+                <button className="settings-text" onClick={() => {
                     // hideModals()
-                    setDeleteOpen(true)}}><h3>Delete Account</h3></button>
+                    setDeleteOpen(true)}}><p className="settings-text">Delete Account</p></button>
                 <ConfirmDelete open={deleteOpen} onClose={() => setDeleteOpen(false)}></ConfirmDelete>         
             </div>
         </>,

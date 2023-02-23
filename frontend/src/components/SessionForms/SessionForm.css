@@ -11,6 +11,7 @@
     padding-top: 70px;
     outline: 2px solid orange;
     outline-offset: -10px;
+    border: 5px solid orange;
 }
 
 .login-logo{
@@ -60,10 +61,11 @@
 
 .signup-div{
     box-shadow: 7px 7px 14px grey;
-    padding-right: 40px;
-    padding-left: 40px;
-    padding-bottom: 40px;
-    padding-top: 15px;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 45px;
+    padding-top: 25px;
+    border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
 }

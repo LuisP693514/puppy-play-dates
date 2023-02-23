@@ -8,6 +8,7 @@ import Messages from './Messages/Messages'
 import Info from './Info/Info'
 import Settings from './Settings/Settings'
 import Logout from './Logout/Logout'
+import Dates from './Dates/Dates';
 import './OptionsBar.css'
 
 export default function OptionsBar() {
@@ -19,6 +20,7 @@ export default function OptionsBar() {
   const [infoOpen, setInfoOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [logoutOpen, setLogoutOpen] = useState(false)
+  const [datesOpen, setDatesOpen] = useState(false)
 
   // useEffect(() => {
 
@@ -37,6 +39,7 @@ export default function OptionsBar() {
     setFriendsOpen(false)
     setMessagesOpen(false)
     setInfoOpen(false)
+    setDatesOpen(false)
   }
 
   const hideModals = () => {
@@ -62,6 +65,10 @@ export default function OptionsBar() {
                         closeAllModals()
                         setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
             <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages>
+            <button className="double-spacer" onClick={() => {
+              closeAllModals()
+              setDatesOpen(!datesOpen)}}><i className="fa-regular fa-calendar white-text"></i></button>
+            <Dates open={datesOpen} datesClose={() => setDatesOpen(false)}></Dates>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setInfoOpen(!infoOpen)}}><i className="fa-regular fa-circle-question white-text"></i></button>

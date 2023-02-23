@@ -3,6 +3,8 @@
     margin: 10px;
     border:7px solid orange;
     border-radius: 500px;
+    outline: 2px solid orange;
+    outline-offset: 5px;
     -webkit-border-radius: 500px;
     -moz-border-radius: 500px;
 }
@@ -26,9 +28,13 @@
 }
 
 .link-icon{
-    font-size: 28px;
+    font-size: 35px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.link-icon:hover{
+    color:  #F78914
 }
 
 .landing-page-layout{
@@ -39,12 +45,12 @@
 
 .landing-page-icon{
     height: 230px;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 5px;
+    margin-bottom: 25px;
 }
 
 .login-developers{
-    margin-top: 25px;
+    margin-top: 20px;
     border-top: 2px solid lightgray;
     padding: 20px;
 }
@@ -64,4 +70,6 @@
 .landing-button{
     padding-top: 10px;
     padding-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 0px
 }

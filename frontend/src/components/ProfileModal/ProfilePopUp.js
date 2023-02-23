@@ -41,11 +41,8 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
     if (!open) return null
     return reactDom.createPortal(
         <>
-            {/* <div className="profile-modal">
-                TESTING PROFILE MODAL
-                <button onClick={profileClose} className="modal-close">&times;</button>
-            </div> */}
             <div className="profile-modal">
+            <button onClick={profileClose} className="modal-close">&times;</button>
                 <img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile"/>
                 <div className="puppy-details-section"> 
                     <h1 id="puppy-profile-details-text">Puppy Profile</h1>
@@ -77,8 +74,8 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                         <h6 id='owner-name'>{otherUser.name}</h6>
                     </div>
                     <div className="owner-age-section">
-                        <h2 id="owner-age-text">Age: </h2>
-                        <h3 id='owner-age'>{otherUser.age}</h3>
+                        <h5 id="owner-age-text">Age: </h5>
+                        <h6 id='owner-age'>{otherUser.age}</h6>
                     </div> 
                     {/* <div className="profile-modal-buttons">   
                         {isFriend ? (
