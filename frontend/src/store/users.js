@@ -58,6 +58,23 @@ export const updateUser = user => async (dispatch) => {
     }
 };
 
+export const updateUserImage = user => async (dispatch) => {
+    // debugger
+    // const profileImageUrl = user.profileImageUrl
+    // const formData = new FormData();
+    // if (profileImageUrl) formData.append('image', profileImageUrl)
+
+    // const response = await jwtFetch(`/api/users/${user._id}`,{
+    //     method: 'PATCH',
+    //     body: formData
+    // });
+
+    // if (response.ok) {
+    //     const user = await response.json();
+    //     dispatch(receiveUser(user))
+    // }
+};
+
 export const deleteUser = userId => async (dispatch) => {
     const response = await jwtFetch(`/api/users/${userId}`, {
         method: 'DELETE'

@@ -6,22 +6,21 @@ const FriendRequest = require('../../models/FriendRequest');
 const User = mongoose.model('User');
 
 router.post('/create', async (req, res) => {
-    const { senderId, receiverId } = req.body;
+    const { sender, receiver } = req.body;
     try {
-        const sender = await User.findById(senderId);
-        const receiver = await User.findById(receiverId);
-
-        if (!sender || !receiver) {
+        const senderm = await User.findById(sender);
+        const receiverm = await User.findById(receiver);
+        if (!senderm || !receiverm) {
             return res.status(404).json({ message: "Sender or receiver not found!" })
         }
 
-        const existingRequest = await FriendRequest.findOne({ sender: senderId, receiver: receiverId });
+        const existingRequest = await FriendRequest.findOne({ sender: sender, receiver: receiver });
 
         if (existingRequest) {
             return res.status(400).json({ message: "Friend request already exists" });
         }
 
-        const newRequest = new FriendRequest({ sender: senderId, receiver: receiverId })
+        const newRequest = new FriendRequest({ sender: sender, receiver: receiver })
         const savedRequest = await newRequest.save();
         res.status(201).json(savedRequest)
 
@@ -38,9 +37,7 @@ router.get('/:userId', async (req, res) => {
             return res.status(404).json({ message: 'User not found' })
         }
 
-        const requests = await FriendRequest.find({ $or: [{ sender: userId }, { receiver: userId }] })
-            .populate('sender', '_id username')
-            .populate('receiver', '_id username');
+        const requests = await getFriendRequestsPending(user)
 
         res.status(200).json(requests)
     } catch (err) {
@@ -50,17 +47,14 @@ router.get('/:userId', async (req, res) => {
 
 router.patch('/:requestId', async (req, res) => {
     const requestId = req.params.reqId;
-    const { status } = req.body;
+    const updateData = req.body;
     try {
-        const request = await FriendRequest.findById(requestId)
+        const request = await FriendRequest.findByIdAndUpdate(requestId, updateData, {new: true})
         if (!request) {
             return res.status(404).json({ message: 'Friend request not found' })
         }
 
-        //work here
-        request.status = status;
-        const savedRequest = await request.save();
-        res.status(200).json(savedRequest)
+        res.status(200).json(request)
 
     } catch (err) {
         res.status(500).json({ message: err.messsage })
@@ -79,5 +73,15 @@ router.delete('/:requestId', async (req, res) => {
         res.status(500).json({message: err.message})
     }
 })
+
+async function getFriendRequestsPending(user) {
+    const object = {}
+    for (let i = 0; i < user.friendRequests.length; i++) {
+        const request = user.friendRequests[i];
+        const friendRequest = await FriendRequest.findById(request)
+        object[user.friendRequests[i]] = friendRequest;
+    }
+    return object;
+}
 
 module.exports = router;

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useState, useEffect, useMemo } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import ProfilePage from './ProfilePage/ProfilePage'
 import * as sessionActions from '../../store/session';
 import Friends from './Friends/Friends'
@@ -10,6 +10,7 @@ import Settings from './Settings/Settings'
 import Logout from './Logout/Logout'
 import Dates from './Dates/Dates';
 import './OptionsBar.css'
+import { getUser } from '../../store/users';
 
 export default function OptionsBar() {
   const dispatch = useDispatch()
@@ -20,14 +21,19 @@ export default function OptionsBar() {
   const [infoOpen, setInfoOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [logoutOpen, setLogoutOpen] = useState(false)
+
   const [datesOpen, setDatesOpen] = useState(false)
+  const sessionUser = useSelector(sessionActions.selectCurrentUser)
+  const user = useSelector(getUser(sessionUser?._id))
 
-  // useEffect(() => {
 
-  //   if (history.location.state && history.location.state.from === 'signup') {
-  //     setProfilePageOpen(true);
-  //   }
-  // }, [history]);
+
+
+  useEffect(() => {
+
+    dispatch(sessionActions.getCurrentUser())
+
+  }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(sessionActions.logout());
@@ -45,6 +51,8 @@ export default function OptionsBar() {
   const hideModals = () => {
     setSettingsOpen(false)
   }
+
+  if (!user) return null;
 
   return (
     <div className="options-bar-div">
@@ -76,10 +84,11 @@ export default function OptionsBar() {
         </div>
         <div className="options-icons">
         <button className="double-spacer" onClick={() => {
-                        closeAllModals()
-                        setLogoutOpen(true)}}><i className="fa-solid fa-right-from-bracket white-text"></i></button>
-            <Logout open={logoutOpen} logoutClose={() => setLogoutOpen(false)} handleLogout={handleLogout}></Logout>         
-        </div>
+          closeAllModals()
+          setLogoutOpen(true)
+        }}><i className="fa-solid fa-right-from-bracket white-text"></i></button>
+        <Logout open={logoutOpen} logoutClose={() => setLogoutOpen(false)} handleLogout={handleLogout}></Logout>
+      </div>
     </div>
   )
 }

@@ -36,10 +36,10 @@ function MyGoogleMap() {
     const markers = useSelector(getMarkers)
     const history = useHistory()
     const defaultTest = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"
-    const dogParkIcon = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png'
-    const veternarianIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/vet.png"
-    const groomersIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pets-hair-salon.avif"
-    const petStoreIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/pet+store.png"
+    const dogParkIcon = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-park-icon.png'
+    const veternarianIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-vet-icon.png"
+    const groomersIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-groomer-icon.png"
+    const petStoreIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-pet-store-icon.png"
     const sessionUser = useSelector(selectCurrentUser)
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
@@ -230,7 +230,8 @@ function MyGoogleMap() {
                 lat: currentUser.latitude,
                 lng: currentUser.longitude
             })
-        }}><i className="fa-solid fa-location-crosshairs crosshairs"></i>
+            map.setZoom(17)
+        }}>Re-Center
         </button>
       </div>
     </>

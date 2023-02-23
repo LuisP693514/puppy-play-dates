@@ -88,16 +88,20 @@ router.get('/current', restoreUser, (req, res) => {
     _id: req.user._id,
     username: req.user.username,
     profileImageUrl: req.user.profileImageUrl,
-    email: req.user.email
+    email: req.user.email,
+    longitude: req.user.longitude,
+    latitude: req.user.latitude
   });
 });
 
 // /api/users/all grabs all the users and exludes the password from the request
 router.get('/all', async (req, res, next) => {
-  const users = await User.find().select('-hashedPassword');
+  const users = await User.find()
   const usersById = {}
   users.forEach(user => {
-    usersById[user._id] = user.toObject();
+    const userObj = user.toObject();
+    delete userObj.hashedPassword;
+    usersById[user._id] = userObj;
   });
   res.json(usersById);
 })
@@ -198,18 +202,18 @@ router.get('/:userId', async (req, res) => {
 });
 
 // /api/users/:userId updates the user
-router.patch('/:userId', async (req, res) => {
+router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
-  // debugger
+  debugger
   try {
-    // singleMulterUpload("image"),
-    // const profileImageUrl = req.body.image ?
-    //   await singleFileUpload({ file: req.body.image, public: true }) 
-    //   :
-    //   DEFAULT_PROFILE_IMAGE_URL;
+    // 
+    const profileImageUrl = req.body.image ?
+      await singleFileUpload({ file: req.body.image, public: true }) 
+      :
+      DEFAULT_PROFILE_IMAGE_URL;
 
-    // updatedUserData.profileImageUrl = profileImageUrl
+    updatedUserData.profileImageUrl = profileImageUrl
 
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
 
@@ -218,7 +222,30 @@ router.patch('/:userId', async (req, res) => {
       return res.status(404).json({message: "User not found"})
     }
 
-    res.status(200).json(user)
+
+    if (user.password) user.password = null;
+
+    if (req.body.password){
+
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) throw err;
+        bcrypt.hash(req.body.password, salt, async (err, hashedPasswor) => {
+          if (err) throw err;
+          try {
+            user.hashedPassword = hashedPasswor;
+            const userUpdated = await user.save();
+            const { hashedPassword, ...rest } = userUpdated.toObject();
+            return res.status(200).json(rest);
+          }
+          catch (err) {
+            next(err);
+          }
+        })
+      });
+    } else {
+      res.status(200).json(user)
+    }
+
   } catch (err) {
     res.status(500).json({message: err.message})
   }
