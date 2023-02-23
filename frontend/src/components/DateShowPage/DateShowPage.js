@@ -20,6 +20,7 @@ const DateShowPage = () => {
         dispatch(fetchDateRequests(currentUser._id))
     }, [dispatch]);
 
+    // need to fetch filtered for thefiltered stuff. do i need a diff useselector
 
     if (!dates) return null;
     if (!dateRequests) return null;
@@ -30,10 +31,10 @@ const DateShowPage = () => {
             <div className='date-index-container'>
                 <h1 id='upcoming-dates'>Upcoming Dates</h1>
                 <div id='date-index'>
-                    {dates.map(dateId => 
-                        <div id='date-item'>
-                            <DateEventContainer dateId={dateId}/>
-                        </div>
+                    {dates.map(dateId =>{ 
+                       return ( <div id='date-item'>
+                                    <DateEventContainer dateId={dateId}/>
+                                </div>)}
                     )}
                 </div>
             </div>
@@ -41,10 +42,10 @@ const DateShowPage = () => {
                 {/* should only be date requests sent to user */}
                 <h2 id='date-requests'>Date Requests</h2>
                 <div id='date-request-index'>
-                    {dateRequests.map(requestId => 
-                        <div id='date-item'>
-                            <DateRequestContainer requestId={requestId}/>
-                        </div>
+                    {dateRequests.map(requestId => {
+                        return (<div id='date-item'>
+                                    <DateRequestContainer requestId={requestId}/>
+                                </div>)}
                     )}
                 </div>
             </div>

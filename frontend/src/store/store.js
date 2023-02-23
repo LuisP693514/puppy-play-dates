@@ -6,6 +6,8 @@ import usersReducer from './users';
 import dateReducer from './dates';
 import dateRequestReducer from './dateRequests';
 import markersReducer from './markers';
+import friendsReducer from './friends';
+import friendRequestReducer from './friendRequests';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
   users: usersReducer,
   dates: dateReducer,
   dateRequests: dateRequestReducer,
-  markers: markersReducer
+  markers: markersReducer,
+  friends: friendsReducer,
+  friendRequests: friendRequestReducer
 });
 
 let enhancer;
