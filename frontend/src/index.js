@@ -10,6 +10,7 @@ import { ModalProvider } from './context/Modal';
 import * as userActions from './store/users'
 import jwtFetch from './store/jwt';
 import * as sessionActions from './store/session'
+import * as dateRequestActions from './store/dateRequests'
 
 const store = configureStore({});
 
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.jwtFetch = jwtFetch;
   window.userActions = userActions;
   window.sessionActions = sessionActions;
+  window.dateRequestActions = dateRequestActions;
 }
 
 

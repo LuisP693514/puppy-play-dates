@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Friend = mongoose.model('Friend');
+const Friend = require('../../models/Friend');
+// const Friend = mongoose.model('Friend');
 const User = mongoose.model("User");
 
 
@@ -69,3 +70,5 @@ router.delete('/:friendId', async (req, res) => {
         res.status(500).json({ message: err.message })
     }
 })
+
+module.exports = router;

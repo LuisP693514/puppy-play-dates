@@ -40,7 +40,7 @@ export const fetchDateRequest = (dateRequestId) => async (dispatch) => {
 };
 
 export const fetchDateRequests = (userId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/users/${userId}/dataRequests`);
+    const response = await jwtFetch(`/api/users/${userId}/dateRequests`);
 
     if (response.ok) {
         const dateRequests = await response.json();
@@ -49,7 +49,7 @@ export const fetchDateRequests = (userId) => async (dispatch) => {
 };
 
 export const fetchDateRequestsFiltered = userId => async (dispatch) => {
-    const response = await jwtFetch(`/api/dateRequests/all/${userId}`); //this needs to change
+    const response = await jwtFetch(`/api/dateRequests/${userId}/filter`);
 
     if (response.ok) {
         const dateRequests = await response.json();

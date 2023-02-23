@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const DateRequest = mongoose.model('DateRequest');
-const User = mongoose.model("User")
+const FriendRequest = require('../../models/FriendRequest');
+// const FriendRequest = mongoose.model('FriendRequest');
+const User = mongoose.model('User');
 
-router.post('/create', async (req, res, next) => {
-    const { senderId, receiverId, date } = req.body;
+router.post('/create', async (req, res) => {
+    const { senderId, receiverId } = req.body;
     try {
         const sender = await User.findById(senderId);
         const receiver = await User.findById(receiverId);
@@ -14,27 +15,13 @@ router.post('/create', async (req, res, next) => {
             return res.status(404).json({ message: "Sender or receiver not found!" })
         }
 
-        const existingRequest = await DateRequest.findOne({
-
-            $or: [{ sender: senderId, receiver: receiverId, date: date },
-            { sender: receiverId, receiver: senderId, date: date }]
-        })
+        const existingRequest = await FriendRequest.findOne({ sender: senderId, receiver: receiverId });
 
         if (existingRequest) {
-            return res.status(400).json({ message: "Date request already exists" });
+            return res.status(400).json({ message: "Friend request already exists" });
         }
 
-        const newRequest = new DateRequest({
-            sender: senderId,
-            receiver: receiverId,
-            date: date,
-            creator: senderId,
-            invitee: receiverId,
-            latitude: req.body.latitude,
-            longitude: req.body.longitude,
-            name: req.body.name
-        })
-
+        const newRequest = new FriendRequest({ sender: senderId, receiver: receiverId })
         const savedRequest = await newRequest.save();
         res.status(201).json(savedRequest)
 
@@ -43,27 +30,6 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
-router.get('/all/:userId', async (req, res) => {
-    const userId = req.params.userId
-    try {
-        const user = await User.findById(userId).select('dateRequests')
-
-        if (!user) {
-            return res.status(404).json({message: "User not found"})
-        }
-
-        const dRById = {}
-        user.dateRequests.forEach(request => {
-            const date = DateRequest.findById(request._id).select("_id creator invitee")
-            user.dateRequests[request._id] = date;
-        });
-
-        res.status(200).json(dRById)
-
-    } catch (err) {
-        res.status(500).json({message: err.message})
-    }
-})
 router.get('/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
@@ -82,8 +48,7 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-
-router.patch('/:reqId', async (req, res) => {
+router.patch('/:requestId', async (req, res) => {
     const requestId = req.params.reqId;
     const { status } = req.body;
     try {
@@ -99,6 +64,19 @@ router.patch('/:reqId', async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ message: err.messsage })
+    }
+})
+
+router.delete('/:requestId', async (req, res) => {
+    const requestId = req.params.requestId
+    try {
+        const request = await FriendRequest.findByIdAndDelete(requestId)
+        if (!request) {
+            return res.status(404).json({message: "Friend request not found."})
+        }
+        res.json({message: "Successfully deleted friend request"})
+    } catch (err) {
+        res.status(500).json({message: err.message})
     }
 })
 

@@ -106,7 +106,7 @@ router.get('/all', async (req, res, next) => {
 router.get('/:userId/dates', async (req, res) => {
   const userId = req.params.userId;
   try {
-    const user = User.findById(userId)
+    const user = await User.findById(userId)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
@@ -123,6 +123,46 @@ router.get('/:userId/dates', async (req, res) => {
   }
 })
 // /api/users/:userId/friends grabs all the dates a single user has (array)
+
+router.get('/:userId/dateRequests', async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId)
+  
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+
+    const dates = user.dateRequests
+    if (!dates) {
+      return res.status(404).json({message: "User's dates not found"})
+    }
+
+    res.status(200).json(dates)
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+})
+
+router.get('/:userId/friendsRequests', async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId)
+    if (!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+
+    const dates = user.friendRequests
+
+    if (!dates) {
+      return res.status(404).json({message: "User's dates not found"})
+    }
+
+    res.status(200).json(dates)
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+})
 
 router.get('/:userId/friends', async (req, res) => {
   const userId = req.params.userId;

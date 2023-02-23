@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Date = require('../../models/Date');
 const router = express.Router();
-const Date = mongoose.model('Date');
 const User = mongoose.model("User");
 
 
@@ -20,7 +20,7 @@ router.get('/:dateId', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
-    const { creatorId, inviteeId, latitude, longitude, date } = req.body;
+    const { creatorId, inviteeId, date } = req.body;
     try {
         // check to see if creator exists
         const creator = await User.findById(creatorId)
@@ -31,7 +31,7 @@ router.post('/create', async (req, res) => {
         // check to see if the invitee exists
         const invitee = await User.findById(inviteeId)
         if (!invitee) {
-            return res.status(404).json({message: "Invitee not found"})
+            return res.status(404).json({ message: "Invitee not found" })
         }
 
         // check to see if both users have a date with conflicting times
@@ -47,10 +47,10 @@ router.post('/create', async (req, res) => {
         }
 
         //create new friend now that all validations pass
-        const newFriend = new Friend({ user: userId, friend: friendId })
-        await newFriend.save();
+        const newDate = new Date(req.body)
+        await newDate.save();
 
-        res.status(201).json(newFriend)
+        res.status(201).json(newDate)
 
     } catch (err) {
         res.status(500).json({ message: err.message })
@@ -73,5 +73,17 @@ router.delete('/:dateId', async (req, res) => {
 
 router.patch('/:dateId', async (req, res) => {
     const dateId = req.params.dateId
-    
+    const updateData = req.body
+    try {
+        const date = await Date.findByIdAndUpdate(dateId, updateData, { new: true })
+        if (!date) {
+            return res.status(404).json({ message: "Date not found" })
+        }
+        res.status(200).json(date)
+
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
 })
+
+module.exports = router;
