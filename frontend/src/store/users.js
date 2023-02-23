@@ -23,7 +23,7 @@ export const getUser = userId => state => {
 };
 
 export const getUsers = state => {
-    return state?.users ? Object.values(state.users) : [];
+    return state?.users ? state.users : {};
 };
 
 export const fetchUser = (userId) => async (dispatch) => {
