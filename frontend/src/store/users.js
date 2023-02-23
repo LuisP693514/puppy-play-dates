@@ -2,7 +2,7 @@ import jwtFetch from "./jwt";
 export const RECEIVE_USER = 'RECEIVE_USER';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const REMOVE_USER = 'REMOVE_USER';
-
+//main copy 
 const receiveUser = user => ({
     type: RECEIVE_USER,
     user
@@ -23,7 +23,7 @@ export const getUser = userId => state => {
 };
 
 export const getUsers = state => {
-    return state?.users ? Object.values(state.users) : [];
+    return state?.users ? state.users : {};
 };
 
 export const fetchUser = (userId) => async (dispatch) => {
@@ -46,7 +46,6 @@ export const fetchUsers = () => async (dispatch) => {
 
 
 export const updateUser = user => async (dispatch) => {
-   
     const response = await jwtFetch(`/api/users/${user._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},

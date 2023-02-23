@@ -74,7 +74,7 @@ export const createNewFriend = (user1Id, user2Id, friendInfo) => async (dispatch
 };
 
 export const fetchFriend = (friendId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/Friends/${friendId}`);
+    const response = await jwtFetch(`/api/friends/${friendId}`);
 
     if (response.ok) {
         const friend = await response.json();

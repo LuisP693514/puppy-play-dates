@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Friend = mongoose.model('Friend');
+const Friend = require('../../models/Friend');
+// const Friend = mongoose.model('Friend');
 const User = mongoose.model("User");
 
 
@@ -20,6 +21,7 @@ router.get('/:friendId', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
+    console.log('im in')
     const { userId, friendId } = req.body;
     try {
         // check to see if user exists
@@ -69,3 +71,5 @@ router.delete('/:friendId', async (req, res) => {
         res.status(500).json({ message: err.message })
     }
 })
+
+module.exports = router;

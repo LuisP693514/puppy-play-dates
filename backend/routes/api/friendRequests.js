@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const FriendRequest = mongoose.model('FriendRequest');
+const FriendRequest = require('../../models/FriendRequest');
+// const FriendRequest = mongoose.model('FriendRequest');
 const User = mongoose.model('User');
 
 router.post('/create', async (req, res) => {

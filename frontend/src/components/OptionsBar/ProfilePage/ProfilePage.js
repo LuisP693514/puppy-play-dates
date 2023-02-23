@@ -16,6 +16,28 @@ function ProfilePage({open, profileClose}) {
     const [showModal, setShowModal] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [updatedUser, setUpdatedUser] = useState({...currentUser});
+    const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+    const [image, setImage] = useState(null);
+
+    const handleImageChange = (e) => {
+        const reader = new FileReader();
+        const file = e.target.files[0];
+        //upload file to aws 
+        //getback success file upload with reosurce url
+        // do stuff on  bottom
+        reader.onloadend = () => {
+            // debugger
+            // go into updatedUser and make the file inside
+            // const updatedUser1 = Object.assign({}, updatedUser);
+            updatedUser.image = file;
+            setUpdatedUser({ ...updatedUser });
+            setImagePreviewUrl(reader.result);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
 
 
     useEffect(() => {
@@ -86,8 +108,11 @@ function ProfilePage({open, profileClose}) {
                     </div>
                     <div className="profile-image">
                         <label> Profile Image: 
-                            <input type="file" accept=".jpg, .jpeg, .png" onChange={e => setUpdatedUser({...updatedUser, image: e.target.files[0]})} />
+                        <input type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
                         </label>
+                        {imagePreviewUrl && (
+                            <img src={imagePreviewUrl} alt="Profile Preview" style={{ maxWidth: '100px' }} />
+                        )}
                     </div>
                     <div className="update-buttons">
                         <button className="button" type='button' onClick={handleUpdate}>Update</button>
