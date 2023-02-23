@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from '../../../store/session';
 import { useHistory } from 'react-router-dom';
 import { selectCurrentUser } from '../../../store/session';
-import { deleteUser, fetchUser, getUser, updateUser } from '../../../store/users';
+import { deleteUser, fetchUser, getUser, updateUser, updateUserImage } from '../../../store/users';
 
 
 function ProfilePage({ open, profileClose }) {
@@ -20,8 +20,14 @@ function ProfilePage({ open, profileClose }) {
     const [image, setImage] = useState(null);
 
     const handleImageChange = (e) => {
+        debugger
         const reader = new FileReader();
         const file = e.target.files[0];
+        // setImage(file)
+        // updatedUser.profileImageUrl = image;
+        
+        // console.log(updatedUser.profileImageUrl)
+        // setUpdatedUser({ ...updatedUser });
         //upload file to aws 
         //getback success file upload with reosurce url
         // do stuff on  bottom
@@ -29,8 +35,7 @@ function ProfilePage({ open, profileClose }) {
             // debugger
             // go into updatedUser and make the file inside
             // const updatedUser1 = Object.assign({}, updatedUser);
-            updatedUser.image = file;
-            setUpdatedUser({ ...updatedUser });
+            
             setImagePreviewUrl(reader.result);
         };
 
@@ -51,6 +56,7 @@ function ProfilePage({ open, profileClose }) {
 
     const handleUpdate = () => {
         dispatch(updateUser({ ...currentUser, ...updatedUser }));
+
         setEditMode(false);
     }
 

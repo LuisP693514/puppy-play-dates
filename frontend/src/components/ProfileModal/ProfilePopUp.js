@@ -5,38 +5,58 @@ import { useDispatch, useSelector } from "react-redux";
 import {useHistory } from 'react-router-dom';
 import { fetchUser, getUser } from "../../store/users";
 import "./ProfilePopUp.css";
+import { getCurrentUser, selectCurrentUser } from "../../store/session";
+import { createFriendRequest } from "../../store/friendRequests";
+import { deleteFriend } from "../../store/friends";
 
 const ProfilePopUp = ({userId, open, profileClose }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
-    const sessionUser = useSelector((state) => state.session.user);
+    const sessionUser = useSelector(selectCurrentUser);
     const currentUser = useSelector(getUser(sessionUser._id))
-    // const isFriend = currentUser.friends.includes(userId);
+    const isFriend = currentUser?.friends.includes(userId);
+    const isFriendRequest = currentUser?.friendRequests.includes(userId);
 
     useEffect(() => {
         dispatch(fetchUser(userId))
-        dispatch(fetchUser(sessionUser._id))
+        dispatch(getCurrentUser())
     }, [dispatch, userId]);
 
     if (!currentUser) return null;
     if (!otherUser) return null;
 
-    const handleCreateDate = e => {
+    const handleCreateDateRequest = e => {
         e.preventDefault();
         history.push('/createDate', {currentUser, otherUser});
     };
 
     const handleAddFriend = e => {
         e.preventDefault();
-        // dispatch(createFriend);
+        dispatch(createFriendRequest({
+            sender: currentUser._id,
+            receiver: otherUser._id,
+            status: 'pending'
+        })) 
     };
 
-    const handleMessage = e => {
+    const handleDeleteFriend = e => {
         e.preventDefault();
-        history.push(`/messages/${userId}`)
-        // hide the userid 
+        dispatch(deleteFriend({
+            friend: otherUser._id,
+            user: currentUser._id
+        }))
+        dispatch(deleteFriend({
+            friend: currentUser._id,
+            user: otherUser._id
+        }))
     };
+
+    // const handleMessage = e => {
+    //     e.preventDefault();
+    //     history.push(`/messages/${userId}`)
+    //     // hide the userid 
+    // };
 
     if (!open) return null
     return reactDom.createPortal(
@@ -80,14 +100,17 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                         <h2 id="owner-age-text">Age: </h2>
                         <h3 id='owner-age'>{otherUser.age}</h3>
                     </div> 
-                    {/* <div className="profile-modal-buttons">   
+                    <div className="profile-modal-buttons">   
                         {isFriend ? (
-                            <button id="create-event-button" onClick={handleCreateDate}>Create Play Date</button>
-                            ) : (
-                            <button id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>
-                        )}
-                        <button id="message-button" onClick={handleMessage}>Message</button>
-                    </div>  */}
+                            <div>
+                                <button id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
+                                <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
+                            </ div>
+                            ) : (<br/>)}
+                        {(!isFriendRequest && !isFriend) ? (<button id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>) : (<br />)}
+                           
+                        {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
+                    </div> 
                     
                 </div>
             </div>
