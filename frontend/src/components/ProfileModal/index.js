@@ -8,8 +8,8 @@ function ProfileModal( {userId} ) {
 
   return (
     <>
-      <button className="double-spacer test" onClick={() => {
-        setProfileOpen(true)}}>Profile Modal</button>
+      {/* <button className="double-spacer test" onClick={() => {
+        setProfileOpen(true)}}>Profile Modal</button> */}
       <ProfilePopUp userId={userId} open={profileOpen} profileClose={() => setProfileOpen(false)}></ProfilePopUp>
     </>
   );
