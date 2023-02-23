@@ -10,8 +10,8 @@ import FriendRequestContainer from './FriendRequestContainer';
 import FriendRequestInfoContainer from './FriendRequestContainer';
 import './Friends.css'
 
-export default function Friends({open, friendsClose}) {
-    const dispatch = useDispatch;
+const Friends = ({open, friendsClose})  => {
+    const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const friends = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
@@ -88,4 +88,6 @@ export default function Friends({open, friendsClose}) {
         </div>,
         document.getElementById("portal")
     )
-}
+};
+
+export default Friends;
