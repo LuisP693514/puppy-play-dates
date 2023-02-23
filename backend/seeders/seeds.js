@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Marker = require('../models/Marker');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
+const DateRequest = require('../models/DateRequest');
 
 const NUM_SEED_USERS = 10;
 

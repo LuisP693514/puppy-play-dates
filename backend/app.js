@@ -7,6 +7,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const usersRouter = require('./routes/api/users');
 const markersRouter = require('./routes/api/markers');
+const dateRequestsRouter = require('./routes/api/dateRequests');
+const datesRouter = require('./routes/api/dates');
+const friendRequestsRouter = require('./routes/api/friendRequests');
+const friendsRouter = require('./routes/api/friends');
 
 const cors = require('cors');
 const csurf = require('csurf');
@@ -47,7 +51,12 @@ app.use(
 // Attach Express routers
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
-app.use('/api/markers', markersRouter)
+app.use('/api/markers', markersRouter);
+app.use('/api/dateRequests', dateRequestsRouter);
+app.use('/api/dates', datesRouter);
+app.use('/api/friendRequests', friendRequestsRouter);
+app.use('/api/friends', friendsRouter);
+
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');
