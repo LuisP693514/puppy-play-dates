@@ -14,7 +14,7 @@ export default function LandingPage() {
         <div className="container">
             <img className="landing-page-icon" src={tightlogo}/>
         </div>
-        <Link className="landing-button" to="/login"><button className="button">Check us out!</button></Link>
+        <Link className="landing-button-div" to="/login"><button className="button landing-button">Check us out!</button></Link>
         <div className="dark-orange-text login-developers"><h2>Developers:</h2></div>
         <div>
             <div className="landing-page-personnel">

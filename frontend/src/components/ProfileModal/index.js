@@ -4,7 +4,7 @@ import ProfilePopUp from './ProfilePopUp.js';
 
 function ProfileModal() {
   
-  const [profileOpen, setProfileOpen] = useState(false);
+const [profileOpen, setProfileOpen] = useState(false);
 
   return (
     <>

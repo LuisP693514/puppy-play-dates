@@ -12,7 +12,7 @@ export default function Settings({open, settingsClose, hideModals}) {
     return ReactDom.createPortal(
         <>
             <div className="modal-overlay"></div>
-            <div className="central-modal">
+            <div className="central-modal settings-modal">
                 <button onClick={settingsClose} className="modal-close">&times;</button>
                 <button className="double-spacer orange-text settings-text" onClick={() => {
                     // hideModals()

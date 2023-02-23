@@ -29,7 +29,6 @@
     font-size: 28px;
     margin-left: 10px;
     margin-right: 10px;
-
 }
 
 .landing-page-layout{
@@ -50,11 +49,19 @@
     padding: 20px;
 }
 
-.landing-button{
-    width: 25%
+.landing-button-div{
+    width: 25%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
 }
 
 .landing-welcome {
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.landing-button{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

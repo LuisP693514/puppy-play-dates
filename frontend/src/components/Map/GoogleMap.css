@@ -5,4 +5,9 @@ img[src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307
     border:1px solid #000 !important;
 }
 
+
+map.img {
+    border-radius: 30px;
+}
+
 /* drop-shadow(4px 7px 1px rgba(0,0,0))  For Map Marker Shadows*/
