@@ -5,18 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {useHistory } from 'react-router-dom';
 import { fetchUser, getUser } from "../../store/users";
 import "./ProfilePopUp.css";
+import { getCurrentUser, selectCurrentUser } from "../../store/session";
+import { createFriendRequest } from "../../store/friendRequests";
 
 const ProfilePopUp = ({userId, open, profileClose }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
-    const sessionUser = useSelector((state) => state.session.user);
+    const sessionUser = useSelector(selectCurrentUser);
     const currentUser = useSelector(getUser(sessionUser._id))
     // const isFriend = currentUser.friends.includes(userId);
 
     useEffect(() => {
         dispatch(fetchUser(userId))
-        dispatch(fetchUser(sessionUser._id))
+        dispatch(getCurrentUser())
     }, [dispatch, userId]);
 
     if (!currentUser) return null;
@@ -29,14 +31,18 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
 
     const handleAddFriend = e => {
         e.preventDefault();
-        // dispatch(createFriend);
+        dispatch(createFriendRequest({
+            sender: sessionUser._id,
+            receiver: otherUser._id,
+            status: 'pending'
+        })) 
     };
 
-    const handleMessage = e => {
-        e.preventDefault();
-        history.push(`/messages/${userId}`)
-        // hide the userid 
-    };
+    // const handleMessage = e => {
+    //     e.preventDefault();
+    //     history.push(`/messages/${userId}`)
+    //     // hide the userid 
+    // };
 
     if (!open) return null
     return reactDom.createPortal(
