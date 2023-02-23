@@ -11,6 +11,7 @@ import { getCurrentUser, selectCurrentUser } from '../../store/session';
 import { getLocation } from '../Utils/getLocation';
 import { updateUser } from '../../store/users';
 import ProfileModal from '../ProfileModal';
+import ProfilePopUp from '../ProfileModal/ProfilePopUp';
 
 const containerStyle = {
     width: '100%',
@@ -42,17 +43,19 @@ function MyGoogleMap() {
     const sessionUser = useSelector(selectCurrentUser)
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
-    
-    // useEffect(() => {
-    // //     getLocation().then(coords => {
-    // //         console.log(coords)
-    // //         setLatitude(coords[0])
-    // //         setLongitude(coords[1])
-    // //         dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
-    // //     })
-    // //   .catch(error => {
-    // //   });
-    // }, [])
+    const [showModal, setShowModal] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState('')
+    // const currentUser = users[sessionUser._id]
+    // setCenter({
+    //     lat: currentUser.latitude,
+    //     lng: currentUser.longitude
+    // })
+    const [center, setCenter] = useState({
+        lat: 40.7361589,
+        lng: -73.9939538
+    })
+    const [userStopDragging, setuserStopDragging] = useState(null);
+    console.log(users)
 
     useEffect(() => {
         getLocation().then(coords => {
@@ -64,6 +67,7 @@ function MyGoogleMap() {
         dispatch(fetchUsers())
         dispatch(fetchMarkers())
         dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
+        
     }, [dispatch, latitude, longitude])
     
     
@@ -71,11 +75,6 @@ function MyGoogleMap() {
         id: 'google-map-script',
         googleMapsApiKey: googleMapApiKey
     })
-    
-    const center = {
-      lat: 40.7361589,
-      lng: -73.9939538
-    };
 
     // console.log(users)
     // console.log('this is session user below')
@@ -84,18 +83,36 @@ function MyGoogleMap() {
     const [map, setMap] = useState(null)
 
     const onLoad = useCallback(function callback(map) {
-    const zoom = 17
-    map.setZoom(zoom)
+        const zoom = 17
+        map.setZoom(zoom)
 
-    setMap(map)
-  }, [])
+        setMap(map)
+        
+    }, [])
 
-  const onUnmount = useCallback(function callback(map) {
-    setMap(null)
-  }, [])
+    const onUnmount = useCallback(function callback(map) {
+        setMap(null)
+    }, [])
+
+  const handleMapCenterChange = () => {
+    if (map && userStopDragging) {
+        const newCenter = map.getCenter();
+        console.log(newCenter.lat(), newCenter.lng());
+        setCenter({
+            lat: newCenter.lat(),
+            lng: newCenter.lng()
+        });
+        setuserStopDragging(null);
+      }
+  };
+
+  const handleUserStopDragging = () => {
+    setuserStopDragging(true);
+  }
 
   const hasLocation = longitude > 0 && latitude > 0;
   return isLoaded ? (
+    <>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -108,15 +125,17 @@ function MyGoogleMap() {
             streetViewControl: false,
             fullscreenControl: false, 
         }}
+        onCenterChanged={handleMapCenterChange}
+        onDragEnd={handleUserStopDragging}
       > 
-        {users.map(user => (
+        {Object.values(users).map(user => (
             user._id === sessionUser._id && hasLocation ?
             (<Marker 
                 clickable
+                // onClick={() => setShowModal(user._id)}
                 onClick={() => {
-                    // history.push('/');
-                    console.log(user._id)
-                    // {<ProfileModal userId={user._id} />}
+                    setShowModal(true)
+                    setSelectedUserId(user._id)
                 }}
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
@@ -128,9 +147,8 @@ function MyGoogleMap() {
            ( <Marker 
                 clickable
                 onClick={() => {
-                    // history.push('/');
-                    console.log(user._id)
-                    // {<ProfileModal userId={user._id} />}
+                    setShowModal(true)
+                    setSelectedUserId(user._id)
                 }}
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
@@ -139,6 +157,16 @@ function MyGoogleMap() {
                 }}
             />)
         ))}
+            {/* {showModal && <ProfileModal userId={sessionUser._id} onClose={() => setShowModal(false)} />} */}
+            {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
+
+            {/* {showModal && (
+    <ProfileModal
+        userId={showModal}
+        onClose={() => setShowModal(null)}
+    />
+)} */}
+
         {markers.map(marker => {
             switch(marker.markerType) {
                 case 'dogPark':
@@ -194,6 +222,18 @@ function MyGoogleMap() {
             }
     })}
       </GoogleMap>
+      <div className='reset-to-user-center'> 
+        <button onClick={() => {
+            // debugger
+            const currentUser = users[sessionUser._id]
+            setCenter({
+                lat: currentUser.latitude,
+                lng: currentUser.longitude
+            })
+        }}>Re-Center
+        </button>
+      </div>
+    </>
   ) : <>...Loading</>
 
 }

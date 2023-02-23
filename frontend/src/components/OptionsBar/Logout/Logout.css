@@ -11,6 +11,8 @@
     padding: 40px;
     box-shadow: 2px 5px 8px #6b6767;
     border-radius: 10px;
+    border-top: 10px solid orange;
+    border-bottom: 10px solid orange;
 }
 
 .logout-button-div{
