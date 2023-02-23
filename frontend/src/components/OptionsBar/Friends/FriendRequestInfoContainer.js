@@ -5,10 +5,10 @@ import { fetchUser, getUser } from "../../../store/users";
 
 const FriendRequestInfoContainer = ({request}) => {
     const dispatch = useDispatch();
-    const invitee = useSelector(getUser(request.invitee))
+    const receiver = useSelector(getUser(request.receiver))
 
     useEffect(() => {
-        dispatch(fetchUser(request.invitee))
+        dispatch(fetchUser(request.receiver))
     }, [dispatch])
 
     const handleDeleteRequest= e => {
@@ -16,12 +16,12 @@ const FriendRequestInfoContainer = ({request}) => {
         dispatch(deleteFriendRequest(request._id))
     }
 
-    if (!invitee) return null;
+    if (!receiver) return null;
 
     return (
         <div className="request-info-container">
-            <p>Owner name: {invitee.name}</p>
-            <p>Puppy name: {invitee.puppyName}</p>
+            <p>Owner name: {receiver.name}</p>
+            <p>Puppy name: {receiver.puppyName}</p>
             <button onClick={handleDeleteRequest} id="unfriend-button">Delete Request</button>
         </div>
     )

@@ -6,21 +6,21 @@ import { fetchUser, getUser } from "../../../store/users";
 
 const FriendRequestContainer = ({request, currentUser}) => {
     const dispatch = useDispatch();
-    const creator = useSelector(getUser(request.creator))
+    const sender = useSelector(getUser(request.sender))
 
     useEffect(() => {
-        dispatch(fetchUser(request.creator))
+        dispatch(fetchUser(request.sender))
     }, [dispatch])
 
     const handleAcceptRequest = e => {
         e.preventDefault();
         dispatch(createFriend({
-            friend: request.creator,
+            friend: request.sender,
             user: currentUser._id
         }))
         dispatch(createFriend({
             friend: currentUser._id,
-            user: request.creator
+            user: request.sender
         }))
         dispatch(deleteFriendRequest(request._id))
     }
@@ -30,12 +30,12 @@ const FriendRequestContainer = ({request, currentUser}) => {
         dispatch(updateFriendRequest({...request, status: 'rejected'}))
     }
 
-    if (!creator) return null;
+    if (!sender) return null;
 
     return (
         <div className="request-info-container">
-            <p>Owner name: {creator.name}</p>
-            <p>Puppy name: {creator.puppyName}</p>
+            <p>Owner name: {sender.name}</p>
+            <p>Puppy name: {sender.puppyName}</p>
             <button onClick={handleAcceptRequest} id="accept-friend-button">Accept</button>
             <button onClick={handleRejectRequest} id="reject-friend-button">Reject</button>
         </div>
