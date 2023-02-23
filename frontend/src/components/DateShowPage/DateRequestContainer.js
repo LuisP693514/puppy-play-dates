@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDateRequest, getDateRequest } from "../../store/dateRequests";
+import { deleteDateRequest, fetchDateRequest, getDateRequest, updateDateRequest } from "../../store/dateRequests";
+import { createDate } from "../../store/dates";
 import { fetchUser, getUser } from "../../store/users";
 
 
@@ -16,7 +17,21 @@ const DateRequestContainer = ({requestId}) => {
 
     const handleAcceptDate = e => {
         e.preventDefault();
-        
+        dispatch(createDate({
+            creator: dateRequest.creator,
+            invitee: dateRequest.invitee,
+            name: dateRequest.name,
+            date: dateRequest.date,
+            latitude: dateRequest.latitude,
+            longitude: dateRequest.longitude
+        }))
+        // dispatch(updateDateRequest({...dateRequest, status: 'accepted'}))
+        dispatch(deleteDateRequest(requestId))
+    };
+
+    const handleDeclineDate = e => {
+        e.preventDefault();
+        dispatch(updateDateRequest({...dateRequest, status: 'declined'}))
     }
 
     if (!dateRequest) return null;
@@ -24,10 +39,12 @@ const DateRequestContainer = ({requestId}) => {
 
     return (
         <div className="date-container">
+            <div>{otherUser.puppyName}</div>
             <div>{dateRequest.name}</div> 
-            {/* need to get the otherUser name */}
+            <div>{dateRequest.date}</div>
+            <div>{dateRequest.description}</div>
             <button id='accept-date' onClick={handleAcceptDate}>Accept</button>
-            {/* <button id='decline-date' onClick={handleDeclineDate}>Decline</button> */}
+            <button id='decline-date' onClick={handleDeclineDate}>Decline</button>
         </div>
     )
 };
