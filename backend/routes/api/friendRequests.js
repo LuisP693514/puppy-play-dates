@@ -14,14 +14,30 @@ router.post('/create', async (req, res) => {
             return res.status(404).json({ message: "Sender or receiver not found!" })
         }
 
-        const existingRequest = await FriendRequest.findOne({ sender: sender, receiver: receiver });
+        const existingRequest = await FriendRequest.findOne({ sender: sender, receiver: receiver, status: 'pending' });
 
         if (existingRequest) {
-            return res.status(400).json({ message: "Friend request already exists" });
+            return res.status(400).send("Friend request already exists");
         }
 
-        const newRequest = new FriendRequest({ sender: sender, receiver: receiver })
+        const newRequest = new FriendRequest({ sender: sender, receiver: receiver, status: 'pending' })
+        const validation = await newRequest.validate();
+
+        if (validation) {
+            return res.status(402).json({ message: "Could not validate" })
+        }
+
         const savedRequest = await newRequest.save();
+
+        // add the savedRequest to the senderm.friendRequests array
+        senderm.friendRequests.push(savedRequest._id);
+        receiverm.friendRequests.push(savedRequest._id);
+        // save the updated senderm document to the database
+        await senderm.save();
+        await receiverm.save();
+
+        console.log(senderm.friendRequests)
+
         res.status(201).json(savedRequest)
 
     } catch (err) {
@@ -49,7 +65,7 @@ router.patch('/:requestId', async (req, res) => {
     const requestId = req.params.reqId;
     const updateData = req.body;
     try {
-        const request = await FriendRequest.findByIdAndUpdate(requestId, updateData, {new: true})
+        const request = await FriendRequest.findByIdAndUpdate(requestId, updateData, { new: true })
         if (!request) {
             return res.status(404).json({ message: 'Friend request not found' })
         }
@@ -66,11 +82,11 @@ router.delete('/:requestId', async (req, res) => {
     try {
         const request = await FriendRequest.findByIdAndDelete(requestId)
         if (!request) {
-            return res.status(404).json({message: "Friend request not found."})
+            return res.status(404).json({ message: "Friend request not found." })
         }
-        res.json({message: "Successfully deleted friend request"})
+        res.json({ message: "Successfully deleted friend request" })
     } catch (err) {
-        res.status(500).json({message: err.message})
+        res.status(500).json({ message: err.message })
     }
 })
 
