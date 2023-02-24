@@ -30,7 +30,7 @@ const FriendRequestContainer = ({request}) => {
 
     const handleRejectRequest = e => {
         e.preventDefault();
-        dispatch(updateFriendRequest({...request, status: 'rejected'}))
+        dispatch(deleteFriendRequest(request._id))
     }
 
     if (!sender) return null;
