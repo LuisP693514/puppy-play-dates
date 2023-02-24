@@ -11,6 +11,7 @@ import Logout from './Logout/Logout'
 import DateShowPage from './Dates/DateShowPage';
 import './OptionsBar.css'
 import { getUser } from '../../store/users';
+import { fetchFriends } from '../../store/friends';
 
 export default function OptionsBar() {
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ export default function OptionsBar() {
   useEffect(() => {
 
     dispatch(sessionActions.getCurrentUser())
+    dispatch(fetchFriends(sessionUser?._id))
 
   }, [dispatch]);
 

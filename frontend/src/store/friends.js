@@ -30,6 +30,7 @@ export const getFriends = state => {
 
 
 export const fetchFriend = (friendId) => async (dispatch) => {
+
     const response = await jwtFetch(`/api/friends/${friendId}`);
 
     if (response.ok) {
@@ -39,7 +40,8 @@ export const fetchFriend = (friendId) => async (dispatch) => {
 };
 
 export const fetchFriends = (userId) => async (dispatch) => {
-    const response = await jwtFetch(`/api/${userId}/friends`);
+
+    const response = await jwtFetch(`/api/users/${userId}/friends`);
 
     if (response.ok) {
         const friends = await response.json();

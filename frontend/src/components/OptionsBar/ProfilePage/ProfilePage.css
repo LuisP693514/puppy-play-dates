@@ -11,7 +11,7 @@
     outline: 2px solid orange;
     outline-offset: -10px;
     box-shadow: 4px 5px 8px #6b6767;
-    z-index: 100;
+    z-index: 6;
 }
 
 .my-update-modal{
@@ -39,6 +39,20 @@
 } */
 
 .profile-image {
+    margin-left: 10px;
+    height: 300px;
+    width: 300px;
+    margin-right: 40px;
+}
+
+.profile-page-buttons{
+    display:flex;
+    justify-content: center;
+    width: 80%;
+    align-self: center;
+}
+
+.show-profile-image{
     height: 300px;
     width: 300px;
 }
@@ -136,6 +150,7 @@ div.label-div input{
 .profile-image-div {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .edit-profile-button{
@@ -144,4 +159,16 @@ div.label-div input{
 
 .my-details-text{
     margin-top: 20px
+}
+
+div.profile-puppy-details-section span{
+    font-size: 20px;
+}
+div.profile-puppy-details-section div{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div.profile-puppy-details-section {
+    margin-left: 10px;
 }

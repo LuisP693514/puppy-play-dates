@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFriend } from "../../../store/friends";
+import { deleteFriend, fetchFriend, getFriend } from "../../../store/friends";
 import { fetchUser, getUser } from "../../../store/users";
 import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
+import './Friends.css'
 
 const FriendContainer = ({friend}) => {
-    // this shows friend id on table, and gets userId
+    // friend is the friendId of the table not hte actual friend
     const dispatch = useDispatch();
-    const friendUser = useSelector(getUser(friend.friend))
+    // const friendInfo = useSelector(getFriend(friend._id));
+    const friendUser = useSelector(getUser(friend?.friend))
     const [showModal, setShowModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
 
-
-
     useEffect(() => {
-        dispatch(fetchUser(friend.friend))
+        // dispatch(fetchFriend(friend._id))
+        // dispatch(fetchUser(friend.friend))
     })
 
-    if (!friendUser) return null
+    if (!friend) return null;
+    if (!friendUser) return null;
 
     const handleUnfriend = e => {
         e.preventDefault();

@@ -69,7 +69,7 @@ router.get('/:userId', async (req, res) => {
 })
 
 // router.get('/:userId', async (req, res) => {
-//     console.log("hello")
+
 //     const userId = req.params.userId;
 //     try {
 //         const user = await User.findById(userId)

@@ -18,13 +18,12 @@ const Friends = ({open, friendsClose})  => {
     const currentUser = useSelector(selectCurrentUser);
     const friends = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
-
+    
     useEffect(() => {
         dispatch(getCurrentUser())
         dispatch(fetchFriends(currentUser._id))
         dispatch(fetchFriendRequests(currentUser._id))
     }, [dispatch])
-
 
     if (!friends) return null;
     if (!friendRequests) return null;
@@ -38,15 +37,14 @@ const Friends = ({open, friendsClose})  => {
         request?.status === 'pending' && request?.receiver === currentUser._id
     ));
 
-    const rejected = friendRequests.filter(request => (
-        request?.status === 'rejected' && request?.sender === currentUser._id
-    ));
+    // const rejected = friendRequests.filter(request => (
+    //     request?.status === 'rejected' && request?.sender === currentUser._id
+    // ));
 
 
     if (!open) return null
     return reactDom.createPortal(
         <div className="options-modal">
-            TESTING FRIENDS
                 <div className='friends-index-container'>
                     <h1 id='friend-list'>Friends</h1>
                     <div id='friend-index'>
@@ -77,7 +75,7 @@ const Friends = ({open, friendsClose})  => {
                         })}
                     </div>
                 </div>
-                <div className='pending-rejected-index-container'> 
+                {/* <div className='pending-rejected-index-container'> 
                     <h2 id='friend-requests'>Rejected Friend Requests</h2>
                     <div id='friend-request-index'>
                         {rejected.map(request => {
@@ -86,7 +84,7 @@ const Friends = ({open, friendsClose})  => {
                                     </div>)
                         })}
                     </div>
-                </div>
+                </div> */}
             <button onClick={friendsClose} className="modal-close">&times;</button>
         </div>,
         document.getElementById("portal")

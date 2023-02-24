@@ -87,6 +87,7 @@ function MyGoogleMap( { filteredMarkers } ) {
   const handleMapCenterChange = () => {
     if (map && userStopDragging) {
         const newCenter = map.getCenter();
+
         setCenter({
             lat: newCenter.lat(),
             lng: newCenter.lng()
@@ -218,7 +219,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 lng: currentUser.longitude
             })
             map.setZoom(17)
-        }}><i class="fa-solid fa-location-crosshairs crosshairs"></i>
+        }}><i className="fa-solid fa-location-crosshairs crosshairs"></i>
         </button>
       </div>
     </>

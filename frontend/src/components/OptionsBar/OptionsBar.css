@@ -28,7 +28,6 @@
 }
 
 .options-modal {
-    z-index: 100;
     position: relative;
     top: 10%;
     left: 7%;
@@ -38,6 +37,8 @@
     padding-right: 60px;
     padding-left: 60px;
     box-shadow: 4px 5px 8px #6b6767;
+    border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
+    z-index: 10;
 }

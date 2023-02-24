@@ -1,13 +1,13 @@
 .filter-modal {
-    z-index: 100;
     position: absolute;
     top: 9%;
     right: 1%;
-    background-color: white;
     width: max-content;
     padding: 5px;
-    box-shadow: 4px 5px 8px #6b6767;
+    background-color: white;
     border: 5px solid #F78914;
+    box-shadow: 4px 5px 8px #6b6767;
+    z-index: 4;
 }
 
 div.filter-modal img{
