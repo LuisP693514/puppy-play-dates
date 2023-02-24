@@ -38,10 +38,17 @@ router.post('/create', async (req, res, next) => {
         })
 
         const savedRequest = await newRequest.save();
-        res.status(201).json(savedRequest)
+
+        sender.dateRequests.push(savedRequest._id);
+        receiver.dateRequests.push(savedRequest._id);
+
+        await sender.save();
+        await receiver.save();
+
+        res.status(201).json(savedRequest);
 
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
 });
 

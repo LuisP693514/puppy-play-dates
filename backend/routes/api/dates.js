@@ -50,7 +50,13 @@ router.post('/create', async (req, res) => {
         const newDate = new Date(req.body)
         await newDate.save();
 
-        res.status(201).json(newDate)
+        creator.dates.push(newDate._id);
+        invitee.dates.push(newDate._id);
+
+        await creator.save();
+        await invitee.save();
+
+        res.status(201).json(newDate);
 
     } catch (err) {
         res.status(500).json({ message: err.message })
