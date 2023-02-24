@@ -17,7 +17,7 @@ export default function Info({open, infoClose}) {
             <div><span><i className="fa-solid fa-comments orange-text"></i></span> to view messages</div>
             <div><span><i className="fa-regular fa-calendar orange-text"></i></span> to see/create date.</div>
             <div><span><i className="fa-solid fa-sliders orange-text"></i></span> to filter content</div>
-            <div><span><i class="fa-solid fa-dog orange-text"></i></span> on map to view dog profile</div>
+            <div><span><i className="fa-solid fa-dog orange-text"></i></span> on map to view dog profile</div>
             <div><span><i className="fa-solid fa-plus orange-text"></i></span>  to zoom the map out</div>
             <div><span><i className="fa-solid fa-minus orange-text"></i></span> to zoom the map in</div>
             <div><span><i className="fa-solid fa-location-crosshairs orange-text"></i></span> to recenter the map on your location</div>

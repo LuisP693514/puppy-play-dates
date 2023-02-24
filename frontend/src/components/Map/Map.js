@@ -234,7 +234,7 @@ function MyGoogleMap() {
                 lng: currentUser.longitude
             })
             map.setZoom(17)
-        }}><i class="fa-solid fa-location-crosshairs crosshairs"></i>
+        }}><i className="fa-solid fa-location-crosshairs crosshairs"></i>
         </button>
       </div>
     </>
