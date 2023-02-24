@@ -38,9 +38,9 @@ const Friends = ({open, friendsClose})  => {
         request?.status === 'pending' && request?.receiver === currentUser._id
     ));
 
-    const rejected = friendRequests.filter(request => (
-        request?.status === 'rejected' && request?.sender === currentUser._id
-    ));
+    // const rejected = friendRequests.filter(request => (
+    //     request?.status === 'rejected' && request?.sender === currentUser._id
+    // ));
 
 
     if (!open) return null
@@ -76,7 +76,7 @@ const Friends = ({open, friendsClose})  => {
                         })}
                     </div>
                 </div>
-                <div className='pending-rejected-index-container'> 
+                {/* <div className='pending-rejected-index-container'> 
                     <h2 id='friend-requests'>Rejected Friend Requests</h2>
                     <div id='friend-request-index'>
                         {rejected.map(request => {
@@ -85,7 +85,7 @@ const Friends = ({open, friendsClose})  => {
                                     </div>)
                         })}
                     </div>
-                </div>
+                </div> */}
             <button onClick={friendsClose} className="modal-close">&times;</button>
         </div>,
         document.getElementById("portal")
