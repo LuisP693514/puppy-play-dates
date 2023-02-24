@@ -63,39 +63,35 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
         <>
             <div className="profile-modal">
             <button onClick={profileClose} className="modal-close">&times;</button>
-                <img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile"/>
+                <div className="dog-name-section"><h2 id='dog-name'>{otherUser.puppyName}</h2></div>
+                <div className="pop-up-img"><img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile"/></div>
                 <div className="puppy-details-section"> 
-                    <div className="dog-name-section">
-                        <h2 id="dog-name-text">Name: </h2>
-                        <h3 id='dog-name'>{otherUser.puppyName}</h3>
-                    </div>
                     <div className="dog-age-section">
-                        <p id="dog-age-text">Age: </p>
-                        <p id='dog-age'>{otherUser.puppyAge}</p>
+                        <span id="dog-age-text">Age: </span>
+                        <span id='dog-age'>{otherUser.puppyAge}</span>
                     </div>
                     <div className="dog-breed-section">
-                        <p id="dog-breed-text">Breed: </p>
-                        <p id='dog-breed'>{otherUser.puppyBreed}</p>
+                        <span id="dog-breed-text">Breed: </span>
+                        <span id='dog-breed'>{otherUser.puppyBreed}</span>
                     </div>
                     <div className="dog-temperament-section">
-                        <p id="dog-temperament-text">Temperament: </p>
-                        <p id='dog-temperament'>{otherUser.puppyTemperament}</p>
+                        <span id="dog-temperament-text">Temperament: </span>
+                        <span id='dog-temperament'>{otherUser.puppyTemperament}</span>
                     </div>
                     <div className="dog-vacc-section">
-                        <p id="dog-vacc-text">Vaccinated: </p>
-                        <p id='dog-vacc'>{otherUser.puppyVaccinated}</p>
+                        <span id="dog-vacc-text">Vaccinated: </span>
+                        <span id='dog-vacc'>{otherUser.puppyVaccinated}</span>
                     </div>
                 </div>
                 <div className="owner-details-section">
-                    <h4 id="owner-profile-details-text">Owner's Profile</h4>
                     <div className="owner-name-section">
-                        <h5 id="owner-name-text">Name: </h5>
-                        <h6 id='owner-name'>{otherUser.name}</h6>
+                        <span id="owner-name-text">Owner'sName: </span><span id='owner-name'>{otherUser.name}</span>
                     </div>
                     <div className="owner-age-section">
-                        <h5 id="owner-age-text">Age: </h5>
-                        <h6 id='owner-age'>{otherUser.age}</h6>
+                        <span id="owner-age-text">Owner's Age: </span><span id='owner-age'>{otherUser.age}</span>
                     </div> 
+                    
+                </div>
                     <div className="profile-modal-buttons">   
                         {isFriend ? (
                             <div>
@@ -103,12 +99,12 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                                 <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
                             </ div>
                             ) : (<br/>)}
-                        {(!isFriendRequest && !isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>) : (<br />)}
+
+                        {(!isFriendRequest && !isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
+
                            
                         {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
                     </div> 
-                    
-                </div>
             </div>
         </>,
         document.getElementById("portal")

@@ -46,7 +46,6 @@ const Friends = ({open, friendsClose})  => {
     if (!open) return null
     return reactDom.createPortal(
         <div className="options-modal">
-            TESTING FRIENDS
                 <div className='friends-index-container'>
                     <h1 id='friend-list'>Friends</h1>
                     <div id='friend-index'>

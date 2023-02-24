@@ -3,6 +3,7 @@
     top: 9%;
     right: 5%;
     max-width: 400px;
+    min-width: 375px;
     height: max-content;
     padding: 15px;
     background-color: white;
@@ -14,10 +15,35 @@
 }
  
 .profile-modal img{
-    height: 300px
+    height: 300px;
+    margin-bottom: 20px;
 }
 
 .checkbox{
     margin-left: 20px;
     margin-right: 5px;
+}
+
+.dog-name-section{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.add-friend-bone{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.pop-up-img{
+    display: flex;
+    justify-content: center;
+}
+
+div.puppy-details-section span{
+    font-size: 20px;
+
+}
+
+.owner-details-section span{
+    font-size: 20px;
 }
