@@ -1,7 +1,7 @@
 # Puppy Play Dates
 
 ## Puppy Play dates
-Puppy Play Dates is an interactive social application that connects Dog owners to oneanother to socialize and walk their pets.
+Puppy Play Dates is an interactive social application that connects dog owners to one another to socialize and walk their pets.
 
 
 ## Background and Overview
