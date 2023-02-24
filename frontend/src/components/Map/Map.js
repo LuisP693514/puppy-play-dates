@@ -60,7 +60,7 @@ function MyGoogleMap() {
         lng: -73.9939538
     })
     const [userStopDragging, setuserStopDragging] = useState(null);
-    console.log(users)
+    // console.log(users)
 
     useEffect(() => {
         getLocation().then(coords => {
@@ -102,7 +102,7 @@ function MyGoogleMap() {
   const handleMapCenterChange = () => {
     if (map && userStopDragging) {
         const newCenter = map.getCenter();
-        console.log(newCenter.lat(), newCenter.lng());
+        // console.log(newCenter.lat(), newCenter.lng());
         setCenter({
             lat: newCenter.lat(),
             lng: newCenter.lng()

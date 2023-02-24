@@ -117,8 +117,7 @@ const friendRequestReducer = (state = {}, action) => {
     case RECEIVE_FRIEND_REQUEST:
         return {...state, [action.friendRequest._id]: action.friendRequest};
     case REMOVE_FRIEND_REQUEST:
-        const newState = {...state};
-        delete newState[action.friendRequestId];
+        const { [action.friendRequestId]: deletedFriendRequest, ...newState } = state;
         return newState;
     default:
       return state;

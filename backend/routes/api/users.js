@@ -207,18 +207,18 @@ router.patch('/:userId/image', singleMulterUpload("image"), async (req, res, nex
   const updatedUserData = req.body;
   try {
     // 
-    console.log(req.file)
+    // console.log(req.file)
     const profileImageUrl = req.file ?
       await singleFileUpload({ file: req.file, public: true }) 
       :
       DEFAULT_PROFILE_IMAGE_URL;
 
-    console.log(profileImageUrl)
+    // console.log(profileImageUrl)
     updatedUserData.profileImageUrl = profileImageUrl
 
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
 
-    console.log(user)
+    // console.log(user)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
@@ -295,7 +295,7 @@ router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => 
 
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
 
-    console.log(user)
+    // console.log(user)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
