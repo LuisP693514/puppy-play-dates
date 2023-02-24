@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const DEFAULT_PROFILE_IMAGE_URL = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"
-
+const Friend = require('./../../models/Friend')
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 
@@ -171,12 +171,12 @@ router.get('/:userId/friendsRequests', async (req, res) => {
 router.get('/:userId/friends', async (req, res) => {
   const userId = req.params.userId;
   try {
-    const user = User.findById(userId)
+    const user = await User.findById(userId)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
 
-    const friends = user.friends
+    const friends = await getFriendAsObj(user)
 
     if (!friends) {
       return res.status(404).json({message: "User's friends not found"})
@@ -184,7 +184,8 @@ router.get('/:userId/friends', async (req, res) => {
 
     res.status(200).json(friends)
   } catch (err) {
-    res.status(500).json({message: err.message})
+    console.log(err)
+    res.status(500).send(`${err.message}`)
   }
 })
 // /api/users/:userId grabs 1 user specified by the userId in the params
@@ -343,6 +344,18 @@ router.delete('/:userId', async (req, res) => {
   }
 })
 
+async function getFriendAsObj(user) {
+  // console.log(user)
+  const object = {}
+  for (let i = 0; i < user.friends.length; i++) {
+      const request = user.friends[i];
+      // console.log(request)
+      const friend = await Friend.findById(request)
+      console.log(friend)
+      object[friend._id] = friend;
+  }
+  return object;
+}
 
 
 module.exports = router;

@@ -9,17 +9,17 @@ import './Friends.css'
 const FriendContainer = ({friend}) => {
     // friend is the friendId of the table not hte actual friend
     const dispatch = useDispatch();
-    const friendInfo = useSelector(getFriend(friend._id));
-    const friendUser = useSelector(getUser(friendInfo?.friend))
+    // const friendInfo = useSelector(getFriend(friend._id));
+    const friendUser = useSelector(getUser(friend?.friend))
     const [showModal, setShowModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
 
     useEffect(() => {
-        dispatch(fetchFriend(friend._id))
-        dispatch(fetchUser(friendInfo.friend))
+        // dispatch(fetchFriend(friend._id))
+        // dispatch(fetchUser(friend.friend))
     })
 
-    if (!friendInfo) return null;
+    if (!friend) return null;
     if (!friendUser) return null;
 
     const handleUnfriend = e => {

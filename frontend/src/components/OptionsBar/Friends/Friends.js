@@ -18,13 +18,12 @@ const Friends = ({open, friendsClose})  => {
     const currentUser = useSelector(selectCurrentUser);
     const friends = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
-
+    
     useEffect(() => {
         dispatch(getCurrentUser())
         dispatch(fetchFriends(currentUser._id))
         dispatch(fetchFriendRequests(currentUser._id))
     }, [dispatch])
-
 
     if (!friends) return null;
     if (!friendRequests) return null;
