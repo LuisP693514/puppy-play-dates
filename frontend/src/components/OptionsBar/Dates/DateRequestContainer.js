@@ -29,7 +29,7 @@ const DateRequestContainer = ({request, currentUser}) => {
 
     const handleDeclineDate = e => {
         e.preventDefault();
-        dispatch(updateDateRequest({...request, status: 'declined'}))
+        dispatch(deleteDateRequest(request._id))
     }
 
     if (!otherUser) return null;
