@@ -46,6 +46,7 @@ export const fetchUsers = () => async (dispatch) => {
 
 
 export const updateUser = user => async (dispatch) => {
+    debugger
     const response = await jwtFetch(`/api/users/${user._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
@@ -59,20 +60,20 @@ export const updateUser = user => async (dispatch) => {
 };
 
 export const updateUserImage = user => async (dispatch) => {
-    // debugger
-    // const profileImageUrl = user.profileImageUrl
-    // const formData = new FormData();
-    // if (profileImageUrl) formData.append('image', profileImageUrl)
+    debugger
+    const image = user.image
+    const formData = new FormData();
+    if (image) formData.append('image', image)
 
-    // const response = await jwtFetch(`/api/users/${user._id}`,{
-    //     method: 'PATCH',
-    //     body: formData
-    // });
+    const response = await jwtFetch(`/api/users/${user._id}/image`,{
+        method: 'PATCH',
+        body: formData
+    });
 
-    // if (response.ok) {
-    //     const user = await response.json();
-    //     dispatch(receiveUser(user))
-    // }
+    if (response.ok) {
+        const user = await response.json();
+        dispatch(receiveUser(user))
+    }
 };
 
 export const deleteUser = userId => async (dispatch) => {

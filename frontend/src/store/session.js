@@ -41,6 +41,7 @@ export const getCurrentUser = () => async dispatch => {
   };
 
 const startSession = (userInfo, route) => async dispatch => {
+    debugger
     const { image, username, password, email } = userInfo;
     const formData = new FormData();
     formData.append("username", username);

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useEffect } from 'react';
-import ReactDom from 'react-dom'
+import reactDom from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchFriendRequests, getFriendRequests } from '../../../store/friendRequests';
 import { fetchFriends, getFriends } from '../../../store/friends';
@@ -29,15 +29,15 @@ const Friends = ({open, friendsClose})  => {
 
 
     const pendingCreator = friendRequests.filter(request => (
-        request.status === 'pending' && request.sender === currentUser._id
+        request?.status === 'pending' && request?.sender === currentUser._id
     ));
 
     const pendingInvitee = friendRequests.filter(request => (
-        request.status === 'pending' && request.receiver === currentUser._id
+        request?.status === 'pending' && request?.receiver === currentUser._id
     ));
 
     const rejected = friendRequests.filter(request => (
-        request.status === 'rejected' && request.sender === currentUser._id
+        request?.status === 'rejected' && request?.sender === currentUser._id
     ));
 
 
