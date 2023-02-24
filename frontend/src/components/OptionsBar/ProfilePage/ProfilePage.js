@@ -35,7 +35,6 @@ function ProfilePage({ open, profileClose }) {
 
             updatedUser.image = file;
             setUpdatedUser(updatedUser);
-            // debugger
             // go into updatedUser and make the file inside
             // const updatedUser1 = Object.assign({}, updatedUser);
             
@@ -58,7 +57,6 @@ function ProfilePage({ open, profileClose }) {
     }
 
     const handleUpdate = () => {
-        debugger
         // if (image) {
             dispatch(updateUserImage( {...updatedUser} ))
         // } else {
