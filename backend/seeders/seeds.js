@@ -11,12 +11,12 @@ const NUM_SEED_USERS = 25;
 // Create users
 const users = [];
 
-const minLong = -74.0000;
-const maxLong = -73.9876;
+const minLong = -74.0075;
+const maxLong = -73.98;
 let randomLong;
 
-const minLat = 40.7395;
-const maxLat = 40.7331;
+const minLat = 40.7420;
+const maxLat = 40.7300;
 let randomLat;
 
 const preseeded_locations = []
@@ -134,17 +134,6 @@ markers.push(
         longitude: -73.99524187653974
     }),
 
-    new Marker({
-        markerType: 'petStore',
-        latitude: 40.73905229623414,
-        longitude: -73.99535611634302
-    }),
-
-    new Marker({
-        markerType: 'petStore',
-        latitude: 40.737212906337206,
-        longitude: -73.9902153251958
-    }),
 
     new Marker({
         markerType: 'petStore',
