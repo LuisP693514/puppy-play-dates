@@ -16,13 +16,14 @@ const FriendRequestContainer = ({request}) => {
 
     const handleAcceptRequest = e => {
         e.preventDefault();
+        debugger
         dispatch(createFriend({
-            friend: request.sender,
-            user: request.receiver
+            friendId: request.sender,
+            userId: request.receiver
         }))
         dispatch(createFriend({
-            friend: request.receiver,
-            user: request.sender
+            friendId: request.receiver,
+            userId: request.sender
         }))
         dispatch(deleteFriendRequest(request._id))
     }
