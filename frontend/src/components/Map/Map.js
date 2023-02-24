@@ -224,7 +224,6 @@ function MyGoogleMap() {
       </GoogleMap>
       <div className='map-center-button'> 
         <button onClick={() => {
-            // debugger
             const currentUser = users[sessionUser._id]
             setCenter({
                 lat: currentUser.latitude,
