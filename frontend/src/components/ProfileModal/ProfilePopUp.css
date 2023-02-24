@@ -11,7 +11,7 @@
     outline: 2px solid orange;
     outline-offset: -10px;
     box-shadow: 4px 5px 8px #6b6767;
-    z-index: 100;
+    z-index: 4;
 }
  
 .profile-modal img{
