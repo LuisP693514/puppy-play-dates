@@ -41,7 +41,7 @@ const DateShowPage = ({open, datesClose}) => {
     if (!open) return null
     return reactDom.createPortal(
         <>
-            <div className='user-date-show-page central-modal'>
+            <div className='user-date-show-page options-modal'>
             <button onClick={datesClose} className="modal-close">&times;</button>
                 <div className='date-index-container'>
                     <h1 id='upcoming-dates'>Upcoming Dates</h1>

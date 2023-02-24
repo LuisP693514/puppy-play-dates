@@ -9,16 +9,16 @@ img[src="https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307
 
 
 .map-center-button {
-        height: 40px;
-        width: 40px;
-        display: flex;
-        justify-content: center;
-        z-index: 2;
-        position: absolute;
-        bottom: 3%;
-        right: 4%;
-        background: white;
-        font-size: 27px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    position: absolute;
+    bottom: 2.8%;
+    right: 3.9%;
+    background: white;
+    font-size: 27px;
 }
 
 .crosshairs{

@@ -41,6 +41,7 @@ h4 {
     margin-bottom: 12px;
     outline: 1px solid white;
     outline-offset: -5px;
+    font-size: 18px
 }
 
 button:hover{

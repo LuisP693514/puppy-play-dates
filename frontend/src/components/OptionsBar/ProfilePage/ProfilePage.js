@@ -131,13 +131,12 @@ function ProfilePage({ open, profileClose }) {
                         <button onClick={profileClose} className="modal-close">&times;</button>
                     </div>
                     <div className="profile-image-div">
-                        <img className="profile-image" src={currentUser.profileImageUrl} alt="profile" />
+                        <img className="show-profile-image" src={currentUser.profileImageUrl} alt="profile" />
                     </div>
                     <div className="profile-puppy-details-section">
                         <div className="my-details-text">
                             <span>Name:</span>
                             <span id='my-dog-name'>{currentUser.puppyName}</span>
-                        </div>
                         </div>
                         <div className="my-dog-age-section">
                             <span id="my-dog-age-text">Age: </span>
@@ -161,6 +160,7 @@ function ProfilePage({ open, profileClose }) {
                             Edit Profile
                         </button>
                     </div>
+                </div>
             </div>,
             document.getElementById("portal")
         )
