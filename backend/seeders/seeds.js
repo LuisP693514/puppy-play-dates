@@ -11,12 +11,12 @@ const NUM_SEED_USERS = 25;
 // Create users
 const users = [];
 
-const minLong = -74.0000;
-const maxLong = -73.9876;
+const minLong = -74.0075;
+const maxLong = -73.98;
 let randomLong;
 
-const minLat = 40.7395;
-const maxLat = 40.7331;
+const minLat = 40.7420;
+const maxLat = 40.7300;
 let randomLat;
 
 const preseeded_locations = []
@@ -34,7 +34,14 @@ users.push(
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png",
         latitude: 40.7363, 
-        longitude: -73.9938
+        longitude: -73.9938,
+        puppyName: 'Demodog',
+        puppyBreed: 'Shiba Inu',
+        puppyAge: 3,
+        name: "Demolition",
+        ownerAge: 95,
+        puppyTemperament: "energetic",
+        puppyVaccinated: true
     })
 )
 
@@ -47,6 +54,15 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
     let profileImage;
     while (profileImage === undefined) {
         const randomNumber = Math.floor(Math.random() * NUM_SEED_USERS);
+        const dogTemperaments = ['affectionate','agile','alert','brave','calm','cheerful','confident',
+                                'courageous','curious','docile','energetic','friendly','gentle','happy',
+                                'independent','intelligent','loyal','obedient','playful','protective','quiet',
+                                'reliable','sensitive','smart','social','stubborn','trainable','vigilant','watchful'];
+        const dogBreeds = ["Beagle","Dalmatian","Greyhound","Chow Chow","Golden Retriever","Siberian Husky","Great Dane","Dachshund",
+                            "Bulldog","Poodle","Boxer","Labrador Retriever","Chihuahua","Pomeranian","Bichon Frise","Border Collie",
+                            "Corgi","Akita","Shih Tzu","Bernese Mountain Dog","Cane Corso","Rhodesian Ridgeback","Shar Pei",
+                            "Weimaraner","Basenji","Mastiff","Newfoundland","Pug","Saint Bernard","Shiba Inu"];
+
         if (!generatedNumbers.includes(randomNumber)) {
             generatedNumbers.push(randomNumber);
             profileImage = `https://puppyplaydates.s3.us-east-2.amazonaws.com/public/${randomNumber}profilepic.png`
@@ -57,7 +73,14 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
                     hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
                     latitude: preseeded_locations[i][0],
                     longitude: preseeded_locations[i][1],
-                    profileImageUrl: profileImage
+                    profileImageUrl: profileImage,
+                    puppyName: faker.animal.dog(),
+                    puppyBreed: dogBreeds[Math.floor(Math.random() * dogBreeds.length)],
+                    puppyAge: faker.datatype.number({ min: 1, max: 30 }),
+                    name: faker.name.fullName(),
+                    ownerAge: faker.datatype.number({ min: 10, max: 100 }),
+                    puppyTemperament: dogTemperaments[Math.floor(Math.random() * dogTemperaments.length)],
+                    puppyVaccinated: faker.datatype.boolean()
                 })
             )
         }
@@ -111,17 +134,6 @@ markers.push(
         longitude: -73.99524187653974
     }),
 
-    new Marker({
-        markerType: 'petStore',
-        latitude: 40.73905229623414,
-        longitude: -73.99535611634302
-    }),
-
-    new Marker({
-        markerType: 'petStore',
-        latitude: 40.737212906337206,
-        longitude: -73.9902153251958
-    }),
 
     new Marker({
         markerType: 'petStore',

@@ -1,67 +1,53 @@
-/* some basic css so we can see what it looks like  */
-
-/* Modal container */
-.modal {
-    z-index: 100;
-    position: relative;
-    top: 10%;
-    left: 7%;
+.my-profile-modal{
+    position: absolute;
+    top: 9%;
+    left: 6%;
+    height: max-content;
+    max-width: 400px;
+    min-width: 375px;
+    padding: 15px;
     background-color: white;
-    width: max-content;
-    padding: 40px;
-    padding-right: 60px;
-    padding-left: 60px;
-    box-shadow: 8px 9px 8px #6b6767;
+    border: 5px solid orange;
+    outline: 2px solid orange;
+    outline-offset: -10px;
+    box-shadow: 4px 5px 8px #6b6767;
+    z-index: 100;
 }
 
-/* Modal content */
-.modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 5px;
-    width: 400px;
-    text-align: center;
+.my-update-modal{
+    position: absolute;
+    top: 10%;
+    left: 6%;
+    max-width: 800px;
+    min-width: 375px;
+    height: max-content;
+    padding: 15px;
+    background-color: white;
+    border: 5px solid orange;
+    outline: 2px solid orange;
+    outline-offset: -10px;
+    box-shadow: 4px 5px 8px #6b6767;
+    z-index: 100;
 }
 
-/* Modal warning message */
-.modal-message {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
 
-/* Modal buttons container */
-.modal-buttons {
+/* .current-user-profile{
     display: flex;
-    justify-content: space-around;
-}
-
-/* Yes button */
-.modal-button-yes {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* No button */
-.modal-button-no {
-    background-color: #f44336;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+} */
 
 .profile-image {
-    height: 100px;
+    height: 300px;
+    width: 300px;
 }
 
-.profile-header {
+.profile-image-div{
     display: flex;
+    justify-content: center;
 }
+
 
 .profile-close {
     position: relative;
@@ -74,5 +60,88 @@
 
 .update-buttons {
     display: Flex;
+    width: 85%;
+}
+
+.update-button{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.profile-text{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.preview-image{
+    width: 300px;
+    height: 300px;
+    border-radius: 800px;
+    border: 2px solid orange;
+    margin-top: 15px
+}
+
+#file-upload-button{
+    background-color: none;
+}
+
+
+.current-user-profile{
+    display: flex;
     flex-direction: column;
+}
+
+.edit-div{
+    display: flex
+
+}
+
+.update-buttons-div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    padding-top: 20px;
+}
+.update-categories{
+    display: flex;
+    margin-bottom: 60px;
+}
+
+.label-div{
+    display: flex;
+    flex-direction: column;
+    width: 325px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 20px
+}
+
+
+div.label-div label{
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+div.label-div input{
+    width: 300px;
+    font-size: 18px;
+    color: grey;
+}
+
+#checkbox{
+    width: 20px;
+}
+
+.profile-image-div {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-profile-button{
+    margin-top: 30px;
+}
+
+.my-details-text{
+    margin-top: 20px
 }

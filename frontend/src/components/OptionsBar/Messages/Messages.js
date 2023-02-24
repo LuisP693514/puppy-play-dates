@@ -8,7 +8,7 @@ export default function Messages({open, messagesClose}) {
     if (!open) return null
     return reactDom.createPortal(
         <div className="options-modal">
-            TESTING MESSAGES
+            <h3 className="orange-text">Messaging Feature Coming Soon!</h3>
             <button onClick={messagesClose} className="modal-close">&times;</button>
         </div>,
         document.getElementById("portal")

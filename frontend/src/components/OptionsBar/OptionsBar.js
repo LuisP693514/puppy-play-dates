@@ -8,7 +8,7 @@ import Messages from './Messages/Messages'
 import Info from './Info/Info'
 import Settings from './Settings/Settings'
 import Logout from './Logout/Logout'
-import Dates from './Dates/Dates';
+import DateShowPage from './Dates/DateShowPage';
 import './OptionsBar.css'
 import { getUser } from '../../store/users';
 
@@ -76,7 +76,7 @@ export default function OptionsBar() {
             <button className="double-spacer" onClick={() => {
               closeAllModals()
               setDatesOpen(!datesOpen)}}><i className="fa-regular fa-calendar white-text"></i></button>
-            <Dates open={datesOpen} datesClose={() => setDatesOpen(false)}></Dates>
+            <DateShowPage open={datesOpen} datesClose={() => setDatesOpen(false)}></DateShowPage>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setInfoOpen(!infoOpen)}}><i className="fa-regular fa-circle-question white-text"></i></button>

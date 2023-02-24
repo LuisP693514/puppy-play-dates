@@ -31,8 +31,8 @@ export default function ConfirmDelete({open, onClose}) {
         <div className='central-modal'>
               <div className="delete-text orange-text"><h3 className="spacer">Are you sure you want to delete your profile?</h3><h3>This action cannot be un-done.</h3></div>
               <div className='modal-buttons'>
-                  <button className='grey-button logout-buttons' onClick={handleConfirmDelete}>Yes</button>
-                  <button className='button logout-buttons' onClick={onClose}>No</button>
+                  <button className='grey-button delete-buttons' onClick={handleConfirmDelete}>Yes</button>
+                  <button className='button delete-buttons' onClick={onClose}>No</button>
               </div>
           </div>
       </div>

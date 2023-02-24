@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchFriendRequests, getFriendRequests } from '../../../store/friendRequests';
 import { fetchFriends, getFriends } from '../../../store/friends';
 import { getCurrentUser, selectCurrentUser } from '../../../store/session';
-import FriendContainer from './FriendContainer';
+import FriendRequestInfoContainer from './FriendRequestInfoContainer';
 import FriendRequestContainer from './FriendRequestContainer';
-import FriendRequestInfoContainer from './FriendRequestContainer';
+import FriendContainer from './FriendContainer';
+
+
 import './Friends.css'
 
 const Friends = ({open, friendsClose})  => {
@@ -60,7 +62,7 @@ const Friends = ({open, friendsClose})  => {
                     <div id='friend-request-index'>
                         {pendingInvitee.map(request => {
                             return (<div id='friend-item'>
-                                        <FriendRequestContainer request={request} currentUser={currentUser}/>
+                                        <FriendRequestContainer request={request}/>
                                     </div>)
                         })}
                     </div>

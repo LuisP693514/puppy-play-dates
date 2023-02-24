@@ -206,9 +206,6 @@ router.get('/:userId', async (req, res) => {
 router.patch('/:userId/image', singleMulterUpload("image"), async (req, res, next) => {
   const userId = req.params.userId;
   const updatedUserData = req.body;
-  console.log(userId)
-  console.log("backend")
-  console.log(updatedUserData)
   try {
     // 
     console.log(req.file)

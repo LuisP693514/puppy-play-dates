@@ -1,11 +1,11 @@
-import './ProfilePage.css';
-import ReactDom from 'react-dom';
+import reactDom from 'react-dom';
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from '../../../store/session';
 import { useHistory } from 'react-router-dom';
 import { selectCurrentUser } from '../../../store/session';
 import { deleteUser, fetchUser, getUser, updateUser, updateUserImage } from '../../../store/users';
+import './ProfilePage.css';
 
 
 function ProfilePage({ open, profileClose }) {
@@ -20,7 +20,7 @@ function ProfilePage({ open, profileClose }) {
     const [image, setImage] = useState(null);
 
     const handleImageChange = (e) => {
-        debugger
+      
         const reader = new FileReader();
         const file = e.target.files[0];
         setImage(file)
@@ -85,86 +85,83 @@ function ProfilePage({ open, profileClose }) {
 
     if (!open) return null
     if (editMode) {
-        return ReactDom.createPortal(
-            <div className="options-modal">
-                <button onClick={profileClose} className="modal-close">&times;</button>
-                <form className='current-user-profile'>
-                    <h3 id='profile-text'>Edit Profile</h3>
-                    <div className="update-div">
-                        <label>
-                            Name:
-                            <input type='text' value={updatedUser.name} onChange={e => setUpdatedUser({ ...updatedUser, name: e.target.value })} />
-                        </label>
-                        <label>
-                            Age:
-                            <input type='text' value={updatedUser.age} onChange={e => setUpdatedUser({ ...updatedUser, age: e.target.value })} />
-                        </label>
-                        <label>
-                            Puppy Name:
-                            <input type='text' value={updatedUser.puppyName} onChange={e => setUpdatedUser({ ...updatedUser, puppyName: e.target.value })} />
-                        </label>
-                        <label>
-                            Puppy Age:
-                            <input type='text' value={updatedUser.puppyAge} onChange={e => setUpdatedUser({ ...updatedUser, puppyAge: e.target.value })} />
-                        </label>
-                        <label>
-                            Puppy Breed:
-                            <input type='text' value={updatedUser.puppyBreed} onChange={e => setUpdatedUser({ ...updatedUser, puppyBreed: e.target.value })} />
-                        </label>
-                        <label>
-                            Puppy Temperament:
-                            <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({ ...updatedUser, puppyTemperament: e.target.value })} />
-                        </label>
-                        <label>
-                            Vaccinated:
-                            <input type='checkbox' checked={updatedUser.puppyVaccinated} onChange={e => setUpdatedUser({ ...updatedUser, puppyVaccinated: e.target.checked })} />
-                        </label>
-                    </div>
-                    <div className="profile-image">
-                        <label> Profile Image:
-                            <input type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
-                        </label>
-                        {imagePreviewUrl && (
-                            <img src={imagePreviewUrl} alt="Profile Preview" style={{ maxWidth: '100px' }} />
-                        )}
-                    </div>
-                    <div className="update-buttons">
-                        <button className="button" type='button' onClick={handleUpdate}>Update</button>
-                        <button className="button" type='button' onClick={handleCancel}>Cancel</button>
-                    </div>
-                </ form>
-            </div>,
+        return reactDom.createPortal(
+            <>
+            <div className="my-update-modal">
+            <button onClick={profileClose} className="modal-close">&times;</button>
+                <div className="edit-div">
+                    <form className='current-user-profile'>
+                        <h2 className='profile-text'>Edit Profile</h2>
+                        <div className="update-div">
+                        <div className="update-categories">
+                            <div className="profile-image">
+                                <div>
+                                    <label> Profile Image: 
+                                        <input type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
+                                    </label >
+                                </div>
+                                <div>
+                                    {imagePreviewUrl && (
+                                        <img className="preview-image" src={imagePreviewUrl} alt="Profile Preview" />
+                                    )}
+                                </div>
+                            </div>
+                            <div className="label-div">
+                                <label>Name: <input type='text' value={updatedUser.name} onChange={e => setUpdatedUser({ ...updatedUser, name: e.target.value })} /></label>
+                                <label>Age: <input type='text' value={updatedUser.age} onChange={e => setUpdatedUser({ ...updatedUser, age: e.target.value })} /></label>
+                                <label>Puppy Name: <input type='text' value={updatedUser.puppyName} onChange={e => setUpdatedUser({ ...updatedUser, puppyName: e.target.value })} /></label>
+                                <label>Puppy Age: <input type='text' value={updatedUser.puppyAge} onChange={e => setUpdatedUser({ ...updatedUser, puppyAge: e.target.value })} /></label>
+                                <label>Puppy Breed: <input type='text' value={updatedUser.puppyBreed} onChange={e => setUpdatedUser({ ...updatedUser, puppyBreed: e.target.value })} /></label>
+                                <label>Puppy Temperament: <input type='text' value={updatedUser.puppyTemperament} onChange={e => setUpdatedUser({ ...updatedUser, puppyTemperament: e.target.value })} /></label>
+                                <label>Vaccinated: <input id="checkbox" type='checkbox' checked={updatedUser.puppyVaccinated} onChange={e => setUpdatedUser({ ...updatedUser, puppyVaccinated: e.target.checked })} /> Yes</label>
+                            </div>
+                        </div>
+                            <div className="update-buttons-div">
+                                <div className="update-buttons">
+                                    <button className="button grey-button update-button" type='button' onClick={handleCancel}>Cancel</button>
+                                    <button className="button update-button" type='button' onClick={handleUpdate}>Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            </>,
             document.getElementById("portal")
         )
     } else {
-        return ReactDom.createPortal(
-            <div className="options-modal">
+        return reactDom.createPortal(
+            <div className="my-profile-modal">
                 <div className='current-user-profile'>
                     <div className="profile-header">
-                        <h3 id='profile-text'>My Profile</h3>
+                        <h2 className='profile-text'>My Profile</h2>
                         <button onClick={profileClose} className="modal-close">&times;</button>
                     </div>
-                    <img className="profile-image" src={currentUser.profileImageUrl} alt="profile" />
+                    <div className="profile-image-div">
+                        <img className="profile-image" src={currentUser.profileImageUrl} alt="profile" />
+                    </div>
                     <div className="profile-puppy-details-section">
-                        <h3 id="my-puppy-profile-details-text">Name</h3>
-                        <div className="my-dog-name-section">
-                            <h3 id='my-dog-name'>{currentUser.puppyName}</h3>
+                        <div className="my-details-text">
+                            <span>Name:</span>
+                            <span id='my-dog-name'>{currentUser.puppyName}</span>
+                        </div>
                         </div>
                         <div className="my-dog-age-section">
-                            <p id="my-dog-age-text">Age: </p>
-                            <p id='my-dog-age'>{currentUser.puppyAge}</p>
+                            <span id="my-dog-age-text">Age: </span>
+                            <span id='my-dog-age'>{currentUser.puppyAge}</span>
                         </div>
                         <div className="my-dog-breed-section">
-                            <p id="my-dog-breed-text">Breed: </p>
-                            <p id='my-dog-breed'>{currentUser.puppyBreed}</p>
+                            <span id="my-dog-breed-text">Breed: </span>
+                            <span id='my-dog-breed'>{currentUser.puppyBreed}</span>
                         </div>
                         <div className="my-dog-temperament-section">
-                            <p id="my-dog-temperament-text">Temperament: </p>
-                            <p id='my-dog-temperament'>{currentUser.puppyTemperament}</p>
+                            <span id="my-dog-temperament-text">Temperament: </span>
+                            <span id='my-dog-temperament'>{currentUser.puppyTemperament}</span>
                         </div>
                         <div className="my-dog-vacc-section">
-                            <p id="my-dog-vacc-text">Vaccinated: </p>
-                            <p id='my-dog-vacc'>{currentUser.puppyVaccinated ? 'Yes' : 'No'}</p>
+                            <span id="my-dog-vacc-text">Vaccinated: </span>
+                            <span id='my-dog-vacc'>{currentUser.puppyVaccinated ? 'Yes' : 'No'}</span>
                         </div>
                     </div>
                     <div className='profile-page-buttons'>
@@ -172,7 +169,6 @@ function ProfilePage({ open, profileClose }) {
                             Edit Profile
                         </button>
                     </div>
-                </div>
             </div>,
             document.getElementById("portal")
         )

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteDateRequest, fetchDateRequest, getDateRequest, updateDateRequest } from "../../store/dateRequests";
-import { createDate } from "../../store/dates";
-import { fetchUser, getUser } from "../../store/users";
+import { deleteDateRequest, fetchDateRequest, getDateRequest, updateDateRequest } from "../../../store/dateRequests";
+import { createDate } from "../../../store/dates";
+import { fetchUser, getUser } from "../../../store/users";
 
 
 const DateRequestContainer = ({request, currentUser}) => {

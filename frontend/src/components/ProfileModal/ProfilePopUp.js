@@ -65,7 +65,6 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
             <button onClick={profileClose} className="modal-close">&times;</button>
                 <img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile"/>
                 <div className="puppy-details-section"> 
-                    <h1 id="puppy-profile-details-text">Puppy Profile</h1>
                     <div className="dog-name-section">
                         <h2 id="dog-name-text">Name: </h2>
                         <h3 id='dog-name'>{otherUser.puppyName}</h3>
@@ -100,11 +99,11 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                     <div className="profile-modal-buttons">   
                         {isFriend ? (
                             <div>
-                                <button id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
+                                <button className="button"id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
                                 <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
                             </ div>
                             ) : (<br/>)}
-                        {(!isFriendRequest && !isFriend) ? (<button id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>) : (<br />)}
+                        {(!isFriendRequest && !isFriend) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}>Add Friend</button>) : (<br />)}
                            
                         {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
                     </div> 
