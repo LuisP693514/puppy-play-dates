@@ -16,7 +16,6 @@ const FriendRequestContainer = ({request}) => {
 
     const handleAcceptRequest = e => {
         e.preventDefault();
-    
         dispatch(createFriend({
             friendId: request.sender,
             userId: request.receiver
