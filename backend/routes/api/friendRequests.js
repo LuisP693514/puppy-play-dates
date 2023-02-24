@@ -36,8 +36,6 @@ router.post('/create', async (req, res) => {
         await senderm.save();
         await receiverm.save();
 
-        console.log(senderm.friendRequests)
-
         res.status(201).json(savedRequest)
 
     } catch (err) {

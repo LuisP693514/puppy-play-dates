@@ -21,7 +21,6 @@ router.get('/:friendId', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
-    console.log('im in')
     const { userId, friendId } = req.body;
     try {
         // check to see if user exists
@@ -49,7 +48,15 @@ router.post('/create', async (req, res) => {
 
         //create new friend now that all validations pass
         const newFriend = new Friend({ user: userId, friend: friendId })
+        const otherFriend = new Friend({ user: friendId, friend: userId })
         await newFriend.save();
+        await otherFriend.save();
+
+        user.friends.push(newFriend._id);
+        friend.friends.push(otherFriend._id);
+
+        await user.save();
+        await friend.save();
 
         res.status(201).json(newFriend)
 
