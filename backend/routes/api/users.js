@@ -15,7 +15,6 @@ const { isProduction } = require('../../config/keys');
 
 
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
-  debugger
   // Check to make sure no one has already registered with the proposed email or
   // username.
   const user = await User.findOne({

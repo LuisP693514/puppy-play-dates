@@ -46,7 +46,6 @@ export const fetchUsers = () => async (dispatch) => {
 
 
 export const updateUser = user => async (dispatch) => {
-    debugger
     const response = await jwtFetch(`/api/users/${user._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
@@ -60,7 +59,6 @@ export const updateUser = user => async (dispatch) => {
 };
 
 export const updateUserImage = user => async (dispatch) => {
-    debugger
     const image = user.image
     const formData = new FormData();
     if (image) formData.append('image', image)

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFriend } from "../../../store/friends";
 import { fetchUser, getUser } from "../../../store/users";
 import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
+import './Friends.css'
 
 const FriendContainer = ({friend}) => {
     // this shows friend id on table, and gets userId
@@ -11,8 +12,6 @@ const FriendContainer = ({friend}) => {
     const friendUser = useSelector(getUser(friend.friend))
     const [showModal, setShowModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
-
-
 
     useEffect(() => {
         dispatch(fetchUser(friend.friend))

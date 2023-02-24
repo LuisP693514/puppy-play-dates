@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFriendRequest, updateFriendRequest } from "../../../store/friendRequests";
 import { createFriend } from "../../../store/friends";
 import { fetchUser, getUser } from "../../../store/users";
+import './Friends.css'
+
 
 const FriendRequestContainer = ({request}) => {
     const dispatch = useDispatch();
