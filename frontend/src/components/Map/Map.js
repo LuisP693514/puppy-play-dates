@@ -10,7 +10,6 @@ import { fetchMarkers, getMarkers } from '../../store/markers';
 import { getCurrentUser, selectCurrentUser } from '../../store/session';
 import { getLocation } from '../Utils/getLocation';
 import { updateUser } from '../../store/users';
-import ProfileModal from '../ProfileModal';
 import ProfilePopUp from '../ProfileModal/ProfilePopUp';
 
 const containerStyle = {
@@ -45,6 +44,12 @@ function MyGoogleMap() {
     const [longitude, setLongitude] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
+    const [animation, setAnimation] = useState(null);
+
+
+    const handleMarkerClick = () => {
+        setAnimation('BOUNCE');
+      };
     // const currentUser = users[sessionUser._id]
     // setCenter({
     //     lat: currentUser.latitude,
@@ -55,7 +60,7 @@ function MyGoogleMap() {
         lng: -73.9939538
     })
     const [userStopDragging, setuserStopDragging] = useState(null);
-    console.log(users)
+    // console.log(users)
 
     useEffect(() => {
         getLocation().then(coords => {
@@ -97,7 +102,7 @@ function MyGoogleMap() {
   const handleMapCenterChange = () => {
     if (map && userStopDragging) {
         const newCenter = map.getCenter();
-        console.log(newCenter.lat(), newCenter.lng());
+        // console.log(newCenter.lat(), newCenter.lng());
         setCenter({
             lat: newCenter.lat(),
             lng: newCenter.lng()
@@ -142,6 +147,7 @@ function MyGoogleMap() {
                     url: user.profileImageUrl,
                     scaledSize: { width: 100, height: 65 }
                 }}
+                animation={animation}
             />)
                 :
            ( <Marker 
@@ -149,23 +155,21 @@ function MyGoogleMap() {
                 onClick={() => {
                     setShowModal(true)
                     setSelectedUserId(user._id)
+                    if (animation === 'BOUNCE') {
+                        setAnimation(null);
+                        } else {
+                        setAnimation('BOUNCE');
+                    }
                 }}
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
                     scaledSize: { width: 80, height: 80 }
                 }}
+                animation={animation}
             />)
         ))}
-            {/* {showModal && <ProfileModal userId={sessionUser._id} onClose={() => setShowModal(false)} />} */}
             {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
-
-            {/* {showModal && (
-    <ProfileModal
-        userId={showModal}
-        onClose={() => setShowModal(null)}
-    />
-)} */}
 
         {markers.map(marker => {
             switch(marker.markerType) {

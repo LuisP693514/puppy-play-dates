@@ -99,7 +99,9 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                                 <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
                             </ div>
                             ) : (<br/>)}
-                        {(!isFriendRequest && !isFriend) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
+
+                        {(!isFriendRequest && !isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
+
                            
                         {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
                     </div> 

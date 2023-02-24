@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFriendRequest, updateFriendRequest } from "../../../store/friendRequests";
 import { createFriend } from "../../../store/friends";
 import { fetchUser, getUser } from "../../../store/users";
+import './Friends.css'
+
 
 const FriendRequestContainer = ({request}) => {
     const dispatch = useDispatch();
@@ -14,13 +16,14 @@ const FriendRequestContainer = ({request}) => {
 
     const handleAcceptRequest = e => {
         e.preventDefault();
+        debugger
         dispatch(createFriend({
-            friend: request.sender,
-            user: request.receiver
+            friendId: request.sender,
+            userId: request.receiver
         }))
         dispatch(createFriend({
-            friend: request.receiver,
-            user: request.sender
+            friendId: request.receiver,
+            userId: request.sender
         }))
         dispatch(deleteFriendRequest(request._id))
     }
