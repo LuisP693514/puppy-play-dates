@@ -140,7 +140,7 @@ function MyGoogleMap() {
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
-                    scaledSize: { width: 60, height: 60 }
+                    scaledSize: { width: 100, height: 65 }
                 }}
             />)
                 :
@@ -175,7 +175,7 @@ function MyGoogleMap() {
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: dogParkIcon,
-                                scaledSize: { width: 40, height: 40 }
+                                scaledSize: { width: 50, height: 50 }
                             }}
                         />
                     )
@@ -185,7 +185,7 @@ function MyGoogleMap() {
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: veternarianIcon,
-                                scaledSize: { width: 40, height: 40 }
+                                scaledSize: { width: 50, height: 50 }
                             }}
                         />
                     )
@@ -195,7 +195,7 @@ function MyGoogleMap() {
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: petStoreIcon,
-                                scaledSize: { width: 40, height: 40 }
+                                scaledSize: { width: 50, height: 50 }
                             }}
                         />
                     )
@@ -205,7 +205,7 @@ function MyGoogleMap() {
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: groomersIcon,
-                                scaledSize: { width: 40, height: 40 }
+                                scaledSize: { width: 50, height: 50 }
                             }}
                         />
                     )
@@ -215,7 +215,7 @@ function MyGoogleMap() {
                             position={{ lat: 40.7356, lng: -73.9910 }}
                             icon={{
                             url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
-                            scaledSize: { width: 40, height: 40 }
+                            scaledSize: { width: 50, height: 50 }
                             }}
                         />
                     )
@@ -231,7 +231,7 @@ function MyGoogleMap() {
                 lng: currentUser.longitude
             })
             map.setZoom(17)
-        }}>Re-Center
+        }}><i class="fa-solid fa-location-crosshairs crosshairs"></i>
         </button>
       </div>
     </>
