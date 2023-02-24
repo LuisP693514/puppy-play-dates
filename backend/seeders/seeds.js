@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const DateRequest = require('../models/DateRequest');
 
-const NUM_SEED_USERS = 25;
+const NUM_SEED_USERS = 50;
 
 // Create users
 const users = [];
@@ -32,7 +32,7 @@ users.push(
         username: 'demo-user',
         email: 'demo-user@appacademy.io',
         hashedPassword: bcrypt.hashSync('password', 10),
-        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png",
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png",
         latitude: 40.7363, 
         longitude: -73.9938,
         puppyName: 'Demodog',
