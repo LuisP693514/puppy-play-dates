@@ -27,7 +27,7 @@ Production README
 
 ![](./frontend/src/images/interface_wireframe.png)
 
-## Technologies & Technical Challenges
+## Technologies
 Puppy Play dates relies on Geolocation and Google Maps Platform to display locational information for profiles, businesses, and parks. Amazon Web Services will allow users to upload profile pictures. Future functionality will employ Websockets for live chat. 
 
 Backend: MongoDB/Express
