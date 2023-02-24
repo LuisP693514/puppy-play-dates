@@ -61,7 +61,6 @@ router.get('/:userId', async (req, res) => {
         }
 
         const dRById = await getDateRequestsPending(user)
-        console.log(dRById)
         res.status(200).json(dRById)
 
     } catch (err) {

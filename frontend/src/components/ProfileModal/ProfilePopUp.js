@@ -17,7 +17,6 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
     const currentUser = useSelector(getUser(sessionUser._id))
     const isFriend = currentUser?.friends.includes(userId);
     const isFriendRequest = currentUser?.friendRequests.includes(userId);
-    debugger
 
     useEffect(() => {
         dispatch(fetchUser(userId))
