@@ -11,6 +11,7 @@ import { getCurrentUser, selectCurrentUser } from '../../store/session';
 import { getLocation } from '../Utils/getLocation';
 import { updateUser } from '../../store/users';
 import ProfilePopUp from '../ProfileModal/ProfilePopUp';
+import Filter from '../NavBar/Filter/Filter';
 
 const containerStyle = {
     width: '100%',
@@ -29,11 +30,10 @@ const containerStyle = {
 
 
 
-function MyGoogleMap() {
+function MyGoogleMap( { filteredMarkers } ) {
     const dispatch = useDispatch()
     const users = useSelector(getUsers)
     const markers = useSelector(getMarkers)
-    const history = useHistory()
     const defaultTest = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/animal-g765307ffb_1280.png"
     const dogParkIcon = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-park-icon.png'
     const veternarianIcon = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-vet-icon.png"
@@ -44,23 +44,12 @@ function MyGoogleMap() {
     const [longitude, setLongitude] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
-    const [animation, setAnimation] = useState(null);
 
-
-    const handleMarkerClick = () => {
-        setAnimation('BOUNCE');
-      };
-    // const currentUser = users[sessionUser._id]
-    // setCenter({
-    //     lat: currentUser.latitude,
-    //     lng: currentUser.longitude
-    // })
     const [center, setCenter] = useState({
         lat: 40.7361589,
         lng: -73.9939538
     })
     const [userStopDragging, setuserStopDragging] = useState(null);
-    // console.log(users)
 
     useEffect(() => {
         getLocation().then(coords => {
@@ -80,10 +69,6 @@ function MyGoogleMap() {
         id: 'google-map-script',
         googleMapsApiKey: googleMapApiKey
     })
-
-    // console.log(users)
-    // console.log('this is session user below')
-    // console.log(sessionUser)
         
     const [map, setMap] = useState(null)
 
@@ -102,7 +87,7 @@ function MyGoogleMap() {
   const handleMapCenterChange = () => {
     if (map && userStopDragging) {
         const newCenter = map.getCenter();
-        // console.log(newCenter.lat(), newCenter.lng());
+
         setCenter({
             lat: newCenter.lat(),
             lng: newCenter.lng()
@@ -115,7 +100,15 @@ function MyGoogleMap() {
     setuserStopDragging(true);
   }
 
-  const hasLocation = longitude > 0 && latitude > 0;
+ 
+  
+    const filtered = markers.filter(marker => {
+      return filteredMarkers.includes(marker.markerType) 
+    });
+
+
+
+  const hasLocation = sessionUser.longitude !== 0 && sessionUser.latitude !== 0;
   return isLoaded ? (
     <>
       <GoogleMap
@@ -137,7 +130,6 @@ function MyGoogleMap() {
             user._id === sessionUser._id && hasLocation ?
             (<Marker 
                 clickable
-                // onClick={() => setShowModal(user._id)}
                 onClick={() => {
                     setShowModal(true)
                     setSelectedUserId(user._id)
@@ -145,33 +137,26 @@ function MyGoogleMap() {
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
-                    scaledSize: { width: 100, height: 65 }
+                    scaledSize: { width: 110, height: 110 }
                 }}
-                animation={animation}
-            />)
+            /> ) 
                 :
            ( <Marker 
                 clickable
                 onClick={() => {
                     setShowModal(true)
                     setSelectedUserId(user._id)
-                    if (animation === 'BOUNCE') {
-                        setAnimation(null);
-                        } else {
-                        setAnimation('BOUNCE');
-                    }
                 }}
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
-                    scaledSize: { width: 80, height: 80 }
+                    scaledSize: { width: 75, height: 75 }
                 }}
-                animation={animation}
             />)
         ))}
             {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
 
-        {markers.map(marker => {
+        {filtered.map(marker => {
             switch(marker.markerType) {
                 case 'dogPark':
                     return (

@@ -207,19 +207,13 @@ router.patch('/:userId/image', singleMulterUpload("image"), async (req, res, nex
   const userId = req.params.userId;
   const updatedUserData = req.body;
   try {
-    // 
-    // console.log(req.file)
     const profileImageUrl = req.file ?
       await singleFileUpload({ file: req.file, public: true }) 
       :
       DEFAULT_PROFILE_IMAGE_URL;
-
-    // console.log(profileImageUrl)
     updatedUserData.profileImageUrl = profileImageUrl
 
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
-
-    // console.log(user)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }
@@ -251,30 +245,6 @@ router.patch('/:userId/image', singleMulterUpload("image"), async (req, res, nex
   } catch (err) {
     res.status(500).json({message: err.message})
   }
-  // const userId = req.params.userId;
-
-  // try {
-  //   // upload the image
-  //   console.log("before aws upload");
-  //   const path = await singleFileUpload({ file: req.file, public: true });
-
-  //   const user = await User.findById(userId);
-  //   if (!user) {
-  //     return res.status(404).json({ message: "User not found" });
-  //   }
-
-  //   let profileImageUrl = path;
-  //   console.log(profileImageUrl);
-  //   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-  //   // Object.assign(user, profileImageUrl);
-  //   user.profileImageUrl = profileImageUrl;
-  //   console.log(user);
-  //   await user.save();
-  //   return res.status(200).json({ user });
-  // } catch (error) {
-  //   console.log(error);
-  //   return res.status(500).json({ message: "Server error" });
-  // }
 })
 
 router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => {
@@ -296,7 +266,6 @@ router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => 
 
     const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
 
-    // console.log(user)
     if (!user) {
       return res.status(404).json({message: "User not found"})
     }

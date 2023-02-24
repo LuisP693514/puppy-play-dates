@@ -6,7 +6,7 @@ import { useState } from 'react';
 import transparentLogo from "../../images/transparent-logo.png"
 
 
-function Navbar() {
+function Navbar(props) {
     const [filterOpen, setFilterOpen] = useState(false)
     // const history = useHistory();
     // const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function Navbar() {
                 </div>
                 <div>
                     <button className="double-spacer orange-text filter" onClick={() => setFilterOpen(!filterOpen)}><i className="fa-solid fa-sliders"></i></button>
-                    <Filter open={filterOpen} filterClose={() => setFilterOpen(false)}></Filter>
+                    <Filter filters={props.filters} filterCallback={props.filterCallback} open={filterOpen} filterClose={() => setFilterOpen(false)}></Filter>
                 </div>
             </div>
         </div>

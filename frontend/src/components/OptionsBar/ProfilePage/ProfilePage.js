@@ -24,20 +24,10 @@ function ProfilePage({ open, profileClose }) {
         const reader = new FileReader();
         const file = e.target.files[0];
         setImage(file)
-        
-        // console.log(updatedUser.profileImageUrl)
-        // setUpdatedUser({ ...updatedUser });
-        //upload file to aws 
-        //getback success file upload with reosurce url
-        // do stuff on  bottom
+
         reader.onloadend = () => {
-
-
             updatedUser.image = file;
             setUpdatedUser(updatedUser);
-            // go into updatedUser and make the file inside
-            // const updatedUser1 = Object.assign({}, updatedUser);
-            
             setImagePreviewUrl(reader.result);
         };
 
@@ -57,11 +47,8 @@ function ProfilePage({ open, profileClose }) {
     }
 
     const handleUpdate = () => {
-        // if (image) {
             dispatch(updateUserImage( {...updatedUser} ))
-        // } else {
             dispatch(updateUser({ ...currentUser, ...updatedUser }));
-        // }
 
         setEditMode(false);
     }
