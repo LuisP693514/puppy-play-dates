@@ -320,7 +320,6 @@ async function getFriendAsObj(user) {
       const request = user.friends[i];
       // console.log(request)
       const friend = await Friend.findById(request)
-      console.log(friend)
       object[friend._id] = friend;
   }
   return object;

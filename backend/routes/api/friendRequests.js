@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const FriendRequest = require('../../models/FriendRequest');
+const Friend = require('../../models/Friend');
 // const FriendRequest = mongoose.model('FriendRequest');
 const User = mongoose.model('User');
 
@@ -18,6 +19,13 @@ router.post('/create', async (req, res) => {
 
         if (existingRequest) {
             return res.status(400).send("Friend request already exists");
+        }
+
+        const existingFriend = await Friend.findOne({$or: [{user: sender, friend: receiver}, {user: receiver, friend: sender}]})
+
+        if (existingFriend) {
+            console.log("Friend already exists")
+            return res.status(400).send("Friend already exists")
         }
 
         const newRequest = new FriendRequest({ sender: sender, receiver: receiver, status: 'pending' })

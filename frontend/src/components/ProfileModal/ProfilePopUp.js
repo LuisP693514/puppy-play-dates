@@ -17,34 +17,37 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
     const currentUser = useSelector(getUser(sessionUser._id));
     const friendList = useSelector(getFriends);
     const isFriendRequest = currentUser?.friendRequests.includes(userId);
-    
-    
+
+
     useEffect(() => {
         dispatch(fetchUser(userId));
         dispatch(getCurrentUser());
-        dispatch(fetchFriends(userId));
+        dispatch(fetchFriends(sessionUser._id));
     }, [dispatch, userId]);
-    
+
     if (!currentUser) return null;
     if (!otherUser) return null;
-    
+
     //Look to see if friends has both the current user and the friend as an entry in friends list
-    
+    let isFriend;
     const isFrien = (u, fr) => {
         if (friendList?.length > 0) {
-            friendList.forEach(friend => {
-                if (u._id === friend.user && fr._id === friend.friend) {
-                    return true;
-                } else if ( friend.user === fr._id && friend.friend === u._id) {
-                    return true;
-                } 
-            });
+            for (let i = 0; i < friendList.length; i++) {
+                const friendObj = friendList[i];
+                if (friendObj.user === u._id && friendObj.friend === fr._id) {
+                    isFriend = true;
+                    break;
+                } else if (friendObj.user === fr._id && friendObj.friend === u._id) {
+                    isFriend = true;
+                    break;
+                }
+            }
         } else {
-            return false;
+            isFriend = false;
         }
     }
-    const isFriend = isFrien(currentUser, otherUser)
-    debugger
+    isFrien(currentUser, otherUser)
+    // debugger
     const handleCreateDateRequest = e => {
         e.preventDefault();
         history.push('/createDate', { currentUser, otherUser });
