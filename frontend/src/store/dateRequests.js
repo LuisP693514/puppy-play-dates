@@ -1,8 +1,8 @@
 import jwtFetch from "./jwt";
 
 
-export const RECEIVE_DATE_REQUEST = 'RECEIVE_DATE_REQUEST';
 export const RECEIVE_DATE_REQUESTS = 'RECEIVE_DATE_REQUESTS';
+export const RECEIVE_DATE_REQUEST = 'RECEIVE_DATE_REQUEST';
 export const REMOVE_DATE_REQUEST = 'REMOVE_DATE_REQUEST'
 
 
@@ -120,6 +120,7 @@ const dateRequestReducer = (state = {}, action) => {
         return {...state, [action.dateRequest._id]: action.dateRequest};
     case REMOVE_DATE_REQUEST:
         const newState = {...state};
+        debugger
         delete newState[action.dateRequestId];
         return newState;
     default:

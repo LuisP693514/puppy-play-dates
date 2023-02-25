@@ -4,10 +4,9 @@ import { useDispatch } from "react-redux";
 import './CreateDateForm.css';
 import { createDateRequest } from '../../store/dateRequests';
 
-const CreateDate = ({currentUser, otherUser}) => {
+const CreateDate = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    debugger
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [latitude, setLatitude] = useState(0);
@@ -49,13 +48,14 @@ const CreateDate = ({currentUser, otherUser}) => {
             </div>
             <div className="date-time-section">
                 <label id="date-time-text">Date and Time</label>
-                <textarea
+                <input
+                    type={"date"}
                     id="date-date-input"
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     required
-                ></textarea>
+                ></input>
             </div>
             <div className="date-description-section">
                 <label id="date-description-text">Description</label>

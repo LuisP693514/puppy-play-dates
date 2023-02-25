@@ -101,7 +101,7 @@ async function getFriendRequestsPending(user) {
     for (let i = 0; i < user.friendRequests.length; i++) {
         const request = user.friendRequests[i];
         const friendRequest = await FriendRequest.findById(request)
-        object[user.friendRequests[i]] = friendRequest;
+        if (friendRequest) object[user.friendRequests[i]] = friendRequest;
     }
     return object;
 }

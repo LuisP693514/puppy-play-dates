@@ -16,7 +16,7 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
     const sessionUser = useSelector(selectCurrentUser);
     const currentUser = useSelector(getUser(sessionUser._id));
     const friendList = useSelector(getFriends);
-    const isFriendRequest = currentUser?.friendRequests.includes(userId);
+    // const isFriendRequest = currentUser?.friendRequests.includes(userId);
 
 
     useEffect(() => {
@@ -122,7 +122,7 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
                         </ div>
                     ) : (<br />)}
 
-                    {(!isFriendRequest && !isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
+                    {(!isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
 
 
                     {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
