@@ -48,6 +48,7 @@ router.post('/create', async (req, res, next) => {
         res.status(201).json(savedRequest);
 
     } catch (err) {
+        console.log(err)
         res.status(500).json({ message: err.message });
     }
 });
@@ -104,7 +105,7 @@ router.patch('/:reqId', async (req, res) => {
     }
 })
 
-router.delete('/reqId', async (req, res) => {
+router.delete('/:reqId', async (req, res) => {
     const requestId = req.params.reqId
     try {
         const request = await DateRequest.findByIdAndDelete(requestId)
@@ -112,6 +113,8 @@ router.delete('/reqId', async (req, res) => {
         if (!request) {
             return res.status(404).json({message: "Failed to delete date request"})
         }
+
+
 
         res.status(200).json({message: "Deleted date request successfully."})
     } catch (err) {
@@ -124,7 +127,7 @@ async function getDateRequestsPending(user) {
     for (let i = 0; i < user.dateRequests.length; i++) {
         const request = user.dateRequests[i];
         const date = await DateRequest.findById(request)
-        object[user.dateRequests[i]] = date;
+        if (date) object[user.dateRequests[i]] = date;
     }
     return object;
 }

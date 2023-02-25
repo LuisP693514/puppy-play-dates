@@ -27,11 +27,11 @@ const DateShowPage = ({open, datesClose}) => {
     if (!dateRequests) return null;
     
     const pendingCreator = dateRequests.filter(request => (
-        request.status === 'pending' && request.creator === currentUser._id
+        request?.status === 'pending' && request?.creator === currentUser._id
     ));
 
     const pendingInvitee = dateRequests.filter(request => (
-        request.status === 'pending' && request.inviteee === currentUser._id
+        request?.status === 'pending' && request?.inviteee === currentUser._id
     ));
 
     // const rejected = dateRequests.filter(request => (

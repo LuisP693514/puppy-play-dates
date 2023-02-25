@@ -2,33 +2,55 @@ import React from "react";
 import reactDom from "react-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { fetchUser, getUser } from "../../store/users";
 import "./ProfilePopUp.css";
 import { getCurrentUser, selectCurrentUser } from "../../store/session";
 import { createFriendRequest } from "../../store/friendRequests";
-import { deleteFriend } from "../../store/friends";
+import { deleteFriend, fetchFriends, getFriends } from "../../store/friends";
 
-const ProfilePopUp = ({userId, open, profileClose }) => {
+const ProfilePopUp = ({ userId, open, profileClose }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
     const sessionUser = useSelector(selectCurrentUser);
-    const currentUser = useSelector(getUser(sessionUser._id))
-    const isFriend = currentUser?.friends.includes(userId);
-    const isFriendRequest = currentUser?.friendRequests.includes(userId);
+    const currentUser = useSelector(getUser(sessionUser._id));
+    const friendList = useSelector(getFriends);
+    // const isFriendRequest = currentUser?.friendRequests.includes(userId);
+
 
     useEffect(() => {
-        dispatch(fetchUser(userId))
-        dispatch(getCurrentUser())
+        dispatch(fetchUser(userId));
+        dispatch(getCurrentUser());
+        dispatch(fetchFriends(sessionUser._id));
     }, [dispatch, userId]);
 
     if (!currentUser) return null;
     if (!otherUser) return null;
 
+    //Look to see if friends has both the current user and the friend as an entry in friends list
+    let isFriend;
+    const isFrien = (u, fr) => {
+        if (friendList?.length > 0) {
+            for (let i = 0; i < friendList.length; i++) {
+                const friendObj = friendList[i];
+                if (friendObj.user === u._id && friendObj.friend === fr._id) {
+                    isFriend = true;
+                    break;
+                } else if (friendObj.user === fr._id && friendObj.friend === u._id) {
+                    isFriend = true;
+                    break;
+                }
+            }
+        } else {
+            isFriend = false;
+        }
+    }
+    isFrien(currentUser, otherUser)
+    // debugger
     const handleCreateDateRequest = e => {
         e.preventDefault();
-        history.push('/createDate', {currentUser, otherUser});
+        history.push('/createDate', { currentUser, otherUser });
     };
 
     const handleAddFriend = e => {
@@ -37,7 +59,7 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
             sender: currentUser._id,
             receiver: otherUser._id,
             status: 'pending'
-        })) 
+        }))
     };
 
     const handleDeleteFriend = e => {
@@ -62,10 +84,10 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
     return reactDom.createPortal(
         <>
             <div className="profile-modal">
-            <button onClick={profileClose} className="modal-close">&times;</button>
+                <button onClick={profileClose} className="modal-close">&times;</button>
                 <div className="dog-name-section"><h2 id='dog-name'>{otherUser.puppyName}</h2></div>
-                <div className="pop-up-img"><img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile"/></div>
-                <div className="puppy-details-section"> 
+                <div className="pop-up-img"><img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile" /></div>
+                <div className="puppy-details-section">
                     <div className="dog-age-section">
                         <span id="dog-age-text">Age: </span>
                         <span id='dog-age'>{otherUser.puppyAge}</span>
@@ -80,7 +102,7 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                     </div>
                     <div className="dog-vacc-section">
                         <span id="dog-vacc-text">Vaccinated: </span>
-                        <span id='dog-vacc'>{otherUser.puppyVaccinated}</span>
+                        <span id='dog-vacc'>{otherUser.puppyVaccinated ? 'Yes' : 'No'}</span>
                     </div>
                 </div>
                 <div className="owner-details-section">
@@ -89,22 +111,22 @@ const ProfilePopUp = ({userId, open, profileClose }) => {
                     </div>
                     <div className="owner-age-section">
                         <span id="owner-age-text">Owner's Age: </span><span id='owner-age'>{otherUser.age}</span>
-                    </div> 
-                    
+                    </div>
+
                 </div>
-                    <div className="profile-modal-buttons">   
-                        {isFriend ? (
-                            <div>
-                                <button className="button"id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
-                                <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
-                            </ div>
-                            ) : (<br/>)}
+                <div className="profile-modal-buttons">
+                    {isFriend ? (
+                        <div>
+                            <button className="button" id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
+                            <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
+                        </ div>
+                    ) : (<br />)}
 
-                        {(!isFriendRequest && !isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
+                    {(!isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
 
-                           
-                        {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
-                    </div> 
+
+                    {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
+                </div>
             </div>
         </>,
         document.getElementById("portal")

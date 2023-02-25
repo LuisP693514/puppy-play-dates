@@ -4,15 +4,16 @@ import { useDispatch } from "react-redux";
 import './CreateDateForm.css';
 import { createDateRequest } from '../../store/dateRequests';
 
-const CreateDate = ({currentUser, otherUser}) => {
+const CreateDate = () => {
     const dispatch = useDispatch();
-    const history = useHistory
+    const history = useHistory();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const [date, setDate] = useState('')
-
+    const currentUser = history.location.state.currentUser
+    const otherUser = history.location.state.otherUser
   const handleSubmit = (e) => {
     e.preventDefault();
     const userOneId = currentUser._id;
@@ -27,6 +28,8 @@ const CreateDate = ({currentUser, otherUser}) => {
     dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
     // history.push('/dates')
   };
+
+  if (!otherUser) return null;
 
   return (
     <div className='create-date-form-container'>
@@ -45,13 +48,14 @@ const CreateDate = ({currentUser, otherUser}) => {
             </div>
             <div className="date-time-section">
                 <label id="date-time-text">Date and Time</label>
-                <textarea
+                <input
+                    type={"date"}
                     id="date-date-input"
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     required
-                ></textarea>
+                ></input>
             </div>
             <div className="date-description-section">
                 <label id="date-description-text">Description</label>
