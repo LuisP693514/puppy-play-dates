@@ -6,13 +6,15 @@ import { createDateRequest } from '../../store/dateRequests';
 
 const CreateDate = ({currentUser, otherUser}) => {
     const dispatch = useDispatch();
-    const history = useHistory
+    const history = useHistory();
+    debugger
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const [date, setDate] = useState('')
-
+    const currentUser = history.location.state.currentUser
+    const otherUser = history.location.state.otherUser
   const handleSubmit = (e) => {
     e.preventDefault();
     const userOneId = currentUser._id;
@@ -27,6 +29,8 @@ const CreateDate = ({currentUser, otherUser}) => {
     dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
     // history.push('/dates')
   };
+
+  if (!otherUser) return null;
 
   return (
     <div className='create-date-form-container'>
