@@ -11,7 +11,7 @@ const dateRequestsRouter = require('./routes/api/dateRequests');
 const datesRouter = require('./routes/api/dates');
 const friendRequestsRouter = require('./routes/api/friendRequests');
 const friendsRouter = require('./routes/api/friends');
-
+ 
 const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
@@ -57,28 +57,6 @@ app.use('/api/dates', datesRouter);
 app.use('/api/friendRequests', friendRequestsRouter);
 app.use('/api/friends', friendsRouter);
 
-
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.statusCode = 404;
-    next(err);
-});
-   
-const serverErrorLogger = debug('backend:error');
-
-// Express custom error handler that will be called whenever a route handler or
-// middleware throws an error or invokes the `next` function with a truthy value
-app.use((err, req, res, next) => {
-    serverErrorLogger(err);
-    const statusCode = err.statusCode || 500;
-    res.status(statusCode);
-    res.json({
-        message: err.message,
-        statusCode,
-        errors: err.errors
-    })
-});
-
 if (isProduction) {
     const path = require('path');
     // Serve the frontend's index.html file at the root route
@@ -100,5 +78,26 @@ if (isProduction) {
         );
     });
 }
+
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.statusCode = 404;
+    next(err);
+});
+   
+const serverErrorLogger = debug('backend:error');
+
+// Express custom error handler that will be called whenever a route handler or
+// middleware throws an error or invokes the `next` function with a truthy value
+app.use((err, req, res, next) => {
+    serverErrorLogger(err);
+    const statusCode = err.statusCode || 500;
+    res.status(statusCode);
+    res.json({
+        message: err.message,
+        statusCode,
+        errors: err.errors
+    })
+});
 
 module.exports = app;
