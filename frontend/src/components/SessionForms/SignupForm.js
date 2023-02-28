@@ -55,7 +55,7 @@ function SignupForm() {
     };
 
     dispatch(signup(user));
-    history.push('/signup', { user });
+    history.push('/signup', { user: user, loc: '/signup'});
   }
 
   // const updateFile = e => setImage(e.target.files[0]);
