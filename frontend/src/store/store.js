@@ -9,6 +9,7 @@ import markersReducer from './markers';
 import friendsReducer from './friends';
 import friendRequestReducer from './friendRequests';
 import chatRoomsReducer from './chatRooms';
+import chatMessagesReducer from './chatMessages';
 
 const rootReducer = combineReducers({
   session,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   markers: markersReducer,
   friends: friendsReducer,
   friendRequests: friendRequestReducer,
-  chatRooms: chatRoomsReducer
+  chatRoom: chatRoomsReducer,
+  chatMessages: chatMessagesReducer
 });
 
 let enhancer;

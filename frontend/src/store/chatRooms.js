@@ -11,8 +11,8 @@ const receiveChatRoom = chatRoom => ({
 })
 
 // Selectors
-export const getChatRoom = chatRoomId => state => {
-    return state?.chatRooms ? state.chatRooms[chatRoomId] : null;
+export const getChatRoom = state => {
+    return state?.chatRoom ? state.chatRoom.room : null;
 }
 
 // Fetch methods
@@ -35,18 +35,14 @@ export const fetchChatRoom = (user1Id, user2Id) => async dispatch => {
 
 const chatRoomsReducer = (state = {}, action) => {
     // Do not mutate state
-    Object.freeze(state)
-
-    // Create a shallow dupe of the state
-    const newState = {...state}
+    Object.freeze(state);
 
     // add the action to the state:
 
     switch (action.type) {
         // Add a single chatroom to the state
         case RECEIVE_CHAT_ROOM:
-            return newState.chatRooms[action.chatRoom._id] = action.chatRoom;
-    
+            return { room : action.chatRoom};
         default:
             return state;
     }
