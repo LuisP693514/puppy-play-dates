@@ -79,6 +79,22 @@ router.delete('/:friendId', async (req, res) => {
         if (!friend) {
             return res.status(404).json({ message: "Friend not found" })
         }
+        const user = await User.findById(friend.user)
+        const user2 = await User.findById(friend.friend)
+        if (!user || !user2) {
+            return res.status(404).json({message: "User not found"})
+        }
+        // delete the associations
+        const entry = user.friends.indexOf(friendId)
+        const entry2 = user2.friends.indexOf(friendId)
+        
+        if (entry > -1){
+            user.friends.splice(entry, 1)
+        }
+
+        if (entry2 > -1) {
+            user2.friends.splice(entry2, 1)
+        }
 
         res.status(200).json({ message: "Friend deleted" })
     } catch (err) {
