@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const ChatRoom = require('../../models/ChatRoom');
 const router = express.Router();
 const Friend = require('../../models/Friend');
 // const Friend = mongoose.model('Friend');
@@ -46,6 +47,9 @@ router.post('/create', async (req, res) => {
             return res.status(400).json({ message: "Friend already exists" })
         }
 
+        const newChatRoom = new ChatRoom({sender: userId, receiver: friendId})
+        await newChatRoom.save();
+
         //create new friend now that all validations pass
         const newFriend = new Friend({ user: userId, friend: friendId })
         const newerFriend = new Friend({ user: friendId, friend: userId })
@@ -54,6 +58,9 @@ router.post('/create', async (req, res) => {
 
         user.friends.push(newFriend._id);
         friend.friends.push(newerFriend._id);
+
+        user.chatRooms.push(newChatRoom._id)
+        friend.chatRooms.push(newChatRoom._id)
 
         await user.save();
         await friend.save();
