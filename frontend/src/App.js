@@ -15,6 +15,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 import SignupFormTwo from './components/SessionForms/SignupFormTwo';
 import CreateDate from './components/CreateDateForm/CreateDateForm';
 import UpdateDateForm from './components/OptionsBar/Dates/DateUpdateForm';
+import TestChat from './components/TestChat';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <ProtectedRoute exact path='/createDate' component={CreateDate}/>
         <ProtectedRoute exact path='/editDate' component={UpdateDateForm}/>
         <ProtectedRoute exact path="/main" component={MainPage} />
+        <ProtectedRoute exact path='/test' component={TestChat} />
         {/* <ProtectedRoute exact path="/users/:id" component={ProfilePage} /> */}
       </Switch>
     </>

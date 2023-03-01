@@ -12,6 +12,7 @@ import jwtFetch from './store/jwt';
 import * as sessionActions from './store/session'
 import * as dateRequestActions from './store/dateRequests'
 import * as friendActions from './store/friends'
+import * as chatRoomActions from './store/chatRooms'
 
 const store = configureStore({});
 
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
   window.dateRequestActions = dateRequestActions;
   window.friendActions = friendActions;
+  window.chatRoomActions = chatRoomActions;
 }
 
 

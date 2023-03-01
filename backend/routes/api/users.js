@@ -196,7 +196,7 @@ router.get('/:userId', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({userId: user});
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -320,6 +320,7 @@ async function getFriendAsObj(user) {
       const request = user.friends[i];
       // console.log(request)
       const friend = await Friend.findById(request)
+      // console.log(friend)
       object[friend._id] = friend;
   }
   return object;
