@@ -11,6 +11,8 @@ const dateRequestsRouter = require('./routes/api/dateRequests');
 const datesRouter = require('./routes/api/dates');
 const friendRequestsRouter = require('./routes/api/friendRequests');
 const friendsRouter = require('./routes/api/friends');
+const chatRoomsRouter = require('./routes/api/chatRooms');
+const chatMessagesRouter = require('./routes/api/chatMessages');
  
 const cors = require('cors');
 const csurf = require('csurf');
@@ -56,6 +58,8 @@ app.use('/api/dateRequests', dateRequestsRouter);
 app.use('/api/dates', datesRouter);
 app.use('/api/friendRequests', friendRequestsRouter);
 app.use('/api/friends', friendsRouter);
+app.use('/api/chatRooms', chatRoomsRouter);
+app.use('/api/chatMessages', chatMessagesRouter);
 
 if (isProduction) {
     const path = require('path');
