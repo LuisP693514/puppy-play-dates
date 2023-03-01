@@ -8,28 +8,28 @@ const validateMessage = require('../../validations/messageValidation');
 const User = mongoose.model("User");
 
 router.post('/create', validateMessage, async (req, res, next) => {
-    const {author, body, chatRoomId} = req.body
+    const {author, body, room} = req.body
     try {
 
-        const chatRoom = await ChatRoom.findById(chatRoomId)
+        const chatRoom = await ChatRoom.findById(room)
+        const authorReal = await User.findById(author._id)
 
-        if (!chatRoom) {
-            return res.status(404).json({message: "Chat room not found"})
+        if (!chatRoom || !authorReal) {
+            return res.status(404).json({message: "Chat room or User not found"})
         }
 
         // edit
-        const newChatMessage = new ChatMessage({author, body})
+        const newChatMessage = new ChatMessage({authorReal, body})
         await newChatMessage.save();
 
-        author.messages.unshift(newChatMessage._id)
-        if (chatRoom.messages.length < 30) {
-            chatRoom.messages.unshift(newChatMessage._id)
+        if (chatRoom.messages.length < 100) {
+            chatRoom.messages.push(newChatMessage._id)
         } else {
-            chatRoom.messages.pop();
-            chatRoom.messages.unshift(newChatMessage._id)
+            chatRoom.messages.shift();
+            chatRoom.messages.push(newChatMessage._id)
         }
 
-        await author.save();
+        await authorReal.save();
         await chatRoom.save();
 
         res.status(200).json(newChatMessage)

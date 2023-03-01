@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChatMessages, getChatMessages } from '../../store/chatMessages';
+import { createChatMessage, fetchChatMessages, getChatMessages } from '../../store/chatMessages';
 import './TestChat.css'
 
 const ChatBox = ({ room, user, socket }) => {
@@ -10,13 +10,13 @@ const ChatBox = ({ room, user, socket }) => {
     const messages = useSelector(getChatMessages)
 
     useEffect(() => {
-        if (room){
-
+        socket.on('receive_message', (data) => {
+            dispatch(createChatMessage(data))
+        })
+        debugger
+        if (room) {
             dispatch(fetchChatMessages(room?._id));
         }
-        socket.on('receive_message', (data) => {
-
-        })
     }, [dispatch, socket])
 
 
@@ -30,7 +30,7 @@ const ChatBox = ({ room, user, socket }) => {
                 room: room?._id
             }
             await socket.emit('send_message', messageData)
-            
+
             setMessage('')
         }
 
@@ -46,7 +46,7 @@ const ChatBox = ({ room, user, socket }) => {
                 {/* list out all the messages inside the chatroom from oldest to newest */}
                 {messages.map(message => {
                     return (
-                        <p className='messageBox' key={message?._id}></p>
+                        <p className='messageBox' key={message?._id}>{message?.body}</p>
                     )
                 })}
             </div>

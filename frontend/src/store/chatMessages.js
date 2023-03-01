@@ -18,7 +18,8 @@ export const getChatMessages = state => {
 // Fetch methods
 /* 
     fetchChatMessages(chatRoomId) -- Fetch all the messages in a single chat room. 
-    Chat room has max 100 messages
+                                     Chat room has max 100 messages
+    createChatMessage(message) -- Creates a message 
 */
 
 export const fetchChatMessages = (chatRoomId) => async dispatch => {
@@ -30,6 +31,18 @@ export const fetchChatMessages = (chatRoomId) => async dispatch => {
         const chatMessages = await res.json();
         dispatch(receiveChatMessages(chatMessages))
     } 
+}
+
+export const createChatMessage = (message) => async dispatch => {
+    const res = await jwtFetch(`/api/chatMessages/create`, {
+        method: 'POST',
+        body: JSON.stringify(message)
+    })
+
+    if (res.ok) {
+        const message = await res.json()
+        
+    }
 }
 
 // chatMessages reducer
