@@ -18,19 +18,22 @@ router.post('/create', validateMessage, async (req, res, next) => {
             return res.status(404).json({message: "Chat room or User not found"})
         }
 
-        // edit
+        // create a new chat message
         const newChatMessage = new ChatMessage({authorReal, body})
-        await newChatMessage.save();
 
-        if (chatRoom.messages.length < 100) {
-            chatRoom.messages.push(newChatMessage._id)
+        // fetch the latest version of the chat room document
+        const latestChatRoom = await ChatRoom.findById(room)
+
+        if (latestChatRoom.messages.length < 100) {
+            latestChatRoom.messages.push(newChatMessage._id)
         } else {
-            chatRoom.messages.shift();
-            chatRoom.messages.push(newChatMessage._id)
+            latestChatRoom.messages.shift();
+            latestChatRoom.messages.push(newChatMessage._id)
         }
 
+        // await latestChatRoom.save();
         await authorReal.save();
-        await chatRoom.save();
+        await newChatMessage.save();
 
         res.status(200).json(newChatMessage)
 

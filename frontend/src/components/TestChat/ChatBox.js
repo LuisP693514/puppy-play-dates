@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createChatMessage, fetchChatMessages, getChatMessages } from '../../store/chatMessages';
+import { useDispatch} from 'react-redux';
+import { createChatMessage, fetchChatMessages } from '../../store/chatMessages';
 import './TestChat.css'
 
-const ChatBox = ({ room, user, socket }) => {
+const ChatBox = ({ room, user, socket, messages }) => {
 
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
-    const messages = useSelector(getChatMessages)
+    const [messageList, setMessageList] = useState(messages)
 
     useEffect(() => {
-        socket.on('receive_message', (data) => {
+        socket.on("receive_message", (data) => {
             dispatch(createChatMessage(data))
+            setMessageList((list) => [...list, data])
         })
-        debugger
         if (room) {
             dispatch(fetchChatMessages(room?._id));
         }
@@ -29,9 +29,9 @@ const ChatBox = ({ room, user, socket }) => {
                 body: message,
                 room: room?._id
             }
-            await socket.emit('send_message', messageData)
-
+            await socket.emit("send_message", messageData)
             setMessage('')
+            setMessageList((list) => [...list, messageData])
         }
 
     }
@@ -44,11 +44,7 @@ const ChatBox = ({ room, user, socket }) => {
             </div>
             <div className='chatBox-body'>
                 {/* list out all the messages inside the chatroom from oldest to newest */}
-                {messages.map(message => {
-                    return (
-                        <p className='messageBox' key={message?._id}>{message?.body}</p>
-                    )
-                })}
+                {messageList.map(message => <p className='messageBox' key={message._id}>{message.body}</p>)}
             </div>
             <div className='chatBox-input'>
                 <input
@@ -69,7 +65,7 @@ const ChatBox = ({ room, user, socket }) => {
                 <button onClick={(e) => {
                     e.preventDefault();
                     sendMessage();
-                }}></button>
+                }}>send</button>
             </div>
         </div>
     )
