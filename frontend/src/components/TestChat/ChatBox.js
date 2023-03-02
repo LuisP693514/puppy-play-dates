@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createChatMessage, fetchChatMessages } from '../../store/chatMessages';
-import './TestChat.css'
+import ScrollToBottom from 'react-scroll-to-bottom';
+import './TestChat.css';
 
 const ChatBox = ({ room, user, socket, messages }) => {
 
@@ -11,14 +12,12 @@ const ChatBox = ({ room, user, socket, messages }) => {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            dispatch(createChatMessage(data))
             setMessageList((list) => [...list, data])
         })
-        if (room) {
-            dispatch(fetchChatMessages(room?._id));
+        if (room?._id) {
+            dispatch(fetchChatMessages(room._id));
         }
-    }, [dispatch, socket])
-
+    }, [dispatch, socket, room])
 
     const sendMessage = async () => {
         // update the message state and create a new message in the backend. do not forget to add 
@@ -27,11 +26,13 @@ const ChatBox = ({ room, user, socket, messages }) => {
             const messageData = {
                 author: user,
                 body: message,
-                room: room?._id
+                room: room?._id,
+                createdAt: new Date(Date.now())
             }
             await socket.emit("send_message", messageData)
             setMessage('')
             setMessageList((list) => [...list, messageData])
+            dispatch(createChatMessage(messageData))
         }
 
     }
@@ -42,10 +43,15 @@ const ChatBox = ({ room, user, socket, messages }) => {
                 {/* Should just be the name of the other user that the current user is talking to */}
                 {`LiveChat`}
             </div>
-            <div className='chatBox-body'>
-                {/* list out all the messages inside the chatroom from oldest to newest */}
-                {messageList.map(message => <p className='messageBox' key={message._id}>{message.body}</p>)}
-            </div>
+            <ScrollToBottom>
+                <div className='chatBox-body'>
+                    {/* list out all the messages inside the chatroom from oldest to newest */}
+                    {messageList.map(message => (<div className='messageBox' key={message._id}>
+                        <p>{message.body}</p>
+                        <p>{parseDateTime(message.createdAt)}</p>
+                    </div>))}
+                </div>
+            </ScrollToBottom>
             <div className='chatBox-input'>
                 <input
                     type={'text'}
@@ -70,6 +76,19 @@ const ChatBox = ({ room, user, socket, messages }) => {
         </div>
     )
 
+}
+
+const parseDateTime = (dateString) => {
+    const date = new Date(dateString);
+
+    let hours = date.getUTCHours();
+    const minutes = ("0" + date.getUTCMinutes()).slice(-2);
+
+    const amPM = hours >= 12 ? "PM" : "AM";
+    hours %= 12;
+    hours = hours || 12;
+
+    return (hours + ":" + minutes + " " + amPM + " UTC");
 }
 
 export default ChatBox;

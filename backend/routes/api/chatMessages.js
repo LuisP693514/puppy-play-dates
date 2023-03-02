@@ -24,15 +24,15 @@ router.post('/create', validateMessage, async (req, res, next) => {
         // fetch the latest version of the chat room document
         const latestChatRoom = await ChatRoom.findById(room)
 
-        if (latestChatRoom.messages.length < 100) {
+        if (latestChatRoom.messages.length < 50) {
             latestChatRoom.messages.push(newChatMessage._id)
         } else {
             latestChatRoom.messages.shift();
             latestChatRoom.messages.push(newChatMessage._id)
         }
 
-        // await latestChatRoom.save();
-        await authorReal.save();
+        await latestChatRoom.save();
+        // await authorReal.save();
         await newChatMessage.save();
 
         res.status(200).json(newChatMessage)
