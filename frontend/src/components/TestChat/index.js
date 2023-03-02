@@ -21,9 +21,9 @@ const TestChat = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const history = useHistory(); // use this to grab 2nd user
-    const user2 = history?.location.state?.user2
+    const user2 = history?.location?.state?.user2
     const realUser2 = useSelector(getUser(user2))
-
+    let currentRoom = history?.location?.state?.oldRoom
     const [updatedUser2, setUpdatedUser2] = useState(false)
     const [updatedChatRoom, setUpdatedChatRoom] = useState(false)
     const chatRoom = useSelector(getChatRoom)
@@ -66,7 +66,7 @@ const TestChat = () => {
 
         dispatch(fetchFriends(currentUser?._id));
 
-    }, [dispatch, user2, updatedUser2, updatedChatRoom])
+    }, [dispatch, user2, updatedUser2, updatedChatRoom, socket])
 
     const grabChatRoom = async () => {
 
@@ -77,7 +77,7 @@ const TestChat = () => {
 
     }
     const joinRoom = () => {
-        socket.emit("join_room", chatRoom._id)
+        socket.emit("join_room", { room: chatRoom._id, oldRoom: currentRoom})
     }
 
     if (friends.length === 0) return null;
@@ -103,6 +103,7 @@ const TestChat = () => {
                                 onClick={(e) => {
                                     joinRoom();
                                     setJoinedRoom(true);
+                                    if (chatRoom) history.push('/test', {user1: currentUser, user2: friend.friend, oldRoom: chatRoom._id})
                                 }}>Open Chat</button>}
                         </>
                     )
