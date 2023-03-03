@@ -22,8 +22,8 @@ const TestChat = () => {
     const currentUser = useSelector(selectCurrentUser);
     const history = useHistory(); // use this to grab 2nd user
     const user2 = history?.location?.state?.user2
+    const oldRoom = history?.location?.state?.oldRoom
     const realUser2 = useSelector(getUser(user2))
-    let currentRoom = history?.location?.state?.oldRoom
     const [updatedUser2, setUpdatedUser2] = useState(false)
     const [updatedChatRoom, setUpdatedChatRoom] = useState(false)
     const chatRoom = useSelector(getChatRoom)
@@ -44,29 +44,24 @@ const TestChat = () => {
                     setUpdatedUser2(true)
                 })
         }
-        // if (currentUser?._id && realUser2?._id) {
-        //     dispatch(fetchChatRoom(currentUser._id, realUser2._id))
-        //         .then(() => {
-        //             setUpdatedChatRoom(true)
-        //         })
-        // }
 
         if (realUser2) {
             grabChatRoom()
         }
 
-        if (chatRoom) {
+        if (chatRoom?._id) {
             dispatch(fetchChatMessages(chatRoom._id))
                 .then(() => {
                     setLoadedMessages(true)
 
                 })
+            joinRoom();
         }
         // for testing purposes, fetching all friends
 
         dispatch(fetchFriends(currentUser?._id));
-
-    }, [dispatch, user2, updatedUser2, updatedChatRoom, socket])
+ 
+    }, [dispatch, user2, updatedUser2, updatedChatRoom, joinedRoom])
 
     const grabChatRoom = async () => {
 
@@ -77,7 +72,7 @@ const TestChat = () => {
 
     }
     const joinRoom = () => {
-        socket.emit("join_room", { room: chatRoom._id, oldRoom: currentRoom})
+        socket.emit("join_room", { room: chatRoom._id, oldRoom: oldRoom })
     }
 
     if (friends.length === 0) return null;
@@ -95,15 +90,14 @@ const TestChat = () => {
                                 key={friend._id}
                                 onClick={(e) => {
                                     setJoinedRoom(false)
-                                    history.push('/test', { user1: currentUser, user2: friend.friend })
+                                    history.push('/test', { user1: currentUser, user2: friend.friend, oldRoom: chatRoom?._id })
                                 }}>{friend.friend}</button>
-                            { (!joinedRoom) && <button
+                            {(!joinedRoom) && <button
                                 id={"button-to-start-chatting"}
                                 disabled={user2 !== friend.friend}
                                 onClick={(e) => {
-                                    joinRoom();
-                                    setJoinedRoom(true);
-                                    if (chatRoom) history.push('/test', {user1: currentUser, user2: friend.friend, oldRoom: chatRoom._id})
+                                    history.push('/test', { user1: currentUser, user2: friend.friend, oldRoom: oldRoom })
+                                    setJoinedRoom(true)
                                 }}>Open Chat</button>}
                         </>
                     )

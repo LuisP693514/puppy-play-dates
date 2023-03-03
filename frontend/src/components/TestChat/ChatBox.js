@@ -17,8 +17,7 @@ const ChatBox = ({ room, user, socket, messages }) => {
         if (room?._id) {
             dispatch(fetchChatMessages(room._id));
         }
-    }, [dispatch, socket, room])
-
+    }, [dispatch, room])
     const sendMessage = async () => {
         // update the message state and create a new message in the backend. do not forget to add 
         // backend functionality to create a new message and store it in the user's messages array
