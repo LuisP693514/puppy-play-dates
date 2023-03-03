@@ -66,10 +66,28 @@ router.post('/create', async (req, res) => {
 router.delete('/:dateId', async (req, res) => {
     const dateId = req.params.dateId
     try {
-        const date = await Date.findByIdAndDelete(dateId)
+        const date = await Date.findById(dateId)
         if (!date) {
             return res.status(404).json({ message: "Date not found" })
         }
+
+        const user1 = await User.findById(date.creator);
+        const user2 = await User.findById(date.invitee);
+
+        if (!user1 || !user2) {
+            return res.status(404).json({message: "Users not found"})
+        }
+
+        const index1 = user1.dates.indexOf(dateId);
+        const index2 = user2.dates.indexOf(dateId);
+
+        if (index1 > -1 ) user1.dates.splice(index1, 1);
+        if (index2 > -1 ) user2.dates.splice(index2, 1);
+
+        await user1.save();
+        await user2.save();
+
+        await date.remove();
 
         res.status(200).json({ message: "Date deleted" })
     } catch (err) {

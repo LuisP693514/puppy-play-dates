@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const mongoose = require('mongoose');
 const ChatRoom = require('../../models/ChatRoom');
 const ChatMessage = require('../../models/ChatMessage')
-// const DateRequest = mongoose.model('DateRequest');
-// const User = mongoose.model("User");
 
 router.get('/:chatRoomId/messages', async (req, res) => {
     const chatRoomId = req.params.chatRoomId;
@@ -56,7 +53,7 @@ async function getChatMessagesAsObj(chatRoom) {
         const request = chatRoom.messages[i];
         // console.log(request)
         const chatMessage = await ChatMessage.findById(request)
-        // console.log(chatMessage)
+        console.log(chatMessage)
         object[chatMessage._id] = chatMessage;
     }
     return object;

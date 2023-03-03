@@ -19,22 +19,26 @@ router.post('/create', validateMessage, async (req, res, next) => {
         }
 
         // create a new chat message
-        const newChatMessage = new ChatMessage({authorReal, body})
+        const newChatMessage = new ChatMessage({author: authorReal, body})
 
         // fetch the latest version of the chat room document
         const latestChatRoom = await ChatRoom.findById(room)
-
+        let msgId;
         if (latestChatRoom.messages.length < 50) {
             latestChatRoom.messages.push(newChatMessage._id)
         } else {
-            latestChatRoom.messages.shift();
+            msgId = latestChatRoom.messages.shift();
+            
             latestChatRoom.messages.push(newChatMessage._id)
         }
 
         await latestChatRoom.save();
         // await authorReal.save();
         await newChatMessage.save();
-
+        if (msgId){
+            const msg = await ChatMessage.findById(msgId)
+            await msg.remove();
+        }
         res.status(200).json(newChatMessage)
 
     } catch (err) {
