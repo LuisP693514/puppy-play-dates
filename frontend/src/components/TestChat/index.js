@@ -8,6 +8,7 @@ import { fetchChatRoom, getChatRoom } from '../../store/chatRooms'
 import { fetchFriends, getFriends } from '../../store/friends'
 import { fetchUser, getUser } from '../../store/users'
 import ChatBox from './ChatBox'
+import { fetchChatMessages, getChatMessages } from '../../store/chatMessages'
 
 const socket = io.connect("http://localhost:5001")
 
@@ -20,12 +21,16 @@ const TestChat = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const history = useHistory(); // use this to grab 2nd user
-    const user2 = history?.location.state?.user2
+    const user2 = history?.location?.state?.user2
+    const oldRoom = history?.location?.state?.oldRoom
     const realUser2 = useSelector(getUser(user2))
-
     const [updatedUser2, setUpdatedUser2] = useState(false)
     const [updatedChatRoom, setUpdatedChatRoom] = useState(false)
     const chatRoom = useSelector(getChatRoom)
+    const messages = useSelector(getChatMessages)
+    const [loadedMessages, setLoadedMessages] = useState(false)
+    const [joinedRoom, setJoinedRoom] = useState(false)
+
 
     //for testing purposes, selecting all friends
 
@@ -39,33 +44,37 @@ const TestChat = () => {
                     setUpdatedUser2(true)
                 })
         }
-        if (currentUser?._id && realUser2?._id) {
-            dispatch(fetchChatRoom(currentUser._id, realUser2._id))
-                .then(() => {
-                    setUpdatedChatRoom(true)
-                })
+
+        if (realUser2) {
+            grabChatRoom()
         }
 
+        if (chatRoom?._id) {
+            dispatch(fetchChatMessages(chatRoom._id))
+                .then(() => {
+                    setLoadedMessages(true);
+                })
+            joinRoom();
+        }
         // for testing purposes, fetching all friends
 
         dispatch(fetchFriends(currentUser?._id));
+ 
+    }, [dispatch, user2, updatedUser2, updatedChatRoom, joinedRoom])
 
-    }, [dispatch, user2, updatedUser2, updatedChatRoom])
+    const grabChatRoom = async () => {
 
+        await dispatch(fetchChatRoom(currentUser._id, realUser2._id))
+            .then(() => {
+                setUpdatedChatRoom(true)
+            })
+
+    }
     const joinRoom = () => {
-
-        // do logic here to auto-join room when both users (friend and current logged in user) are found
-        // this is to join socket room
-        if (chatRoom) {
-            socket.emit('join_room', chatRoom?._id)
-        }
-
+        socket.emit("join_room", { room: chatRoom._id, oldRoom: oldRoom })
     }
-    if (chatRoom) {
-        joinRoom();
-    }
+
     if (friends.length === 0) return null;
-
     return (
         <>
             {/* for testing purposes, displaying all users as a link to chat with them */}
@@ -74,15 +83,27 @@ const TestChat = () => {
                 <div>friends: </div>
                 {friends.map(friend => {
                     return (
-                        <button key={friend._id} onClick={(e) => {
-                            e.preventDefault();
-                            history.push('/test', { user1: currentUser, user2: friend.friend})
-                        }}>{friend.friend}</button>
+                        <>
+                            <button
+                                disabled={user2 === friend.friend}
+                                key={friend._id}
+                                onClick={(e) => {
+                                    setJoinedRoom(false)
+                                    history.push('/test', { user1: currentUser, user2: friend.friend, oldRoom: chatRoom?._id })
+                                }}>{friend.friend}</button>
+                            {(!joinedRoom) && <button
+                                id={"button-to-start-chatting"}
+                                disabled={user2 !== friend.friend}
+                                onClick={(e) => {
+                                    history.push('/test', { user1: currentUser, user2: friend.friend, oldRoom: oldRoom })
+                                    setJoinedRoom(true)
+                                }}>Open Chat</button>}
+                        </>
                     )
                 })}
-                
             </div>
-            <ChatBox socket={socket} user={currentUser} room={chatRoom}/>
+
+            {loadedMessages && joinedRoom ? <ChatBox messages={messages} socket={socket} user={currentUser} room={chatRoom} /> : <></>}
         </>
     )
 

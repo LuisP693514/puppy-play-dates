@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const DateRequest = require('../../models/DateRequest');
-// const DateRequest = mongoose.model('DateRequest');
 const User = mongoose.model("User");
 
 router.post('/create', async (req, res, next) => {
@@ -69,25 +68,6 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-// router.get('/:userId', async (req, res) => {
-
-//     const userId = req.params.userId;
-//     try {
-//         const user = await User.findById(userId)
-//         if (!user) {
-//             return res.status(404).json({ message: 'User not found' })
-//         }
-
-//         const requests = await FriendRequest.find({ $or: [{ sender: userId }, { receiver: userId }] })
-//             .populate('sender', '_id username')
-//             .populate('receiver', '_id username');
-
-//         res.status(200).json(requests)
-//     } catch (err) {
-//         res.status(500).json({ message: err.message })
-//     }
-// })
-
 router.patch('/:reqId', async (req, res) => {
     const requestId = req.params.reqId;
     const updateData = req.body;
@@ -97,7 +77,7 @@ router.patch('/:reqId', async (req, res) => {
             return res.status(404).json({ message: 'Date request not found' })
         }
 
-        //work here
+        await request.save();
         res.status(200).json(request)
 
     } catch (err) {

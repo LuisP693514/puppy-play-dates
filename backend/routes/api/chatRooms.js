@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const mongoose = require('mongoose');
 const ChatRoom = require('../../models/ChatRoom');
 const ChatMessage = require('../../models/ChatMessage')
-// const DateRequest = mongoose.model('DateRequest');
-// const User = mongoose.model("User");
 
 router.get('/:chatRoomId/messages', async (req, res) => {
     const chatRoomId = req.params.chatRoomId;

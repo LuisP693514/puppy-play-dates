@@ -21,8 +21,7 @@ const userSchema = new Schema({
     longitude: { type: Number },
     signedIn: { type: Boolean, default: false },
     puppyTemperament: { type: String },
-    chatRooms: [{type: mongoose.Schema.Types.ObjectId, ref: 'ChatRoom'}],
-    messages: [{type: mongoose.Schema.Types.ObjectId, ref: 'ChatMessage'}]
+    chatRooms: [{type: mongoose.Schema.Types.ObjectId, ref: 'ChatRoom'}]
 
 }, {
     timestamps: true
