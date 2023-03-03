@@ -12,7 +12,7 @@ router.post('/create', validateMessage, async (req, res, next) => {
     try {
 
         const chatRoom = await ChatRoom.findById(room)
-        const authorReal = await User.findById(author._id)
+        const authorReal = await User.findById(author)
 
         if (!chatRoom || !authorReal) {
             return res.status(404).json({message: "Chat room or User not found"})

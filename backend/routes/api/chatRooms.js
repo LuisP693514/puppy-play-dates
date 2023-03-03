@@ -53,7 +53,7 @@ async function getChatMessagesAsObj(chatRoom) {
         const request = chatRoom.messages[i];
         // console.log(request)
         const chatMessage = await ChatMessage.findById(request)
-        console.log(chatMessage)
+        // console.log(chatMessage)
         object[chatMessage._id] = chatMessage;
     }
     return object;

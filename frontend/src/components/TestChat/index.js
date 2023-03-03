@@ -52,8 +52,7 @@ const TestChat = () => {
         if (chatRoom?._id) {
             dispatch(fetchChatMessages(chatRoom._id))
                 .then(() => {
-                    setLoadedMessages(true)
-
+                    setLoadedMessages(true);
                 })
             joinRoom();
         }

@@ -1,6 +1,93 @@
-.chatBox-body {
-    max-height: 300px;
-    max-width: 500px;
-    margin: 0 auto;
-    box-sizing: border-box;
+.chatBox-wrapper {
+    width: 300px;
+    height: 420px;
 }
+
+.chatBox-wrapper p {
+    margin: 0;
+}
+
+.chatBox-wrapper .chatBox-header {
+    height: 45px;
+    border-radius: 6px;
+    background: #263238;
+    position: relative;
+}
+
+.chatBox-wrapper .chatBox-header p {
+    display: block;
+    padding: 0 1em 0 2em;
+    color: #fff;
+    font-weight: 700;
+    line-height: 45px;
+}
+
+.chatBox-wrapper .chat-body {
+    height: 475px;
+    border: 1px solid #263238;
+    background: #fff;
+    position: relative;
+}
+
+.chatBox-wrapper .chat-body .message-container {
+    width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chatBox-wrapper .chat-body .message-container::-webkit-scrollbar {
+    display: none;
+}
+
+.chatBox-wrapper .chat-body .messageBox {
+    height: auto;
+    padding: 10px;
+    display: flex;
+}
+
+.message-content {
+    width: auto;
+  height: auto;
+  min-height: 40px;
+  max-width: 120px;
+  background-color: #43a047;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+#currentUser {
+    justify-content: flex-end;
+}
+
+#currentUser .message-content {
+    justify-content: flex-end;
+}
+
+#currentUser .message-time {
+    justify-content: flex-end;
+  margin-left: 5px;
+}
+
+#otherUser {
+    justify-content: flex-start;
+}
+
+#otherUser .message-content {
+    justify-content: flex-start;
+    background-color: #d47800;
+}
+
+#otherUser .message-time {
+    justify-content: flex-start;
+  margin-left: 5px;
+}
+
