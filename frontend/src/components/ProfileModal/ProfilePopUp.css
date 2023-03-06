@@ -27,6 +27,7 @@
 .dog-name-section{
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 15px
 }
 
 .add-friend-bone{
@@ -47,4 +48,18 @@ div.puppy-details-section span{
 
 .owner-details-section span{
     font-size: 20px;
+}
+
+#delete-friend-on-modal{
+    color: orange
+}
+
+#delete-friend-on-modal:hover{
+    color: #ee7308
+}
+
+.friend-profile-button-options{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
 }

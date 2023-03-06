@@ -4,17 +4,85 @@
     left: 7%;
     background-color: white;
     width: max-content;
+    height: 80%;
     padding: 40px;
-    padding-right: 60px;
-    padding-left: 60px;
     box-shadow: 4px 5px 8px #6b6767;
     border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
     z-index: 10;
+    overflow: auto;
+}
+
+.overflow {
+    height: 100%;
+    overflow: auto;
 }
 
 .profile-friend-image {
-    height: 50px;
-    width: 50px
+    height: 75px;
+    width: 75px
+}
+
+
+.friend-list{
+    font-size: 1.3em;
+    color: orange;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.friend-info{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.request-info-container{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pending-info {
+    margin-left: 20px;
+    line-height: 20px;
+}
+
+.delete-request{
+    color: orange
+}
+
+.delete-request:hover{
+    color: #ee7308
+}
+
+.friends-names{
+    margin-left: 20px;
+}
+
+#accept-friend-button{
+    color: orange
+}
+
+#accept-friend-button:hover{
+    color: #ee7308
+}
+
+#reject-friend-button{
+    color: grey
+}
+
+#reject-friend-button:hover{
+    color: #ee7308
+}
+
+.request-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    line-height: 20px;
 }

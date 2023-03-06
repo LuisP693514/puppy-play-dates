@@ -22,9 +22,13 @@ const FriendRequestInfoContainer = ({request}) => {
 
     return (
         <div className="request-info-container">
-            <p>Owner name: {receiver.name}</p>
-            <p>Puppy name: {receiver.puppyName}</p>
-            <button onClick={handleDeleteRequest} id="unfriend-button">Delete Request</button>
+            <div>
+                <img className="profile-friend-image" src={receiver.profileImageUrl}/>
+            </div>
+            <div className="pending-info">
+                <p>{receiver.name} & {receiver.puppyName}</p>
+                <button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button>
+            </div>
         </div>
     )
 };

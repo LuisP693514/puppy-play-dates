@@ -32,10 +32,14 @@ const FriendRequestContainer = ({request}) => {
 
     return (
         <div className="request-info-container">
-            <p>Owner name: {sender.name}</p>
-            <p>Puppy name: {sender.puppyName}</p>
-            <button onClick={handleAcceptRequest} id="accept-friend-button">Accept</button>
-            <button onClick={handleRejectRequest} id="reject-friend-button">Reject</button>
+            <div>
+                <img className="profile-friend-image" src={sender.profileImageUrl}/>
+            </div>
+            <div className="request-info">
+                <p>{sender.name} & {sender.puppyName}</p>
+                <button className="" onClick={handleAcceptRequest} id="accept-friend-button">- Confirm -</button>
+                <button className="" onClick={handleRejectRequest} id="reject-friend-button">- Decline -</button>
+            </div>
         </div>
     )
 };
