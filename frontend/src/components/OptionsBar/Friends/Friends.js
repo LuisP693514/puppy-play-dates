@@ -44,9 +44,9 @@ const Friends = ({open, friendsClose})  => {
 
     if (!open) return null
     return reactDom.createPortal(
-        <div className="options-modal">
+        <div className="friends-modal">
                 <div className='friends-index-container'>
-                    <h1 id='friend-list'>Friends</h1>
+                    <h5 id='friend-list '>FRIENDS</h5>
                     <div id='friend-index'>
                         {friends.map(friend => {
                             return(<div id='friend-item'>
@@ -56,7 +56,7 @@ const Friends = ({open, friendsClose})  => {
                     </div>
                 </div>
                 <div className='friend-request-index-container'> 
-                    <h2 id='friend-requests'>Friend Requests</h2>
+                    <h5 id='friend-requests'>Friend Requests</h5>
                     <div id='friend-request-index'>
                         {pendingInvitee.map(request => {
                             return (<div id='friend-item'>
@@ -66,7 +66,7 @@ const Friends = ({open, friendsClose})  => {
                     </div>
                 </div>
                 <div className='friend-pending-index-container'> 
-                    <h2 id='friend-requests'>Pending Friend Requests</h2>
+                    <h5 id='friend-requests'>Pending Friend Requests</h5>
                     <div id='friend-request-index'>
                         {pendingCreator.map(request => {
                             return (<div id='friend-item'>

@@ -23,5 +23,8 @@
   "homepage": "https://github.com/LuisP693514/puppy-play-dates#readme",
   "engines": {
     "node": "16.x"
+  },
+  "dependencies": {
+    "react-scroll-to-bottom": "^4.2.0"
   }
 }
