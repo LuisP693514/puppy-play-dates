@@ -29,6 +29,8 @@ function LoginForm () {
   }
 
   const handleDemoSubmit = () => {
+    setEmail('demo-user@appacademy.io')
+    setPassword('password')
     dispatch(sessionActions.login({ 
       email: 'demo-user@appacademy.io', 
       password: 'password' }
