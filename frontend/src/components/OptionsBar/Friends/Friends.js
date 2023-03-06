@@ -10,7 +10,6 @@ import FriendRequestInfoContainer from './FriendRequestInfoContainer';
 import FriendRequestContainer from './FriendRequestContainer';
 import FriendContainer from './FriendContainer';
 
-
 import './Friends.css'
 
 const Friends = ({open, friendsClose})  => {
@@ -37,55 +36,65 @@ const Friends = ({open, friendsClose})  => {
         request?.status === 'pending' && request?.receiver === currentUser._id
     ));
 
-    // const rejected = friendRequests.filter(request => (
-    //     request?.status === 'rejected' && request?.sender === currentUser._id
-    // ));
+    function friendReqList() {
+
+        if (pendingInvitee.length){
+            return (
+                <>
+                    <h6 className='friend-list'>FRIEND REQUESTS:</h6>
+                    <div id='friend-request-index'>
+                        {pendingInvitee.map(request => {
+                                return (<div id='friend-item'>
+                                        <FriendRequestContainer request={request}/>
+                                    </div>)
+                        })}
+                    </div>
+                </>)
+            } else {
+            return <></>
+        }
+        }
+    
+    function pendingRequests(){
+        if (pendingCreator.length) {
+            return (<>
+                <h6 className='friend-list'>PENDING REQUESTS:</h6>
+                <div id='friend-request-index'>
+                    {pendingCreator.map(request => {
+                        return (<div id='friend-item'>
+                                    <FriendRequestInfoContainer request={request}/>
+                                </div>)
+                    })}
+                </div>
+            </>)
+        }else{
+            return <></>
+        }
+    }
 
 
     if (!open) return null
     return reactDom.createPortal(
         <div className="friends-modal">
-                <div className='friends-index-container'>
-                    <h5 id='friend-list '>FRIENDS</h5>
-                    <div id='friend-index'>
-                        {friends.map(friend => {
-                            return(<div id='friend-item'>
-                                        <FriendContainer friend={friend}/>
-                                    </div>)
-                        })}
+            <div className="overflow">
+                    <div className='friends-index-container'>
+                        <h5 className='friend-list'>FRIENDS:</h5>
+                        <div id='friend-index'>
+                            {friends.map(friend => {
+                                return(<div id='friend-item'>
+                                            <FriendContainer friend={friend}/>
+                                        </div>)
+                            })}
+                        </div>
                     </div>
-                </div>
-                <div className='friend-request-index-container'> 
-                    <h5 id='friend-requests'>Friend Requests</h5>
-                    <div id='friend-request-index'>
-                        {pendingInvitee.map(request => {
-                            return (<div id='friend-item'>
-                                        <FriendRequestContainer request={request}/>
-                                    </div>)
-                        })}
+                    <div className='friend-request-index-container'> 
+                        {friendReqList()}
                     </div>
-                </div>
-                <div className='friend-pending-index-container'> 
-                    <h5 id='friend-requests'>Pending Friend Requests</h5>
-                    <div id='friend-request-index'>
-                        {pendingCreator.map(request => {
-                            return (<div id='friend-item'>
-                                        <FriendRequestInfoContainer request={request}/>
-                                    </div>)
-                        })}
+                    <div className='friend-pending-index-container'> 
+                        {pendingRequests()}
                     </div>
-                </div>
-                {/* <div className='pending-rejected-index-container'> 
-                    <h2 id='friend-requests'>Rejected Friend Requests</h2>
-                    <div id='friend-request-index'>
-                        {rejected.map(request => {
-                            return (<div id='friend-item'>
-                                        <FriendRequestInfoContainer request={request}/>
-                                    </div>)
-                        })}
-                    </div>
-                </div> */}
-            <button onClick={friendsClose} className="modal-close">&times;</button>
+                <button onClick={friendsClose} className="modal-close">&times;</button>
+            </div>
         </div>,
         document.getElementById("portal")
     )

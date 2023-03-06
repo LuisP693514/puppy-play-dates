@@ -137,7 +137,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 position={{ lat: user.latitude, lng: user.longitude }} 
                 icon={{
                     url: user.profileImageUrl,
-                    scaledSize: { width: 110, height: 110 }
+                    scaledSize: { width: 110, height: 110 },
                 }}
             /> ) 
                 :
@@ -151,6 +151,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 icon={{
                     url: user.profileImageUrl,
                     scaledSize: { width: 75, height: 75 }
+
                 }}
             />)
         ))}

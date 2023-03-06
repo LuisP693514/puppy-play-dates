@@ -116,9 +116,9 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
                 </div>
                 <div className="profile-modal-buttons">
                     {isFriend ? (
-                        <div>
+                        <div className="friend-profile-button-options">
                             <button className="button" id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
-                            <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>Delete Friend</button>
+                            <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>- Unfriend -</button>
                         </ div>
                     ) : (<br />)}
 
