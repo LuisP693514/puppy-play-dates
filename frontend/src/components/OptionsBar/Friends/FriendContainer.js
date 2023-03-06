@@ -33,12 +33,19 @@ const FriendContainer = ({friend}) => {
             <button className="friend-info" onClick={() => {
                     setShowModal(true);
                     setSelectedUserId(friendUser._id);}}>
-                <img className="profile-friend-image" src={friendUser.profileImageUrl} alt="profile" />
-                <p>Owner name: {friendUser.name}</p>
-                <p>Puppy name: {friendUser.puppyName}</p>
+                <div className="profile-friend-image">
+                    <img className="" src={friendUser.profileImageUrl} alt="profile" />
+                </div>
+                <div>
+                    <div>
+                    <p>PLACEHOLDER{friendUser.name} & FIX ME{friendUser.puppyName}</p>
+                    </div>
+                    <div>
+                        <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button>
+                        {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
+                    </div>
+                </div>
             </button>
-            <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button>
-        {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
         </div>
     )
 };
