@@ -41,7 +41,7 @@ const FriendContainer = ({friend}) => {
                     <p>{friendUser.name} & {friendUser.puppyName}</p>
                     </div>
                     <div>
-                        {/* <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button> */}
+                        <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button>
                         {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
                     </div>
                 </div>

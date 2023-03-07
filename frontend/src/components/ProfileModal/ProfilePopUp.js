@@ -62,17 +62,12 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
         }))
     };
 
-    const handleDeleteFriend = e => {
-        e.preventDefault();
-        dispatch(deleteFriend({
-            friend: otherUser._id,
-            user: currentUser._id
-        }))
-        dispatch(deleteFriend({
-            friend: currentUser._id,
-            user: otherUser._id
-        }))
-    };
+    // const friend = friendList.filter(friend => friend.user === userId)
+
+    // const handleDeleteFriend = e => {
+    //     e.preventDefault();
+    //     dispatch(deleteFriend(friend._id))
+    // };
 
     // const handleMessage = e => {
     //     e.preventDefault();
@@ -118,7 +113,7 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
                     {isFriend ? (
                         <div className="friend-profile-button-options">
                             <button className="button" id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
-                            <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>- Unfriend -</button>
+                            {/* <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>- Unfriend -</button> */}
                         </ div>
                     ) : (<br />)}
 
