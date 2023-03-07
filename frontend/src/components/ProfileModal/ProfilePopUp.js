@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import reactDom from "react-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
     const sessionUser = useSelector(selectCurrentUser);
     const currentUser = useSelector(getUser(sessionUser._id));
     const friendList = useSelector(getFriends);
-    // const isFriendRequest = currentUser?.friendRequests.includes(userId);
+    const [friendRequestSent, setFriendRequestSent] = useState(false);
 
 
     useEffect(() => {
@@ -47,7 +47,6 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
         }
     }
     isFrien(currentUser, otherUser)
-    // debugger
     const handleCreateDateRequest = e => {
         e.preventDefault();
         history.push('/createDate', { currentUser, otherUser });
@@ -59,21 +58,10 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
             sender: currentUser._id,
             receiver: otherUser._id,
             status: 'pending'
-        }))
+        }));
+        setFriendRequestSent(true);
     };
 
-    // const friend = friendList.filter(friend => friend.user === userId)
-
-    // const handleDeleteFriend = e => {
-    //     e.preventDefault();
-    //     dispatch(deleteFriend(friend._id))
-    // };
-
-    // const handleMessage = e => {
-    //     e.preventDefault();
-    //     history.push(`/messages/${userId}`)
-    //     // hide the userid 
-    // };
 
     if (!open) return null
     return reactDom.createPortal(
@@ -113,14 +101,18 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
                     {isFriend ? (
                         <div className="friend-profile-button-options">
                             <button className="button" id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
-                            {/* <button id='delete-friend-on-modal' onClick={handleDeleteFriend}>- Unfriend -</button> */}
                         </ div>
                     ) : (<br />)}
 
-                    {(!isFriend && (currentUser._id !== userId)) ? (<button className="button" id="add-friend-button" onClick={handleAddFriend}><i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i></button>) : (<br />)}
-
-
-                    {/* <button id="message-button" onClick={handleMessage}>Message</button> */}
+                              {(!isFriend && (currentUser._id !== userId)) ? (
+            friendRequestSent ? (
+              <button className="button" disabled>Pending Friend Request</button>
+            ) : (
+                <button className="button" id="add-friend-button" onClick={handleAddFriend}>
+                    <i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i>
+                </button>
+                )
+                ) : (<br />)}
                 </div>
             </div>
         </>,
