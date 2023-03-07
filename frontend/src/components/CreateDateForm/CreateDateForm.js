@@ -26,7 +26,7 @@ const CreateDate = () => {
         latitude
     };
     dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
-    // history.push('/dates')
+    history.push('/main')
   };
 
   if (!otherUser) return null;

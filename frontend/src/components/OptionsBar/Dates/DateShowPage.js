@@ -31,12 +31,9 @@ const DateShowPage = ({open, datesClose}) => {
     ));
 
     const pendingInvitee = dateRequests.filter(request => (
-        request?.status === 'pending' && request?.inviteee === currentUser._id
+        request?.status === 'pending' && request?.invitee === currentUser._id
     ));
 
-    // const rejected = dateRequests.filter(request => (
-    //     request.status === 'rejected' && request.creator === currentUser._id
-    // ));
 
     if (!open) return null
     return reactDom.createPortal(
@@ -73,16 +70,6 @@ const DateShowPage = ({open, datesClose}) => {
                             })}
                         </div>
                     </div>
-                    {/* <div className='date-pending-rejected-index-container'> 
-                        <h2 id='date-requests'>Rejected Date Requests</h2>
-                        <div id='date-request-index'>
-                            {rejected.map(request => {
-                                return (<div id='date-item'>
-                                            <DateRequestInfoContainer request={request}/>
-                                        </div>)
-                            })}
-                        </div>
-                    </div> */}
             </div>
         </>,
         document.getElementById("portal")

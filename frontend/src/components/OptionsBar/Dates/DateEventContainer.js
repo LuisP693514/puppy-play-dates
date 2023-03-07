@@ -37,7 +37,7 @@ const DateEventContainer = ({dateId}) => {
     }
 
     const handleUpdateClick = () => {
-        history.push('/editDate' , {date})
+        history.push('/editDate', {date})
     }
 
         return (

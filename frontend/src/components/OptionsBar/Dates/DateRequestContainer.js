@@ -23,7 +23,6 @@ const DateRequestContainer = ({request, currentUser}) => {
             latitude: request.latitude,
             longitude: request.longitude
         }))
-        // dispatch(updateDateRequest({...dateRequest, status: 'accepted'}))
         dispatch(deleteDateRequest(request._id))
     };
 
