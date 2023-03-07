@@ -8,37 +8,38 @@ const User = mongoose.model("User");
 router.get('/:dateId', async (req, res) => {
     const dateId = req.params.dateId
     try {
-        const Date = await Date.findById(dateId)
-        if (!Date) {
+        const date = await Date.findById(dateId)
+        if (!date) {
             return res.status(404).json({ message: "Date not found" })
         }
 
-        res.status(200).json(Date)
+        res.status(200).json(date)
     } catch (err) {
+        console.log(err)
         res.status(500).json({ message: err.message })
     }
 })
 
 router.post('/create', async (req, res) => {
-    const { creatorId, inviteeId, date } = req.body;
+    const { creator, invitee, date } = req.body;
     try {
         // check to see if creator exists
-        const creator = await User.findById(creatorId)
-        if (!creator) {
+        const creatorR = await User.findById(creator)
+        if (!creatorR) {
             return res.status(404).json({ message: "Creator not found" })
         }
 
         // check to see if the invitee exists
-        const invitee = await User.findById(inviteeId)
-        if (!invitee) {
+        const inviteeR = await User.findById(invitee)
+        if (!inviteeR) {
             return res.status(404).json({ message: "Invitee not found" })
         }
 
         // check to see if both users have a date with conflicting times
         const existingDate = await Date.findOne({
             $or: [
-                { creator: creatorId, invitee: inviteeId, date: date },
-                { creator: inviteeId, invitee: creatorId, date: date }
+                { creator: creator, invitee: invitee, date: date },
+                { creator: invitee, invitee: creator, date: date }
             ]
         })
 
@@ -50,11 +51,11 @@ router.post('/create', async (req, res) => {
         const newDate = new Date(req.body)
         await newDate.save();
 
-        creator.dates.push(newDate._id);
-        invitee.dates.push(newDate._id);
+        creatorR.dates.push(newDate._id);
+        inviteeR.dates.push(newDate._id);
 
-        await creator.save();
-        await invitee.save();
+        await creatorR.save();
+        await inviteeR.save();
 
         res.status(201).json(newDate);
 
@@ -67,13 +68,13 @@ router.delete('/:dateId', async (req, res) => {
     const dateId = req.params.dateId
     try {
         const date = await Date.findById(dateId)
+        console.log(date)
         if (!date) {
             return res.status(404).json({ message: "Date not found" })
         }
 
         const user1 = await User.findById(date.creator);
         const user2 = await User.findById(date.invitee);
-
         if (!user1 || !user2) {
             return res.status(404).json({message: "Users not found"})
         }
@@ -91,6 +92,7 @@ router.delete('/:dateId', async (req, res) => {
 
         res.status(200).json({ message: "Date deleted" })
     } catch (err) {
+        console.log(err)
         res.status(500).json({ message: err.message })
     }
 })
@@ -106,6 +108,7 @@ router.patch('/:dateId', async (req, res) => {
         res.status(200).json(date)
 
     } catch (err) {
+        console.log(err)
         res.status(500).json({ message: err.message })
     }
 })

@@ -9,6 +9,7 @@ const DEFAULT_PROFILE_IMAGE_URL = "https://puppyplaydates.s3.us-east-2.amazonaws
 const Friend = require('./../../models/Friend')
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
+const Date = require('../../models/Date')
 
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
@@ -112,18 +113,18 @@ router.get('/:userId/dates', async (req, res) => {
   try {
     const user = await User.findById(userId)
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
-    const dates = user.dates
+    const dates = getDateAsObj(user)
 
     if (!dates) {
-      return res.status(404).json({message: "User's dates not found"})
+      return res.status(404).json({ message: "User's dates not found" })
     }
 
     res.status(200).json(dates)
   } catch (err) {
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message })
   }
 })
 // /api/users/:userId/friends grabs all the dates a single user has (array)
@@ -132,19 +133,19 @@ router.get('/:userId/dateRequests', async (req, res) => {
   const userId = req.params.userId;
   try {
     const user = await User.findById(userId)
-  
+
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
     const dates = user.dateRequests
     if (!dates) {
-      return res.status(404).json({message: "User's dates not found"})
+      return res.status(404).json({ message: "User's dates not found" })
     }
 
     res.status(200).json(dates)
   } catch (err) {
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -153,18 +154,18 @@ router.get('/:userId/friendsRequests', async (req, res) => {
   try {
     const user = await User.findById(userId)
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
     const dates = user.friendRequests
 
     if (!dates) {
-      return res.status(404).json({message: "User's dates not found"})
+      return res.status(404).json({ message: "User's dates not found" })
     }
 
     res.status(200).json(dates)
   } catch (err) {
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -173,13 +174,13 @@ router.get('/:userId/friends', async (req, res) => {
   try {
     const user = await User.findById(userId)
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
     const friends = await getFriendAsObj(user)
 
     if (!friends) {
-      return res.status(404).json({message: "User's friends not found"})
+      return res.status(404).json({ message: "User's friends not found" })
     }
 
     res.status(200).json(friends)
@@ -208,20 +209,20 @@ router.patch('/:userId/image', singleMulterUpload("image"), async (req, res, nex
   const updatedUserData = req.body;
   try {
     const profileImageUrl = req.file ?
-      await singleFileUpload({ file: req.file, public: true }) 
+      await singleFileUpload({ file: req.file, public: true })
       :
       DEFAULT_PROFILE_IMAGE_URL;
     updatedUserData.profileImageUrl = profileImageUrl
 
-    const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
+    const user = await User.findByIdAndUpdate(userId, updatedUserData, { new: true })
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
 
     if (user.password) user.password = null;
 
-    if (req.body.password){
+    if (req.body.password) {
 
       bcrypt.genSalt(10, (err, salt) => {
         if (err) throw err;
@@ -243,7 +244,7 @@ router.patch('/:userId/image', singleMulterUpload("image"), async (req, res, nex
     }
 
   } catch (err) {
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -264,16 +265,16 @@ router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => 
     // console.log(profileImageUrl)
     // updatedUserData.profileImageUrl = profileImageUrl
 
-    const user = await User.findByIdAndUpdate(userId, updatedUserData, {new: true})
+    const user = await User.findByIdAndUpdate(userId, updatedUserData, { new: true })
 
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
 
     if (user.password) user.password = null;
 
-    if (req.body.password){
+    if (req.body.password) {
 
       bcrypt.genSalt(10, (err, salt) => {
         if (err) throw err;
@@ -295,9 +296,9 @@ router.patch('/:userId', singleMulterUpload("image"), async (req, res, next) => 
     }
 
   } catch (err) {
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message })
   }
-  
+
 })
 // /api/users/:userId deletes the user
 router.delete('/:userId', async (req, res) => {
@@ -305,11 +306,11 @@ router.delete('/:userId', async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(userId)
     if (!user) {
-      return res.status(404).json({message: 'Could not delete user.'})
+      return res.status(404).json({ message: 'Could not delete user.' })
     }
-    res.json({message: "Successfully deleted the user."})
+    res.json({ message: "Successfully deleted the user." })
   } catch (err) {
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -317,11 +318,24 @@ async function getFriendAsObj(user) {
   // console.log(user)
   const object = {}
   for (let i = 0; i < user.friends.length; i++) {
-      const request = user.friends[i];
-      // console.log(request)
-      const friend = await Friend.findById(request)
-      // console.log(friend)
-      object[friend._id] = friend;
+    const request = user.friends[i];
+    // console.log(request)
+    const friend = await Friend.findById(request)
+    // console.log(friend)
+    object[friend._id] = friend;
+  }
+  return object;
+}
+
+async function getDateAsObj(user) {
+  // console.log(user)
+  const object = {}
+  for (let i = 0; i < user.dates.length; i++) {
+    const request = user.dates[i];
+    // console.log(request)
+    const date = await Date.findById(request)
+    // console.log(date)
+    object[date._id] = date;
   }
   return object;
 }

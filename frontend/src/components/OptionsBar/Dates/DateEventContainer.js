@@ -10,13 +10,15 @@ const DateEventContainer = ({dateId}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const date = useSelector(getDate(dateId));
-    const otherUser = useSelector(getUser(date.invitee))
+    const otherUser = useSelector(getUser(date?.invitee))
     const [showModal, setShowModal] = useState(false);
 
 
     useEffect(() => {
-        dispatch(fetchDate(dateId))
-        dispatch(fetchUser(date.invitee))
+        if (dateId) {
+            dispatch(fetchDate(dateId))
+        }
+        dispatch(fetchUser(date?.invitee))
     }, [dispatch]);
 
     if (!date) return null;
@@ -28,7 +30,7 @@ const DateEventContainer = ({dateId}) => {
 
     const handleConfirmDelete = e => {
         e.preventDefault();
-        dispatch(deleteDate(date.id));
+        dispatch(deleteDate(date?._id));
     }
 
     const handleCancelDelete = e => {
@@ -43,10 +45,10 @@ const DateEventContainer = ({dateId}) => {
         return (
             <div className="date-container">
                 <div className="date-info-container">
-                    <p>Date with {otherUser.puppyName}</p>
-                    <div>{date.name}</div>
-                    <div>{date.date}</div>
-                    <div>{date.description}</div>
+                    <p>Date with {otherUser?.puppyName}</p>
+                    <div>{date?.name}</div>
+                    <div>{date?.date}</div>
+                    <div>{date?.description}</div>
                     {/* <div>Location:</div>
                     <div>Latitude: {date.latitude}</div>
                     <div>Longitude: {date.longitude}</div> */}
