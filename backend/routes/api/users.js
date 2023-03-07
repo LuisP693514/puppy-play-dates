@@ -116,12 +116,12 @@ router.get('/:userId/dates', async (req, res) => {
       return res.status(404).json({ message: "User not found" })
     }
 
-    const dates = getDateAsObj(user)
+    const dates = await getDateAsObj(user)
 
     if (!dates) {
       return res.status(404).json({ message: "User's dates not found" })
     }
-
+    // console.log(dates)
     res.status(200).json(dates)
   } catch (err) {
     res.status(500).json({ message: err.message })
