@@ -15,7 +15,6 @@ const DateShowPage = ({open, datesClose}) => {
     const dates = useSelector(getDates);
     const dateRequests = useSelector(getDateRequests);
 
-
     useEffect(() => {
         dispatch(getCurrentUser())
         dispatch(fetchDates(currentUser._id))
@@ -34,7 +33,6 @@ const DateShowPage = ({open, datesClose}) => {
         request?.status === 'pending' && request?.invitee === currentUser._id
     ));
 
-
     if (!open) return null
     return reactDom.createPortal(
         <>
@@ -43,9 +41,9 @@ const DateShowPage = ({open, datesClose}) => {
                 <div className='date-index-container'>
                     <h1 id='upcoming-dates'>Upcoming Dates</h1>
                     <div id='date-index'>
-                        {dates.map(dateId =>{ 
+                        {dates.map(date =>{ 
                         return ( <div id='date-item'>
-                                        <DateEventContainer dateId={dateId}/>
+                                        <DateEventContainer dateId={date._id}/>
                                     </div>)}
                         )}
                     </div>

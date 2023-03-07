@@ -9,7 +9,6 @@ const UpdateDateForm = ({date}) => {
     const history = useHistory();
     const [updatedDate, setUpdatedDate] = useState({...date});
 
-
     const handleUpdate = () => {
         dispatch(updateDate({...date, ...updatedDate}));
     }

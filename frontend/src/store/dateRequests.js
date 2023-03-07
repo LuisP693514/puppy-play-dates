@@ -120,7 +120,6 @@ const dateRequestReducer = (state = {}, action) => {
         return {...state, [action.dateRequest._id]: action.dateRequest};
     case REMOVE_DATE_REQUEST:
         const newState = {...state};
-        debugger
         delete newState[action.dateRequestId];
         return newState;
     default:
