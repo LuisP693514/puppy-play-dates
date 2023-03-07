@@ -4,13 +4,16 @@ import { useHistory } from "react-router-dom";
 import { updateDate } from "../../../store/dates";
     
        
-const UpdateDateForm = ({date}) => {
+const UpdateDateForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const date = history?.location?.state?.date
+
     const [updatedDate, setUpdatedDate] = useState({...date});
 
     const handleUpdate = () => {
         dispatch(updateDate({...date, ...updatedDate}));
+        history.push('/main')
     }
 
     const handleCancelUpdate = () => {
