@@ -6,12 +6,11 @@ import { fetchUser, getUser } from "../../../store/users";
 import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 import './Friends.css'
 
-const FriendContainer = ({friend}) => {
+const FriendContainer = ({friend, showFriendModal, setShowFriendModal, closeAllModals}) => {
     // friend is the friendId of the table not the actual friend
     const dispatch = useDispatch();
     // const friendInfo = useSelector(getFriend(friend._id));
     const friendUser = useSelector(getUser(friend?.friend))
-    const [userModalOpen, setUserModalOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
 
     useEffect(() => {
@@ -31,7 +30,8 @@ const FriendContainer = ({friend}) => {
     return (
         <div className="friend-container">
             <button className="friend-info" onClick={() => {
-                    setUserModalOpen(true);
+                    closeAllModals()
+                    setShowFriendModal(true);
                     setSelectedUserId(friendUser._id);}}>
                 <div className="">
                     <img className="profile-friend-image" src={friendUser.profileImageUrl} alt="profile" />
@@ -41,8 +41,8 @@ const FriendContainer = ({friend}) => {
                     <p>{friendUser.name} & {friendUser.puppyName}</p>
                     </div>
                     <div>
-                        <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button>
-                        {<ProfilePopUp userId={selectedUserId} open={userModalOpen} profileClose={() => setUserModalOpen(false)}></ProfilePopUp>}
+                        {/* <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button> */}
+                        {<ProfilePopUp userId={selectedUserId} open={showFriendModal} profileClose={() => setShowFriendModal(false)}></ProfilePopUp>}
                     </div>
                 </div>
             </button>

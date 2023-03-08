@@ -1,7 +1,5 @@
-import React from 'react'
-
-import { useEffect } from 'react';
 import reactDom from 'react-dom'
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchFriendRequests, getFriendRequests } from '../../../store/friendRequests';
 import { fetchFriends, getFriends } from '../../../store/friends';
@@ -9,7 +7,6 @@ import { getCurrentUser, selectCurrentUser } from '../../../store/session';
 import FriendRequestInfoContainer from './FriendRequestInfoContainer';
 import FriendRequestContainer from './FriendRequestContainer';
 import FriendContainer from './FriendContainer';
-
 import './Friends.css'
 
 const Friends = ({open, friendsClose})  => {
@@ -17,6 +14,15 @@ const Friends = ({open, friendsClose})  => {
     const currentUser = useSelector(selectCurrentUser);
     const friends = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
+    const [showFriendModal, setShowFriendModal] = useState(false);
+    const [showPendingModal, setPendingShowModal] = useState(false)
+    const [showRequestModal, setShowRequestModal] = useState(false)
+
+    const closeAllModals = () =>{
+        setShowFriendModal(false)
+        setPendingShowModal(false)
+        setShowRequestModal(false)
+    }
     
     useEffect(() => {
         dispatch(getCurrentUser())
@@ -45,7 +51,7 @@ const Friends = ({open, friendsClose})  => {
                     <div id='friend-request-index'>
                         {pendingInvitee.map(request => {
                                 return (<div id='friend-item'>
-                                        <FriendRequestContainer request={request}/>
+                                        <FriendRequestContainer request={request} showRequestModal={showRequestModal} setShowRequestModal={setShowRequestModal} closeAllModals={closeAllModals} />
                                     </div>)
                         })}
                     </div>
@@ -62,7 +68,7 @@ const Friends = ({open, friendsClose})  => {
                 <div id='friend-request-index'>
                     {pendingCreator.map(request => {
                         return (<div id='friend-item'>
-                                    <FriendRequestInfoContainer request={request}/>
+                                    <FriendRequestInfoContainer request={request} showPendingModal ={showPendingModal} setPendingShowModal={setPendingShowModal} closeAllModals={closeAllModals}/>
                                 </div>)
                     })}
                 </div>
@@ -82,7 +88,7 @@ const Friends = ({open, friendsClose})  => {
                         <div id='friend-index'>
                             {friends.map(friend => {
                                 return(<div id='friend-item'>
-                                            <FriendContainer friend={friend}/>
+                                            <FriendContainer friend={friend} showFriendModal={showFriendModal} setShowFriendModal={setShowFriendModal} closeAllModals={closeAllModals}/>
                                         </div>)
                             })}
                         </div>
