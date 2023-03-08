@@ -16,7 +16,9 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
     const sessionUser = useSelector(selectCurrentUser);
     const currentUser = useSelector(getUser(sessionUser._id));
     const friendList = useSelector(getFriends);
-    const [friendRequestSent, setFriendRequestSent] = useState(false);
+    // const [friendRequestSent, setFriendRequestSent] = useState(false);
+    const [friendRequestStatus, setFriendRequestStatus] = useState({});
+
 
 
     useEffect(() => {
@@ -59,8 +61,14 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
             receiver: otherUser._id,
             status: 'pending'
         }));
-        setFriendRequestSent(true);
+        setFriendRequestStatus({
+            ...friendRequestStatus,
+            [currentUser._id]: 'pending',
+            [otherUser._id]: 'pending'
+        });
     };
+
+    const isPendingFriend = friendRequestStatus[currentUser._id] === 'pending' && friendRequestStatus[otherUser._id] === 'pending';
 
 
     if (!open) return null
@@ -104,15 +112,15 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
                         </ div>
                     ) : (<br />)}
 
-                              {(!isFriend && (currentUser._id !== userId)) ? (
-            friendRequestSent ? (
-              <button className="button" disabled>Pending Friend Request</button>
-            ) : (
-                <button className="button" id="add-friend-button" onClick={handleAddFriend}>
-                    <i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i>
-                </button>
-                )
-                ) : (<br />)}
+                    {(!isFriend && !isPendingFriend && (currentUser._id !== userId)) ? (
+                    <button className="button" id="add-friend-button" onClick={handleAddFriend}>
+                        <i className="fa-solid fa-bone white-text add-friend-bone"></i>Add Friend<i className="fa-solid fa-bone white-text add-friend-bone"></i>
+                    </button>
+                    ) : (<br />)}
+
+                    {isPendingFriend ? (
+                    <button className="button" disabled>Pending Friend Request</button>
+                    ) : null}
                 </div>
             </div>
         </>,
