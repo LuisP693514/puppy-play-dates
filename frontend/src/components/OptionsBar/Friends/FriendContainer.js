@@ -11,7 +11,7 @@ const FriendContainer = ({friend}) => {
     const dispatch = useDispatch();
     // const friendInfo = useSelector(getFriend(friend._id));
     const friendUser = useSelector(getUser(friend?.friend))
-    const [showModal, setShowModal] = useState(false);
+    const [userModalOpen, setUserModalOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const FriendContainer = ({friend}) => {
     return (
         <div className="friend-container">
             <button className="friend-info" onClick={() => {
-                    setShowModal(true);
+                    setUserModalOpen(true);
                     setSelectedUserId(friendUser._id);}}>
                 <div className="">
                     <img className="profile-friend-image" src={friendUser.profileImageUrl} alt="profile" />
@@ -42,7 +42,7 @@ const FriendContainer = ({friend}) => {
                     </div>
                     <div>
                         <button onClick={handleUnfriend} id="unfriend-button">Unfriend</button>
-                        {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
+                        {<ProfilePopUp userId={selectedUserId} open={userModalOpen} profileClose={() => setUserModalOpen(false)}></ProfilePopUp>}
                     </div>
                 </div>
             </button>
