@@ -10,7 +10,7 @@ function ProfileModal( {userId} ) {
     <>
       {/* <button className="double-spacer test" onClick={() => {
         setProfileOpen(true)}}>Profile Modal</button> */}
-      <ProfilePopUp userId={userId} open={profileOpen} profileClose={() => setProfileOpen(false)}></ProfilePopUp>
+      <ProfilePopUp userId={userId} open={profileOpen} profileClose={setProfileOpen}></ProfilePopUp>
     </>
   );
 }

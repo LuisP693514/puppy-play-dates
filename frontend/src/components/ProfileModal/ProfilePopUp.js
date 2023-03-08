@@ -22,7 +22,7 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
 
 
     useEffect(() => {
-        dispatch(fetchUser(userId));
+        if (userId) dispatch(fetchUser(userId));
         dispatch(getCurrentUser());
         dispatch(fetchFriends(sessionUser._id));
     }, [dispatch, userId]);
@@ -75,7 +75,7 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
     return reactDom.createPortal(
         <>
             <div className="profile-modal">
-                <button onClick={profileClose} className="modal-close">&times;</button>
+                <button onClick={() => profileClose(false)} className="modal-close">&times;</button>
                 <div className="dog-name-section"><h2 id='dog-name'>{otherUser.puppyName}</h2></div>
                 <div className="pop-up-img"><img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile" /></div>
                 <div className="puppy-details-section">
