@@ -6,12 +6,13 @@ import data from './MapConfig.json'
 import { fetchUsers, getUsers } from '../../store/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchMarkers, getMarkers } from '../../store/markers';
+import { createMarker, fetchMarkers, getMarkers } from '../../store/markers';
 import { getCurrentUser, selectCurrentUser } from '../../store/session';
 import { getLocation } from '../Utils/getLocation';
 import { updateUser } from '../../store/users';
 import ProfilePopUp from '../ProfileModal/ProfilePopUp';
 import Filter from '../NavBar/Filter/Filter';
+import MapMarkerPopUp from '../MapMarkerModal';
 
 const containerStyle = {
     width: '100%',
@@ -27,9 +28,6 @@ const containerStyle = {
 //   lng: -73.9939538
 // };
 
-
-
-
 function MyGoogleMap( { filteredMarkers } ) {
     const dispatch = useDispatch()
     const users = useSelector(getUsers)
@@ -43,7 +41,9 @@ function MyGoogleMap( { filteredMarkers } ) {
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const [showModal, setShowModal] = useState(false);
+    const [showMarkerModal, setShowMarkerModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState('')
+    const [selectedMarker, setSelectedMarker] = useState('')
 
     const [center, setCenter] = useState({
         lat: 40.7361589,
@@ -52,18 +52,34 @@ function MyGoogleMap( { filteredMarkers } ) {
     const [userStopDragging, setuserStopDragging] = useState(null);
 
     useEffect(() => {
+        debugger
         getLocation().then(coords => {
             setLatitude(coords[0])
             setLongitude(coords[1])
         })
       .catch(error => {
       });
+      const minLong = longitude - 0.0135462
+        const maxLong = longitude + 0.0139538
+        let randomLong;
+
+        const minLat = latitude + 0.0058411
+        const maxLat = latitude - 0.0061589
+        let randomLat;
+
+        const preseeded_locations = []
+        for (let i = 0; i < 12; i++) {
+            debugger
+            randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+            randomLat = (Math.random() * (maxLat - minLat)) + minLat;
+            preseeded_locations.push([randomLat, randomLong])
+            dispatch(createMarker({markerType: 'dogPark', latitude: preseeded_locations[i][0], longitude: preseeded_locations[i][1]}))
+        }
         dispatch(fetchUsers())
         dispatch(fetchMarkers())
         dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
         
     }, [dispatch, latitude, longitude])
-    
     
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -128,7 +144,7 @@ function MyGoogleMap( { filteredMarkers } ) {
       > 
         {Object.values(users).map(user => (
             user._id === sessionUser._id && hasLocation ?
-            (<Marker 
+            (<Marker
                 clickable
                 onClick={() => {
                     setShowModal(true)
@@ -141,7 +157,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 }}
             /> ) 
                 :
-           ( <Marker 
+           (  <Marker 
                 clickable
                 onClick={() => {
                     setShowModal(true)
@@ -151,17 +167,23 @@ function MyGoogleMap( { filteredMarkers } ) {
                 icon={{
                     url: user.profileImageUrl,
                     scaledSize: { width: 75, height: 75 }
-
                 }}
             />)
         ))}
-            {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
 
+        {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
+        
         {filtered.map(marker => {
             switch(marker.markerType) {
                 case 'dogPark':
                     return (
                         <Marker 
+                            clickable
+                            onClick={() => {
+                                setShowMarkerModal(true)
+                                setSelectedMarker(marker._id)
+                                setShowModal(false)
+                            }}
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: dogParkIcon,
@@ -211,6 +233,8 @@ function MyGoogleMap( { filteredMarkers } ) {
                     )
             }
     })}
+        {<MapMarkerPopUp markerId={selectedMarker} open={showMarkerModal} profileClose={() => setShowMarkerModal(false)}></MapMarkerPopUp>}
+
       </GoogleMap>
       <div className='map-center-button'> 
         <button onClick={() => {
