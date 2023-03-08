@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFriendRequest, updateFriendRequest } from "../../../store/friendRequests";
 import { createFriend } from "../../../store/friends";
 import { fetchUser, getUser } from "../../../store/users";
+import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 import './Friends.css'
 
 
-const FriendRequestContainer = ({request}) => {
+const FriendRequestContainer = ({request, showRequestModal, setShowRequestModal, closeAllModals}) => {
     const dispatch = useDispatch();
     const sender = useSelector(getUser(request.sender))
+    const [selectedUserId, setSelectedUserId] = useState('')
 
     useEffect(() => {
         dispatch(fetchUser(request.sender))
@@ -32,13 +34,22 @@ const FriendRequestContainer = ({request}) => {
 
     return (
         <div className="request-info-container">
-            <div>
-                <img className="profile-friend-image" src={sender.profileImageUrl}/>
-            </div>
-            <div className="request-info">
+            <button className="friend-info" onClick={() => {
+                    closeAllModals();
+                    setShowRequestModal(true);
+                    setSelectedUserId(sender._id);
+                    }}>
+                <div>
+                    <img className="profile-friend-image" src={sender.profileImageUrl}/>
+                </div>
+            </button>
+            <div className="pending-info">
                 <p>{sender.name} & {sender.puppyName}</p>
                 <button className="" onClick={handleAcceptRequest} id="accept-friend-button">- Confirm -</button>
                 <button className="" onClick={handleRejectRequest} id="reject-friend-button">- Decline -</button>
+            </div>
+            <div>
+                {<ProfilePopUp userId={selectedUserId} open={showRequestModal} profileClose={() => setShowRequestModal(false)}></ProfilePopUp>}
             </div>
         </div>
     )
