@@ -4,10 +4,16 @@ import OptionsBar from '../OptionsBar/OptionsBar';
 import './MainPage.css'
 import MyGoogleMap from '../Map/Map';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../store/session';
+
 
 function MainPage() {
 
   const [filters, setFilters] = useState(["petStore", "dogPark", "vet", "groomer"])
+
+  const user = useSelector(selectCurrentUser)
+  const userId = user?._id
 
   const handleFilterClick = (e) => {
     e.preventDefault()
@@ -31,7 +37,7 @@ function MainPage() {
           <div className="main-layout">
             <div>
               <Navbar filters={filters} filterCallback={handleFilterClick}/>
-              <ProfileModal />
+              <ProfileModal userId={userId}/>
             </div>
             <MyGoogleMap filteredMarkers={filters}/>
           </div>
