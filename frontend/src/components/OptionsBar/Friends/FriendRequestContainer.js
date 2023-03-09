@@ -49,7 +49,7 @@ const FriendRequestContainer = ({request, showRequestModal, setShowRequestModal,
                 <button className="" onClick={handleRejectRequest} id="reject-friend-button">- Decline -</button>
             </div>
             <div>
-                {<ProfilePopUp userId={selectedUserId} open={showRequestModal} profileClose={() => setShowRequestModal(false)}></ProfilePopUp>}
+                {<ProfilePopUp pending={true} userId={selectedUserId} open={showRequestModal} profileClose={() => setShowRequestModal(false)}></ProfilePopUp>}
             </div>
         </div>
     )
