@@ -21,7 +21,7 @@ const Marker = mongoose.model('Marker')
 // })
 
 router.post('/create', async (req, res, next) => {
-  const { markerType, latitude, longitude } = req.body;
+  const { markerType, latitude, longitude, name, address, hours } = req.body;
 
   console.log(req.body);
 
@@ -29,7 +29,10 @@ router.post('/create', async (req, res, next) => {
     const newMarker = new Marker({
       markerType: markerType,
       latitude: latitude,
-      longitude: longitude
+      longitude: longitude,
+      name: name,
+      address: address,
+      hours: hours
     });
     await newMarker.save();
     res.status(201).json(newMarker);
@@ -42,13 +45,19 @@ router.post('/create', async (req, res, next) => {
 
 
 router.get('/allMarkers', async (req, res) => {
-    try {
+    // try {
       const markers = await Marker.find();
-      res.json(markers);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-    }
+      const markersById = {}
+      markers.forEach(marker => {
+        const markerObj = marker.toObject();
+        markersById[marker._id] = markerObj;
+      })
+      // res.json(markers);
+      res.json(markersById)
+    // } catch (error) {
+    //   console.error(error);
+    //   res.status(500).send('Server error');
+    // }
   });
 
 

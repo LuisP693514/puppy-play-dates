@@ -13,6 +13,7 @@ import { updateUser } from '../../store/users';
 import ProfilePopUp from '../ProfileModal/ProfilePopUp';
 import Filter from '../NavBar/Filter/Filter';
 import MapMarkerPopUp from '../MapMarkerModal';
+import { faker } from '@faker-js/faker'
 
 const containerStyle = {
     width: '100%',
@@ -51,8 +52,17 @@ function MyGoogleMap( { filteredMarkers } ) {
     })
     const [userStopDragging, setuserStopDragging] = useState(null);
 
+    function generateFakeHours() {
+        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const startHour = Math.floor(Math.random() * 3) + 9
+        const endHour = Math.floor(Math.random() * 4) + 5;
+        const hours = daysOfWeek.map(day => `${day}: ${startHour}:00am - ${endHour - 12}:00pm`).join('\n');
+      
+        return hours;
+    }
+      
+
     useEffect(() => {
-        debugger
         getLocation().then(coords => {
             setLatitude(coords[0])
             setLongitude(coords[1])
@@ -69,11 +79,41 @@ function MyGoogleMap( { filteredMarkers } ) {
 
         const preseeded_locations = []
         for (let i = 0; i < 12; i++) {
-            debugger
-            randomLong = (Math.random() * (maxLong - minLong)) + minLong;
-            randomLat = (Math.random() * (maxLat - minLat)) + minLat;
-            preseeded_locations.push([randomLat, randomLong])
-            dispatch(createMarker({markerType: 'dogPark', latitude: preseeded_locations[i][0], longitude: preseeded_locations[i][1]}))
+            // randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+            // randomLat = (Math.random() * (maxLat - minLat)) + minLat;
+            // preseeded_locations.push([randomLat, randomLong])
+            // dispatch(createMarker({
+            //     markerType: 'dogPark', 
+            //     latitude: preseeded_locations[i][0], 
+            //     longitude: preseeded_locations[i][1],
+            //     name: `${faker.address.city()} Park`,
+            //     address: faker.address.streetAddress(),
+            //     hours: generateFakeHours()
+            // }))
+            // dispatch(createMarker({
+            //     markerType: 'vet', 
+            //     latitude: preseeded_locations[i][0], 
+            //     longitude: preseeded_locations[i][1],
+            //     name: `${faker.name.lastName()} Veterinary Clinic`,
+            //     address: faker.address.streetAddress(),
+            //     hours: generateFakeHours()
+            // }))
+            // dispatch(createMarker({
+            //     markerType: 'groomer', 
+            //     latitude: preseeded_locations[i][0], 
+            //     longitude: preseeded_locations[i][1],
+            //     name: faker.company.companyName('Pampered Paws Grooming'),
+            //     address: faker.address.streetAddress(),
+            //     hours: generateFakeHours()
+            // }))
+            // dispatch(createMarker({
+            //     markerType: 'petStore', 
+            //     latitude: preseeded_locations[i][0], 
+            //     longitude: preseeded_locations[i][1],
+            //     name: faker.company.companyName('Pet Store'),
+            //     address: faker.address.streetAddress(),
+            //     hours: generateFakeHours()
+            // }))
         }
         dispatch(fetchUsers())
         dispatch(fetchMarkers())
@@ -180,9 +220,9 @@ function MyGoogleMap( { filteredMarkers } ) {
                         <Marker 
                             clickable
                             onClick={() => {
+                                setShowModal(false)
                                 setShowMarkerModal(true)
                                 setSelectedMarker(marker._id)
-                                setShowModal(false)
                             }}
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
@@ -194,6 +234,12 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'vet':
                     return (
                         <Marker 
+                            clickable
+                            onClick={() => {
+                                setShowModal(false)
+                                setShowMarkerModal(true)
+                                setSelectedMarker(marker._id)
+                            }}
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: veternarianIcon,
@@ -204,6 +250,13 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'petStore':
                     return (
                         <Marker 
+                            clickable
+                            onClick={() => {
+                                debugger
+                                setShowModal(false)
+                                setSelectedMarker(marker._id)
+                                setShowMarkerModal(true)
+                            }}
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: petStoreIcon,
@@ -214,6 +267,12 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'groomer':
                     return (
                         <Marker 
+                            clickable
+                            onClick={() => {
+                                setShowModal(false)
+                                setShowMarkerModal(true)
+                                setSelectedMarker(marker._id)
+                            }}
                             position={{ lat: marker.latitude, lng: marker.longitude }}
                             icon={{
                                 url: groomersIcon,
@@ -224,6 +283,11 @@ function MyGoogleMap( { filteredMarkers } ) {
                 default:
                     return (
                         <Marker 
+                            onClick={() => {
+                                setShowMarkerModal(true)
+                                setSelectedMarker(marker._id)
+                                setShowModal(false)
+                            }}
                             position={{ lat: 40.7356, lng: -73.9910 }}
                             icon={{
                             url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
@@ -233,7 +297,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                     )
             }
     })}
-        {<MapMarkerPopUp markerId={selectedMarker} open={showMarkerModal} profileClose={() => setShowMarkerModal(false)}></MapMarkerPopUp>}
+        {selectedMarker && <MapMarkerPopUp markerId={selectedMarker} open={showMarkerModal} profileClose={() => setShowMarkerModal(false)}></MapMarkerPopUp>}
 
       </GoogleMap>
       <div className='map-center-button'> 

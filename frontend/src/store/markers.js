@@ -21,6 +21,7 @@ export const getMarkers = state => {
 }
 
 export const getMarker = markerId => state => {
+    debugger
     return state?.markers ? state?.markers[markerId] : null
 }
 

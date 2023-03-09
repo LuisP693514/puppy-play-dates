@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Filter from './Filter/Filter';
 import { useState } from 'react';
 import transparentLogo from "../../images/transparent-logo.png"
+import Search from '../Search';
 
 
 function Navbar(props) {
@@ -25,6 +26,7 @@ function Navbar(props) {
                     <Link className='navLogo' to='/'></Link>
                 </div>
                 <div>
+                    <Search />
                     <button className="double-spacer orange-text filter" onClick={() => setFilterOpen(!filterOpen)}><i className="fa-solid fa-sliders"></i></button>
                     <Filter filters={props.filters} filterCallback={props.filterCallback} open={filterOpen} filterClose={() => setFilterOpen(false)}></Filter>
                 </div>

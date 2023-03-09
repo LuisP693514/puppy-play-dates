@@ -11,6 +11,7 @@ import FriendRequestContainer from './FriendRequestContainer';
 import FriendContainer from './FriendContainer';
 
 import './Friends.css'
+import Search from '../../Search';
 
 const Friends = ({open, friendsClose})  => {
     const dispatch = useDispatch();
