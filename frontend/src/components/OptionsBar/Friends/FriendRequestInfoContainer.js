@@ -39,7 +39,7 @@ const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowMo
                 <button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button>
             </div>
             <div>
-                {<ProfilePopUp userId={selectedUserId} open={showPendingModal} profileClose={() => setPendingShowModal(false)}></ProfilePopUp>}
+                {<ProfilePopUp pending={true} userId={selectedUserId} open={showPendingModal} profileClose={() => setPendingShowModal(false)}></ProfilePopUp>}
             </div>
         </div>
     )

@@ -6,26 +6,33 @@ import { useHistory } from 'react-router-dom';
 import { fetchUser, getUser } from "../../store/users";
 import "./ProfilePopUp.css";
 import { getCurrentUser, selectCurrentUser } from "../../store/session";
-import { createFriendRequest } from "../../store/friendRequests";
-import { deleteFriend, fetchFriends, getFriends } from "../../store/friends";
+import { createFriendRequest, fetchFriendRequests, getFriendRequests } from "../../store/friendRequests";
+import { fetchFriends, getFriends } from "../../store/friends";
 
-const ProfilePopUp = ({ userId, open, profileClose }) => {
+const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
     const sessionUser = useSelector(selectCurrentUser);
     const currentUser = useSelector(getUser(sessionUser._id));
     const friendList = useSelector(getFriends);
-    // const [friendRequestSent, setFriendRequestSent] = useState(false);
+    const friendRequests = useSelector(getFriendRequests);
     const [friendRequestStatus, setFriendRequestStatus] = useState({});
-
-
 
     useEffect(() => {
         if (userId) dispatch(fetchUser(userId));
         dispatch(getCurrentUser());
         dispatch(fetchFriends(sessionUser._id));
+        dispatch(fetchFriendRequests(currentUser._id))
     }, [dispatch, userId]);
+
+    const pendingCreator = friendRequests.find(request => (
+        request?.status === 'pending' && request?.sender === userId
+    ));
+
+    const pendingInvitee = friendRequests.find(request => (
+        request?.status === 'pending' && request?.receiver === userId
+    ));
 
     if (!currentUser) return null;
     if (!otherUser) return null;
@@ -68,7 +75,10 @@ const ProfilePopUp = ({ userId, open, profileClose }) => {
         });
     };
 
-    const isPendingFriend = friendRequestStatus[currentUser._id] === 'pending' && friendRequestStatus[otherUser._id] === 'pending';
+    // const isPendingFriend = friendRequestStatus[currentUser._id] === 'pending' && friendRequestStatus[otherUser._id] === 'pending';
+    const isPendingFriend = pendingInvitee || pendingCreator || pending || (friendRequestStatus[currentUser._id] === 'pending' && friendRequestStatus[otherUser._id] === 'pending');
+
+
 
 
     if (!open) return null
