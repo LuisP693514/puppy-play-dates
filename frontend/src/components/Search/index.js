@@ -4,6 +4,7 @@ import { fetchDates, getDates } from "../../store/dates"
 import { fetchFriends, getFriends } from "../../store/friends"
 import { selectCurrentUser } from "../../store/session"
 import { fetchUsers, getUsers } from "../../store/users"
+import ProfilePopUp from "../ProfileModal/ProfilePopUp"
 
 const Search = () => {
     const dispatch = useDispatch()
@@ -11,6 +12,8 @@ const Search = () => {
     const friends = useSelector(getFriends)
     const users = useSelector(getUsers)
     const dates = useSelector(getDates)
+    const [selectedUserId, setSelectedUserId] = useState('')
+    const [showModal, setShowModal] = useState(false);
     const [searchWord, setSearchWord] = useState('')
     const friendsInfo = []
     const datesInfo = []
@@ -69,12 +72,16 @@ const Search = () => {
             }
                 }).map((friendInfo) => {
                     return (
-                    <div>
-                        <img src={friendInfo.profileImageUrl} />
+                    <button onClick={() => {
+                        setShowModal(true)
+                        setSelectedUserId(friendInfo._id)
+                    }}>
+                        <img className="profile-friend-image" src={friendInfo.profileImageUrl} />
                         <p>{friendInfo.username}</p>
-                    </div>
+                    </button>
                     )
             })}
+            {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
         {/* {datesInfo.filter((dateInfo) => {
             if (searchWord === dateInfo.username){
               return true

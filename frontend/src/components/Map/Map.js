@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, Circle } from '@react-google-maps/api';
 import { googleMapApiKey } from '../../config/keys';
 import './GoogleMap.css'
 import data from './MapConfig.json'
@@ -53,12 +53,13 @@ function MyGoogleMap( { filteredMarkers } ) {
     const [userStopDragging, setuserStopDragging] = useState(null);
 
     function generateFakeHours() {
+        const hoursArray = []
         const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
         const startHour = Math.floor(Math.random() * 3) + 9
         const endHour = Math.floor(Math.random() * 4) + 5;
-        const hours = daysOfWeek.map(day => `${day}: ${startHour}:00am - ${endHour - 12}:00pm`).join('\n');
-      
-        return hours;
+        const hours = daysOfWeek.map(day => `${day}: ${startHour}:00am - ${12 - endHour}:00pm`).join('\n');
+        hoursArray.push(hours)
+        return hoursArray
     }
       
 
@@ -69,6 +70,21 @@ function MyGoogleMap( { filteredMarkers } ) {
         })
       .catch(error => {
       });
+
+      if(longitude && latitude){
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
+            if (status === 'OK' && results.length > 0) {
+              const country = results[0].address_components.find(
+                (component) => component.types.includes('country')
+              );
+              if (country) {
+                console.log(`The marker is in ${country.long_name}.`);
+                // TODO: Check if the country is over land or water.
+              }
+            }
+          });
+      }
       const minLong = longitude - 0.0135462
         const maxLong = longitude + 0.0139538
         let randomLong;
@@ -77,40 +93,58 @@ function MyGoogleMap( { filteredMarkers } ) {
         const maxLat = latitude - 0.0061589
         let randomLat;
 
-        const preseeded_locations = []
+        const preseeded_locations_dogPark = []
+        for (let i = 0; i < 12; i++) {
+            randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+            randomLat = (Math.random() * (maxLat - minLat)) + minLat;
+            preseeded_locations_dogPark.push([randomLat, randomLong])
+            dispatch(createMarker({
+                markerType: 'dogPark', 
+                latitude: preseeded_locations_dogPark[i][0], 
+                longitude: preseeded_locations_dogPark[i][1],
+                name: `${faker.address.city()} Park`,
+                address: faker.address.streetAddress(),
+                hours: generateFakeHours()
+            }))
+        }
+        const preseeded_locations_vet = []
         for (let i = 0; i < 12; i++) {
             // randomLong = (Math.random() * (maxLong - minLong)) + minLong;
             // randomLat = (Math.random() * (maxLat - minLat)) + minLat;
-            // preseeded_locations.push([randomLat, randomLong])
-            // dispatch(createMarker({
-            //     markerType: 'dogPark', 
-            //     latitude: preseeded_locations[i][0], 
-            //     longitude: preseeded_locations[i][1],
-            //     name: `${faker.address.city()} Park`,
-            //     address: faker.address.streetAddress(),
-            //     hours: generateFakeHours()
-            // }))
+            // preseeded_locations_vet.push([randomLat, randomLong])
             // dispatch(createMarker({
             //     markerType: 'vet', 
-            //     latitude: preseeded_locations[i][0], 
-            //     longitude: preseeded_locations[i][1],
+            //     latitude: preseeded_locations_vet[i + 1][0], 
+            //     longitude: preseeded_locations_vet[i + 1][1],
             //     name: `${faker.name.lastName()} Veterinary Clinic`,
             //     address: faker.address.streetAddress(),
             //     hours: generateFakeHours()
             // }))
+        }
+        const preseeded_locations_groomer = []
+        for (let i = 0; i < 12; i++) {
+            // randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+            // randomLat = (Math.random() * (maxLat - minLat)) + minLat;
+            // preseeded_locations_groomer.push([randomLat, randomLong])
             // dispatch(createMarker({
-            //     markerType: 'groomer', 
-            //     latitude: preseeded_locations[i][0], 
-            //     longitude: preseeded_locations[i][1],
-            //     name: faker.company.companyName('Pampered Paws Grooming'),
+            //     markerType: 'vet', 
+            //     latitude: preseeded_locations_groomer[i + 1][0], 
+            //     longitude: preseeded_locations_groomer[i + 1][1],
+            //     name: `${faker.name.lastName()} Veterinary Clinic`,
             //     address: faker.address.streetAddress(),
             //     hours: generateFakeHours()
             // }))
+        }
+        const preseeded_locations_petStore = []
+        for (let i = 0; i < 12; i++) {
+            // randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+            // randomLat = (Math.random() * (maxLat - minLat)) + minLat;
+            // preseeded_locations_petStore.push([randomLat, randomLong])
             // dispatch(createMarker({
-            //     markerType: 'petStore', 
-            //     latitude: preseeded_locations[i][0], 
-            //     longitude: preseeded_locations[i][1],
-            //     name: faker.company.companyName('Pet Store'),
+            //     markerType: 'vet', 
+            //     latitude: preseeded_locations_petStore[i + 1][0], 
+            //     longitude: preseeded_locations_petStore[i + 1][1],
+            //     name: `${faker.name.lastName()} Veterinary Clinic`,
             //     address: faker.address.streetAddress(),
             //     hours: generateFakeHours()
             // }))
@@ -156,13 +190,9 @@ function MyGoogleMap( { filteredMarkers } ) {
     setuserStopDragging(true);
   }
 
- 
-  
     const filtered = markers.filter(marker => {
       return filteredMarkers.includes(marker.markerType) 
     });
-
-
 
   const hasLocation = sessionUser.longitude !== 0 && sessionUser.latitude !== 0;
   return isLoaded ? (
@@ -184,18 +214,30 @@ function MyGoogleMap( { filteredMarkers } ) {
       > 
         {Object.values(users).map(user => (
             user._id === sessionUser._id && hasLocation ?
-            (<Marker
-                clickable
-                onClick={() => {
-                    setShowModal(true)
-                    setSelectedUserId(user._id)
-                }}
-                position={{ lat: user.latitude, lng: user.longitude }} 
-                icon={{
-                    url: user.profileImageUrl,
-                    scaledSize: { width: 110, height: 110 },
-                }}
-            /> ) 
+            (
+                <>
+                    <Marker
+                        clickable
+                        onClick={() => {
+                            setShowModal(true)
+                            setSelectedUserId(user._id)
+                        }}
+                        position={{ lat: user.latitude - .0004, lng: user.longitude - .0001}} 
+                        icon={{
+                            url: user.profileImageUrl,
+                            scaledSize: { width: 110, height: 110 }
+                        }}
+                    /> 
+                    <Circle 
+                        center={{ lat: user.latitude, lng: user.longitude }}    
+                        radius={100}
+                        options={{
+                            strokeColor: "#FBC02D",
+                            fillColor: "#FBC02D"
+                        }}
+                    />
+                </>
+            ) 
                 :
            (  <Marker 
                 clickable
@@ -252,7 +294,6 @@ function MyGoogleMap( { filteredMarkers } ) {
                         <Marker 
                             clickable
                             onClick={() => {
-                                debugger
                                 setShowModal(false)
                                 setSelectedMarker(marker._id)
                                 setShowMarkerModal(true)
@@ -296,7 +337,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                         />
                     )
             }
-    })}
+    })} 
         {selectedMarker && <MapMarkerPopUp markerId={selectedMarker} open={showMarkerModal} profileClose={() => setShowMarkerModal(false)}></MapMarkerPopUp>}
 
       </GoogleMap>
@@ -316,3 +357,90 @@ function MyGoogleMap( { filteredMarkers } ) {
 
 }
 export default MyGoogleMap
+
+
+// import { useEffect, useState} from "react";
+// import reactDom from "react-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { deleteFriendRequest } from "../../../store/friendRequests";
+// import { fetchUser, getUser } from "../../../store/users";
+// import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
+// import './Friends.css'
+// const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowModal, closeAllModals}) => {
+//     const dispatch = useDispatch();
+//     const receiver = useSelector(getUser(request.receiver))
+//     const [selectedUserId, setSelectedUserId] = useState('')
+//     const [prevId, setPrevId] = useState('')
+//     useEffect(() => {
+//         dispatch(fetchUser(request.receiver))
+//     }, [dispatch])
+//     const handleDeleteRequest= e => {
+//         e.preventDefault();
+//         dispatch(deleteFriendRequest(request._id))
+//     }
+    // const resetModal = () => {
+    //     debugger
+    //     if(prevUserId){
+    //         const friend = document.getElementById(prevUserId)
+    //         reactDom.unmountComponentAtNode(friend)
+    //     }
+    // }
+    // let prevId
+    // function handleSelected () {
+    //     debugger
+    //     if (user){
+    //         let friend = document.getElementById(user)
+    //         reactDom.unmountComponentAtNode(friend)
+    //         setUser(receiver._id)
+    //         setSelectedUserId(receiver._id)
+    //     } else {
+    //         debugger
+    //         setUser(receiver._id)
+    //         debugger
+    //         setSelectedUserId(receiver._id)
+    //     }
+    //     debugger
+    // }
+    // const runTest = () => {
+    //     debugger
+    // }
+//     const closeSiblings =() => {
+//         debugger
+//         if (prevId){
+//             debugger
+//             let friend = document.getElementById(prevId)
+//             // friend.innerHTML = ""
+//             reactDom.unmountComponentAtNode(friend)
+//         } else {
+//             debugger
+//             setPrevId(receiver._id)
+//             debugger
+//         }
+//     }
+//     if (!receiver) return null;
+//     return (
+//         <div className="request-info-container" id="pending-container">
+//             <button className="friend-info" onClick={() => {
+//                 closeSiblings()
+//                 closeAllModals();
+//                 // resetModal()
+//                 setPendingShowModal(true);
+//                 // handleSelected()
+//                 setSelectedUserId(receiver._id)
+//                 // runTest()
+//                 }}>
+//                 <div>
+//                     <img className="profile-friend-image" src={receiver.profileImageUrl}/>
+//                 </div>
+//             </button>
+//             <div className="pending-info">
+//                 <p>{receiver.name} & {receiver.puppyName}</p>
+//                 <button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button>
+//             </div>
+//             <div>
+//                 {<ProfilePopUp userId={selectedUserId} open={showPendingModal} profileClose={() => setPendingShowModal(false)}></ProfilePopUp>}
+//             </div>
+//         </div>
+//     )
+// };
+// export default FriendRequestInfoContainer;

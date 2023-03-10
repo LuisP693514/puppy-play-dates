@@ -7,7 +7,7 @@ const markerSchema = new Schema({
     longitude: {type: Number},
     name: { type: String },
     address: { type: String },
-    hours: { type: String }
+    hours: { type: Array }
 })
 
 module.exports = mongoose.model('Marker', markerSchema);
