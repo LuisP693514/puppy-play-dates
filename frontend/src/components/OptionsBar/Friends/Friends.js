@@ -20,7 +20,6 @@ const Friends = ({open, friendsClose})  => {
     const [prevId, setPrevId] = useState('')
 
     const closeAllModals = () =>{
-        debugger
         setShowFriendModal(false)
         setPendingShowModal(false)
         setShowRequestModal(false)
@@ -70,7 +69,7 @@ const Friends = ({open, friendsClose})  => {
                 <div id='friend-request-index'>
                     {pendingCreator.map(request => {
                         return (<div id='friend-item'>
-                                    <FriendRequestInfoContainer request={request} showPendingModal ={showPendingModal} setPendingShowModal={setPendingShowModal} closeAllModals={closeAllModals} prevId={prevId} setPrevId={setPrevId} open={receiver._id === request.receiver ? showPendingModal : null } closePending={setPendingShowModal}/>
+                                    <FriendRequestInfoContainer request={request} showPendingModal ={showPendingModal} setPendingShowModal={setPendingShowModal} closeAllModals={closeAllModals} prevId={prevId} setPrevId={setPrevId}/>
                                 </div>)
                     })}
                 </div>

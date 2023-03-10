@@ -6,7 +6,7 @@ import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 import './Friends.css'
 
 
-const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowModal, closeAllModals, prevId, setPrevId, open, }) => {
+const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowModal, closeAllModals, prevId, setPrevId}) => {
     const dispatch = useDispatch();
     const receiver = useSelector(getUser(request.receiver))
     const [selectedUserId, setSelectedUserId] = useState('')
