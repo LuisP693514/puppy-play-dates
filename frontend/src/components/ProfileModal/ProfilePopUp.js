@@ -9,7 +9,7 @@ import { getCurrentUser, selectCurrentUser } from "../../store/session";
 import { createFriendRequest, fetchFriendRequests, getFriendRequests } from "../../store/friendRequests";
 import { fetchFriends, getFriends } from "../../store/friends";
 
-const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
+const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
@@ -39,7 +39,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
 
     //Look to see if friends has both the current user and the friend as an entry in friends list
     let isFriend;
-    const isFrien = (u, fr) => {
+    const checkIfBothUsersAreFriends = (u, fr) => {
         if (friendList?.length > 0) {
             for (let i = 0; i < friendList.length; i++) {
                 const friendObj = friendList[i];
@@ -55,7 +55,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
             isFriend = false;
         }
     }
-    isFrien(currentUser, otherUser)
+    checkIfBothUsersAreFriends(currentUser, otherUser)
     const handleCreateDateRequest = e => {
         e.preventDefault();
         history.push('/createDate', { currentUser, otherUser });
@@ -84,7 +84,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
     if (!open) return null
     return reactDom.createPortal(
         <>
-            <div className="profile-modal" id={userId}>
+            <div className={`profile-modal ${fromRequestsModal ? 'hidden' : ''}`} id={userId}>
                 <button onClick={() => profileClose(false)} className="modal-close">&times;</button>
                 <div className="dog-name-section"><h2 id='dog-name'>{otherUser.puppyName}</h2></div>
                 <div className="pop-up-img"><img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile" /></div>
