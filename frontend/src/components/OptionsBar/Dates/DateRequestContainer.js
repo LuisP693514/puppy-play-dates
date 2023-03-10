@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteDateRequest, fetchDateRequest, getDateRequest, updateDateRequest } from "../../../store/dateRequests";
 import { createDate } from "../../../store/dates";
 import { fetchUser, getUser } from "../../../store/users";
+import DatePopUp from "./DatePopUp";
 
 
 const DateRequestContainer = ({request, currentUser}) => {
@@ -35,12 +36,13 @@ const DateRequestContainer = ({request, currentUser}) => {
 
     return (
         <div className="date-container">
-            <div>{otherUser.puppyName}</div>
-            <div>{request.name}</div> 
-            <div>{request.date}</div>
-            <div>{request.description}</div>
-            <button id='accept-date' onClick={handleAcceptDate}>Accept</button>
-            <button id='decline-date' onClick={handleDeclineDate}>Decline</button>
+            <button>
+                <img className="profile-friend-image" src={otherUser.profileImageUrl}/>
+                <div>{otherUser.username} & {otherUser.puppyName}</div>
+                <button className="delete-request" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>
+                <button className="delete-request" id='decline-date' onClick={handleDeclineDate}>-Decline-</button>
+            </button>
+            {/* <DatePopUp/> */}
         </div>
     )
 };
