@@ -19,11 +19,18 @@ const DateRequestInfoContainer = ({request}) => {
     if (!invitee) return null;
 
     return (
-        <div className="request-info-container">
-            <p>Owner name: {invitee.name}</p>
-            <p>Puppy name: {invitee.puppyName}</p>
-            <button onClick={handleDeleteRequest} id="delete-date-button">Delete Request</button>
-        </div>
+        <>
+            <img className="profile-friend-image"src={invitee.profileImageUrl}/>
+            <div className="pending-info">
+                <div>
+                    <p>Placeholder{invitee.name} & Placeholder{invitee.puppyName}</p>
+                </div>
+                <div>
+                    <button className="delete-request" onClick={handleDeleteRequest} id="delete-date-button">-Delete Request-</button>
+                </div>
+            </div>
+        </>
+
     )
 };
 

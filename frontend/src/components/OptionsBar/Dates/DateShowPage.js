@@ -22,6 +22,66 @@ const DateShowPage = ({open, datesClose}) => {
     }, [dispatch]);
 
 
+    const datesList = () => {
+        if (dates.length){
+            return (
+                <>
+                <div id='date-index'>
+                    {dates.map(date =>{ 
+                    return ( <div id='date-item'>
+                                    <DateEventContainer dateId={date._id}/>
+                                </div>)}
+                    )}
+                </div>
+                </>
+            )
+
+        } else {
+            return (
+                <div> To start making dates, Add Friends!</div>
+            )
+        }
+    }
+
+    const request = () => {
+        if (pendingInvitee.length){
+            return (
+                <>
+                    <div className='date-request-index-container date-list'> 
+                        <h6 id='date-requests'>Date Requests:</h6>
+                    </div>
+                    <div id='date-request-index'>
+                        {pendingInvitee.map(request => {
+                            return (<div id='date-item'>
+                                        <DateRequestContainer request={request} currentUser={currentUser}/>
+                                    </div>)
+                        })}
+                    </div>
+                </>
+            )
+        }
+    }
+
+    const pending = () => {
+        if (pendingCreator.length){
+            return (
+                <>
+                    <div className='date-pending-index-container date-list'>
+                        <h6 id='date-requests date-list'>Pending Date Requests:</h6>
+                    </div>
+                    <div id='date-request-index'>
+                        {pendingCreator.map(request => {
+                            return (<div id='date-item'>
+                                        <DateRequestInfoContainer request={request}/>
+                                    </div>)
+                        })}
+                     </div>
+                </>
+            )
+            
+        }
+    }
+
     if (!dates) return null;
     if (!dateRequests) return null;
     
@@ -38,36 +98,13 @@ const DateShowPage = ({open, datesClose}) => {
         <>
             <div className='user-date-show-page options-modal'>
             <button onClick={datesClose} className="modal-close">&times;</button>
-                <div className='date-index-container'>
-                    <h1 id='upcoming-dates'>Upcoming Dates</h1>
-                    <div id='date-index'>
-                        {dates.map(date =>{ 
-                        return ( <div id='date-item'>
-                                        <DateEventContainer dateId={date._id}/>
-                                    </div>)}
-                        )}
-                    </div>
+                <div className='date-index-container date-list'>
+                    <h6 id='upcoming-dates'>Upcoming Dates:</h6>
+                    {datesList()}
                 </div>
-                <div className='date-request-index-container'> 
-                        <h2 id='date-requests'>Date Requests</h2>
-                        <div id='date-request-index'>
-                            {pendingInvitee.map(request => {
-                                return (<div id='date-item'>
-                                            <DateRequestContainer request={request} currentUser={currentUser}/>
-                                        </div>)
-                            })}
-                        </div>
-                    </div>
-                    <div className='date-pending-index-container'> 
-                        <h2 id='date-requests'>Pending Date Requests</h2>
-                        <div id='date-request-index'>
-                            {pendingCreator.map(request => {
-                                return (<div id='date-item'>
-                                            <DateRequestInfoContainer request={request}/>
-                                        </div>)
-                            })}
-                        </div>
-                    </div>
+                    {request()}
+
+                    {pending()}
             </div>
         </>,
         document.getElementById("portal")

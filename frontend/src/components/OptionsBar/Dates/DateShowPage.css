@@ -1,0 +1,13 @@
+.date-list{
+    display: flex;
+    font-size: 1.3em;
+    color: orange;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.pending-info{
+    display: flex
+    
+}
