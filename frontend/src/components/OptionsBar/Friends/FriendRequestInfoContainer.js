@@ -6,20 +6,17 @@ import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 import './Friends.css'
 
 
-const FriendRequestInfoContainer = ({ request, showPendingModal, setPendingShowModal, closeAllModals, setPrevId }) => {
+const FriendRequestInfoContainer = ({ request, showPendingModal, setVisible, setPendingShowModal, closeAllModals, setPrevId }) => {
     const dispatch = useDispatch();
     const receiver = useSelector(getUser(request.receiver))
-    const [selectedUserId, setSelectedUserId] = useState('')
-    const [visible, setVisible] = useState(false)
-    const [fromRequestsModal, setFromRequestsModal] = useState(true)
+    const [selectedUserId, setSelectedUserId] = useState('');
+    
+    
 
 
     useEffect(() => {
-        dispatch(fetchUser(request.receiver))
-        if (visible) {
-            closeSiblings();
-        }
-    }, [dispatch, visible])
+        dispatch(fetchUser(request.receiver));
+    }, [dispatch])
 
 
     const handleDeleteRequest = e => {
@@ -42,6 +39,7 @@ const FriendRequestInfoContainer = ({ request, showPendingModal, setPendingShowM
                 element.classList.add('hidden')
             }
         }
+
 
         const profile = document.getElementById(id)
         if (profile && Array.from(profile.classList).includes('hidden')) {
@@ -71,15 +69,7 @@ const FriendRequestInfoContainer = ({ request, showPendingModal, setPendingShowM
                 <button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button>
             </div>
             <div>
-                {<ProfilePopUp userId={selectedUserId}
-                    open={showPendingModal}
-                    profileClose={() => setPendingShowModal(false)}
-                    visible={visible}
-                    setVisible={setVisible}
-                    closeVisible={closeVisible}
-                    fromRequestsModal={fromRequestsModal}
-                    >
-                </ProfilePopUp>}
+                
             </div>
         </div>
     )
