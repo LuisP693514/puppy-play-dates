@@ -45,17 +45,17 @@ const DateEventContainer = ({dateId}) => {
         return (
             <div className="date-container">
                 <div className="date-info-container">
-                    <p>Date with {otherUser?.puppyName}</p>
+                    <p>Date with {otherUser?.username} & {otherUser?.puppyName}</p>
                     <div>{date?.name}</div>
-                    <div>{date?.date}</div>
+                    <div>{date?.date.slice(0,10)}</div>
                     <div>{date?.description}</div>
                     {/* <div>Location:</div>
                     <div>Latitude: {date.latitude}</div>
                     <div>Longitude: {date.longitude}</div> */}
                 </div>
                 <div className="handle-date-buttons">
-                    <button onClick={handleUpdateClick}>Update</button>
-                    <button onClick={handleDeleteClick}>Delete</button>
+                    <button id="reject-friend-button" onClick={handleDeleteClick}>-Delete-</button>
+                    <button className="delete-request" onClick={handleUpdateClick}>-Update-</button>
                 </div>
                 {showModal && (
                             <div className='delete-date-modal'>

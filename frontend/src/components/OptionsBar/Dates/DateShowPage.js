@@ -48,7 +48,7 @@ const DateShowPage = ({open, datesClose}) => {
             return (
                 <>
                     <div className='date-request-index-container date-list'> 
-                        <h6 id='date-requests'>Date Requests:</h6>
+                        <h6 id='date-requests date-list'>Date Requests:</h6>
                     </div>
                     <div id='date-request-index'>
                         {pendingInvitee.map(request => {
@@ -100,10 +100,9 @@ const DateShowPage = ({open, datesClose}) => {
             <button onClick={datesClose} className="modal-close">&times;</button>
                 <div className='date-index-container date-list'>
                     <h6 id='upcoming-dates'>Upcoming Dates:</h6>
-                    {datesList()}
                 </div>
+                    {datesList()}
                     {request()}
-
                     {pending()}
             </div>
         </>,
