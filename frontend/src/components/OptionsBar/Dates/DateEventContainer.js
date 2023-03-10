@@ -43,7 +43,7 @@ const DateEventContainer = ({dateId}) => {
     }
 
         return (
-            <div className="date-container">
+            <>
                 <div className="date-info-container">
                     <p>Date with {otherUser?.username} & {otherUser?.puppyName}</p>
                     <div>{date?.name}</div>
@@ -56,6 +56,7 @@ const DateEventContainer = ({dateId}) => {
                 <div className="handle-date-buttons">
                     <button id="reject-friend-button" onClick={handleDeleteClick}>-Delete-</button>
                     <button className="delete-request" onClick={handleUpdateClick}>-Update-</button>
+                    
                 </div>
                 {showModal && (
                             <div className='delete-date-modal'>
@@ -71,7 +72,7 @@ const DateEventContainer = ({dateId}) => {
                                 </div>
                             </div>
                         )}
-            </div>
+            </>
         )
 };
 

@@ -35,15 +35,17 @@ const DateRequestContainer = ({request, currentUser}) => {
     if (!otherUser) return null;
 
     return (
-        <div className="date-container">
+        <>
             <button>
+                <div className="request-spacing">
                 <img className="profile-friend-image" src={otherUser.profileImageUrl}/>
                 <div>{otherUser.username} & {otherUser.puppyName}</div>
+
                 <button  id='reject-friend-button' onClick={handleDeclineDate}>-Decline-</button>
                 <button className="delete-request" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>
             </button>
             {/* <DatePopUp/> */}
-        </div>
+        </>
     )
 };
 
