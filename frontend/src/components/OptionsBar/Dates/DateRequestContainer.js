@@ -40,9 +40,9 @@ const DateRequestContainer = ({request, currentUser}) => {
                 <div className="request-spacing">
                 <img className="profile-friend-image" src={otherUser.profileImageUrl}/>
                 <div>{otherUser.username} & {otherUser.puppyName}</div>
-                <button className="delete-request"id='reject-friend-button' onClick={handleDeclineDate}>-Decline-</button>
-                <button className="delete-request"  onClick={handleAcceptDate}>-Accept-</button>
-                </div>
+
+                <button  id='reject-friend-button' onClick={handleDeclineDate}>-Decline-</button>
+                <button className="delete-request" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>
             </button>
             {/* <DatePopUp/> */}
         </>

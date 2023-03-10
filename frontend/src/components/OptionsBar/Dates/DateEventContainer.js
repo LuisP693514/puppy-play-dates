@@ -55,7 +55,8 @@ const DateEventContainer = ({dateId}) => {
                 </div>
                 <div className="handle-date-buttons">
                     <button id="reject-friend-button" onClick={handleDeleteClick}>-Delete-</button>
-                    <button className="delete-request"onClick={handleUpdateClick}>-Update-</button>
+                    <button className="delete-request" onClick={handleUpdateClick}>-Update-</button>
+                    
                 </div>
                 {showModal && (
                             <div className='delete-date-modal'>
