@@ -104,7 +104,9 @@ input {
     z-index: 1;
 }
 
-
+.hidden {
+    display: none;
+}
 
 .spacer {
     margin-bottom: 7px;

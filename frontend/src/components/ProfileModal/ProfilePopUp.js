@@ -14,7 +14,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
     const sessionUser = useSelector(selectCurrentUser);
-    const currentUser = useSelector(getUser(sessionUser._id));
+    const currentUser = useSelector(getUser(sessionUser?._id));
     const friendList = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
     const [friendRequestStatus, setFriendRequestStatus] = useState({});
@@ -22,8 +22,8 @@ const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
     useEffect(() => {
         if (userId) dispatch(fetchUser(userId));
         dispatch(getCurrentUser());
-        dispatch(fetchFriends(sessionUser._id));
-        dispatch(fetchFriendRequests(currentUser._id))
+        dispatch(fetchFriends(sessionUser?._id));
+        dispatch(fetchFriendRequests(currentUser?._id))
     }, [dispatch, userId]);
 
     const pendingCreator = friendRequests.find(request => (
@@ -84,7 +84,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending }) => {
     if (!open) return null
     return reactDom.createPortal(
         <>
-            <div className="profile-modal">
+            <div className="profile-modal" id={userId}>
                 <button onClick={() => profileClose(false)} className="modal-close">&times;</button>
                 <div className="dog-name-section"><h2 id='dog-name'>{otherUser.puppyName}</h2></div>
                 <div className="pop-up-img"><img className="modal-profile-image" src={otherUser.profileImageUrl} alt="profile" /></div>
