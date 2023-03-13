@@ -13,7 +13,7 @@ import { updateUser } from '../../store/users';
 import ProfilePopUp from '../ProfileModal/ProfilePopUp';
 import Filter from '../NavBar/Filter/Filter';
 import MapMarkerPopUp from '../MapMarkerModal';
-import { faker } from '@faker-js/faker'
+
 
 const containerStyle = {
     width: '100%',

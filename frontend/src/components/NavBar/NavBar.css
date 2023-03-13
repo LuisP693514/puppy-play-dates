@@ -33,3 +33,9 @@
     position: relative;
     background-color: white;
 }
+
+.search-bar{
+    position: absolute;
+    right: 10%;
+    top: 37%;
+}
