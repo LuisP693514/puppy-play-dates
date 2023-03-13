@@ -23,8 +23,7 @@ export default function DatePopUp({open, closeDate, date, request}) {
         <div className="profile-modal">
         <button onClick={() => {closeDate(false)}} className="modal-close">&times;</button>
             {date()}
-            
-           
+            We need date info here
         </div>
     </>,
   document.getElementById('portal')

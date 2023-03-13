@@ -4,7 +4,7 @@ import { fetchUser, getUser } from "../../../store/users";
 import { deleteDateRequest } from "../../../store/dateRequests";
 import DatePopUp from "./DatePopUp";
 
-const DateRequestInfoContainer = ({request, showPendingModal, setShowPendingModal, closeAllModals}) => {
+const DateRequestInfoContainer = ({request, showPendingDateModal, setShowPendingDateModal, closeAllModals}) => {
     const dispatch = useDispatch();
     const invitee = useSelector(getUser(request.invitee))
 
@@ -19,21 +19,16 @@ const DateRequestInfoContainer = ({request, showPendingModal, setShowPendingModa
 
     if (!invitee) return null;
     
-    const runTest = () => {
-        debugger
-    }
-
 
     return (
         <>
             <button onClick={() => {
-                runTest()
                 closeAllModals()
-                setShowPendingModal(true)
+                setShowPendingDateModal(true)
             }}>
                 <div>
-                <img className="profile-friend-image"src={invitee.profileImageUrl}/>
-                </div> 
+                    <img className="profile-friend-image"src={invitee.profileImageUrl}/>
+                    </div> 
             </button>
             <div className="pending-info">
                 <div>
@@ -43,7 +38,7 @@ const DateRequestInfoContainer = ({request, showPendingModal, setShowPendingModa
                     <button className="delete-request" onClick={handleDeleteRequest} id="delete-date-button">-Delete Request-</button>
                 </div>
             </div>
-            <DatePopUp open={showPendingModal} closeDate={setShowPendingModal(false)} />
+            <DatePopUp open={showPendingDateModal} closeDate={setShowPendingDateModal} />
         </>
 
     )

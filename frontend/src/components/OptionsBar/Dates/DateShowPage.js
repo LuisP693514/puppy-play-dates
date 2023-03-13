@@ -7,7 +7,6 @@ import { fetchDateRequests, getDateRequests } from '../../../store/dateRequests'
 import DateEventContainer from './DateEventContainer';
 import DateRequestContainer from './DateRequestContainer';
 import DateRequestInfoContainer from './DateRequestInfoContainer';
-import DatePopUp from './DatePopUp';
 import './DateShowPage.css';
 
 const DateShowPage = ({open, datesClose}) => {
@@ -17,7 +16,7 @@ const DateShowPage = ({open, datesClose}) => {
     const dateRequests = useSelector(getDateRequests);
     const [showDateModal, setShowDateModal] = useState(false)
     const [showRequestModal, setShowRequestModal] = useState(false)
-    const [showPendingModal, setShowPendingModal] = useState(false)
+    const [showPendingDateModal, setShowPendingDateModal] = useState(false)
 
     useEffect(() => {
         dispatch(getCurrentUser())
@@ -28,7 +27,7 @@ const DateShowPage = ({open, datesClose}) => {
     const closeAllModals = () =>{
         setShowDateModal(false)
         setShowRequestModal(false)
-        setShowPendingModal(false)
+        setShowPendingDateModal(false)
     }
 
     const datesList = () => {
@@ -81,7 +80,7 @@ const DateShowPage = ({open, datesClose}) => {
                     <div id='date-request-index'>
                         {pendingCreator.map(request => {
                             return (<div id='date-item'>
-                                        <DateRequestInfoContainer request={request} key={request._id} showPendingModal={showPendingModal} setShowPendingModal={setShowPendingModal} closeAllModals={closeAllModals}/>
+                                        <DateRequestInfoContainer request={request} key={request._id} showPendingDateModal={showPendingDateModal} setShowPendingDateModal={setShowPendingDateModal} closeAllModals={closeAllModals}/>
                                     </div>)
                         })}
                      </div>
