@@ -5,6 +5,7 @@ import { fetchMarker, getMarker } from "../../store/markers";
 import "./MapMarkerPopUp.css"
 
 const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
+    debugger
     // console.log(markerId)
     const dispatch = useDispatch();
     let currentMarker;
@@ -16,12 +17,19 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
     switch(currentMarker.markerType){
         case 'dogPark': 
             markerImg = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-park-icon.png'
+            break;
         case 'vet':
             markerImg = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-vet-icon.png"
+            break;
         case 'groomer':
             markerImg = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-groomer-icon.png"
+            break;
         case 'petStore': 
             markerImg = "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-pet-store-icon.png"
+            break;
+        default:
+            markerImg = ""
+            break;
     }
     
     useEffect(() => {

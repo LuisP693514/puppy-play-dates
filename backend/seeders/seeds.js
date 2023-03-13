@@ -91,10 +91,12 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 
 function generateFakeHours() {
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    const startHour = Math.floor(Math.random() * 3) + 9
+    const startHour = Math.floor(Math.random() * 3) + 9;
     const endHour = Math.floor(Math.random() * 4) + 5;
-    const hours = daysOfWeek.map(day => `${day}: ${startHour}:00am - ${endHour - 12}:00pm`).join('\n');
-  
+    const hours = daysOfWeek.map(
+        day => `${day}: ${startHour}:00am - ${12 - endHour}:00pm`
+    );
+    
     return hours;
 }
 
