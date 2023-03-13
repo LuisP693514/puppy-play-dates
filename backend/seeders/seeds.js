@@ -4,12 +4,15 @@ const User = require('../models/User');
 const Marker = require('../models/Marker');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
-const DateRequest = require('../models/DateRequest');
+const FriendRequest = require('../models/FriendRequest');
+const Friend = require('../models/Friend')
 
 const NUM_SEED_USERS = 50;
 
 // Create users
 const users = [];
+const friendRequests = [];
+const friends = [];
 
 const minLong = -74.0075;
 const maxLong = -73.98;
@@ -42,8 +45,79 @@ users.push(
         ownerAge: 95,
         puppyTemperament: "energetic",
         puppyVaccinated: true
+    }),
+    // demo's first friend request :)
+    new User({
+        username: 'demo-user2',
+        email: 'demo-user@appacademy2.io',
+        hashedPassword: bcrypt.hashSync('password', 10),
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        latitude: 40.7363, 
+        longitude: -73.9938,
+        puppyName: 'dog',
+        puppyBreed: 'Inu',
+        puppyAge: 4,
+        name: "Demo",
+        ownerAge: 9,
+        puppyTemperament: "energetic",
+        puppyVaccinated: true
+    }),
+    // demo's REAL FRIEND
+    new User({
+        username: 'demo-user3',
+        email: 'demo-user@appacademy3.io',
+        hashedPassword: bcrypt.hashSync('password', 10),
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        latitude: 40.7363, 
+        longitude: -73.9938,
+        puppyName: 'doggy',
+        puppyBreed: 'big dog',
+        puppyAge:6,
+        name: "Demo4",
+        ownerAge: 19,
+        puppyTemperament: "tired",
+        puppyVaccinated: true
     })
 )
+
+// creating friend requests with user 0 and user 1 
+friendRequests.push(
+    new FriendRequest({
+        sender: users[1]._id,
+        receiver: users[0]._id,
+        status: 'pending'
+    })
+)
+
+// create friends
+friends.push(
+    new Friend({
+        user: users[0]._id,
+        friend: users[2]._id
+    })
+)
+
+// Add all friend requests to the association arrays
+for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    for (let j = 0; j < friendRequests.length; j++) {
+        const friendRequest = friendRequests[j];
+        user.friendRequests.push(friendRequest._id)
+    }
+}
+
+// Add all friends between users (DO NOT DO USER 1 AND 0)
+
+for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    for (let j = 0; j < friends.length; j++) {
+        const friend = friends[j];
+        if (friend.user === user._id){
+            user.friends.push(friend._id)
+        }
+    }
+}
+
 
 
 let generatedNumbers = [];
@@ -165,7 +239,7 @@ markers.push(
         markerType: 'petStore',
         latitude: 40.738922458615654,
         longitude: -73.99524187653974,
-        name: faker.company.companyName('Pet Store'),
+        name: faker.company.name('Pet Store'),
         address: faker.address.streetAddress(),
         hours: generateFakeHours()
     }),
@@ -175,7 +249,7 @@ markers.push(
         markerType: 'petStore',
         latitude: 40.73963656238125, 
         longitude: -73.98992972568763,
-        name: faker.company.companyName('Pet Store'),
+        name: faker.company.name('Pet Store'),
         address: faker.address.streetAddress(),
         hours: generateFakeHours()
     }),
@@ -184,7 +258,7 @@ markers.push(
         markerType: 'groomer',
         latitude: 40.737284820240276,
         longitude: -73.98996213895228,
-        name: faker.company.companyName('Pampered Paws Grooming'),
+        name: faker.company.name('Pampered Paws Grooming'),
         address: faker.address.streetAddress(),
         hours: generateFakeHours()
     }),
@@ -193,7 +267,7 @@ markers.push(
         markerType: 'groomer',
         latitude: 40.73505160156264,
         longitude: -73.99939342658173,
-        name: faker.company.companyName('Pampered Paws Grooming'),
+        name: faker.company.name('Pampered Paws Grooming'),
         address: faker.address.streetAddress(),
         hours: generateFakeHours()
     }),
@@ -202,7 +276,7 @@ markers.push(
         markerType: 'groomer',
         latitude: 40.743998638315944, 
         longitude: -73.9906181686328,
-        name: faker.company.companyName('Pampered Paws Grooming'),
+        name: faker.company.name('Pampered Paws Grooming'),
         address: faker.address.streetAddress(),
         hours: generateFakeHours()
     })
@@ -225,6 +299,8 @@ const insertSeeds = () => {
     User.collection.drop()
         .then(() => Marker.collection.drop())
         .then(() => User.insertMany(users))
+        .then(() => FriendRequest.insertMany(friendRequests))
+        .then(() => Friend.insertMany(friends))
         .then(() => Marker.insertMany(markers))
         .then(() => {
             console.log("Done!");
