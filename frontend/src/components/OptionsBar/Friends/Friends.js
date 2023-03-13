@@ -9,6 +9,7 @@ import FriendRequestContainer from './FriendRequestContainer';
 import FriendContainer from './FriendContainer';
 import ProfilePopUp from '../../ProfileModal/ProfilePopUp';
 import './Friends.css'
+import Search from '../../Search';
 
 const Friends = ({ open, friendsClose }) => {
     const dispatch = useDispatch();

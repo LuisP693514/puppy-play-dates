@@ -89,74 +89,120 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 
 }
 
+function generateFakeHours() {
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const startHour = Math.floor(Math.random() * 3) + 9
+    const endHour = Math.floor(Math.random() * 4) + 5;
+    const hours = daysOfWeek.map(day => `${day}: ${startHour}:00am - ${endHour - 12}:00pm`).join('\n');
+  
+    return hours;
+}
+
+// const name = `${faker.address.city()} Park`
+// const address =   faker.address.streetAddress()
+// const hours = generateFakeHours()
+
 const markers = []
 
 markers.push(
     new Marker({
         markerType: 'dogPark',
         latitude: 40.7356,
-        longitude: -73.9910
+        longitude: -73.9910,
+        name: `${faker.address.city()} Park`,
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'dogPark',
         latitude: 40.730432427292016,
-        longitude: -73.99762672202375
+        longitude: -73.99762672202375,
+        name: `${faker.address.city()} Park`,
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'dogPark',
         latitude: 40.733151097780606,
-        longitude: -73.98393676227361
+        longitude: -73.98393676227361,
+        name: `${faker.address.city()} Park`,
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'vet',
         latitude: 40.7385175547654,
-        longitude: -73.9892033826281
+        longitude: -73.9892033826281,
+        name: `${faker.name.lastName()} Veterinary Clinic`,
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'vet',
         latitude: 40.7328094398341,
-        longitude: -73.99468473419279
+        longitude: -73.99468473419279,
+        name: `${faker.name.lastName()} Veterinary Clinic`,
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'vet',
         latitude: 40.738584183565344,
-        longitude: -73.9962968964177
+        longitude: -73.9962968964177,
+        name: `${faker.name.lastName()} Veterinary Clinic`,
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'petStore',
         latitude: 40.738922458615654,
-        longitude: -73.99524187653974
+        longitude: -73.99524187653974,
+        name: faker.company.companyName('Pet Store'),
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
 
     new Marker({
         markerType: 'petStore',
         latitude: 40.73963656238125, 
-        longitude: -73.98992972568763
+        longitude: -73.98992972568763,
+        name: faker.company.companyName('Pet Store'),
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'groomer',
         latitude: 40.737284820240276,
-        longitude: -73.98996213895228
+        longitude: -73.98996213895228,
+        name: faker.company.companyName('Pampered Paws Grooming'),
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'groomer',
         latitude: 40.73505160156264,
-        longitude: -73.99939342658173
+        longitude: -73.99939342658173,
+        name: faker.company.companyName('Pampered Paws Grooming'),
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     }),
 
     new Marker({
         markerType: 'groomer',
         latitude: 40.743998638315944, 
-        longitude: -73.9906181686328
+        longitude: -73.9906181686328,
+        name: faker.company.companyName('Pampered Paws Grooming'),
+        address: faker.address.streetAddress(),
+        hours: generateFakeHours()
     })
 )
 
