@@ -47,7 +47,26 @@ const Friends = ({ open, friendsClose }) => {
         request?.status === 'pending' && request?.receiver === currentUser._id
     ));
 
-
+    function friendsList() {
+        if (friends.length){
+            return (
+                <div id='friend-index'>
+                    {friends.map(friend => {
+                        return (<div id='friend-item'>
+                            <FriendContainer friend={friend} showFriendModal={showFriendModal} setShowFriendModal={setShowFriendModal} closeAllModals={closeAllModals} />
+                        </div>)
+                    })}
+                </div>
+            )
+        } else {
+            return (
+                <div className="date-spacer">
+                    <div>Click profiles on the map to start adding friends.</div>
+                    <div>Once they have accepted your invitation, they will show up here.</div>
+                </div>
+            )
+        }
+    }
 
     function friendReqList() {
 
@@ -99,13 +118,7 @@ const Friends = ({ open, friendsClose }) => {
             <div className="overflow">
                 <div className='friends-index-container'>
                     <h5 className='friend-list'>FRIENDS:</h5>
-                    <div id='friend-index'>
-                        {friends.map(friend => {
-                            return (<div id='friend-item'>
-                                <FriendContainer friend={friend} showFriendModal={showFriendModal} setShowFriendModal={setShowFriendModal} closeAllModals={closeAllModals} />
-                            </div>)
-                        })}
-                    </div>
+                    {friendsList()}
                 </div>
                 <div className='friend-request-index-container'>
                     {friendReqList()}

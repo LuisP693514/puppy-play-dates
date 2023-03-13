@@ -45,8 +45,10 @@ const FriendRequestContainer = ({request, showRequestModal, setShowRequestModal,
             </button>
             <div className="pending-info">
                 <p>{sender.name} & {sender.puppyName}</p>
-                <button className="" onClick={handleAcceptRequest} id="accept-friend-button">- Confirm -</button>
-                <button className="" onClick={handleRejectRequest} id="reject-friend-button">- Decline -</button>
+                <div>
+                    <button className="" onClick={handleRejectRequest} id="reject-friend-button">-Decline-</button>
+                    <button className="accept-button" onClick={handleAcceptRequest} id="accept-friend-button">-Confirm-</button>
+                </div>
             </div>
             <div>
                 {<ProfilePopUp pending={true} userId={selectedUserId} open={showRequestModal} profileClose={() => setShowRequestModal(false)}></ProfilePopUp>}

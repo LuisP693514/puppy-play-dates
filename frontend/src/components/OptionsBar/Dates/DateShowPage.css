@@ -10,7 +10,7 @@
     border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
-    z-index: 10;
+    z-index: 20;
     overflow: auto;
 }
 
@@ -52,4 +52,8 @@
 
 .accept-button{
     padding-left: 10px;
+}
+
+.date-spacer {
+    margin-top: 10px;
 }

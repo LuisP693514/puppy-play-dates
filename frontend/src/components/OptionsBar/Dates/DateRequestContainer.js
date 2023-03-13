@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteDateRequest, fetchDateRequest, getDateRequest, updateDateRequest } from "../../../store/dateRequests";
 import { createDate } from "../../../store/dates";
@@ -6,9 +6,10 @@ import { fetchUser, getUser } from "../../../store/users";
 import DatePopUp from "./DatePopUp";
 
 
-const DateRequestContainer = ({request, currentUser}) => {
+const DateRequestContainer = ({request, showRequestModal, setShowRequestModal, closeAllModals}) => {
     const dispatch = useDispatch();
     const otherUser = useSelector(getUser(request.creator))
+    
 
     useEffect(() => {
         dispatch(fetchUser(request.creator))
@@ -32,26 +33,27 @@ const DateRequestContainer = ({request, currentUser}) => {
         dispatch(deleteDateRequest(request._id))
     }
 
+
     if (!otherUser) return null;
 
     return (
         <>
-            <button>
-                <div className="date-info-container">
-
-                    <div className="request-spacing">
-                    <img className="profile-friend-image" src={otherUser.profileImageUrl}/>
-                    </div>
-                    <div className="pending-info">
-                        <div>Placeholder {otherUser.username} & Placeholder{otherUser.puppyName}</div>
-                        <div className="date-request-buttons">
-                            <button  id='reject-friend-button' onClick={handleDeclineDate}>-Decline-</button>
-                            <button className="delete-request accept-button" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>
-                        </div>
-                    </div>
+            <button onClick={() => {
+                closeAllModals()
+                setShowRequestModal(true)
+            }}>
+                <div className="request-spacing">
+                <img className="profile-friend-image" src={otherUser.profileImageUrl}/>
                 </div>
             </button>
-            {/* <DatePopUp/> */}
+            <div className="pending-info">
+                <div> {otherUser.username} & {otherUser.puppyName}</div>
+                <div className="date-request-buttons">
+                    <button  id='reject-friend-button' onClick={handleDeclineDate}>-Decline-</button>
+                    <button className="delete-request accept-button" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>
+                </div>
+            </div>
+            <DatePopUp open={showRequestModal} closeDate={setShowRequestModal} request={request}/>
         </>
     )
 };

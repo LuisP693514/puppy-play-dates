@@ -72,13 +72,13 @@ export default function OptionsBar() {
                         setFriendsOpen(!friendsOpen)}}><i className="fa-solid fa-bone white-text"></i></button>
             <Friends open={friendsOpen} friendsClose={() => setFriendsOpen(false)} closeAllModals={closeAllModals}></Friends>
             <button className="double-spacer" onClick={() => {
-                        closeAllModals()
-                        setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
-            <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages>
-            <button className="double-spacer" onClick={() => {
               closeAllModals()
               setDatesOpen(!datesOpen)}}><i className="fa-regular fa-calendar white-text"></i></button>
             <DateShowPage open={datesOpen} datesClose={() => setDatesOpen(false)}></DateShowPage>
+            <button className="double-spacer" onClick={() => {
+                        closeAllModals()
+                        setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
+            <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setInfoOpen(!infoOpen)}}><i className="fa-regular fa-circle-question white-text"></i></button>
