@@ -35,14 +35,16 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
                 <button onClick={profileClose} className="modal-close-marker">&times;</button>
                  <div>
                     <div className="modal-marker-popup">
-                        <img className="profile-friend-image" src={markerImg}/>
-                        <div className="right-side-modal">
-                            <span>{currentMarker.name}</span>
-                            <span>{currentMarker.address}</span>
+                        <div> 
+                            <img className="business-profile-image" src={markerImg}/>
+                        </div>
+                        <div className="business-info">
+                            <h4>{currentMarker.name}</h4>
+                            <h4>{currentMarker.address}</h4>
                         </div>
                     </div>
                     <div>
-                        <span>{currentMarker.hours}</span>
+                        <div>{currentMarker.hours}</div>
                     </div>
                 </div>
             </div>
