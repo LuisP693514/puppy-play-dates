@@ -36,8 +36,8 @@ users.push(
         email: 'demo-user@appacademy.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png",
-        latitude: 40.7363, 
-        longitude: -73.9938,
+        latitude: 40.7343, 
+        longitude: -73.9936,
         puppyName: 'Demodog',
         puppyBreed: 'Shiba Inu',
         puppyAge: 3,
@@ -52,12 +52,12 @@ users.push(
         email: 'demo-user@appacademy2.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
-        latitude: 40.7363, 
-        longitude: -73.9938,
+        latitude: 40.7350, 
+        longitude: -73.9921,
         puppyName: 'dog',
         puppyBreed: 'Inu',
         puppyAge: 4,
-        name: "Demo",
+        name: "Demo44444",
         ownerAge: 9,
         puppyTemperament: "energetic",
         puppyVaccinated: true
@@ -68,13 +68,45 @@ users.push(
         email: 'demo-user@appacademy3.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
-        latitude: 40.7363, 
-        longitude: -73.9938,
+        latitude: 40.730, 
+        longitude: -73.9930,
         puppyName: 'doggy',
         puppyBreed: 'big dog',
         puppyAge:6,
-        name: "Demo4",
+        name: "Demo4332",
         ownerAge: 19,
+        puppyTemperament: "tired",
+        puppyVaccinated: true
+    }),
+    // friend request
+    new User({
+        username: 'demo-user88',
+        email: 'demo-user@appacademy88.io',
+        hashedPassword: bcrypt.hashSync('password', 10),
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        latitude: 40.730, 
+        longitude: -73.9938,
+        puppyName: 'oldie',
+        puppyBreed: 'sad dog',
+        puppyAge:44,
+        name: "Demo422",
+        ownerAge: 13,
+        puppyTemperament: "tired",
+        puppyVaccinated: true
+    }),
+    // friend
+    new User({
+        username: 'demouser21',
+        email: 'demo-user@appacademy21.io',
+        hashedPassword: bcrypt.hashSync('password', 10),
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        latitude: 40.7363, 
+        longitude: -73.990,
+        puppyName: 'doggy2',
+        puppyBreed: 'big dog2',
+        puppyAge:4,
+        name: "Demo555",
+        ownerAge: 11,
         puppyTemperament: "tired",
         puppyVaccinated: true
     })
@@ -86,6 +118,11 @@ friendRequests.push(
         sender: users[1]._id,
         receiver: users[0]._id,
         status: 'pending'
+    }),
+    new FriendRequest({
+        sender: users[3]._id,
+        receiver: users[0]._id,
+        status: 'pending'
     })
 )
 
@@ -94,6 +131,18 @@ friends.push(
     new Friend({
         user: users[0]._id,
         friend: users[2]._id
+    }),
+    new Friend({
+        user: users[2]._id,
+        friend: users[0]._id
+    }),
+    new Friend({
+        user: users[0]._id,
+        friend: users[4]._id
+    }),
+    new Friend({
+        user: users[4]._id,
+        friend: users[0]._id
     })
 )
 
