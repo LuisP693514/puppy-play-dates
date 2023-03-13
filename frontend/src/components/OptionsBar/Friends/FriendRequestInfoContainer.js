@@ -65,8 +65,9 @@ const FriendRequestInfoContainer = ({ request, showPendingModal, setVisible, set
                 </div>
             </button>
             <div className="pending-info">
-                <p>{receiver.name} & {receiver.puppyName}</p>
-                <button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button>
+                <div><p>{receiver.name} & {receiver.puppyName}</p></div>
+                <div><button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button> </div>
+                
             </div>
             <div>
                 

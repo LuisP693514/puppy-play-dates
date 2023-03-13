@@ -12,3 +12,10 @@
 .settings-text{
     font-size: 1.2em;
 }
+
+.account-delete {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-self: center;
+}

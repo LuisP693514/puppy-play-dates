@@ -16,11 +16,12 @@ const Friends = ({ open, friendsClose }) => {
     const friends = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
     const [showFriendModal, setShowFriendModal] = useState(false);
-    const [showPendingModal, setPendingShowModal] = useState(false)
+    const [showPendingModal, setPendingShowModal] = useState(true)
     const [showRequestModal, setShowRequestModal] = useState(false)
     const [prevId, setPrevId] = useState('')
     const [fromRequestsModal, setFromRequestsModal] = useState(true);
     const [visible, setVisible] = useState(false);
+   
     const closeAllModals = () => {
         setShowFriendModal(false)
         setPendingShowModal(false)
@@ -76,7 +77,7 @@ const Friends = ({ open, friendsClose }) => {
                             <FriendRequestInfoContainer setVisible={setVisible} request={request} showPendingModal={showPendingModal} setPendingShowModal={setPendingShowModal} closeAllModals={closeAllModals} prevId={prevId} setPrevId={setPrevId} />
                             <ProfilePopUp 
                                 userId={request.receiver}
-                                open={true}
+                                open={showPendingModal}
                                 profileClose={() => setPendingShowModal(false)}
                                 setVisible={setVisible}
                                 fromRequestsModal={fromRequestsModal}

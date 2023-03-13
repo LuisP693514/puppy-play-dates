@@ -55,6 +55,7 @@
 .show-profile-image{
     height: 300px;
     width: 300px;
+    border-radius: 300px;
 }
 
 .profile-image-div{

@@ -45,18 +45,21 @@ const DateEventContainer = ({dateId}) => {
         return (
             <>
                 <div className="date-info-container">
-                    <p>Date with {otherUser?.username} & {otherUser?.puppyName}</p>
-                    <div>{date?.name}</div>
-                    <div>{date?.date.slice(0,10)}</div>
-                    <div>{date?.description}</div>
+                    <div> <img className="profile-friend-image" src={otherUser.profileImageUrl}/></div>
+                    <div className="pending-info">
+                        <p>Date with {otherUser?.username} & {otherUser?.puppyName}</p>
+                        <div>{date?.name} on {date?.date.slice(0,10)}</div>
+                        <div>{date?.description}</div>
+                        <div className="handle-date-buttons">
+                            <button id="reject-friend-button" onClick={handleDeleteClick}>-Delete-</button>
+                            <button className="delete-request accept-button" onClick={handleUpdateClick}>-Update-</button>
+                            
+                        </div>
+
+                    </div>
                     {/* <div>Location:</div>
                     <div>Latitude: {date.latitude}</div>
                     <div>Longitude: {date.longitude}</div> */}
-                </div>
-                <div className="handle-date-buttons">
-                    <button id="reject-friend-button" onClick={handleDeleteClick}>-Delete-</button>
-                    <button className="delete-request" onClick={handleUpdateClick}>-Update-</button>
-                    
                 </div>
                 {showModal && (
                             <div className='delete-date-modal'>

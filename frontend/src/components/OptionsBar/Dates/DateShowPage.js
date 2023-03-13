@@ -99,12 +99,14 @@ const DateShowPage = ({open, datesClose}) => {
         <div>
             <div className='user-date-show-page date-modal'>
             <button onClick={datesClose} className="modal-close">&times;</button>
-                <div className='date-index-container date-list'>
-                    <h6 id='upcoming-dates'>Upcoming Dates:</h6>
+                <div className="overflow">
+                    <div className='date-index-container date-list'>
+                        <h6 id='upcoming-dates'>Upcoming Dates:</h6>
+                    </div>
+                        {datesList()}
+                        {request()}
+                        {pending()}
                 </div>
-                    {datesList()}
-                    {request()}
-                    {pending()}
             </div>
         </div>
         </>,

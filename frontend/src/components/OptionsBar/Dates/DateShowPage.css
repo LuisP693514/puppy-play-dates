@@ -1,5 +1,5 @@
 .date-modal{
-    position: relative;
+    position: absolute;
     top: 10%;
     left: 7%;
     background-color: white;
@@ -36,5 +36,20 @@
 
 #date-item{
     margin-left: 0px;
-    margin-top: 10px
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.date-info-container{
+    display: flex;
+    align-items: center;
+}
+
+.date-request-items{
+    align-items: flex-start;
+}
+
+.accept-button{
+    padding-left: 10px;
 }
