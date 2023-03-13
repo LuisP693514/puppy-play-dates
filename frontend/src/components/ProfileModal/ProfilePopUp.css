@@ -43,12 +43,9 @@
 
 div.puppy-details-section span{
     font-size: 20px;
-
+    line-height: 15px;
 }
 
-.owner-details-section span{
-    font-size: 20px;
-}
 
 #delete-friend-on-modal{
     color: orange
@@ -62,4 +59,8 @@ div.puppy-details-section span{
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+}
+
+.modal-profile-image {
+    border-radius: 300px;
 }

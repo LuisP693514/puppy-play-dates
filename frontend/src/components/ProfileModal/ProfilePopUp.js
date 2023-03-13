@@ -105,8 +105,6 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
                         <span id="dog-vacc-text">Vaccinated: </span>
                         <span id='dog-vacc'>{otherUser.puppyVaccinated ? 'Yes' : 'No'}</span>
                     </div>
-                </div>
-                <div className="owner-details-section">
                     <div className="owner-name-section">
                         <span id="owner-name-text">Owner'sName: </span><span id='owner-name'>{otherUser.name}</span>
                     </div>
