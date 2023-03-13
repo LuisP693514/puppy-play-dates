@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFriendRequest } from "../../../store/friendRequests";
 import { fetchUser, getUser } from "../../../store/users";
@@ -6,18 +6,20 @@ import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 import './Friends.css'
 
 
-const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowModal, closeAllModals, prevId, setPrevId}) => {
+const FriendRequestInfoContainer = ({ request, showPendingModal, setVisible, setPendingShowModal, closeAllModals, setPrevId }) => {
     const dispatch = useDispatch();
     const receiver = useSelector(getUser(request.receiver))
-    const [selectedUserId, setSelectedUserId] = useState('')
-    const [visible, setVisible] = useState(false)
+    const [selectedUserId, setSelectedUserId] = useState('');
     
+    
+
+
     useEffect(() => {
-        dispatch(fetchUser(request.receiver))
+        dispatch(fetchUser(request.receiver));
     }, [dispatch])
 
 
-    const handleDeleteRequest= e => {
+    const handleDeleteRequest = e => {
         e.preventDefault();
         dispatch(deleteFriendRequest(request._id))
     }
@@ -26,86 +28,40 @@ const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowMo
         setVisible(false)
     }
 
-    // const resetModal = () => {
-    //     debugger
-    //     if(prevUserId){
-    //         const friend = document.getElementById(prevUserId)
-    //         reactDom.unmountComponentAtNode(friend)
-    //     }
-    // }
-
-    // let prevId
-
-    // function handleSelected () {
-    //     debugger
-    //     if (user){
-    //         let friend = document.getElementById(user)
-    //         reactDom.unmountComponentAtNode(friend)
-    //         setUser(receiver._id)
-    //         setSelectedUserId(receiver._id)
-    //     } else {
-    //         debugger
-    //         setUser(receiver._id)
-    //         debugger
-    //         setSelectedUserId(receiver._id)
-    //     }
-    //     debugger
-    // }
-
-    // const runTest = () => {
-    //     debugger
-    // }
-
     const closeSiblings = (id) => {
-        debugger
-        if (prevId) {
-            debugger
-            // let portal= document.getElementById("portal")
-            let prev = document.getElementById(prevId)
-            let self = document.getElementById(id)
-            debugger
 
-            if (!prev){
-                setPrevId(id)
-            } else if(!self){
-                prev.classList.add("hidden")
-            } else if (self.classList.contains("hidden") && !prev.classList.contains("hidden")){
-                self.classList.remove("hidden")
-                prev.classList.add("hidden")
-            } else {
-
+        const portal = document.getElementById('portal') // every profile that exists
+        
+        // hide all the children
+        for (let i = 0; i < portal.children.length; i++) {
+            const element = portal.children[i];
+            if (Array.from(element.classList).includes('profile-modal')){
+                element.classList.add('hidden')
             }
-            debugger
-            // reactDom.unmountComponentAtNode(friend)
-            // if (friend){
-            //     portal.removeChild(friend)
-            // }
-            // debugger
-            // friend.innerHTML = ("")
         }
-        debugger
-        setPrevId(id)
-        debugger
+
+
+        const profile = document.getElementById(id)
+        if (profile && Array.from(profile.classList).includes('hidden')) {
+            profile.classList.remove('hidden')
+        }
+
     }
 
-    // if (!open) return null
     if (!receiver) return null;
 
     return (
         <div className="request-info-container">
             <button className="friend-info" onClick={() => {
-                closeSiblings(request.receiver)
                 closeVisible()
                 closeAllModals();
-                // resetModal()
                 setPendingShowModal(true);
                 setVisible(true)
-                // handleSelected()
                 setSelectedUserId(receiver._id)
-                // runTest()
-                }}>
+                closeSiblings(request.receiver)
+            }}>
                 <div>
-                    <img className="profile-friend-image" src={receiver.profileImageUrl}/>
+                    <img className="profile-friend-image" src={receiver.profileImageUrl} />
                 </div>
             </button>
             <div className="pending-info">
@@ -113,7 +69,7 @@ const FriendRequestInfoContainer = ({request, showPendingModal, setPendingShowMo
                 <button onClick={handleDeleteRequest} className="delete-request" id="unfriend-button">-Delete Request-</button>
             </div>
             <div>
-                {<ProfilePopUp userId={selectedUserId} open={showPendingModal} profileClose={() => setPendingShowModal(false)} visible={visible} setVisible={setVisible} closeVisible={closeVisible}></ProfilePopUp>}
+                
             </div>
         </div>
     )
