@@ -20,17 +20,18 @@ function Navbar(props) {
 
     return (
         <div className="nav-bar-height">
-            <div className='nav-bar-header'>
                 <img className="main-page-logo" src={transparentLogo}/>
                 <div id='headerLogo'>
                     <Link className='navLogo' to='/'></Link>
                 </div>
-                <div>
+                <div className="search-bar">
                     <Search />
+                </div>
+
+                <div>
                     <button className="double-spacer orange-text filter" onClick={() => setFilterOpen(!filterOpen)}><i className="fa-solid fa-sliders"></i></button>
                     <Filter filters={props.filters} filterCallback={props.filterCallback} open={filterOpen} filterClose={() => setFilterOpen(false)}></Filter>
                 </div>
-            </div>
         </div>
     )
 

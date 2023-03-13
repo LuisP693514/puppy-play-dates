@@ -51,9 +51,10 @@ const Search = () => {
     return (
         <div>
         {/* <form onSubmit={handleSubmit}> */}
+          <i className="fa-solid fa-magnifying-glass"></i>
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search by friend name"
             onChange={handleChange}
           />
           {
