@@ -24,8 +24,8 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
     useEffect(() => {
         if (userId) dispatch(fetchUser(userId));
         dispatch(getCurrentUser());
-        dispatch(fetchFriends(sessionUser?._id));
-        dispatch(fetchFriendRequests(currentUser?._id))
+        if (sessionUser) dispatch(fetchFriends(sessionUser._id));
+        if (currentUser) dispatch(fetchFriendRequests(currentUser._id))
     }, [dispatch, userId]);
 
     const pendingCreator = friendRequests.find(request => (
