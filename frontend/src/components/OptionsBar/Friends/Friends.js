@@ -31,8 +31,8 @@ const Friends = ({ open, friendsClose }) => {
 
     useEffect(() => {
         dispatch(getCurrentUser())
-        dispatch(fetchFriends(currentUser._id))
-        dispatch(fetchFriendRequests(currentUser._id))
+        dispatch(fetchFriends(currentUser?._id))
+        dispatch(fetchFriendRequests(currentUser?._id))
     }, [dispatch])
 
     if (!friends) return null;
