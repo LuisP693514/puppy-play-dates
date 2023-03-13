@@ -43,7 +43,7 @@ const DateRequestContainer = ({request, currentUser}) => {
                     <img className="profile-friend-image" src={otherUser.profileImageUrl}/>
                     </div>
                     <div className="pending-info">
-                        <div>Placeholder {otherUser.username} & Placeholder{otherUser.puppyName}</div>
+                        <div> {otherUser.username} & {otherUser.puppyName}</div>
                         <div className="date-request-buttons">
                             <button  id='reject-friend-button' onClick={handleDeclineDate}>-Decline-</button>
                             <button className="delete-request accept-button" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>

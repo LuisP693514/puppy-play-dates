@@ -23,7 +23,7 @@ const DateRequestInfoContainer = ({request}) => {
             <img className="profile-friend-image"src={invitee.profileImageUrl}/>
             <div className="pending-info">
                 <div>
-                    <p>Placeholder{invitee.name} & Placeholder{invitee.puppyName}</p>
+                    <p>{invitee.name} & {invitee.puppyName}</p>
                 </div>
                 <div>
                     <button className="delete-request" onClick={handleDeleteRequest} id="delete-date-button">-Delete Request-</button>
