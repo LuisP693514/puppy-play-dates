@@ -1,20 +1,32 @@
 import reactDom from "react-dom"
 
 
-export default function DatePopUp(open, closeDate) {
+export default function DatePopUp({open, closeDate, date, request}) {
 
-    if (!open) return null
+  function date () {
+    if (request) {
+      return (
+        <>
+          <div>{request.name}</div> 
+          <div>{request.date.slice(0,10)}</div>
+          <div>{request.description}</div>
+        </>
+      )
+    } else{
+      return null
+    }
+  }
+   
+  if (!open) return null
   return reactDom.createPortal(
     <>
-        <div className="modal-overlay"></div>
-        <div className="central-modal">
-            Testing Date Modal
-            {/* <div>{request.name}</div> 
-            <div>{request.date.slice(0,10)}</div>
-            <div>{request.description}</div>
-             */}
+        <div className="profile-modal">
+        <button onClick={() => {closeDate(false)}} className="modal-close">&times;</button>
+            {date()}
+            
+           
         </div>
     </>,
-    document.getElementById('Portal')
+  document.getElementById('portal')
   )
 }

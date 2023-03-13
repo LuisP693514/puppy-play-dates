@@ -1,19 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import reactDom from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDates, getDates } from '../../../store/dates';
 import { getCurrentUser, selectCurrentUser } from '../../../store/session';
-import './DateShowPage.css';
+import { fetchDateRequests, getDateRequests } from '../../../store/dateRequests';
 import DateEventContainer from './DateEventContainer';
 import DateRequestContainer from './DateRequestContainer';
-import { fetchDateRequests, getDateRequests } from '../../../store/dateRequests';
 import DateRequestInfoContainer from './DateRequestInfoContainer';
+import DatePopUp from './DatePopUp';
+import './DateShowPage.css';
 
 const DateShowPage = ({open, datesClose}) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const dates = useSelector(getDates);
     const dateRequests = useSelector(getDateRequests);
+    const [showDateModal, setShowDateModal] = useState(false)
+    const [showRequestModal, setShowRequestModal] = useState(false)
+    const [showPendingModal, setShowPendingModal] = useState(false)
 
     useEffect(() => {
         dispatch(getCurrentUser())
@@ -21,6 +25,11 @@ const DateShowPage = ({open, datesClose}) => {
         dispatch(fetchDateRequests(currentUser._id))
     }, [dispatch]);
 
+    const closeAllModals = () =>{
+        setShowDateModal(false)
+        setShowRequestModal(false)
+        setShowPendingModal(false)
+    }
 
     const datesList = () => {
         if (dates.length){
@@ -29,7 +38,7 @@ const DateShowPage = ({open, datesClose}) => {
                 <div id='date-index'>
                     {dates.map(date =>{ 
                     return ( <div id='date-item'>
-                                    <DateEventContainer dateId={date._id}/>
+                                    <DateEventContainer dateId={date._id} key={date._id} showDateModal={showDateModal} setShowDateModal={setShowDateModal} closeAllModals={closeAllModals}/>
                                 </div>)}
                     )}
                 </div>
@@ -38,7 +47,7 @@ const DateShowPage = ({open, datesClose}) => {
 
         } else {
             return (
-                <div> To start making dates, Add Friends!</div>
+                <div className="date-spacer"> Select a friend's profile and click Create Play Date to begin.</div>
             )
         }
     }
@@ -53,7 +62,7 @@ const DateShowPage = ({open, datesClose}) => {
                     <div id='date-request-index'>
                         {pendingInvitee.map(request => {
                             return (<div id='date-item'>
-                                        <DateRequestContainer request={request} currentUser={currentUser}/>
+                                    <DateRequestContainer request={request} key={request._id} currentUser={currentUser} showRequestModal={showRequestModal} setShowRequestModal={setShowRequestModal} closeAllModals={closeAllModals}/>
                                     </div>)
                         })}
                     </div>
@@ -72,7 +81,7 @@ const DateShowPage = ({open, datesClose}) => {
                     <div id='date-request-index'>
                         {pendingCreator.map(request => {
                             return (<div id='date-item'>
-                                        <DateRequestInfoContainer request={request}/>
+                                        <DateRequestInfoContainer request={request} key={request._id} showPendingModal={showPendingModal} setShowPendingModal={setShowPendingModal} closeAllModals={closeAllModals}/>
                                     </div>)
                         })}
                      </div>

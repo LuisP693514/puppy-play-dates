@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser, getUser } from "../../../store/users";
 import { deleteDateRequest } from "../../../store/dateRequests";
+import DatePopUp from "./DatePopUp";
 
-const DateRequestInfoContainer = ({request}) => {
+const DateRequestInfoContainer = ({request, showPendingModal, setShowPendingModal, closeAllModals}) => {
     const dispatch = useDispatch();
     const invitee = useSelector(getUser(request.invitee))
 
@@ -17,10 +18,23 @@ const DateRequestInfoContainer = ({request}) => {
     }
 
     if (!invitee) return null;
+    
+    const runTest = () => {
+        debugger
+    }
+
 
     return (
         <>
-            <img className="profile-friend-image"src={invitee.profileImageUrl}/>
+            <button onClick={() => {
+                runTest()
+                closeAllModals()
+                setShowPendingModal(true)
+            }}>
+                <div>
+                <img className="profile-friend-image"src={invitee.profileImageUrl}/>
+                </div> 
+            </button>
             <div className="pending-info">
                 <div>
                     <p>{invitee.name} & {invitee.puppyName}</p>
@@ -29,6 +43,7 @@ const DateRequestInfoContainer = ({request}) => {
                     <button className="delete-request" onClick={handleDeleteRequest} id="delete-date-button">-Delete Request-</button>
                 </div>
             </div>
+            <DatePopUp open={showPendingModal} closeDate={setShowPendingModal(false)} />
         </>
 
     )

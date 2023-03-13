@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteDate, fetchDate, getDate} from "../../../store/dates";
 import { fetchUser, getUser } from "../../../store/users";
+import DatePopUp from "./DatePopUp";
 
 
-const DateEventContainer = ({dateId}) => {
+const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllModals}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const date = useSelector(getDate(dateId));
     const otherUser = useSelector(getUser(date?.invitee))
     const [showModal, setShowModal] = useState(false);
-
 
     useEffect(() => {
         if (dateId) {
@@ -45,7 +45,13 @@ const DateEventContainer = ({dateId}) => {
         return (
             <>
                 <div className="date-info-container">
+                    <button className="friend-info" onClick={() => {
+                        closeAllModals()
+                        setShowDateModal(true);
+                        // setSelectedUserId(friendUser._id);
+                    }}>
                     <div> <img className="profile-friend-image" src={otherUser.profileImageUrl}/></div>
+                    </button>
                     <div className="pending-info">
                         <p>Date with {otherUser?.username} & {otherUser?.puppyName}</p>
                         <div>{date?.name} on {date?.date.slice(0,10)}</div>
@@ -75,6 +81,7 @@ const DateEventContainer = ({dateId}) => {
                                 </div>
                             </div>
                         )}
+               {<DatePopUp open={showDateModal} closeDate={setShowDateModal} date={date}/>}
             </>
         )
 };
