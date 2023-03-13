@@ -71,20 +71,20 @@ function MyGoogleMap( { filteredMarkers } ) {
       .catch(error => {
       });
 
-      if(longitude && latitude){
-        const geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
-            if (status === 'OK' && results.length > 0) {
-              const country = results[0].address_components.find(
-                (component) => component.types.includes('country')
-              );
-              if (country) {
-                console.log(`The marker is in ${country.long_name}.`);
-                // TODO: Check if the country is over land or water.
-              }
-            }
-          });
-      }
+    //   if(longitude && latitude){
+    //     const geocoder = new window.google.maps.Geocoder();
+    //     geocoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
+    //         if (status === 'OK' && results.length > 0) {
+    //           const country = results[0].address_components.find(
+    //             (component) => component.types.includes('country')
+    //           );
+    //           if (country) {
+    //             console.log(`The marker is in ${country.long_name}.`);
+    //             // TODO: Check if the country is over land or water.
+    //           }
+    //         }
+    //       });
+    //   }
       const minLong = longitude - 0.0135462
         const maxLong = longitude + 0.0139538
         let randomLong;
@@ -95,17 +95,17 @@ function MyGoogleMap( { filteredMarkers } ) {
 
         const preseeded_locations_dogPark = []
         for (let i = 0; i < 12; i++) {
-            randomLong = (Math.random() * (maxLong - minLong)) + minLong;
-            randomLat = (Math.random() * (maxLat - minLat)) + minLat;
-            preseeded_locations_dogPark.push([randomLat, randomLong])
-            dispatch(createMarker({
-                markerType: 'dogPark', 
-                latitude: preseeded_locations_dogPark[i][0], 
-                longitude: preseeded_locations_dogPark[i][1],
-                name: `${faker.address.city()} Park`,
-                address: faker.address.streetAddress(),
-                hours: generateFakeHours()
-            }))
+            // randomLong = (Math.random() * (maxLong - minLong)) + minLong;
+            // randomLat = (Math.random() * (maxLat - minLat)) + minLat;
+            // preseeded_locations_dogPark.push([randomLat, randomLong])
+            // dispatch(createMarker({
+            //     markerType: 'dogPark', 
+            //     latitude: preseeded_locations_dogPark[i][0], 
+            //     longitude: preseeded_locations_dogPark[i][1],
+            //     name: `${faker.address.city()} Park`,
+            //     address: faker.address.streetAddress(),
+            //     hours: generateFakeHours()
+            // }))
         }
         const preseeded_locations_vet = []
         for (let i = 0; i < 12; i++) {

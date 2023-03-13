@@ -21,7 +21,7 @@ export const getMarkers = state => {
 }
 
 export const getMarker = markerId => state => {
-    debugger
+    // debugger
     return state?.markers ? state?.markers[markerId] : null
 }
 
@@ -42,7 +42,7 @@ export const fetchMarker = (markerId) => async (dispatch) => {
 }
 
 export const createMarker = (markerObj) => async (dispatch) => {
-    debugger
+    // debugger
     const response = await jwtFetch(`/api/markers/create`, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},

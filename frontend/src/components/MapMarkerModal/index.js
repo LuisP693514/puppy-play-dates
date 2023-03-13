@@ -5,14 +5,14 @@ import { fetchMarker, getMarker } from "../../store/markers";
 import "./MapMarkerPopUp.css"
 
 const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
-    console.log(markerId)
+    // console.log(markerId)
     const dispatch = useDispatch();
     let currentMarker;
     let markerImg;
 
     
     currentMarker = useSelector(getMarker(markerId))
-    console.log(currentMarker)
+    // console.log(currentMarker)
     switch(currentMarker.markerType){
         case 'dogPark': 
             markerImg = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-park-icon.png'

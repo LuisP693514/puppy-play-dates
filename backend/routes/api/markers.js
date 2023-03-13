@@ -23,7 +23,7 @@ const Marker = mongoose.model('Marker')
 router.post('/create', async (req, res, next) => {
   const { markerType, latitude, longitude, name, address, hours } = req.body;
 
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     const newMarker = new Marker({
@@ -37,7 +37,7 @@ router.post('/create', async (req, res, next) => {
     await newMarker.save();
     res.status(201).json(newMarker);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -65,7 +65,7 @@ router.get('/:markerId', async (req, res) => {
   const markerId = req.params.markerId
 
   try {
-    console.log(markerId)
+    // console.log(markerId)
     const marker = await Marker.findById(markerId)
     if (!marker) {
       return res.status(404).json({ message: "Marker not found"})
