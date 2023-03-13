@@ -1,0 +1,45 @@
+.create-date-modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    box-shadow: 2px 5px 8px #6b6767;
+    border-radius: 10px;
+    border-top: 10px solid orange;
+    border-bottom: 10px solid orange;
+    z-index: 14;
+    
+}
+
+.date-image{
+    height: 200px;
+    width: 200px;
+    border-radius: 300px;
+}
+
+.create-date-form{
+    display:flex;
+    margin-top: 20px;
+}
+
+.create-form-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.date-modal-overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 10;
+}

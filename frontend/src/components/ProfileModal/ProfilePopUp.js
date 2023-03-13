@@ -8,6 +8,7 @@ import "./ProfilePopUp.css";
 import { getCurrentUser, selectCurrentUser } from "../../store/session";
 import { createFriendRequest, fetchFriendRequests, getFriendRequests } from "../../store/friendRequests";
 import { fetchFriends, getFriends } from "../../store/friends";
+import CreateDate from "../CreateDateForm/CreateDateForm";
 
 const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }) => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
     const friendList = useSelector(getFriends);
     const friendRequests = useSelector(getFriendRequests);
     const [friendRequestStatus, setFriendRequestStatus] = useState({});
+    const [showCreate, setShowCreate] = useState(false)
 
     useEffect(() => {
         if (userId) dispatch(fetchUser(userId));
@@ -55,7 +57,9 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
             isFriend = false;
         }
     }
+    
     checkIfBothUsersAreFriends(currentUser, otherUser)
+
     const handleCreateDateRequest = e => {
         e.preventDefault();
         history.push('/createDate', { currentUser, otherUser });
@@ -79,7 +83,9 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
     const isPendingFriend = pendingInvitee || pendingCreator || pending || (friendRequestStatus[currentUser._id] === 'pending' && friendRequestStatus[otherUser._id] === 'pending');
 
 
-
+    function runTest() {
+        debugger
+    }
 
     if (!open) return null
     return reactDom.createPortal(
@@ -116,7 +122,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
                 <div className="profile-modal-buttons">
                     {isFriend ? (
                         <div className="friend-profile-button-options">
-                            <button className="button" id="create-event-button" onClick={handleCreateDateRequest}>Create Play Date</button>
+                            <button className="button" id="create-event-button" onClick={() => {setShowCreate(true)}}>Create Play Date</button>
                         </ div>
                     ) : (<br />)}
 
@@ -131,6 +137,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
                     ) : null}
                 </div>
             </div>
+            <CreateDate open={showCreate} setShowCreate={setShowCreate} currentUser={currentUser} otherUser={otherUser} />
         </>,
         document.getElementById("portal")
     );

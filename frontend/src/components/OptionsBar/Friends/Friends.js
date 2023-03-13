@@ -61,7 +61,7 @@ const Friends = ({ open, friendsClose }) => {
         } else {
             return (
                 <div className="date-spacer">
-                    <div>Click profiles on the map to start adding friends.</div>
+                    <div className="spacer">Click profiles on the map to start adding friends.</div>
                     <div>Once they have accepted your invitation, they will show up here.</div>
                 </div>
             )
