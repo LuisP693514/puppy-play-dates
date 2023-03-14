@@ -80,7 +80,7 @@ const DateShowPage = ({open, datesClose}) => {
                     <div id='date-request-index'>
                         {pendingCreator.map(request => {
                             return (<div id='date-item'>
-                                        <DateRequestInfoContainer request={request} key={request._id} showPendingDateModal={showPendingDateModal} setShowPendingDateModal={setShowPendingDateModal} closeAllModals={closeAllModals}/>
+                                        <DateRequestInfoContainer request={request} key={pendingCreator._id} showPendingDateModal={showPendingDateModal} setShowPendingDateModal={setShowPendingDateModal} closeAllModals={closeAllModals}/>
                                     </div>)
                         })}
                      </div>

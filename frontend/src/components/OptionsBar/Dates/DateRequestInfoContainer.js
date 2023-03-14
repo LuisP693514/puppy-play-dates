@@ -35,10 +35,13 @@ const DateRequestInfoContainer = ({request, showPendingDateModal, setShowPending
                     <p>{invitee.name} & {invitee.puppyName}</p>
                 </div>
                 <div>
+                    {request.name} on {request?.date.slice(0,10)}
+                </div>
+                <div>
                     <button className="delete-request" onClick={handleDeleteRequest} id="delete-date-button">-Delete Request-</button>
                 </div>
             </div>
-            <DatePopUp open={showPendingDateModal} closeDate={setShowPendingDateModal} />
+            <DatePopUp open={showPendingDateModal} closeDate={setShowPendingDateModal} request={request} otherUser={invitee} incoming={false}/>
         </>
 
     )
