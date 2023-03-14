@@ -10,7 +10,6 @@ const UpdateDateForm = ({date, otherUser}) => {
 
 
     const handleUpdate = () => {
-        debugger
         dispatch(updateDate({...date, ...updatedDate}));
     }
 
