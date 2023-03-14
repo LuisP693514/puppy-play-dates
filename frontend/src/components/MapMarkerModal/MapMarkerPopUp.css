@@ -13,15 +13,6 @@
     box-shadow: 4px 5px 8px #6b6767;
     z-index: 4;
 }
-
-.modal-close-marker {
-    font-size: 30px;
-    position: absolute;
-    top: 10px;
-    right: 16px;
-    color: #ee7308;
-}
-
 .modal-marker-popup {
     display: flex;
     flex-direction: column;
@@ -37,4 +28,11 @@
     text-align: center;
     font-size: 1.5em;
     margin: 20px
+}
+
+.business-hours {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
 }

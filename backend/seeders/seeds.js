@@ -7,7 +7,7 @@ const { faker } = require('@faker-js/faker');
 const FriendRequest = require('../models/FriendRequest');
 const Friend = require('../models/Friend')
 
-const NUM_SEED_USERS = 50;
+const NUM_SEED_USERS = 47;
 
 // Create users
 const users = [];
@@ -51,7 +51,7 @@ users.push(
         username: 'demo-user2',
         email: 'demo-user@appacademy2.io',
         hashedPassword: bcrypt.hashSync('password', 10),
-        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/51profilepic.png", // change the profile pic
         latitude: 40.7350, 
         longitude: -73.9921,
         puppyName: 'dog',
@@ -67,7 +67,7 @@ users.push(
         username: 'demo-user3',
         email: 'demo-user@appacademy3.io',
         hashedPassword: bcrypt.hashSync('password', 10),
-        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/50profilepic.png", // change the profile pic
         latitude: 40.730, 
         longitude: -73.9930,
         puppyName: 'doggy',
@@ -83,7 +83,7 @@ users.push(
         username: 'demo-user88',
         email: 'demo-user@appacademy88.io',
         hashedPassword: bcrypt.hashSync('password', 10),
-        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/49profilepic.png", // change the profile pic
         latitude: 40.730, 
         longitude: -73.9938,
         puppyName: 'oldie',
@@ -99,7 +99,7 @@ users.push(
         username: 'demouser21',
         email: 'demo-user@appacademy21.io',
         hashedPassword: bcrypt.hashSync('password', 10),
-        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png", // change the profile pic
+        profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/48profilepic.png", // change the profile pic
         latitude: 40.7363, 
         longitude: -73.990,
         puppyName: 'doggy2',
