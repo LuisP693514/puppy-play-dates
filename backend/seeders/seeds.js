@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const FriendRequest = require('../models/FriendRequest');
 const Friend = require('../models/Friend')
+const Dates = require('../models/Date')
+const DateRequest = require('../models/DateRequest')
 
 const NUM_SEED_USERS = 50;
 
@@ -13,6 +15,8 @@ const NUM_SEED_USERS = 50;
 const users = [];
 const friendRequests = [];
 const friends = [];
+const dateRequests = [];
+const dates = [];
 
 const minLong = -74.0075;
 const maxLong = -73.98;
@@ -105,7 +109,7 @@ users.push(
         puppyName: 'doggy2',
         puppyBreed: 'big dog2',
         puppyAge:4,
-        name: "Demo555",
+        name: "Ice Spice",
         ownerAge: 11,
         puppyTemperament: "tired",
         puppyVaccinated: true
@@ -146,12 +150,79 @@ friends.push(
     })
 )
 
+// grab the current time
+
+const currentTime = new Date();
+
+// create dates
+
+dates.push(
+    new Dates({
+        date: (new Date(currentTime.getTime() + (7 * 24 * 60 * 60 * 1000))), // 7 days in the future
+        creator: users[0]._id,
+        invitee: users[2]._id,
+        description: 'Just want to hang out',
+        name: 'Puppy Hangout'
+    }),
+    new Dates({
+        date: (new Date(currentTime.getTime() + (17 * 24 * 60 * 60 * 1000))), // 7 days in the future
+        creator: users[0]._id,
+        invitee: users[2]._id,
+        description: 'Another hang out 10 days later',
+        name: 'Puppy Hangout 2 '
+    })
+)
+
+// Add the dates to the users that are in there
+
+for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    for (let j = 0; j < dates.length; j++) {
+        const date = dates[j];
+        if (!user.dates.includes(date._id) && (date.creator === user._id || date.invitee === user._id)) {
+            user.dates.push(date._id)
+        }
+    }
+}
+
+// creating date requests
+dateRequests.push(
+    new DateRequest({
+        sender: users[4]._id,
+        receiver: users[0]._id,
+        status: 'pending',
+        name: 'Dog Party',
+        description: 'Let\'s go to the dog park!',
+        date: (new Date(currentTime.getTime() + (4 * 24 * 60 * 60 * 1000))) // 4 days in the future
+    }),
+    new DateRequest({
+        sender: users[4]._id,
+        receiver: users[0]._id,
+        status: 'pending',
+        name: 'Dog Party part 2',
+        description: 'Let\'s go to the dog park again!',
+        date: (new Date(currentTime.getTime() + (14 * 24 * 60 * 60 * 1000))) // 14 days in the future
+    }),
+)
+
+for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    for (let j = 0; j < dateRequests.length; j++) {
+        const dateRequest = dateRequests[j];
+        if (!user.dateRequests.includes(dateRequest._id) && (dateRequest.receiver === user._id || dateRequest.creator === user._id)){
+            user.dateRequests.push(dateRequest._id)
+        }
+    }
+}
+
 // Add all friend requests to the association arrays
 for (let i = 0; i < users.length; i++) {
     const user = users[i];
     for (let j = 0; j < friendRequests.length; j++) {
         const friendRequest = friendRequests[j];
-        user.friendRequests.push(friendRequest._id)
+        if (!user.friendRequests.includes(friendRequest._id) && (friendRequest.sender === user._id || friendRequest.receiver === user._id)) {
+            user.friendRequests.push(friendRequest._id);
+        }
     }
 }
 
@@ -350,6 +421,8 @@ const insertSeeds = () => {
         .then(() => User.insertMany(users))
         .then(() => FriendRequest.insertMany(friendRequests))
         .then(() => Friend.insertMany(friends))
+        .then(() => Dates.insertMany(dates))
+        .then(() => DateRequest.insertMany(dateRequests))
         .then(() => Marker.insertMany(markers))
         .then(() => {
             console.log("Done!");
