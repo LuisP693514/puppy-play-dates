@@ -14,8 +14,8 @@ export default function Info({open, infoClose}) {
             <div><span><i className="fa-solid fa-gear orange-text"></i></span> to change account settings</div>
             <div><span><i className="fa-solid fa-paw orange-text"></i></span> to view and update your profile</div>
             <div><span><i className="fa-solid fa-bone orange-text"></i></span> to view your friends</div>
-            <div><span><i className="fa-solid fa-comments orange-text"></i></span> to view messages</div>
-            <div><span><i className="fa-regular fa-calendar orange-text"></i></span> to see/create date.</div>
+            {/* <div><span><i className="fa-solid fa-comments orange-text"></i></span> to view messages</div> */}
+            <div><span><i className="fa-regular fa-calendar orange-text"></i></span> to see upcoming dates</div>
             <div><span><i className="fa-solid fa-sliders orange-text"></i></span> to filter content</div>
             <div><span><i className="fa-solid fa-dog orange-text"></i></span> on map to view dog profile</div>
             <div><span><i className="fa-solid fa-plus orange-text"></i></span>  to zoom the map out</div>
