@@ -81,7 +81,7 @@ const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllMo
                                 </div>
                             </div>
                         )}
-               <DatePopUp open={showDateModal} closeDate={setShowDateModal} date={date}/>
+               <DatePopUp open={showDateModal} closeDate={setShowDateModal} date={date} otherUser={otherUser}/>
             </>
         )
 };
