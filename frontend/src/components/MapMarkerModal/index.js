@@ -1,5 +1,5 @@
 import reactDom from "react-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMarker, getMarker } from "../../store/markers";
 import "./MapMarkerPopUp.css"
@@ -10,7 +10,6 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
     const dispatch = useDispatch();
     let currentMarker;
     let markerImg;
-
     
     currentMarker = useSelector(getMarker(markerId))
     // console.log(currentMarker.hours)
@@ -39,7 +38,7 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
 
     return reactDom.createPortal(
         <>
-            <div className="marker-modal">
+            <div className="marker-modal" style={{ display: open ? "block" : "none" }}>
                 <button onClick={profileClose} className="modal-close">&times;</button>
                  <div>
                     <div className="modal-marker-popup">
