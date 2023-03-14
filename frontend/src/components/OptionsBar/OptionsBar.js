@@ -75,10 +75,10 @@ export default function OptionsBar() {
               closeAllModals()
               setDatesOpen(!datesOpen)}}><i className="fa-regular fa-calendar white-text"></i></button>
             <DateShowPage open={datesOpen} datesClose={() => setDatesOpen(false)}></DateShowPage>
-            <button className="double-spacer" onClick={() => {
+            {/* <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
-            <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages>
+            <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages> */}
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setInfoOpen(!infoOpen)}}><i className="fa-regular fa-circle-question white-text"></i></button>
