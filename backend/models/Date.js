@@ -6,9 +6,10 @@ const dateSchema = new Schema({
     date: { type: Date },
     latitude: { type: Number },
     longitude: { type: Number },
-    creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    invitee: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    name: {type: String}
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    invitee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    name: { type: String },
+    description: { type: String }
 
 }, {
     timestamps: true
