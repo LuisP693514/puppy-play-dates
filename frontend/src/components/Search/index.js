@@ -7,6 +7,7 @@ import { fetchUsers, getUsers } from "../../store/users"
 import ProfilePopUp from "../ProfileModal/ProfilePopUp"
 
 const Search = () => {
+  // debugger
     const dispatch = useDispatch()
     const currentUser = useSelector(selectCurrentUser)
     const friends = useSelector(getFriends)
@@ -42,7 +43,6 @@ const Search = () => {
     const handleChange = (e) => {
         setSearchWord(e.target.value)
     }
-
     // const handleSubmit = (e) => {
     //     e.preventDefault()
     //     setSearchWord(searchWord)
@@ -56,6 +56,7 @@ const Search = () => {
             type="text"
             placeholder="Search by friend name"
             onChange={handleChange}
+            value={searchWord}
           />
           {
           friendsInfo.filter((friendInfo) => {
@@ -74,6 +75,7 @@ const Search = () => {
                 }).map((friendInfo) => {
                     return (
                     <button onClick={() => {
+                        setSearchWord("")
                         setShowModal(true)
                         setSelectedUserId(friendInfo._id)
                     }}>
@@ -83,22 +85,6 @@ const Search = () => {
                     )
             })}
             {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
-        {/* {datesInfo.filter((dateInfo) => {
-            if (searchWord === dateInfo.username){
-              return true
-            } 
-            return false
-          }).map((dateInfo) => {
-            return (
-              <div>
-                <img src={dateInfo.profileImageUrl} />
-                <p>{dateInfo.username}</p>
-              </div>
-            )
-          })} */}
-          
-         {/* <button type="submit">Search</button> */}
-        {/* </form> */}
         </div>
       );      
 }

@@ -5,7 +5,7 @@ import { fetchMarker, getMarker } from "../../store/markers";
 import "./MapMarkerPopUp.css"
 
 const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
-    debugger
+    // debugger
     // console.log(markerId)
     const dispatch = useDispatch();
     let currentMarker;
@@ -13,7 +13,7 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
 
     
     currentMarker = useSelector(getMarker(markerId))
-    // console.log(currentMarker)
+    // console.log(currentMarker.hours)
     switch(currentMarker.markerType){
         case 'dogPark': 
             markerImg = 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/orange-park-icon.png'
@@ -40,7 +40,7 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
     return reactDom.createPortal(
         <>
             <div className="marker-modal">
-                <button onClick={profileClose} className="modal-close-marker">&times;</button>
+                <button onClick={profileClose} className="modal-close">&times;</button>
                  <div>
                     <div className="modal-marker-popup">
                         <div> 
@@ -51,8 +51,10 @@ const MapMarkerPopUp = ({ markerId, open, profileClose }) => {
                             <h4>{currentMarker.address}</h4>
                         </div>
                     </div>
-                    <div>
-                        <div>{currentMarker.hours}</div>
+                    <div className="business-hours">
+                        {currentMarker.hours.map((day, index) => (
+                            <div key={index}>{day}</div>
+                        ))}
                     </div>
                 </div>
             </div>
