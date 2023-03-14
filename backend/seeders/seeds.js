@@ -38,12 +38,12 @@ users.push(
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png",
         latitude: 40.7343, 
         longitude: -73.9936,
-        puppyName: 'Demodog',
-        puppyBreed: 'Shiba Inu',
+        puppyName: 'Lassie',
+        puppyBreed: 'Rough Collie',
         puppyAge: 3,
-        name: "Demolition",
+        name: "Rud Weatherwax",
         ownerAge: 95,
-        puppyTemperament: "energetic",
+        puppyTemperament: "intelligent",
         puppyVaccinated: true
     }),
     // demo's first friend request :)
@@ -54,12 +54,12 @@ users.push(
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/51profilepic.png", // change the profile pic
         latitude: 40.7350, 
         longitude: -73.9921,
-        puppyName: 'dog',
+        puppyName: 'Princess Fluffy',
         puppyBreed: 'Inu',
         puppyAge: 4,
-        name: "Demo44444",
+        name: "Roseanna Sharrow",
         ownerAge: 9,
-        puppyTemperament: "energetic",
+        puppyTemperament: "playful",
         puppyVaccinated: true
     }),
     // demo's REAL FRIEND
@@ -70,12 +70,12 @@ users.push(
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/50profilepic.png", // change the profile pic
         latitude: 40.730, 
         longitude: -73.9930,
-        puppyName: 'doggy',
-        puppyBreed: 'big dog',
+        puppyName: 'Snoopy',
+        puppyBreed: 'White Beagle',
         puppyAge:6,
-        name: "Demo4332",
+        name: "Charlie Brown",
         ownerAge: 19,
-        puppyTemperament: "tired",
+        puppyTemperament: "lazy",
         puppyVaccinated: true
     }),
     // friend request
@@ -86,12 +86,12 @@ users.push(
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/49profilepic.png", // change the profile pic
         latitude: 40.730, 
         longitude: -73.9938,
-        puppyName: 'oldie',
-        puppyBreed: 'sad dog',
+        puppyName: 'Scooby Doo',
+        puppyBreed: 'Great Dane',
         puppyAge:44,
-        name: "Demo422",
+        name: "Shaggy",
         ownerAge: 13,
-        puppyTemperament: "tired",
+        puppyTemperament: "easily scared",
         puppyVaccinated: true
     }),
     // friend
@@ -102,12 +102,12 @@ users.push(
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/48profilepic.png", // change the profile pic
         latitude: 40.7363, 
         longitude: -73.990,
-        puppyName: 'doggy2',
-        puppyBreed: 'big dog2',
+        puppyName: 'Totto',
+        puppyBreed: 'Carin Terrier',
         puppyAge:4,
-        name: "Demo555",
+        name: "Dorothy",
         ownerAge: 11,
-        puppyTemperament: "tired",
+        puppyTemperament: "defender",
         puppyVaccinated: true
     })
 )
