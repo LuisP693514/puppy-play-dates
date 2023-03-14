@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteDate, fetchDate, getDate} from "../../../store/dates";
+import { getCurrentUser, selectCurrentUser } from "../../../store/session";
 import { fetchUser, getUser } from "../../../store/users";
+import CreateDate from "../../CreateDateForm/CreateDateForm";
 import DatePopUp from "./DatePopUp";
 
 
@@ -12,16 +14,23 @@ const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllMo
     const history = useHistory();
     const date = useSelector(getDate(dateId));
     const otherUser = useSelector(getUser(date?.invitee))
+    const sessionUser = useSelector(selectCurrentUser);
+    const currentUser = useSelector(getUser(sessionUser?._id));
     const [showModal, setShowModal] = useState(false);
+    const [showCreate, setShowCreate] = useState(false)
 
     useEffect(() => {
         if (dateId) {
             dispatch(fetchDate(dateId))
         }
+        dispatch(getCurrentUser());
+        dispatch(fetchUser(sessionUser._id))
         dispatch(fetchUser(date?.invitee))
     }, [dispatch]);
 
     if (!date) return null;
+    if (!sessionUser) return null;
+    if (!currentUser) return null;
 
     const handleDeleteClick = e => {
         e.preventDefault();
@@ -38,9 +47,9 @@ const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllMo
         setShowModal(false);
     }
 
-    const handleUpdateClick = () => {
-        history.push('/editDate', {date})
-    }
+    // const handleUpdateClick = () => {
+    //     history.push('/editDate', {date})
+    // }
 
         return (
             <>
@@ -58,10 +67,8 @@ const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllMo
                         <div>{date?.description}</div>
                         <div className="handle-date-buttons">
                             <button id="reject-friend-button" onClick={handleDeleteClick}>-Delete-</button>
-                            <button className="delete-request accept-button" onClick={handleUpdateClick}>-Update-</button>
-                            
+                            <button className="delete-request accept-button" onClick={() => {setShowCreate(true)}}>-Update-</button> 
                         </div>
-
                     </div>
                     {/* <div>Location:</div>
                     <div>Latitude: {date.latitude}</div>
@@ -81,7 +88,8 @@ const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllMo
                                 </div>
                             </div>
                         )}
-               <DatePopUp open={showDateModal} closeDate={setShowDateModal} date={date} otherUser={otherUser}/>
+            <DatePopUp open={showDateModal} closeDate={setShowDateModal} date={date} otherUser={otherUser}/>
+            <CreateDate open={showCreate} setShowCreate={setShowCreate} currentUser={currentUser} otherUser={otherUser} isUpdate={true} dateObj={date}/>
             </>
         )
 };

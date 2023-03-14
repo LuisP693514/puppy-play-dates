@@ -4,14 +4,15 @@ import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { createDateRequest } from '../../store/dateRequests';
 import './CreateDateForm.css';
+import UpdateDateForm from '../OptionsBar/Dates/DateUpdateForm';
 
-const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
+const CreateDate = ({open, setShowCreate, currentUser, dateObj ,otherUser, isUpdate}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
+    // const [latitude, setLatitude] = useState(0);
+    // const [longitude, setLongitude] = useState(0);
     const [date, setDate] = useState('')
   
     const handleSubmit = (e) => {
@@ -22,21 +23,16 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
             name,
             date,
             description,
-            longitude,
-            latitude
+            // longitude,
+            // latitude
         };
         dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
         setShowCreate(false)
     };
 
-  if (!otherUser) return null;
-  if (!open) return null
 
-  return reactDom.createPortal(
-    <>
-        <div className="date-modal-overlay"></div>
-        <div className="create-date-modal">
-            <button onClick={() => setShowCreate(false)} className="modal-close">&times;</button>
+    const createDate = () => {return (
+
             <div className='create-date-form-container'>
                 <div>
                     <h1 id='date-form-title'>Create Play Date with {otherUser.puppyName}Place</h1>
@@ -113,6 +109,20 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
                     </form>
                 </div>
             </div>
+     )}
+
+    
+
+
+  if (!otherUser) return null;
+  if (!open) return null
+
+  return reactDom.createPortal(
+    <>
+        <div className="date-modal-overlay"></div>
+        <div className="create-date-modal">
+            <button onClick={() => setShowCreate(false)} className="modal-close">&times;</button>
+            { isUpdate ? <UpdateDateForm date={dateObj} otherUser={otherUser}/> : createDate()}
         </div>
     </>,
     document.getElementById('portal2')

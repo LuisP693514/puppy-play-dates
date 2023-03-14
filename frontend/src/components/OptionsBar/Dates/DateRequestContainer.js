@@ -53,7 +53,7 @@ const DateRequestContainer = ({request, showRequestModal, setShowRequestModal, c
                     <button className="delete-request accept-button" id='accept-date' onClick={handleAcceptDate}>-Accept-</button>
                 </div>
             </div>
-            <DatePopUp open={showRequestModal} closeDate={setShowRequestModal} request={request}/>
+            <DatePopUp open={showRequestModal} closeDate={setShowRequestModal} otherUser={otherUser} request={request} incoming={true}/>
         </>
     )
 };

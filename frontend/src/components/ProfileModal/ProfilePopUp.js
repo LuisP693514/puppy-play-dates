@@ -10,7 +10,7 @@ import { createFriendRequest, fetchFriendRequests, getFriendRequests } from "../
 import { fetchFriends, getFriends } from "../../store/friends";
 import CreateDate from "../CreateDateForm/CreateDateForm";
 
-const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }) => {
+const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherUser = useSelector(getUser(userId));
@@ -137,7 +137,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
                     ) : null}
                 </div>
             </div>
-            <CreateDate open={showCreate} setShowCreate={setShowCreate} currentUser={currentUser} otherUser={otherUser} />
+            <CreateDate open={showCreate} setShowCreate={setShowCreate} currentUser={currentUser} otherUser={otherUser} isUpdate={false} />
         </>,
         document.getElementById("portal")
     );
