@@ -43,7 +43,8 @@ export default function DatePopUp({open, closeDate, date, request, otherUser, in
     }
   }
 
-  if(!date) return null
+  if(!date) return null;
+  if(!request) return null;
 
   if (!open) return null
   return reactDom.createPortal(
