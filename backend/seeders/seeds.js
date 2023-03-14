@@ -32,7 +32,7 @@ for (let i = 0; i < NUM_SEED_USERS; i++) {
 
 users.push(
     new User({
-        username: 'demo-user',
+        username: 'Rud',
         email: 'demo-user@appacademy.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/52profilepic.png",
@@ -48,7 +48,7 @@ users.push(
     }),
     // demo's first friend request :)
     new User({
-        username: 'demo-user2',
+        username: 'Roseanna',
         email: 'demo-user@appacademy2.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/51profilepic.png", // change the profile pic
@@ -64,7 +64,7 @@ users.push(
     }),
     // demo's REAL FRIEND
     new User({
-        username: 'demo-user3',
+        username: 'Charlie Brown',
         email: 'demo-user@appacademy3.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/50profilepic.png", // change the profile pic
@@ -80,7 +80,7 @@ users.push(
     }),
     // friend request
     new User({
-        username: 'demo-user88',
+        username: 'Shaggy',
         email: 'demo-user@appacademy88.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/49profilepic.png", // change the profile pic
@@ -96,7 +96,7 @@ users.push(
     }),
     // friend
     new User({
-        username: 'demouser21',
+        username: 'Dorothy',
         email: 'demo-user@appacademy21.io',
         hashedPassword: bcrypt.hashSync('password', 10),
         profileImageUrl: "https://puppyplaydates.s3.us-east-2.amazonaws.com/public/48profilepic.png", // change the profile pic
