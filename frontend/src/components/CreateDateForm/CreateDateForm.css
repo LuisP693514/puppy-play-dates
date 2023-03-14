@@ -43,3 +43,8 @@
     background-color: rgba(0,0,0,.5);
     z-index: 10;
 }
+
+#date-description-input{
+    height: 75px;
+    width: 250px;
+}
