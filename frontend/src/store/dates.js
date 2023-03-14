@@ -49,14 +49,12 @@ export const fetchDates = (userId) => async (dispatch) => {
 };
 
 export const updateDate = date => async (dispatch) => {
-    debugger
     const response = await jwtFetch(`/api/dates/${date._id}`,{
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(date)
     });
 
-    debugger
     if (response.ok) {
         const date = await response.json();
         dispatch(receiveDate(date))
