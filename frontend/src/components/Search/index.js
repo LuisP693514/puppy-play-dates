@@ -5,8 +5,10 @@ import { fetchFriends, getFriends } from "../../store/friends"
 import { selectCurrentUser } from "../../store/session"
 import { fetchUsers, getUsers } from "../../store/users"
 import ProfilePopUp from "../ProfileModal/ProfilePopUp"
+import "./Search.css"
 
 const Search = () => {
+  // debugger
     const dispatch = useDispatch()
     const currentUser = useSelector(selectCurrentUser)
     const friends = useSelector(getFriends)
@@ -42,11 +44,51 @@ const Search = () => {
     const handleChange = (e) => {
         setSearchWord(e.target.value)
     }
-
     // const handleSubmit = (e) => {
     //     e.preventDefault()
     //     setSearchWord(searchWord)
     // }
+
+    function searchResults() {
+      if (searchWord){
+        return (
+          <div className='search-drop'>
+            {
+            friendsInfo.filter((friendInfo) => {
+              if(searchWord === "") return false
+              const friendUsername = friendInfo.username.toLowerCase()
+              const searchUsername = searchWord.toLowerCase()
+              for (let i = 0; i < friendInfo.username.length; i++) {
+                  if (searchWord === friendInfo.username){
+                      return true
+                  } else if((friendUsername.indexOf(searchUsername) > -1)) {
+                          return true
+                  } else {
+                      return false
+                  }
+              }
+                  }).map((friendInfo) => {
+                      return (
+                        <div className='search-div'>
+                          <button onClick={() => {
+                              setSearchWord("")
+                              setShowModal(true)
+                              setSelectedUserId(friendInfo._id)
+                          }}>
+                            <div className="search-info"> 
+                              <img className="profile-friend-image" src={friendInfo.profileImageUrl} />
+                              <div className="search-name">{friendInfo.username}</div>
+                            </div>
+                          </button>
+                        </div>
+                      )
+              })}
+          </div>
+        )
+      } else {
+        return null
+      }
+    }
 
     return (
         <div>
@@ -54,51 +96,14 @@ const Search = () => {
           <i className="fa-solid fa-magnifying-glass"></i>
           <input
             type="text"
-            placeholder="Search by friend name"
+            placeholder=' friends username'
             onChange={handleChange}
+            value={searchWord}
           />
-          {
-          friendsInfo.filter((friendInfo) => {
-            if(searchWord === "") return false
-            const friendUsername = friendInfo.username.toLowerCase()
-            const searchUsername = searchWord.toLowerCase()
-            for (let i = 0; i < friendInfo.username.length; i++) {
-                if (searchWord === friendInfo.username){
-                    return true
-                } else if((friendUsername.indexOf(searchUsername) > -1)) {
-                        return true
-                } else {
-                    return false
-                }
-            }
-                }).map((friendInfo) => {
-                    return (
-                    <button onClick={() => {
-                        setShowModal(true)
-                        setSelectedUserId(friendInfo._id)
-                    }}>
-                        <img className="profile-friend-image" src={friendInfo.profileImageUrl} />
-                        <p>{friendInfo.username}</p>
-                    </button>
-                    )
-            })}
-            {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
-        {/* {datesInfo.filter((dateInfo) => {
-            if (searchWord === dateInfo.username){
-              return true
-            } 
-            return false
-          }).map((dateInfo) => {
-            return (
-              <div>
-                <img src={dateInfo.profileImageUrl} />
-                <p>{dateInfo.username}</p>
-              </div>
-            )
-          })} */}
+          {searchResults()}
           
-         {/* <button type="submit">Search</button> */}
-        {/* </form> */}
+          
+            {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
         </div>
       );      
 }

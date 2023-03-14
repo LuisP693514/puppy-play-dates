@@ -15,19 +15,19 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
     const [date, setDate] = useState('')
   
     const handleSubmit = (e) => {
-    e.preventDefault();
-    const userOneId = currentUser._id;
-    const userTwoId = otherUser._id;
-    const dateInfo = {   
-        name,
-        date,
-        description,
-        longitude,
-        latitude
+        e.preventDefault();
+        const userOneId = currentUser._id;
+        const userTwoId = otherUser._id;
+        const dateInfo = {   
+            name,
+            date,
+            description,
+            longitude,
+            latitude
+        };
+        dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
+        setShowCreate(false)
     };
-    dispatch(createDateRequest({senderId: userOneId, receiverId: userTwoId, ...dateInfo}));
-    history.push('/main')
-  };
 
   if (!otherUser) return null;
   if (!open) return null
@@ -47,9 +47,9 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
                             <img className="profile-image date-image" src={otherUser.profileImageUrl}/>
                         </div>
                         <div className='create-form-inputs'>
-                            <div>
+                            <div >
 
-                                <div id='date-name-section'>
+                                <div id='date-name-section' className="spacer">
                                     <label id="date-name-text">Date Name:</label>
                                     <input
                                         id="date-name-input"
@@ -60,7 +60,7 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
                                         required
                                     />
                                 </div>
-                                <div className="date-time-section">
+                                <div className="date-time-section spacer">
                                     <label id="date-time-text">Date and Time:</label>
                                     <input
                                         type={"date"}
@@ -71,8 +71,8 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
                                         required
                                     ></input>
                                 </div>
-                                <div className="date-description-section">
-                                    <label id="date-description-text">Description:</label>
+                                <div className="date-description-section spacer">
+                                    <label id="date-description-text">Description: </label>
                                     <textarea
                                         id="date-description-input"
                                         name="description"
@@ -81,7 +81,7 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
                                         required
                                     ></textarea>
                                 </div>
-                                <p>Location:</p>
+                                {/* <p>Location:</p>
                                 <div className="date-location-section">
                                     <label id="date-location-input">Latitude</label>
                                     <input
@@ -103,11 +103,11 @@ const CreateDate = ({open, setShowCreate, currentUser, otherUser}) => {
                                         onChange={(e) => setLongitude(e.target.value)}
                                         required
                                     />
-                                </div>
+                                </div> */}
                             </div>
 
                             <div>
-                                <button id='date-submit' className="button" type="submit">Create Date</button>
+                                <button id='date-submit'  className="button" type="submit">Create Date</button>
                             </div>
                         </div>
                     </form>

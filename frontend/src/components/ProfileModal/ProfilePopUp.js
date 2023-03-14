@@ -84,7 +84,7 @@ const ProfilePopUp = ({ userId, open, profileClose, pending, fromRequestsModal }
 
 
     function runTest() {
-        debugger
+        // debugger
     }
 
     if (!open) return null
