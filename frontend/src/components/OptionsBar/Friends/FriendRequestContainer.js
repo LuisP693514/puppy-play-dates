@@ -7,7 +7,7 @@ import ProfilePopUp from "../../ProfileModal/ProfilePopUp";
 import './Friends.css'
 
 
-const FriendRequestContainer = ({request, showRequestModal, setShowRequestModal, closeAllModals}) => {
+const FriendRequestContainer = ({request, showRequestModal, setShowRequestModal, setVisible, closeAllModals}) => {
     const dispatch = useDispatch();
     const sender = useSelector(getUser(request.sender))
     const [selectedUserId, setSelectedUserId] = useState('')
@@ -30,14 +30,41 @@ const FriendRequestContainer = ({request, showRequestModal, setShowRequestModal,
         dispatch(deleteFriendRequest(request._id))
     }
 
+    const closeVisible = () => {
+        setVisible(false)
+    }
+
+    const closeSiblings = (id) => {
+
+        const portal = document.getElementById('portal') // every profile that exists
+        
+        // hide all the children
+        for (let i = 0; i < portal.children.length; i++) {
+            const element = portal.children[i];
+            if (Array.from(element.classList).includes('profile-modal')){
+                element.classList.add('hidden')
+            }
+        }
+
+
+        const profile = document.getElementById(id)
+        if (profile && Array.from(profile.classList).includes('hidden')) {
+            profile.classList.remove('hidden')
+        }
+
+    }
+
     if (!sender) return null;
 
     return (
         <div className="request-info-container">
             <button className="friend-info" onClick={() => {
-                    closeAllModals();
-                    setShowRequestModal(true);
-                    setSelectedUserId(sender._id);
+                closeVisible()
+                closeAllModals();
+                setShowRequestModal(true);
+                setVisible(true)
+                setSelectedUserId(sender._id)
+                closeSiblings(sender._id)
                     }}>
                 <div>
                     <img className="profile-friend-image" src={sender.profileImageUrl}/>

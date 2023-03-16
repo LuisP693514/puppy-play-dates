@@ -10,7 +10,7 @@
     border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
-    z-index: 20;
+    z-index: 10;
     overflow: auto;
 }
 
@@ -56,4 +56,10 @@
 
 .date-spacer {
     margin-top: 10px;
+}
+
+.update-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
