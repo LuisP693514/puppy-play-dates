@@ -53,7 +53,14 @@ const Friends = ({ open, friendsClose }) => {
                 <div id='friend-index'>
                     {friends.map(friend => {
                         return (<div id='friend-item'>
-                            <FriendContainer friend={friend} showFriendModal={showFriendModal} setShowFriendModal={setShowFriendModal} closeAllModals={closeAllModals} />
+                            <FriendContainer setVisible={setVisible} friend={friend} showFriendModal={showFriendModal} setShowFriendModal={setShowFriendModal} closeAllModals={closeAllModals} />
+                            <ProfilePopUp 
+                                // userId={friend}
+                                open={showPendingModal}
+                                profileClose={() => setPendingShowModal(false)}
+                                setVisible={setVisible}
+                                fromRequestsModal={fromRequestsModal}
+                            />
                         </div>)
                     })}
                 </div>
@@ -77,7 +84,14 @@ const Friends = ({ open, friendsClose }) => {
                     <div id='friend-request-index'>
                         {pendingInvitee.map(request => {
                             return (<div id='friend-item'>
-                                <FriendRequestContainer request={request} showRequestModal={showRequestModal} setShowRequestModal={setShowRequestModal} closeAllModals={closeAllModals} />
+                                <FriendRequestContainer setVisible={setVisible} request={request} showRequestModal={showRequestModal} setShowRequestModal={setShowRequestModal} closeAllModals={closeAllModals} />
+                                <ProfilePopUp 
+                                userId={request.receiver}
+                                open={showPendingModal}
+                                profileClose={() => setPendingShowModal(false)}
+                                setVisible={setVisible}
+                                fromRequestsModal={fromRequestsModal}
+                            />
                             </div>)
                         })}
                     </div>

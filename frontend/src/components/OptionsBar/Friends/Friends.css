@@ -14,6 +14,22 @@
     overflow: auto;
 }
 
+.request-modal{
+    position: relative;
+    top: 10%;
+    left: 7%;
+    background-color: white;
+    width: max-content;
+    height: 80%;
+    padding: 40px;
+    box-shadow: 4px 5px 8px #6b6767;
+    border: 5px solid orange;
+    outline: 2px solid orange;
+    outline-offset: -10px;
+    z-index: 10;
+    overflow: auto;
+}
+
 .overflow {
     height: 100%;
     overflow: auto;
