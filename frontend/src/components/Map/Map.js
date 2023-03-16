@@ -217,6 +217,7 @@ function MyGoogleMap( { filteredMarkers } ) {
             (
                 <>
                     <Marker
+                        key={user._id}
                         clickable
                         onClick={() => {
                             setShowModal(true)
@@ -240,6 +241,7 @@ function MyGoogleMap( { filteredMarkers } ) {
             ) 
                 :
            (  <Marker 
+                key={user._id}
                 clickable
                 onClick={() => {
                     setShowModal(true)
@@ -260,6 +262,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'dogPark':
                     return (
                         <Marker 
+                            key={marker._id}
                             clickable
                             onClick={() => {
                                 setShowModal(false)
@@ -276,6 +279,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'vet':
                     return (
                         <Marker 
+                            key={marker._id}
                             clickable
                             onClick={() => {
                                 setShowModal(false)
@@ -292,6 +296,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'petStore':
                     return (
                         <Marker 
+                            key={marker._id}
                             clickable
                             onClick={() => {
                                 setShowModal(false)
@@ -308,6 +313,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 case 'groomer':
                     return (
                         <Marker 
+                            key={marker._id}
                             clickable
                             onClick={() => {
                                 setShowModal(false)
@@ -324,6 +330,7 @@ function MyGoogleMap( { filteredMarkers } ) {
                 default:
                     return (
                         <Marker 
+                            key={marker._id}
                             onClick={() => {
                                 setShowMarkerModal(true)
                                 setSelectedMarker(marker._id)
