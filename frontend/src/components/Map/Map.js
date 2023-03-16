@@ -29,7 +29,7 @@ const containerStyle = {
 //   lng: -73.9939538
 // };
 
-function MyGoogleMap( { filteredMarkers } ) {
+function MyGoogleMap({ filteredMarkers }) {
     const dispatch = useDispatch()
     const users = useSelector(getUsers)
     const markers = useSelector(getMarkers)
@@ -61,31 +61,31 @@ function MyGoogleMap( { filteredMarkers } ) {
         hoursArray.push(hours)
         return hoursArray
     }
-      
+
 
     useEffect(() => {
         getLocation().then(coords => {
             setLatitude(coords[0])
             setLongitude(coords[1])
         })
-      .catch(error => {
-      });
+            .catch(error => {
+            });
 
-    //   if(longitude && latitude){
-    //     const geocoder = new window.google.maps.Geocoder();
-    //     geocoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
-    //         if (status === 'OK' && results.length > 0) {
-    //           const country = results[0].address_components.find(
-    //             (component) => component.types.includes('country')
-    //           );
-    //           if (country) {
-    //             console.log(`The marker is in ${country.long_name}.`);
-    //             // TODO: Check if the country is over land or water.
-    //           }
-    //         }
-    //       });
-    //   }
-      const minLong = longitude - 0.0135462
+        //   if(longitude && latitude){
+        //     const geocoder = new window.google.maps.Geocoder();
+        //     geocoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
+        //         if (status === 'OK' && results.length > 0) {
+        //           const country = results[0].address_components.find(
+        //             (component) => component.types.includes('country')
+        //           );
+        //           if (country) {
+        //             console.log(`The marker is in ${country.long_name}.`);
+        //             // TODO: Check if the country is over land or water.
+        //           }
+        //         }
+        //       });
+        //   }
+        const minLong = longitude - 0.0135462
         const maxLong = longitude + 0.0139538
         let randomLong;
 
@@ -151,15 +151,15 @@ function MyGoogleMap( { filteredMarkers } ) {
         }
         dispatch(fetchUsers())
         dispatch(fetchMarkers())
-        dispatch(updateUser( { ...sessionUser, latitude, longitude } ))
-        
+        dispatch(updateUser({ ...sessionUser, latitude, longitude }))
+
     }, [dispatch, latitude, longitude])
-    
+
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: googleMapApiKey
     })
-        
+
     const [map, setMap] = useState(null)
 
     const onLoad = useCallback(function callback(map) {
@@ -167,200 +167,203 @@ function MyGoogleMap( { filteredMarkers } ) {
         map.setZoom(zoom)
 
         setMap(map)
-        
+
     }, [])
 
     const onUnmount = useCallback(function callback(map) {
         setMap(null)
     }, [])
 
-  const handleMapCenterChange = () => {
-    if (map && userStopDragging) {
-        const newCenter = map.getCenter();
+    const handleMapCenterChange = () => {
+        if (map && userStopDragging) {
+            const newCenter = map.getCenter();
 
-        setCenter({
-            lat: newCenter.lat(),
-            lng: newCenter.lng()
-        });
-        setuserStopDragging(null);
-      }
-  };
+            setCenter({
+                lat: newCenter.lat(),
+                lng: newCenter.lng()
+            });
+            setuserStopDragging(null);
+        }
+    };
 
-  const handleUserStopDragging = () => {
-    setuserStopDragging(true);
-  }
+    const handleUserStopDragging = () => {
+        setuserStopDragging(true);
+    }
 
     const filtered = markers.filter(marker => {
-      return filteredMarkers.includes(marker.markerType) 
+        return filteredMarkers.includes(marker.markerType)
     });
 
-  const hasLocation = sessionUser.longitude !== 0 && sessionUser.latitude !== 0;
-  return isLoaded ? (
-    <>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        // zoom={17}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        options={{
-            styles: data,
-            mapTypeControl: false,
-            streetViewControl: false,
-            fullscreenControl: false, 
-        }}
-        onCenterChanged={handleMapCenterChange}
-        onDragEnd={handleUserStopDragging}
-      > 
-        {Object.values(users).map(user => (
-            user._id === sessionUser._id && hasLocation ?
-            (
-                <>
-                    <Marker
-                        key={user._id}
-                        clickable
-                        onClick={() => {
-                            setShowModal(true)
-                            setSelectedUserId(user._id)
-                        }}
-                        position={{ lat: user.latitude - .0004, lng: user.longitude - .0001}} 
-                        icon={{
-                            url: user.profileImageUrl,
-                            scaledSize: { width: 110, height: 110 }
-                        }}
-                    /> 
-                    <Circle 
-                        center={{ lat: user.latitude, lng: user.longitude }}    
-                        radius={100}
-                        options={{
-                            strokeColor: "#FBC02D",
-                            fillColor: "#FBC02D"
-                        }}
-                    />
-                </>
-            ) 
-                :
-           (  <Marker 
-                key={user._id}
-                clickable
-                onClick={() => {
-                    setShowModal(true)
-                    setSelectedUserId(user._id)
+    const hasLocation = sessionUser.longitude !== 0 && sessionUser.latitude !== 0;
+    return isLoaded ? (
+        <>
+            {/* <script type="text/javascript"
+                async defer src={`http://maps.google.com/maps?file=api&v=2&sensor=false&key=____`}>
+            </script> */}
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                // zoom={17}
+                onLoad={onLoad}
+                onUnmount={onUnmount}
+                options={{
+                    styles: data,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    fullscreenControl: false,
                 }}
-                position={{ lat: user.latitude, lng: user.longitude }} 
-                icon={{
-                    url: user.profileImageUrl,
-                    scaledSize: { width: 75, height: 75 }
-                }}
-            />)
-        ))}
+                onCenterChanged={handleMapCenterChange}
+                onDragEnd={handleUserStopDragging}
+            >
+                {Object.values(users).map(user => (
+                    user._id === sessionUser._id && hasLocation ?
+                        (
+                            <>
+                                <Marker
+                                    key={user._id}
+                                    clickable
+                                    onClick={() => {
+                                        setShowModal(true)
+                                        setSelectedUserId(user._id)
+                                    }}
+                                    position={{ lat: user.latitude - .0004, lng: user.longitude - .0001 }}
+                                    icon={{
+                                        url: user.profileImageUrl,
+                                        scaledSize: { width: 110, height: 110 }
+                                    }}
+                                />
+                                <Circle
+                                    center={{ lat: user.latitude, lng: user.longitude }}
+                                    radius={100}
+                                    options={{
+                                        strokeColor: "#FBC02D",
+                                        fillColor: "#FBC02D"
+                                    }}
+                                />
+                            </>
+                        )
+                        :
+                        (<Marker
+                            key={user._id}
+                            clickable
+                            onClick={() => {
+                                setShowModal(true)
+                                setSelectedUserId(user._id)
+                            }}
+                            position={{ lat: user.latitude, lng: user.longitude }}
+                            icon={{
+                                url: user.profileImageUrl,
+                                scaledSize: { width: 75, height: 75 }
+                            }}
+                        />)
+                ))}
 
-        {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
-        
-        {filtered.map(marker => {
-            switch(marker.markerType) {
-                case 'dogPark':
-                    return (
-                        <Marker 
-                            key={marker._id}
-                            clickable
-                            onClick={() => {
-                                setShowModal(false)
-                                setShowMarkerModal(true)
-                                setSelectedMarker(marker._id)
-                            }}
-                            position={{ lat: marker.latitude, lng: marker.longitude }}
-                            icon={{
-                                url: dogParkIcon,
-                                scaledSize: { width: 50, height: 50 }
-                            }}
-                        />
-                    )
-                case 'vet':
-                    return (
-                        <Marker 
-                            key={marker._id}
-                            clickable
-                            onClick={() => {
-                                setShowModal(false)
-                                setShowMarkerModal(true)
-                                setSelectedMarker(marker._id)
-                            }}
-                            position={{ lat: marker.latitude, lng: marker.longitude }}
-                            icon={{
-                                url: veternarianIcon,
-                                scaledSize: { width: 50, height: 50 }
-                            }}
-                        />
-                    )
-                case 'petStore':
-                    return (
-                        <Marker 
-                            key={marker._id}
-                            clickable
-                            onClick={() => {
-                                setShowModal(false)
-                                setSelectedMarker(marker._id)
-                                setShowMarkerModal(true)
-                            }}
-                            position={{ lat: marker.latitude, lng: marker.longitude }}
-                            icon={{
-                                url: petStoreIcon,
-                                scaledSize: { width: 50, height: 50 }
-                            }}
-                        />
-                    )
-                case 'groomer':
-                    return (
-                        <Marker 
-                            key={marker._id}
-                            clickable
-                            onClick={() => {
-                                setShowModal(false)
-                                setShowMarkerModal(true)
-                                setSelectedMarker(marker._id)
-                            }}
-                            position={{ lat: marker.latitude, lng: marker.longitude }}
-                            icon={{
-                                url: groomersIcon,
-                                scaledSize: { width: 50, height: 50 }
-                            }}
-                        />
-                    )
-                default:
-                    return (
-                        <Marker 
-                            key={marker._id}
-                            onClick={() => {
-                                setShowMarkerModal(true)
-                                setSelectedMarker(marker._id)
-                                setShowModal(false)
-                            }}
-                            position={{ lat: 40.7356, lng: -73.9910 }}
-                            icon={{
-                            url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
-                            scaledSize: { width: 50, height: 50 }
-                            }}
-                        />
-                    )
-            }
-    })} 
-        {selectedMarker && <MapMarkerPopUp markerId={selectedMarker} open={showMarkerModal} profileClose={() => setShowMarkerModal(false)}></MapMarkerPopUp>}
+                {<ProfilePopUp userId={selectedUserId} open={showModal} profileClose={() => setShowModal(false)}></ProfilePopUp>}
 
-      </GoogleMap>
-      <div className='map-center-button'> 
-        <button onClick={() => {
-            const currentUser = users[sessionUser._id]
-            setCenter({
-                lat: currentUser.latitude,
-                lng: currentUser.longitude
-            })
-            map.setZoom(17)
-        }}><i className="fa-solid fa-location-crosshairs crosshairs"></i>
-        </button>
-      </div>
-    </>
-  ) : <>...Loading</>
+                {filtered.map(marker => {
+                    switch (marker.markerType) {
+                        case 'dogPark':
+                            return (
+                                <Marker
+                                    key={marker._id}
+                                    clickable
+                                    onClick={() => {
+                                        setShowModal(false)
+                                        setShowMarkerModal(true)
+                                        setSelectedMarker(marker._id)
+                                    }}
+                                    position={{ lat: marker.latitude, lng: marker.longitude }}
+                                    icon={{
+                                        url: dogParkIcon,
+                                        scaledSize: { width: 50, height: 50 }
+                                    }}
+                                />
+                            )
+                        case 'vet':
+                            return (
+                                <Marker
+                                    key={marker._id}
+                                    clickable
+                                    onClick={() => {
+                                        setShowModal(false)
+                                        setShowMarkerModal(true)
+                                        setSelectedMarker(marker._id)
+                                    }}
+                                    position={{ lat: marker.latitude, lng: marker.longitude }}
+                                    icon={{
+                                        url: veternarianIcon,
+                                        scaledSize: { width: 50, height: 50 }
+                                    }}
+                                />
+                            )
+                        case 'petStore':
+                            return (
+                                <Marker
+                                    key={marker._id}
+                                    clickable
+                                    onClick={() => {
+                                        setShowModal(false)
+                                        setSelectedMarker(marker._id)
+                                        setShowMarkerModal(true)
+                                    }}
+                                    position={{ lat: marker.latitude, lng: marker.longitude }}
+                                    icon={{
+                                        url: petStoreIcon,
+                                        scaledSize: { width: 50, height: 50 }
+                                    }}
+                                />
+                            )
+                        case 'groomer':
+                            return (
+                                <Marker
+                                    key={marker._id}
+                                    clickable
+                                    onClick={() => {
+                                        setShowModal(false)
+                                        setShowMarkerModal(true)
+                                        setSelectedMarker(marker._id)
+                                    }}
+                                    position={{ lat: marker.latitude, lng: marker.longitude }}
+                                    icon={{
+                                        url: groomersIcon,
+                                        scaledSize: { width: 50, height: 50 }
+                                    }}
+                                />
+                            )
+                        default:
+                            return (
+                                <Marker
+                                    key={marker._id}
+                                    onClick={() => {
+                                        setShowMarkerModal(true)
+                                        setSelectedMarker(marker._id)
+                                        setShowModal(false)
+                                    }}
+                                    position={{ lat: 40.7356, lng: -73.9910 }}
+                                    icon={{
+                                        url: 'https://puppyplaydates.s3.us-east-2.amazonaws.com/public/dogparkicon.png',
+                                        scaledSize: { width: 50, height: 50 }
+                                    }}
+                                />
+                            )
+                    }
+                })}
+                {selectedMarker && <MapMarkerPopUp markerId={selectedMarker} open={showMarkerModal} profileClose={() => setShowMarkerModal(false)}></MapMarkerPopUp>}
+
+            </GoogleMap>
+            <div className='map-center-button'>
+                <button onClick={() => {
+                    const currentUser = users[sessionUser._id]
+                    setCenter({
+                        lat: currentUser.latitude,
+                        lng: currentUser.longitude
+                    })
+                    map.setZoom(17)
+                }}><i className="fa-solid fa-location-crosshairs crosshairs"></i>
+                </button>
+            </div>
+        </>
+    ) : <>...Loading</>
 
 }
 export default MyGoogleMap
