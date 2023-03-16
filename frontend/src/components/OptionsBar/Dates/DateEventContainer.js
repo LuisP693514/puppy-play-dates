@@ -54,13 +54,13 @@ const DateEventContainer = ({dateId, showDateModal, setShowDateModal, closeAllMo
         return (
             <>
                 <div className="date-info-container">
-                    <button className="friend-info" onClick={() => {
+                    {/* <button className="friend-info" onClick={() => {
                         closeAllModals()
                         setShowDateModal(true);
                         // setSelectedUserId(friendUser._id);
-                    }}>
+                    }}> */}
                     <div> <img className="profile-friend-image" src={otherUser.profileImageUrl}/></div>
-                    </button>
+                    {/* </button> */}
                     <div className="pending-info">
                         <p>Date with {otherUser?.username} & {otherUser?.puppyName}</p>
                         <div>{date?.name} on {date?.date.slice(0,10)}</div>

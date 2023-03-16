@@ -16,6 +16,7 @@
  
 .profile-modal img{
     height: 300px;
+    width: 300px;
     margin-bottom: 20px;
 }
 
@@ -43,7 +44,7 @@
 
 div.puppy-details-section span{
     font-size: 20px;
-    line-height: 15px;
+    line-height: 20px;
 }
 
 
