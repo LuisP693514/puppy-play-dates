@@ -10,7 +10,7 @@ const debug = require('debug')
 const http = require('http');
 const serverLogger = debug('backend:server');
 const dbLogger = debug('backend:mongodb');
-const { Server } = require("socket.io")
+// const { Server } = require("socket.io")
 const cors = require("cors")
 
 app.use(cors())
@@ -27,32 +27,32 @@ app.set('port', port);
  */
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
-  }
-})
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"]
+//   }
+// })
 
-io.on("connection", (socket) => {
-  console.log(`User connected: ${socket.id}`);
+// io.on("connection", (socket) => {
+//   console.log(`User connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    console.log(`${socket.id} left room: ${data.oldRoom}`)
-    socket.leave(data.oldRoom)
-    console.log(`${socket.id} joined room: ${data.room}`)
-    socket.join(data.room)
+//   socket.on("join_room", (data) => {
+//     console.log(`${socket.id} left room: ${data.oldRoom}`)
+//     socket.leave(data.oldRoom)
+//     console.log(`${socket.id} joined room: ${data.room}`)
+//     socket.join(data.room)
     
-  })
+//   })
 
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data)
-  })
+//   socket.on("send_message", (data) => {
+//     socket.to(data.room).emit("receive_message", data)
+//   })
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected", socket.id)
-  })
-})
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected", socket.id)
+//   })
+// })
 
 /**
  * Listen on provided port, on all network interfaces.
