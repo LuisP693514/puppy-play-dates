@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, Circle } from '@react-google-maps/api';
-import { googleMapApiKey } from '../../config/keys';
 import './GoogleMap.css'
 import data from './MapConfig.json'
 import { fetchUsers, getUsers } from '../../store/users';
