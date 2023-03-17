@@ -159,11 +159,6 @@ function MyGoogleMap({ filteredMarkers }) {
         id: 'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
     })
-
-    console.log(`REACT_APP_GOOGLE_MAP_API_KEY: ${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`)
-    console.log(`REACT_APP_GOOGLE_API_KEY: ${process.env.REACT_APP_GOOGLE_API_KEY}`)
-    console.log(`GOOGLE_MAP_API_KEY: ${process.env.GOOGLE_MAP_API_KEY}`)
-    console.log(`googleMapApiKey: ${googleMapApiKey}`)
         
     const [map, setMap] = useState(null)
 
