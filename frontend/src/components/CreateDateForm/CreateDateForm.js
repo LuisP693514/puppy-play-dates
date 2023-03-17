@@ -44,7 +44,6 @@ const CreateDate = ({open, setShowCreate, currentUser, dateObj ,otherUser, isUpd
                         </div>
                         <div className='create-form-inputs'>
                             <div >
-
                                 <div id='date-name-section' className="spacer">
                                     <label id="date-name-text">Date Name:</label>
                                     <input

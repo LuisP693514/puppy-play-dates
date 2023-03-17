@@ -7,20 +7,22 @@ export default function DatePopUp({open, closeDate, date, request, otherUser, in
     if (request) {
       return (
         <>
-            <div>
-              {incoming ? 
-                <p>Play Date Request from {otherUser.puppyName ? otherUser.puppyName : `${otherUser.username}'s puppy`}</p>
-              : 
-                <p>Play Date Request for {otherUser.puppyName ? otherUser.puppyName : `${otherUser.username}'s puppy`}</p>}
-              <img alt="otherUser-pfp" src={otherUser.profileImageUrl}/>
-            </div>
-            <div>
-              <div>{request?.name} on {request?.date.slice(0,10)}</div>
-              {/* <div>Location:</div>
-                    <div>Latitude: {request.latitude}</div>
+            <div className='show-date'>
+              <div className='date-title'>
+                {incoming ? 
+                  <h2>Request from {otherUser.puppyName ? otherUser.puppyName : `${otherUser.username}'s puppy`}</h2>
+                : 
+                  <h2>Request for {otherUser.puppyName ? otherUser.puppyName : `${otherUser.username}'s puppy`}</h2>}
+              </div>
+              <img className="date-image" alt="otherUser-pfp" src={otherUser.profileImageUrl}/>
+              <div className="date-details">
+                <div>{request?.name} on {request?.date.slice(0,10)}</div>
+                {/* <div>Location:</div>
+                      <div>Latitude: {request.latitude}</div>
                     <div>Longitude: {request.longitude}</div>  */}
-              <p>Details:</p>
-              {request.description}
+                <p>Details:</p>
+                {request.description}
+              </div>
             </div>
         </>
       )
