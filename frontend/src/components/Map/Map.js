@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, Circle } from '@react-google-maps/api';
-import { googleMapApiKey } from '../../config/keys';
 import './GoogleMap.css'
 import data from './MapConfig.json'
 import { fetchUsers, getUsers } from '../../store/users';
@@ -159,11 +158,6 @@ function MyGoogleMap({ filteredMarkers }) {
         id: 'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
     })
-
-    console.log(`REACT_APP_GOOGLE_MAP_API_KEY: ${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`)
-    console.log(`REACT_APP_GOOGLE_API_KEY: ${process.env.REACT_APP_GOOGLE_API_KEY}`)
-    console.log(`GOOGLE_MAP_API_KEY: ${process.env.GOOGLE_MAP_API_KEY}`)
-    console.log(`googleMapApiKey: ${googleMapApiKey}`)
         
     const [map, setMap] = useState(null)
 
