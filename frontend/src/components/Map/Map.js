@@ -157,8 +157,9 @@ function MyGoogleMap({ filteredMarkers }) {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: googleMapApiKey
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
     })
+    console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY)
 
     const [map, setMap] = useState(null)
 
