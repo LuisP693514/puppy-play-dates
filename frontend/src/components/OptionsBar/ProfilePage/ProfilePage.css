@@ -98,7 +98,8 @@
     object-fit: contain;
     border-radius: 800px;
     border: 2px solid orange;
-    margin-top: 15px
+    margin-top: 15px;
+    overflow: scroll;
 }
 
 #file-upload-button{
