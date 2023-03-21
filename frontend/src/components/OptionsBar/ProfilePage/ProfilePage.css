@@ -3,6 +3,7 @@
     top: 10%;
     left: 7%;
     height: max-content;
+    max-height: 90vh;
     max-width: 400px;
     min-width: 375px;
     padding: 15px;
@@ -11,6 +12,7 @@
     outline: 2px solid orange;
     outline-offset: -10px;
     box-shadow: 4px 5px 8px #6b6767;
+    overflow: auto;
     z-index: 6;
 }
 
@@ -18,8 +20,9 @@
     position: absolute;
     top: 10%;
     left: 6%;
-    max-width: 800px;
+    max-width: 1000px;
     min-width: 375px;
+    max-height: 90vh;
     height: max-content;
     padding: 15px;
     background-color: white;
@@ -92,9 +95,11 @@
 .preview-image{
     width: 300px;
     height: 300px;
+    object-fit: contain;
     border-radius: 800px;
     border: 2px solid orange;
-    margin-top: 15px
+    margin-top: 15px;
+    overflow: scroll;
 }
 
 #file-upload-button{
@@ -128,7 +133,7 @@
     display: flex;
     flex-direction: column;
     width: 325px;
-    overflow: hidden;
+    overflow: scroll;
     white-space: nowrap;
     margin-right: 20px
 }

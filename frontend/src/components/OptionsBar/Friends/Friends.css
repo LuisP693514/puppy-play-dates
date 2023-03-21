@@ -5,6 +5,7 @@
     background-color: white;
     width: max-content;
     height: 80%;
+    max-height: 90vh;
     padding: 40px;
     box-shadow: 4px 5px 8px #6b6767;
     border: 5px solid orange;
@@ -21,6 +22,7 @@
     background-color: white;
     width: max-content;
     height: 80%;
+    max-height: 90vh;
     padding: 40px;
     box-shadow: 4px 5px 8px #6b6767;
     border: 5px solid orange;

@@ -5,12 +5,14 @@
     max-width: 400px;
     min-width: 375px;
     height: max-content;
+    max-height: 90vh;
     padding: 15px;
     background-color: white;
     border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
     box-shadow: 4px 5px 8px #6b6767;
+    overflow: auto;
     z-index: 4;
 }
 .modal-marker-popup {
