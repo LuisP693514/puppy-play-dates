@@ -20,7 +20,7 @@
     position: absolute;
     top: 10%;
     left: 6%;
-    max-width: 800px;
+    max-width: 1000px;
     min-width: 375px;
     max-height: 90vh;
     height: max-content;
@@ -95,6 +95,7 @@
 .preview-image{
     width: 300px;
     height: 300px;
+    object-fit: contain;
     border-radius: 800px;
     border: 2px solid orange;
     margin-top: 15px
@@ -131,7 +132,7 @@
     display: flex;
     flex-direction: column;
     width: 325px;
-    overflow: hidden;
+    overflow: scroll;
     white-space: nowrap;
     margin-right: 20px
 }
