@@ -33,6 +33,7 @@
     left: 7%;
     background-color: white;
     width: max-content;
+    max-height: 90vh;
     padding: 40px;
     padding-right: 60px;
     padding-left: 60px;
@@ -40,5 +41,6 @@
     border: 5px solid orange;
     outline: 2px solid orange;
     outline-offset: -10px;
+    overflow: auto;
     z-index: 10;
 }
