@@ -60,25 +60,25 @@ export default function OptionsBar() {
     <div className="options-bar-div">
         <div className="options-icons">
             <button className="double-spacer" onClick={() => {
-                        closeAllModals()
-                        setSettingsOpen(true)}}><i className="fa-solid fa-gear white-text"></i></button>
-            <Settings open={settingsOpen} settingsClose={() => setSettingsOpen(false)} closeAllModals={closeAllModals} hideModals={hideModals}></Settings>
-            <button className="double-spacer" onClick={() => {
-                        closeAllModals()
-                        setProfilePageOpen(!profilePageOpen)}}><i className="fa-solid fa-paw white-text"></i></button>
+              closeAllModals()
+              setProfilePageOpen(!profilePageOpen)}}><i className="fa-solid fa-paw white-text"></i></button>
             <ProfilePage open={profilePageOpen} profileClose={()=> setProfilePageOpen(false)} closeAllModals={closeAllModals}></ProfilePage>
             <button className="double-spacer" onClick={() => {
-                        closeAllModals()
-                        setFriendsOpen(!friendsOpen)}}><i className="fa-solid fa-bone white-text"></i></button>
+              closeAllModals()
+              setFriendsOpen(!friendsOpen)}}><i className="fa-solid fa-bone white-text"></i></button>
             <Friends open={friendsOpen} friendsClose={() => setFriendsOpen(false)} closeAllModals={closeAllModals}></Friends>
             <button className="double-spacer" onClick={() => {
               closeAllModals()
               setDatesOpen(!datesOpen)}}><i className="fa-regular fa-calendar white-text"></i></button>
             <DateShowPage open={datesOpen} datesClose={() => setDatesOpen(false)}></DateShowPage>
             {/* <button className="double-spacer" onClick={() => {
-                        closeAllModals()
-                        setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
+              closeAllModals()
+              setMessagesOpen(!messagesOpen)}}><i className="fa-solid fa-comments white-text"></i></button>
             <Messages open={messagesOpen} messagesClose={() => setMessagesOpen(false)} closeAllModals={closeAllModals}></Messages> */}
+            <button className="double-spacer" onClick={() => {
+                        closeAllModals()
+                        setSettingsOpen(true)}}><i className="fa-solid fa-gear white-text"></i></button>
+            <Settings open={settingsOpen} settingsClose={() => setSettingsOpen(false)} closeAllModals={closeAllModals} hideModals={hideModals}></Settings>
             <button className="double-spacer" onClick={() => {
                         closeAllModals()
                         setInfoOpen(!infoOpen)}}><i className="fa-regular fa-circle-question white-text"></i></button>
